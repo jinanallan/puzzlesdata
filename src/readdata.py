@@ -18,6 +18,14 @@ for index, js in enumerate(json_files):
   print(js)
   tokens = js.split('_')
   puzzleID = tokens[1]
+  puzzleAttempts = []
+
+  if( puzzleID in testDict['puzzles']):
+    print('list already contains this puzzle, add a new attempt')
+    puzzleAttempts = testDict['puzzles'][puzzleID]
+  else:
+    print('Creating a new list of puzzle attempts')
+    
   print(tokens)
   with open(os.path.join(path_to_json, js)) as json_file:
     json_text = json.load(json_file)
@@ -30,11 +38,17 @@ for index, js in enumerate(json_files):
     totaltime = json_text['total-time']
     solved = json_text['solved']
     puzzlefile = json_text['puzzle-file']
+
+    puzzleAttempts.append(totaltime)
+    testDict['puzzles'][puzzleID] = puzzleAttempts
+#    testDict['puzzles'][puzzleID].append(totaltime)
+
     if solved == True:
       cntSolved = cntSolved + 1
 
     jsons_data.loc[index] = [endstatus, endtime, starttime, solved, totaltime]
 
 print(jsons_data)
-print('Solved', cntSolved)
+#print('Solved', cntSolved)
+#print(testDict)
 
