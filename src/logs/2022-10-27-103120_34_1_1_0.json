@@ -1,0 +1,53 @@
+{
+ "attempt": 0,
+ "end-status": 3,
+ "end-time": "1666866692091377-2022-10-27-10:31:32:91.377",
+ "events": [
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.0,
+     0.0,
+     0.1
+    ],
+    "end": [
+     0.0,
+     0.0,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1666866692100433-2022-10-27-10:31:32:100.433",
+   "x": 0.0,
+   "y": 0.0
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.0,
+     0.0,
+     0.1
+    ],
+    "end": [
+     0.0,
+     0.003,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1666866692100556-2022-10-27-10:31:32:100.556",
+   "x": 0.0,
+   "y": 0.0
+  }
+ ],
+ "participantID": "34",
+ "puzzle-file": "../../scenes-30a/0-2-1-pnp.g",
+ "rating": -1,
+ "run": 1,
+ "solved": false,
+ "start-time": "1666866690031187-2022-10-27-10:31:30:31.187",
+ "time-solved": -1,
+ "total-time": 2.06018143
+}
