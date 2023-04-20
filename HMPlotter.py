@@ -4,6 +4,7 @@ import pandas as pd
 import os
 import json
 import re
+import matplotlib.colors as mcolors
 
 
 def use_regex(input_text):
@@ -52,8 +53,10 @@ def movement_of_players(df, participant_id, run):
 
 
 def main():
-    folder = input("Enter the folder path: ")
-    desiredpuzzel = int(input("Enter the puzzel number: "))
+    # folder = input("Enter the folder path: ")
+    folder = '/home/erfan/Downloads/pnp'
+    # desiredpuzzel = int(input("Enter the puzzel number: "))
+    desiredpuzzel = 1
     x = np.array([])
     y = np.array([])
 
@@ -71,7 +74,19 @@ def main():
                 x = np.append(x, xi)
                 y = np.append(y, yi)
     # print(y.shape)
-    plt.hist2d(x, y, bins=(20, 20))
+    # fig, ax = plt.subplots()
+    # img = plt.imread('/home/erfan/Downloads/puzzleexamplescreenshots/puzzle2.png')
+    # print(img.shape)
+    #max of x and y 
+    m = max(x.max(), y.max())
+    # ax.imshow(img, extent=[-2,2,-2,2])
+
+# fig, ax = plt.subplots()
+    # img = plt.imread('/home/erfan/Downloads/puzzleexamplescreenshots/puzzle2.png')
+    # print(img.shape)
+    # colors = [(0,0,1,c) for c in np.linspace(0,1,100)]
+    # cmapred = mcolors.LinearSegmentedColormap.from_list('mycmap', colors, N=5)
+    plt.hist2d(x, y, bins=(60, 60))
     plt.show()
 
 
