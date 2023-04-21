@@ -5,6 +5,7 @@ import os
 import json
 import re
 import matplotlib.colors as mcolors
+import movementTracker
 
 
 def use_regex(input_text):
@@ -18,59 +19,63 @@ def use_regex(input_text):
     return int(particpants), int(run), int(puzzle_id), int(puzzle_id2)
 
 
-def movement_of_players(df, participant_id, run):
+# def movement_of_players(df, participant_id, run):
 
-    events = df["events"]
-    df_events = pd.DataFrame(events)
-    df_events["code"] = df['events'].apply(lambda x: x.get('code'))
-    df_events["timestamp"] = df['events'].apply(lambda x: x.get('timestamp'))
-    df_events["x"] = df['events'].apply(lambda x: x.get('x'))
-    df_events["y"] = df['events'].apply(lambda x: x.get('y'))
-    df_events = df_events.drop('events', axis=1)
+#     events = df["events"]
+#     df_events = pd.DataFrame(events)
+#     df_events["code"] = df['events'].apply(lambda x: x.get('code'))
+#     df_events["timestamp"] = df['events'].apply(lambda x: x.get('timestamp'))
+#     df_events["x"] = df['events'].apply(lambda x: x.get('x'))
+#     df_events["y"] = df['events'].apply(lambda x: x.get('y'))
+#     df_events = df_events.drop('events', axis=1)
 
-    # index of attach and release events so that we can plot the movement of players in different colors
-    attachIndex = df_events.index[df_events['code'] == 3].tolist()
-    releaseIndex = df_events.index[df_events['code'] == 4].tolist()
+#     # index of attach and release events so that we can plot the movement of players in different colors
+#     attachIndex = df_events.index[df_events['code'] == 3].tolist()
+#     releaseIndex = df_events.index[df_events['code'] == 4].tolist()
 
-    interactions = np.array([])
-    for i in range(len(attachIndex)):
-        interactions = np.append(
-            interactions, (range(attachIndex[i], releaseIndex[i])))
-        interactions = interactions.flatten()
-    interactions = interactions.astype(int)
+#     interactions = np.array([])
+#     for i in range(len(attachIndex)):
+#         interactions = np.append(
+#             interactions, (range(attachIndex[i], releaseIndex[i])))
+#         interactions = interactions.flatten()
+#     interactions = interactions.astype(int)
 
-    x = np.array([])
-    y = np.array([])
-    for index, row in df_events.iterrows():
-        if index in interactions:
-            x = np.append(x, row['x'])
-            # x = x.flatten()
-            # x = x.astype(int)
-            y = np.append(y, row['y'])
-            # y = y.flatten()
-            # y = y.astype(int)
-    return x, y
+#     x = np.array([])
+#     y = np.array([])
+#     for index, row in df_events.iterrows():
+#         if index in interactions:
+#             x = np.append(x, row['x'])
+#             # x = x.flatten()
+#             # x = x.astype(int)
+#             y = np.append(y, row['y'])
+#             # y = y.flatten()
+#             # y = y.astype(int)
+#     return x, y
 
 
 def main():
     # folder = input("Enter the folder path: ")
     folder = '/home/erfan/Downloads/pnp'
     # desiredpuzzel = int(input("Enter the puzzel number: "))
-    desiredpuzzel = 1
+    desiredpuzzel = 22
     x = np.array([])
     y = np.array([])
 
     for filename in os.listdir(folder):
         if filename.endswith('.json'):
             participant_id, run, puzzel, puzzel2 = use_regex(filename)
+            print(filename)
+            print(run)
             if puzzel == desiredpuzzel:
                 # Load the JSON file
                 with open(os.path.join(folder, filename)) as json_file:
                     data = json.load(json_file)
-                    df = pd.DataFrame(data)
+                    df=movementTracker.df_from_json(data)
+                    
 
                 # get the movement of players
-                xi, yi = movement_of_players(df, participant_id, run)
+                xi, yi = movementTracker.interaction(df, participant_id, run, "Attach obj1")
+                print(xi.shape)
                 x = np.append(x, xi)
                 y = np.append(y, yi)
     # print(y.shape)
@@ -78,7 +83,7 @@ def main():
     # img = plt.imread('/home/erfan/Downloads/puzzleexamplescreenshots/puzzle2.png')
     # print(img.shape)
     #max of x and y 
-    m = max(x.max(), y.max())
+    # m = max(x.max(), y.max())
     # ax.imshow(img, extent=[-2,2,-2,2])
 
 # fig, ax = plt.subplots()
@@ -86,7 +91,7 @@ def main():
     # print(img.shape)
     # colors = [(0,0,1,c) for c in np.linspace(0,1,100)]
     # cmapred = mcolors.LinearSegmentedColormap.from_list('mycmap', colors, N=5)
-    plt.hist2d(x, y, bins=(60, 60))
+    plt.hist2d(x, y, bins=(50, 50))
     plt.show()
 
 
