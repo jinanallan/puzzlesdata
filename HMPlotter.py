@@ -23,7 +23,7 @@ def main():
 
     # folder = input("Enter the folder path: ")
     folder = '/home/erfan/Downloads/pnp'
-    desiredpuzzel = int(input("Enter the puzzel number: "))
+    desiredpuzzel = int(input("Enter the puzzle number: "))
     type = input("Enter the type of interaction: ")
 
     x = np.array([])
@@ -53,7 +53,7 @@ def main():
     fig, ax = plt.subplots()
 
     #the image of the desired puzzle
-    imgfolder = '/home/erfan/Downloads/puzzleexamplescreenshots/cropped'
+    imgfolder = 'cropped'
     fname = os.path.join(imgfolder, 'puzzle'+str(desiredpuzzel)+'.png')
     img = Image.open(fname).convert('L')
     img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
