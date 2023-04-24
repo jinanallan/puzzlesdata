@@ -10,9 +10,9 @@ def df_from_json(file):
     return df
 
 def interaction(df, participant_id, run,type):
-    #valid interactions types: Attach box1, Attach obj1, Attach obj2, Attach obj3
 
-    if type not in ['Attach box1', 'Attach box2', 'Attach obj1', 'Attach obj2', 'Attach obj3', 'Attach obj4']: raise ValueError('Invalid interaction type')
+    #valid interactions types: box1, obj1, obj2, obj3, obj4
+    if type not in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4']: raise ValueError('Invalid interaction type')
 
     events = df["events"]
     df_events = pd.DataFrame(events)
@@ -24,9 +24,8 @@ def interaction(df, participant_id, run,type):
     df_events = df_events.drop('events', axis=1)
 
     # index of attach and release events so that we can plot the movement of players in different colors
-    
-    attachIndex = (df_events.index[df_events["description"]== type]+1).tolist()
-    releaseIndex = (df_events.index[df_events['code'] == 4]-1).tolist() 
+    attachIndex = (df_events.index[df_events['description'] == "Attach "+type]+1).tolist() 
+    releaseIndex = (df_events.index[df_events['description'] == "Release "+type]-1).tolist() 
 
     interactions = np.array([])
     for i in range(len(attachIndex)):
@@ -40,9 +39,5 @@ def interaction(df, participant_id, run,type):
     for index, row in df_events.iterrows():
         if index in interactions:
             x = np.append(x, row['x'])
-            # x = x.flatten()
-            # x = x.astype(int)
             y = np.append(y, row['y'])
-            # y = y.flatten()
-            # y = y.astype(int)
     return x, y
