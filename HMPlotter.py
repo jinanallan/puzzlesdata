@@ -47,7 +47,7 @@ def main():
 
    
 
-    colors = [(0,12,0,c) for c in np.linspace(0,1,1000)]
+    colors = [(1,0,0,c) for c in np.linspace(0,1,100)]
     cmapred = mcolors.LinearSegmentedColormap.from_list('mycmap', colors, N=100)
 
     fig, ax = plt.subplots()
