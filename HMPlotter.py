@@ -64,6 +64,8 @@ def main():
     plt.colorbar()
     plt.title(type + ' Interaction Heatmap of the Puzzle ' + str(desiredpuzzel))
     plt.show()
+    #save the plot in the temp folder with same name as the title
+    fig.savefig(os.path.join('/home/erfan/Documents/Puzzel/puzzlesdata/TEMP',type+'_'+ str(desiredpuzzel) +'.png'), dpi=300)
 
 
 if __name__ == '__main__':
