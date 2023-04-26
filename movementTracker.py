@@ -50,3 +50,11 @@ def interaction(df, participant_id, run,type):
             x = np.append(x, row['x'])
             y = np.append(y, row['y'])
     return x, y
+
+#get the list of unique descriptions in the json file
+def get_descriptions(df):
+    events = df["events"]
+    df_events = pd.DataFrame(events)
+    df_events["description"] = df['events'].apply(lambda x: x.get('description'))
+    df_events = df_events.drop('events', axis=1)
+    return df_events['description'].unique()
