@@ -70,9 +70,16 @@ solved_all=np.where(np.sum(solved, axis=1)==len(puzzles))
 solved_all=solved_all[0]
 solved_all=participants[solved_all]
 
+notall=np.where(np.sum(solved, axis=1)!=len(puzzles))
+notall=notall[0]
+
 print("The number of participants who solved all the puzzles:", len(solved_all), "out of",len(participants))
 print("The participants who eventually solved all the puzzles: ", solved_all)
+print ("The participants who did not solve all the puzzles: ", np.setdiff1d(participants, solved_all))
 
+for i in notall:
+     print("The participant", participants[i], "solved", np.sum(solved[i]).astype(int), "puzzles out of", len(puzzles))
+     print("The puzzles that the participant", participants[i], "did not solve are:", np.setdiff1d(puzzles, np.where(solved[i]==1)))
               
           
       
