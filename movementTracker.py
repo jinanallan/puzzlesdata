@@ -6,7 +6,10 @@ import json
 
 #json file as a pandas dataframe
 def df_from_json(file):
-    df = pd.DataFrame(file)
+    try:
+        df = pd.DataFrame(file)
+    except :
+        df = pd.DataFrame(file, index=[0])
     return df
 
 def interaction(df, participant_id, run,type):
