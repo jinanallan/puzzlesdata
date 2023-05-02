@@ -12,4 +12,4 @@ The puzzles that the participant 37 did not solve are: [10 27]
 The participant 44 solved 20 puzzles out of 27  
 The puzzles that the participant 44 did not solve are: [ 7  8 11 21 24 25 27]  
 
-With (stats.py)[https://github.com/jinanallan/puzzlesdata/blob/main/stats.py , it is feasible now to request any form of general stats of the data needed]
+With [stats](https://github.com/jinanallan/puzzlesdata/blob/main/stats.py) , it is feasible now to request any form of general stats of the data needed
