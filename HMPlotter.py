@@ -24,7 +24,7 @@ def main():
     # folder = input("Enter the folder path: ")
     folder = '/home/erfan/Downloads/pnp'
     # desiredpuzzle = int(input("Enter the puzzle number: "))
-    for i in [1, 2, 3, 4, 6, 21, 22, 23, 24, 25, 26]:
+    for i in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:
         desiredpuzzle = i
         for j in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4', 'total', 'free']:
             type = j    
@@ -41,13 +41,16 @@ def main():
                         with open(os.path.join(folder, filename)) as json_file:
                             data = json.load(json_file)
                             df=movementTracker.df_from_json(data)
-                            if type in ["total", "free"]:
-                                xi, yi = movementTracker.interaction(df, participant_id, run, type)
-                                x = np.append(x, xi)
-                                y = np.append(y, yi)
-                            elif "Attach"+type or "Release"+ type in movementTracker.get_descriptions(df):
-                                    # get the movement of players
-                                    xi, yi = movementTracker.interaction(df, participant_id, run, type)
+
+                            xi, yi = movementTracker.interaction(df, participant_id, run, type)
+
+                            if xi.size == 0 or yi.size == 0:
+                                pass
+                            else:
+                                if type in ["total", "free"]:
+                                    x = np.append(x, xi)
+                                    y = np.append(y, yi)
+                                elif "Attach"+type or "Release"+ type in movementTracker.get_descriptions(df):
                                     x = np.append(x, xi)
                                     y = np.append(y, yi)
                            
