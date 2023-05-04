@@ -27,8 +27,11 @@ puzzle_id= range(len(puzzle_f))
 #the idea is to list all the puzzels and thier final states in  each attemp for each participant
 
 #looking at the data in two diffrent modes of puzzle, pnp  and push 
-pnp_folder = "/home/erfan/Downloads/pnp"
-push_folder = "/home/erfan/Downloads/push"
+pnp_folder = input("Enter the path to the pnp folder: ")
+# "/home/erfan/Downloads/pnp"
+
+push_folder = input("Enter the path to the push folder: ")
+# "/home/erfan/Downloads/push"
 
 df_main = pd.DataFrame()
 
@@ -80,8 +83,7 @@ print ("The participants who did not solve all the puzzles: ", np.setdiff1d(part
 for i in notall:
      print("The participant", participants[i], "solved", np.sum(solved[i]).astype(int), "puzzles out of", len(puzzles))
      print("The puzzles that the participant", participants[i], "did not solve are:", np.setdiff1d(puzzles, np.where(solved[i]==1)))
-     print("this is a test")
-              
+                 
           
       
 
