@@ -38,13 +38,11 @@ df_main = pd.DataFrame()
 for folder in [pnp_folder, push_folder]:
         for filename in os.listdir(folder):
             if filename.endswith(".json"): 
-                p,r,i,a=HMPlotter.use_regex(filename)
-                if True:
-                    with open(os.path.join(folder, filename)) as json_file:
-                        data = json.load(json_file)
-                        df=movementTracker.df_from_json(data)
-                        df=dropEvents(df)
-                        df_main=pd.concat([df_main,df], ignore_index=True)
+                with open(os.path.join(folder, filename)) as json_file:
+                    data = json.load(json_file)
+                    df=movementTracker.df_from_json(data)
+                    df=dropEvents(df)
+                    df_main=pd.concat([df_main,df], ignore_index=True)
 
 df_main.drop("start-time", axis=1, inplace=True)
 df_main.drop("end-time", axis=1, inplace=True)
@@ -61,10 +59,12 @@ df_grouped=df_main.groupby(['participantID', 'puzzle-file', 'run','attempt'])
 
 solved=np.zeros((len(participants), len(puzzle_id)))
 
+run = int(input("Enter the run number: ") ) 
+
 for name , group in df_grouped:
-     for row_index, row in group.iterrows():
-          if row['solved'] == True:  
-             solved[row['participantID'], row['puzzle-file']]=1
+    for row_index, row in group.iterrows():
+        if row['solved']== True and row['run']==run :  
+            solved[row['participantID'], row['puzzle-file']]=1
 
 
 
@@ -76,15 +76,14 @@ solved_all=participants[solved_all]
 notall=np.where(np.sum(solved, axis=1)!=len(puzzles))
 notall=notall[0]
 
-print("The number of participants who solved all the puzzles:", len(solved_all), "out of",len(participants))
+print("The number of participants who solved all the puzzles:", len(solved_all), "out of all in the run :", run)
 print("The participants who eventually solved all the puzzles: ", solved_all)
 print ("The participants who did not solve all the puzzles: ", np.setdiff1d(participants, solved_all))
 
 for i in notall:
-     print("The participant", participants[i], "solved", np.sum(solved[i]).astype(int), "puzzles out of", len(puzzles))
-     print("The puzzles that the participant", participants[i], "did not solve are:", np.setdiff1d(puzzles, np.where(solved[i]==1)))
-print("final test")
-                 
+    print("The participant", participants[i], "solved", np.sum(solved[i]).astype(int), "puzzles out of", len(puzzles))
+    print("The puzzles that the participant", participants[i], "did not solve are:", np.setdiff1d(puzzles, np.where(solved[i]==1)))
+                
           
       
 
