@@ -80,6 +80,7 @@ print ("The participants who did not solve all the puzzles: ", np.setdiff1d(part
 for i in notall:
      print("The participant", participants[i], "solved", np.sum(solved[i]).astype(int), "puzzles out of", len(puzzles))
      print("The puzzles that the participant", participants[i], "did not solve are:", np.setdiff1d(puzzles, np.where(solved[i]==1)))
+     print("this is a test")
               
           
       
