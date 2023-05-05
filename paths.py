@@ -47,8 +47,8 @@ def main():
                 with open(os.path.join(folder, filename)) as json_file:
                     data = json.load(json_file)
                     df=movementTracker.df_from_json(data)
-
-                    xi, yi = movementTracker.interaction(df, participant_id, run, type,sparce=True)
+                    sparce=True
+                    xi, yi = movementTracker.interaction(df, participant_id, run, type,sparce)
 
                     if xi.size == 0 or yi.size == 0:
                                 pass
@@ -79,7 +79,7 @@ def main():
                         plt.xlabel('x')
                         plt.ylabel('y')
                         plt.legend()
-            plt.title('Participant:'+str(participant_id)+' Puzzle: '+str(puzzle)+' Attempt:'+str(attempt)+' Run:'+str(run))
+            plt.title('Participant:'+str(participant_id)+' Puzzle: '+str(puzzle)+' Attempt:'+str(attempt)+' Run:'+str(run)+'\n'+'sparcity:'+str(sparce))
             plt.savefig('plots/'+str(puzzle)+'_'+str(participant_id)+'_'+str(attempt)+'_'+str(run)+'.png', dpi=300)
             plt.close()
 

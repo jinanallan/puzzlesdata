@@ -52,7 +52,8 @@ def interaction(df, participant_id, run,type, sparce=False):
                 x = np.append(x, row['x'])
                 y = np.append(y, row['y'])
         if sparce: return x[::2], y[::2]
-        return x, y 
+        else:
+                return x, y 
     except:
         return np.array([]), np.array([])
    
