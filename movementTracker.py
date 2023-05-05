@@ -12,7 +12,7 @@ def df_from_json(file):
         df = pd.DataFrame(file, index=[0])
     return df
 
-def interaction(df, participant_id, run,type):
+def interaction(df, participant_id, run,type, sparce=False):
 
     #valid interactions types: box1, obj1, obj2, obj3, obj4
     if type not in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4', 'total', 'free']: raise ValueError('Invalid interaction type')
@@ -51,6 +51,7 @@ def interaction(df, participant_id, run,type):
             elif index in interactions: 
                 x = np.append(x, row['x'])
                 y = np.append(y, row['y'])
+        if sparce: return x[::2], y[::2]
         return x, y 
     except:
         return np.array([]), np.array([])
