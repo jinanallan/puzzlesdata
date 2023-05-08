@@ -12,12 +12,17 @@ def df_from_json(file):
         df = pd.DataFrame(file, index=[0])
     return df
 
-def interaction(df, participant_id, run,type, sparce=False, direction=False):
+def interaction(df, participant_id, run,type, sparce=False, direction=False, solved=False):
 
     #valid interactions types: box1, obj1, obj2, obj3, obj4
     if type not in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4', 'total', 'free']: raise ValueError('Invalid interaction type')
+    if solved: 
+        #return the value of the solved key as string
+        return str(df['solved'].values[0])
     
     try:
+    
+
         events = df["events"]
         df_events = pd.DataFrame(events)
         df_events["code"] = df['events'].apply(lambda x: x.get('code'))
@@ -25,9 +30,11 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False):
         #the time stamp (unix time)  
         df_events['timestamp'] = df_events['timestamp'].str.split('-').str[0] 
         df_events['timestamp'] = df_events['timestamp'].astype(int)
+        df_events['timestamp'] = pd.to_datetime(df_events['timestamp'], unit='us')
         df_events["x"] = df['events'].apply(lambda x: x.get('x'))
         df_events["y"] = df['events'].apply(lambda x: x.get('y'))
         df_events["description"] = df['events'].apply(lambda x: x.get('description'))
+        df
         df_events = df_events.drop('events', axis=1)
 
         if type == 'total' or type == 'free':
@@ -48,11 +55,18 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False):
                 startTime = df_events.loc[attachIndex[i], 'timestamp']
                 y_start = df_events.loc[attachIndex[i], 'y']
                 x_end = df_events.loc[releaseIndex[i], 'x']
+                endTime = df_events.loc[releaseIndex[i], 'timestamp']
                 y_end = df_events.loc[releaseIndex[i], 'y']
+
+                d=endTime-startTime
+                d=d.total_seconds()
+                d=round(d,2)
+
                 x=np.array([x_start,x_end])
                 y=np.array([y_start,y_end])
                 geo=nesw(x,y)
-                s=np.append(s,str(startTime)+"_"+type+" "+ geo)
+
+                s=np.append(s,str(startTime)+"_"+type+" "+ geo + " " + str(d)+"s")
         
             return s
     
@@ -102,18 +116,17 @@ def nesw(x,y):
     x_diff = x[-1]-x[0]
     y_diff = y[-1]-y[0]
     direction_step= np.sqrt(x_diff**2+y_diff**2)
-    try:
+    if direction_step != 0:
         x_diff = x_diff/direction_step
         y_diff = y_diff/direction_step
-    except:
-        pass
+    
 
     # transform the [x_diff, y_diff] to angle in degrees
     angle = np.arctan2(y_diff, x_diff) * 180 / np.pi
     # print(angle)
     angle = angle % 360
     angle = round(angle, 0)
-    
+
     if angle in range(0, 30) or angle in range(330, 360):
         direction = "E"
     elif angle in range(30, 60):
@@ -132,15 +145,3 @@ def nesw(x,y):
         direction = "SE"
     return direction
     
-    #set the direction as north, east, south, west and  their combinations
-    # if x_diff>0 :
-    #     if y_diff>0:
-    #         direction = "NE"
-    #     else:
-    #         direction = "SE"
-    # else:
-    #     if y_diff>0:
-    #         direction = "NW"
-    #     else:
-    #         direction = "SW"
-    # return direction
