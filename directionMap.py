@@ -57,58 +57,6 @@ def main():
                         f.write("Solved: " + str(solved_stats)+"\n")  
                         f.write("\n")
 
-
-
-
-            
-               
-                
-        
-
-
-
-
-
-
-
-
-
-
-
-
-            #         if xi.size == 0 or yi.size == 0:
-            #                     pass
-            #         else:
-                        
-            #             imgfolder = 'cropped'
-            #             fname = os.path.join(imgfolder, 'puzzle'+str(puzzle)+'.png')
-            #             img = Image.open(fname).convert('L')
-
-            #             img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
-
-            #             #diffrent colors for each type
-            #             colors=[coloring(type,i) for i in np.linspace(0.2,1,len(xi))]
-            #             # cm=mcolors.LinearSegmentedColormap.from_list('mylist', colors, N=len(xi))
-
-            #             if type=='free':
-            #                  s=5
-            #             else:
-            #                 s=25
-            #             ax.scatter(xi, yi,
-            #                                    s=s,
-            #                                    c=colors,
-            #                                    label=type,
-            #                        marker= ".")
-                        
-            #             plt.xlim(-2, 2)
-            #             plt.ylim(-2, 2)
-            #             plt.xlabel('x')
-            #             plt.ylabel('y')
-            #             plt.legend()
-            # plt.title('Participant:'+str(participant_id)+' Puzzle: '+str(puzzle)+' Attempt:'+str(attempt)+' Run:'+str(run)+'\n'+'sparcity:'+str(sparce))
-            # plt.savefig('plots/'+str(puzzle)+'_'+str(participant_id)+'_'+str(attempt)+'_'+str(run)+'.png', dpi=300)
-            # plt.close()
-
 if __name__ == "__main__":
     main()
 
