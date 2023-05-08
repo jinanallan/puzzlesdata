@@ -31,44 +31,55 @@ def main():
 
     output_file = 'directionmap.txt'
 
+    desired_puzzle = int(input("Enter the puzzle number: "))
+   
+
     with open(output_file, 'w') as f:
         for filename in os.listdir(folder):
             if filename.endswith('.json'):
                 participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
-            if puzzle in [1, 2]:
-
-                f.write("Participant:" + str(participant_id) + " for the Puzzle:" + str(puzzle) +
-                         " in the Attempt:" + str(attempt) + " and run:" +str(run)+ " took follwing movements:"+"\n" )
-                
+                if desired_puzzle == puzzle:
 
 
-                with open(os.path.join(folder, filename)) as json_file:
+                    f.write("Participant:" + str(participant_id) + " for the Puzzle:" + str(puzzle) +
+                            " in the Attempt:" + str(attempt) + " and run:" +str(run)+ " took follwing movements:"+"\n" )
+                    
 
-            
-                    eventlist=[]
 
-                    data = json.load(json_file)
-                    df=movementTracker.df_from_json(data) 
+                    eventlist=np.array([])
+                    with open(os.path.join(folder, filename)) as json_file:
 
-                for j in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4']:
-                    type = j  
+                        data = json.load(json_file)
+                        df=movementTracker.df_from_json(data) 
 
-                    xi, yi = movementTracker.interaction(df, participant_id, run, type)
+                    for type in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4']:
 
-                    if xi.size == 0 or yi.size == 0:
-                        pass
-                    else:
-                        o=movementTracker.interaction(df, participant_id, run, type,direction=True)
-                        eventlist.append(o)
+                        xi, yi = movementTracker.interaction(df, participant_id, run, type)
+
+                        if xi.size == 0 or yi.size == 0:
+
+                            pass
+
+                        else:
+
+                            o=movementTracker.interaction(df, participant_id, run, type,direction=True)
+                            eventlist= np.append(eventlist,o)
+                    
+                    #sortting the list baded on the time of the event
+                    eventlist=eventlist[np.argsort(eventlist)]
+                    eventlist=[i.split("_")[1] for i in eventlist]
+
+                    f.write(str(eventlist)+"\n")
+
+                    f.write("\n")
+
 
 
 
             
                
-                f.write(str(eventlist)+"\n")
                 
-            f.write("\n")
-        f.write("\n")
+        
 
 
 

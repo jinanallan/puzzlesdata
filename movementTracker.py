@@ -39,24 +39,21 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False):
         
 
         if direction:
+            #here is an array since any type may be interacted multiple times
             s=np.array([])
-            startTime = df_events.loc[attachIndex, 'timestamp']
-            startTime = startTime.values[0]
+            
 
             for i in range(len(attachIndex)):
-
-                intercation =range(attachIndex[i], releaseIndex[i])
-                interactions = interactions.flatten()
-                interactions = interactions.astype(int)
-
-                x = np.array([])
-                y = np.array([])
-                for index, row in df_events.iterrows():
-                    if index in interactions: 
-                        x = np.append(x, row['x'])
-                        y = np.append(y, row['y'])
+                x_start = df_events.loc[attachIndex[i], 'x']
+                startTime = df_events.loc[attachIndex[i], 'timestamp']
+                y_start = df_events.loc[attachIndex[i], 'y']
+                x_end = df_events.loc[releaseIndex[i], 'x']
+                y_end = df_events.loc[releaseIndex[i], 'y']
+                x=np.array([x_start,x_end])
+                y=np.array([y_start,y_end])
                 geo=nesw(x,y)
-                s=np.append(s,type+" "+geo +" "+ str(startTime[i]))
+                s=np.append(s,str(startTime)+"_"+type+" "+ geo)
+        
             return s
     
         else:
@@ -79,11 +76,11 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False):
                     x = np.append(x, row['x'])
                     y = np.append(y, row['y'])
                 
-        if sparce: 
-            return x[::2], y[::2]
+            if sparce: 
+                return x[::2], y[::2]
 
-        else:
-                return x, y 
+            else:
+                    return x, y 
         
     except:
         return np.array([]), np.array([])
@@ -104,9 +101,13 @@ def nesw(x,y):
     #0: stationary, 1: up, 2: right, 3: down, 4: left
     x_diff = x[-1]-x[0]
     y_diff = y[-1]-y[0]
-    direction_step= np.sqrt(x_diff**2+y_diff**2)
-    x_diff = x_diff/direction_step
-    y_diff = y_diff/direction_step
+    # direction_step= np.sqrt(x_diff**2+y_diff**2)
+    # try:
+    #     x_diff = x_diff/direction_step
+    #     y_diff = y_diff/direction_step
+    # except:
+    #     pass
+        
     #set the direction as north, east, south, west and  their combinations
     if x_diff>0 :
         if y_diff>0:
