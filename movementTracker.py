@@ -101,22 +101,46 @@ def nesw(x,y):
     #0: stationary, 1: up, 2: right, 3: down, 4: left
     x_diff = x[-1]-x[0]
     y_diff = y[-1]-y[0]
-    # direction_step= np.sqrt(x_diff**2+y_diff**2)
-    # try:
-    #     x_diff = x_diff/direction_step
-    #     y_diff = y_diff/direction_step
-    # except:
-    #     pass
-        
-    #set the direction as north, east, south, west and  their combinations
-    if x_diff>0 :
-        if y_diff>0:
-            direction = "NE"
-        else:
-            direction = "SE"
-    else:
-        if y_diff>0:
-            direction = "NW"
-        else:
-            direction = "SW"
+    direction_step= np.sqrt(x_diff**2+y_diff**2)
+    try:
+        x_diff = x_diff/direction_step
+        y_diff = y_diff/direction_step
+    except:
+        pass
+
+    # transform the [x_diff, y_diff] to angle in degrees
+    angle = np.arctan2(y_diff, x_diff) * 180 / np.pi
+    # print(angle)
+    angle = angle % 360
+    angle = round(angle, 0)
+    
+    if angle in range(0, 30) or angle in range(330, 360):
+        direction = "E"
+    elif angle in range(30, 60):
+        direction = "NE"
+    elif angle in range(60, 120):
+        direction = "N"
+    elif angle in range(120, 150):
+        direction = "NW"
+    elif angle in range(150, 210):
+        direction = "W"
+    elif angle in range(210, 240):
+        direction = "SW"
+    elif angle in range(240, 300):
+        direction = "S"
+    elif angle in range(300, 330):
+        direction = "SE"
     return direction
+    
+    #set the direction as north, east, south, west and  their combinations
+    # if x_diff>0 :
+    #     if y_diff>0:
+    #         direction = "NE"
+    #     else:
+    #         direction = "SE"
+    # else:
+    #     if y_diff>0:
+    #         direction = "NW"
+    #     else:
+    #         direction = "SW"
+    # return direction
