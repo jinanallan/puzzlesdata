@@ -42,6 +42,7 @@ with open(file, 'r') as text:
     i = np.zeros(max_length)
     j = np.zeros(max_length)
     z = np.zeros(max_length)
+    k = np.zeros(max_length)
     
 
     for line in text:
@@ -56,13 +57,12 @@ with open(file, 'r') as text:
                     action_t = action_t.strip()
                     action_t = action_t.split(" ")
 
-                    if action_t[0] == "box1" and action_t[1] == "NW"  :
+                    if action_t[0] == "box1" and action_t[1] == "NW":
                         i[t] += 1
-                    elif action_t[0] == "box1" and action_t[1] == "W"  :
+                    elif action_t[0] == "box1" and action_t[1] == "W":
                         j[t] += 1
-                    else:
+                    else:   
                         z[t] += 1
-
                 except:
                     continue
     
@@ -70,12 +70,12 @@ with open(file, 'r') as text:
     max_length = max(len(i), len(j), len(z))
     order = np.arange(max_length)
     #plot a stacked bar plot with i, j, z for each time step
-    plt.bar(order, i, label='box 1 NW*')
-    plt.bar(order, j, bottom=i, label='box 2 W*')
-    plt.bar(order, z, bottom=i+j, label='box1 *')
-    # plt.bar(order, k, bottom=i+j+z, label='other')
+    plt.bar(order+1, i, label='box 1 NW')
+    plt.bar(order+1, j, bottom=i, label='box1 W')
+    plt.bar(order+1, z, bottom=i+j, label='box1 *')
+    # plt.bar(order+1, k, bottom=i+j+z, label='other')
     plt.legend()
-    plt.xlabel('Ordinal nnumber of the interaction')
+    plt.xlabel('Ordinal number of the interaction')
     plt.ylabel('Number of participants')
     plt.title('Puzzle 2 direction statistics')
     plt.show()

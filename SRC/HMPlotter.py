@@ -50,7 +50,8 @@ def main():
                                 if type in ["total", "free"]:
                                     x = np.append(x, xi)
                                     y = np.append(y, yi)
-                                elif "Attach"+type or "Release"+ type in movementTracker.get_descriptions(df):
+                                elif "Attach "+type or "Release "+ type in movementTracker.get_descriptions(df):
+                                    print("test")
                                     x = np.append(x, xi)
                                     y = np.append(y, yi)
                            
