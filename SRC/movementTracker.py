@@ -15,7 +15,8 @@ def df_from_json(file):
 def interaction(df, participant_id, run,type, sparce=False, direction=False, solved=False):
 
     #valid interactions types: box1, obj1, obj2, obj3, obj4
-    if type not in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4', 'total', 'free']: raise ValueError('Invalid interaction type')
+    if type not in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4', 'total', 'free', 'Glue', 'Unglue']: raise ValueError('Invalid interaction type')
+
     if solved: 
         #return the value of the solved key as string
         return str(df['solved'].values[0])
@@ -34,12 +35,23 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, sol
         df_events["x"] = df['events'].apply(lambda x: x.get('x'))
         df_events["y"] = df['events'].apply(lambda x: x.get('y'))
         df_events["description"] = df['events'].apply(lambda x: x.get('description'))
-        df
+
         df_events = df_events.drop('events', axis=1)
 
         if type == 'total' or type == 'free':
             attachIndex = (df_events.index[df_events['description'].str.contains("Attach")]+1).tolist() 
             releaseIndex = (df_events.index[df_events['description'].str.contains("Release")]-1).tolist()
+        # elif type == 'Glue':
+        #     GlueIndex = (df_events.index[df_events['description'].str.contains(type)]).tolist() 
+        #     for i in range(len(GlueIndex)):
+        #         print("Glue interaction: ")
+        #         print(df_events.loc[GlueIndex[i], 'description'])
+
+        #         # print(df_events.loc[GlueIndex[i], 'timestamp'])
+        #         print("ego location:")
+        #         print(df_events.loc[GlueIndex[i], 'x'])
+        #         print(df_events.loc[GlueIndex[i], 'y']) 
+        #     # releaseIndex = (df_events.index[df_events['description'].str.contains(type)]).tolist()
         else:
             attachIndex = (df_events.index[df_events['description'] == "Attach "+type]+1).tolist() 
             releaseIndex = (df_events.index[df_events['description'] == "Release "+type]-1).tolist() 
@@ -48,6 +60,26 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, sol
         if direction:
             #here is an array since any type may be interacted multiple times
             s=np.array([])
+            if type == 'Glue' or type == 'Unglue':
+                GlueAction = (df_events.index[df_events['description'].str.contains(type)]).tolist()
+                for i in range(len(GlueAction)):
+                    x_start = df_events.loc[GlueAction[i], 'x']
+                    startTime = df_events.loc[GlueAction[i], 'timestamp']
+                    y_start = df_events.loc[GlueAction[i], 'y']
+                    # x_end = df_events.loc[GlueAction[i], 'x']
+                    # endTime = df_events.loc[GlueAction[i], 'timestamp']
+                    # y_end = df_events.loc[GlueAction[i], 'y']
+                    glue_description = df_events.loc[GlueAction[i], 'description']
+                    # d=endTime-startTime
+                    # d=d.total_seconds()
+                    # d=round(d,2)
+
+                    # x=np.array([x_start,x_end])
+                    # y=np.array([y_start,y_end])
+                    # geo=nesw(x,y)
+
+                    s=np.append(s,str(startTime)+"_"+glue_description)
+            
             
 
             for i in range(len(attachIndex)):

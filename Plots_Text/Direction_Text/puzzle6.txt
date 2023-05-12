@@ -7,7 +7,7 @@ Participant:31 for the Puzzle:6 in the Attempt:0 and run:2 took follwing movemen
 Solved: True
 
 Participant:33 for the Puzzle:6 in the Attempt:0 and run:1 took follwing movements:
-['obj2 W 2.01s', 'obj4 E 0.42s', 'obj4 E 0.6s', 'obj4 E 0.48s', 'obj4 E 0.43s', 'obj1 E 0.33s', 'box1 W 1.05s']
+['Glue attempt for obj2 and obj3', 'Glue attempt for obj2 and obj3', 'Glue attempt for obj2 and obj3', 'obj2 W 2.01s', 'obj4 E 0.42s', 'obj4 E 0.6s', 'obj4 E 0.48s', 'obj4 E 0.43s', 'obj1 E 0.33s', 'box1 W 1.05s']
 Solved: True
 
 Participant:33 for the Puzzle:6 in the Attempt:0 and run:2 took follwing movements:
@@ -39,7 +39,7 @@ Participant:39 for the Puzzle:6 in the Attempt:0 and run:1 took follwing movemen
 Solved: True
 
 Participant:36 for the Puzzle:6 in the Attempt:0 and run:1 took follwing movements:
-['obj2 S 1.31s', 'obj2 N 0.92s', 'obj2 E 0.7s', 'box1 NW 0.78s']
+['obj2 S 1.31s', 'obj2 N 0.92s', 'Glue obj3 to obj2', 'obj2 E 0.7s', 'box1 NW 0.78s']
 Solved: True
 
 Participant:37 for the Puzzle:6 in the Attempt:0 and run:2 took follwing movements:
@@ -47,7 +47,7 @@ Participant:37 for the Puzzle:6 in the Attempt:0 and run:2 took follwing movemen
 Solved: True
 
 Participant:36 for the Puzzle:6 in the Attempt:0 and run:2 took follwing movements:
-['obj2 E 1.39s', 'obj2 N 0.64s', 'obj2 SE 0.33s', 'obj2 E 0.8s', 'box1 W 1.2s']
+['Glue attempt for obj2 and obj3', 'obj2 E 1.39s', 'obj2 N 0.64s', 'obj2 SE 0.33s', 'Glue obj3 to obj2', 'obj2 E 0.8s', 'box1 W 1.2s']
 Solved: True
 
 Participant:39 for the Puzzle:6 in the Attempt:0 and run:2 took follwing movements:
@@ -55,15 +55,15 @@ Participant:39 for the Puzzle:6 in the Attempt:0 and run:2 took follwing movemen
 Solved: True
 
 Participant:41 for the Puzzle:6 in the Attempt:0 and run:1 took follwing movements:
-['obj2 E 0.0s', 'obj2 SE 0.47s', 'obj2 N 0.52s', 'obj2 S 0.13s', 'obj2 NE 1.03s', 'box1 NW 0.9s']
+['Glue attempt for obj2 and obj3', 'obj2 E 0.0s', 'obj2 SE 0.47s', 'obj2 N 0.52s', 'obj2 S 0.13s', 'Glue obj3 to obj2', 'obj2 NE 1.03s', 'box1 NW 0.9s']
 Solved: True
 
 Participant:41 for the Puzzle:6 in the Attempt:0 and run:2 took follwing movements:
-['obj2 E 0.15s', 'obj2 N 0.57s', 'box1 NW 2.25s']
+['Glue attempt for obj2 and obj3', 'Glue attempt for obj2 and obj3', 'Glue attempt for obj2 and obj3', 'obj2 E 0.15s', 'Glue obj3 to obj2', 'obj2 N 0.57s', 'box1 NW 2.25s']
 Solved: True
 
 Participant:42 for the Puzzle:6 in the Attempt:0 and run:1 took follwing movements:
-['obj2 S 0.93s', 'obj4 E 0.32s', 'obj1 E 0.1s', 'obj1 E 2.93s', 'obj1 NW 1.58s']
+['obj2 S 0.93s', 'obj4 E 0.32s', 'obj1 E 0.1s', 'obj1 E 2.93s', 'Glue box1 to obj1', 'obj1 NW 1.58s']
 Solved: True
 
 Participant:43 for the Puzzle:6 in the Attempt:0 and run:1 took follwing movements:
@@ -103,11 +103,11 @@ Participant:45 for the Puzzle:6 in the Attempt:0 and run:2 took follwing movemen
 Solved: True
 
 Participant:47 for the Puzzle:6 in the Attempt:0 and run:1 took follwing movements:
-['obj2 NE 0.26s', 'obj2 E 0.42s', 'box1 NW 0.57s']
+['Glue attempt for obj2 and obj3', 'Glue attempt for obj2 and obj3', 'Glue attempt for obj2 and obj3', 'Glue attempt for obj2 and obj3', 'obj2 NE 0.26s', 'Glue obj3 to obj2', 'obj2 E 0.42s', 'box1 NW 0.57s']
 Solved: True
 
 Participant:47 for the Puzzle:6 in the Attempt:0 and run:2 took follwing movements:
-['obj2 E 0.26s', 'obj2 E 0.47s', 'box1 NW 0.75s']
+['Glue attempt for obj2 and obj3', 'obj2 E 0.26s', 'Glue obj3 to obj2', 'obj2 E 0.47s', 'box1 NW 0.75s']
 Solved: True
 
 Participant:48 for the Puzzle:6 in the Attempt:0 and run:1 took follwing movements:
@@ -115,6 +115,6 @@ Participant:48 for the Puzzle:6 in the Attempt:0 and run:1 took follwing movemen
 Solved: True
 
 Participant:48 for the Puzzle:6 in the Attempt:0 and run:2 took follwing movements:
-['obj4 E 0.43s', 'obj2 N 0.55s', 'obj2 N 0.85s', 'box1 NW 0.83s']
+['obj4 E 0.43s', 'obj2 N 0.55s', 'Glue obj3 to obj2', 'obj2 N 0.85s', 'box1 NW 0.83s']
 Solved: True
 
