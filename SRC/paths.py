@@ -54,7 +54,7 @@ def main():
                                 pass
                     else:
                         
-                        imgfolder = 'cropped'
+                        imgfolder = '/home/erfan/Documents/Puzzle/puzzlesdata/cropped_puzzles_screenshots'
                         fname = os.path.join(imgfolder, 'puzzle'+str(puzzle)+'.png')
                         img = Image.open(fname).convert('L')
 
@@ -80,7 +80,7 @@ def main():
                         plt.ylabel('y')
                         plt.legend()
             plt.title('Participant:'+str(participant_id)+' Puzzle: '+str(puzzle)+' Attempt:'+str(attempt)+' Run:'+str(run)+'\n'+'sparcity:'+str(sparce))
-            plt.savefig('plots/'+str(puzzle)+'_'+str(participant_id)+'_'+str(attempt)+'_'+str(run)+'.png', dpi=300)
+            plt.savefig('/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/Path_Plots/'+str(puzzle)+'_'+str(participant_id)+'_'+str(attempt)+'_'+str(run)+'.png', dpi=300)
             plt.close()
 
 if __name__ == "__main__":

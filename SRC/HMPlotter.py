@@ -51,7 +51,7 @@ def main():
                                     x = np.append(x, xi)
                                     y = np.append(y, yi)
                                 elif "Attach "+type or "Release "+ type in movementTracker.get_descriptions(df):
-                                    print("test")
+                                    # print("test")
                                     x = np.append(x, xi)
                                     y = np.append(y, yi)
                            
@@ -63,7 +63,7 @@ def main():
                 fig, ax = plt.subplots()
 
                 #the image of the desired puzzle
-                imgfolder = 'cropped'
+                imgfolder = '/home/erfan/Documents/Puzzle/puzzlesdata/cropped_puzzles_screenshots'
                 fname = os.path.join(imgfolder, 'puzzle'+str(desiredpuzzle)+'.png')
                 img = Image.open(fname).convert('L')
                 img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
@@ -75,7 +75,8 @@ def main():
                 plt.title(type + ' Interaction Heatmap of the Puzzle ' + str(desiredpuzzle))
                 # plt.show()
                 #save the plot in the temp folder with same name as the title
-                fig.savefig(os.path.join('/home/erfan/Documents/Puzzle/puzzlesdata/TEMP', str(desiredpuzzle)+'_'+ type +'.png'), dpi=300)
+                
+                fig.savefig(os.path.join('/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/HeatMap_Plots', str(desiredpuzzle)+'_'+ type +'.png'), dpi=300)
                 plt.close(fig)
 
 
