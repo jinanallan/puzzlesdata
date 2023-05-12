@@ -12,10 +12,10 @@ def main():
      # folder = input("Enter the folder path: ")
     folder = '/home/erfan/Downloads/pnp'
    
-
+    # 1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26
     for desired_puzzle in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:
 
-        output_file = os.path.join('Direction', 'puzzle'+str(desired_puzzle)+'.txt')
+        output_file = os.path.join('/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/Direction_Text', 'puzzle'+str(desired_puzzle)+'.txt')
 
         with open(output_file, 'w') as f:
             for filename in sorted(os.listdir(folder)):
@@ -34,18 +34,18 @@ def main():
                             data = json.load(json_file)
                             df=movementTracker.df_from_json(data) 
 
-                        for type in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4']:
+                        for type in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4','Glue','Unglue']:
 
-                            xi, yi = movementTracker.interaction(df, participant_id, run, type)
-                            if xi.size == 0 or yi.size == 0:
+                            # xi, yi = movementTracker.interaction(df, participant_id, run, type)
+                            # if xi.size == 0 or yi.size == 0:
 
-                                pass
+                            #     pass
 
-                            else:
+                            # else:
 
-                                o=movementTracker.interaction(df, participant_id, run, type,direction=True)
-                                eventlist= np.append(eventlist,o)
-                        
+                            o=movementTracker.interaction(df, participant_id, run, type,direction=True)
+                            eventlist= np.append(eventlist,o)
+                    
                         #sortting the list baded on the time of the event
                         eventlist=eventlist[np.argsort(eventlist)]
                         eventlist=[i.split("_")[1] for i in eventlist]
