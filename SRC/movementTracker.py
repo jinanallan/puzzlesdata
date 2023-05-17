@@ -12,7 +12,7 @@ def df_from_json(file):
         df = pd.DataFrame(file, index=[0])
     return df
 
-def interaction(df, participant_id, run,type, sparce=False, direction=False, solved=False):
+def interaction(df, participant_id, run,type, sparce=False, direction=False, pos= False, solved=False):
 
     #valid interactions types: box1, obj1, obj2, obj3, obj4
     if type not in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4', 'total', 'free', 'Glue', 'Unglue']: raise ValueError('Invalid interaction type')
@@ -96,7 +96,11 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, sol
 
                 x=np.array([x_start,x_end])
                 y=np.array([y_start,y_end])
-                geo=nesw(x,y)
+                if pos: 
+                   geo=str(PosChange(x,y))
+
+                else:
+                    geo=nesw(x,y)
 
                 s=np.append(s,str(startTime)+"_"+type+" "+ geo + " " + str(d)+"s")
         
@@ -141,10 +145,6 @@ def get_descriptions(df):
     return df_events['description'].unique()
 
 def nesw(x,y):
-    #the first implementation is based on looking at the first and last points
-    #x and y are numpy arrays
-    #returns the direction of movement
-    #0: stationary, 1: up, 2: right, 3: down, 4: left
     x_diff = x[-1]-x[0]
     y_diff = y[-1]-y[0]
     direction_step= np.sqrt(x_diff**2+y_diff**2)
@@ -176,4 +176,12 @@ def nesw(x,y):
     elif angle in range(300, 330):
         direction = "SE"
     return direction
-    
+
+def PosChange(x,y):
+    x_diff = x[-1]-x[0]
+    y_diff = y[-1]-y[0]
+    direction_step= np.sqrt(x_diff**2+y_diff**2)
+    if direction_step != 0:
+        x_diff = x_diff/direction_step
+        y_diff = y_diff/direction_step
+    return x_diff, y_diff

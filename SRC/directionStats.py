@@ -23,10 +23,13 @@ def actions(action_list):
     action_list = action_list.replace("[", "")
     action_list = action_list.replace("]", "")
     action_list = action_list.replace("'", "")
+    action_list = action_list.replace("(", "[")
+    action_list = action_list.replace(")", "]")
+    action_list = action_list.replace(",", " ")
     action_list = action_list.split(",")
     return action_list
 
-file = 'Direction/puzzle2.txt'
+file = '/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/Direction_Text/puzzle2.txt'
 
 with open(file, 'r') as text:
     text = text.readlines()
