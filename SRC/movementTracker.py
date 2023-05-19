@@ -94,7 +94,8 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, pos
                     x=np.array([x_start,x_end])
                     y=np.array([y_start,y_end])
                     if pos:
-                        geo=str(PosChange(x,y))
+                        xx,yy=PosChange(x,y)
+                        geo=str(xx)+" " +str(yy)
                     else:
                         geo=nesw(x,y)
 
@@ -107,15 +108,6 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, pos
                         
                 return s
 
-
-
-
-
-                   
-
-            
-              
-               
             else:
                 for i in range(len(attachIndex)):
                     x_start = df_events.loc[attachIndex[i], 'x']
@@ -132,7 +124,8 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, pos
                     x=np.array([x_start,x_end])
                     y=np.array([y_start,y_end])
                     if pos: 
-                        geo=str(PosChange(x,y))
+                        xx,yy=PosChange(x,y)
+                        geo=str(xx)+" " +str(yy)
 
                     else:
                         geo=nesw(x,y)
@@ -220,4 +213,6 @@ def PosChange(x,y):
     if direction_step != 0:
         x_diff = x_diff/direction_step
         y_diff = y_diff/direction_step
+        x_diff = round(x_diff,2)
+        y_diff = round(y_diff,2)
     return x_diff, y_diff
