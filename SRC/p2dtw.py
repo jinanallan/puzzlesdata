@@ -109,7 +109,7 @@ def main():
             d=dtw_ndim.distance(querry, reference)
             # print(d)
             dist[i,j]=d
-    print(dist.shape)
+    print(dist)
 
 
 
