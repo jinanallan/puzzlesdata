@@ -41,17 +41,7 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, pos
         if type == 'total' or type == 'free':
             attachIndex = (df_events.index[df_events['description'].str.contains("Attach")]+1).tolist() 
             releaseIndex = (df_events.index[df_events['description'].str.contains("Release")]-1).tolist()
-        # elif type == 'Glue':
-        #     GlueIndex = (df_events.index[df_events['description'].str.contains(type)]).tolist() 
-        #     for i in range(len(GlueIndex)):
-        #         print("Glue interaction: ")
-        #         print(df_events.loc[GlueIndex[i], 'description'])
-
-        #         # print(df_events.loc[GlueIndex[i], 'timestamp'])
-        #         print("ego location:")
-        #         print(df_events.loc[GlueIndex[i], 'x'])
-        #         print(df_events.loc[GlueIndex[i], 'y']) 
-        #     # releaseIndex = (df_events.index[df_events['description'].str.contains(type)]).tolist()
+       
         else:
             attachIndex = (df_events.index[df_events['description'] == "Attach "+type]+1).tolist() 
             releaseIndex = (df_events.index[df_events['description'] == "Release "+type]-1).tolist() 
@@ -81,30 +71,76 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, pos
                     s=np.append(s,str(startTime)+"_"+glue_description)
             
             
+            if type == 'free':
+               
+                x_start = df_events.loc[0, 'x']
+                startTime = df_events.loc[0, 'timestamp']
+                y_start = df_events.loc[0, 'y']
 
-            for i in range(len(attachIndex)):
-                x_start = df_events.loc[attachIndex[i], 'x']
-                startTime = df_events.loc[attachIndex[i], 'timestamp']
-                y_start = df_events.loc[attachIndex[i], 'y']
-                x_end = df_events.loc[releaseIndex[i], 'x']
-                endTime = df_events.loc[releaseIndex[i], 'timestamp']
-                y_end = df_events.loc[releaseIndex[i], 'y']
+                # x_end = df_events.loc[len(df_events)-1, 'x']
+                # endTime = df_events.loc[len(df_events)-1, 'timestamp']
+                # y_end = df_events.loc[len(df_events)-1, 'y']
 
-                d=endTime-startTime
-                d=d.total_seconds()
-                d=round(d,2)
+                for i in range(len(attachIndex)):
 
-                x=np.array([x_start,x_end])
-                y=np.array([y_start,y_end])
-                if pos: 
-                   geo=str(PosChange(x,y))
+                    x_end = df_events.loc[attachIndex[i]-1, 'x']
+                    endTime = df_events.loc[attachIndex[i]-1, 'timestamp']
+                    y_end = df_events.loc[attachIndex[i]-1, 'y']
 
-                else:
-                    geo=nesw(x,y)
+                    d=endTime-startTime
+                    d=d.total_seconds()
+                    d=round(d,2)
+                    
+                    x=np.array([x_start,x_end])
+                    y=np.array([y_start,y_end])
+                    if pos:
+                        geo=str(PosChange(x,y))
+                    else:
+                        geo=nesw(x,y)
 
-                s=np.append(s,str(startTime)+"_"+type+" "+ geo + " " + str(d)+"s")
-        
-            return s
+                    s=np.append(s,str(startTime)+"_"+type+" "+ geo + " " + str(d)+"s")
+
+                    x_start = df_events.loc[releaseIndex[i]+1, 'x']
+                    startTime = df_events.loc[releaseIndex[i]+1, 'timestamp']
+                    y_start = df_events.loc[releaseIndex[i]+1, 'y']
+                            
+                        
+                return s
+
+
+
+
+
+                   
+
+            
+              
+               
+            else:
+                for i in range(len(attachIndex)):
+                    x_start = df_events.loc[attachIndex[i], 'x']
+                    startTime = df_events.loc[attachIndex[i], 'timestamp']
+                    y_start = df_events.loc[attachIndex[i], 'y']
+                    x_end = df_events.loc[releaseIndex[i], 'x']
+                    endTime = df_events.loc[releaseIndex[i], 'timestamp']
+                    y_end = df_events.loc[releaseIndex[i], 'y']
+
+                    d=endTime-startTime
+                    d=d.total_seconds()
+                    d=round(d,2)
+
+                    x=np.array([x_start,x_end])
+                    y=np.array([y_start,y_end])
+                    if pos: 
+                        geo=str(PosChange(x,y))
+
+                    else:
+                        geo=nesw(x,y)
+
+                    s=np.append(s,str(startTime)+"_"+type+" "+ geo + " " + str(d)+"s")
+                
+            
+                return s
     
         else:
 
