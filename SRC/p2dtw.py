@@ -4,6 +4,7 @@ import json
 import movementTracker
 import re
 import HMPlotter
+from dtaidistance import dtw
 from dtaidistance import dtw_ndim
 from dtaidistance import dtw_ndim_visualisation
 
@@ -15,17 +16,17 @@ def main():
     # 1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26
     for desired_puzzle in [2]:
 
-        output_file = os.path.join('/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/Direction_Text', 'puzzle'+str(desired_puzzle)+'10_pos.txt')
+        output_file = os.path.join('/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/Direction_Text', 'puzzle'+str(desired_puzzle)+'20_pos.txt')
 
         with open(output_file, 'w') as f:
             for filename in sorted(os.listdir(folder)):
                 if filename.endswith('.json'):
                     participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
 
-                    if desired_puzzle == puzzle and run == 1 and attempt == 0:
+                    if desired_puzzle == puzzle and run == 2 and attempt == 0:
 
-                        f.write(str(participant_id) + "_" + str(puzzle) +
-                                "_" + str(attempt) + "_" +str(run)+"\n" )
+                        f.write(str(participant_id) + "_" + str(run) +
+                                "_" + str(puzzle) + "_" +str(attempt)+"\n" )
                         
 
                         eventlist=np.array([])
@@ -61,6 +62,7 @@ def main():
         
         text = f.readlines()
         max_length = 0
+        ids=[]
 
 
         for line in text:
@@ -90,26 +92,44 @@ def main():
                 ac = np.array(action_list)
                 p210[j,:ac.shape[0],:ac.shape[1]]=ac
                 j+=1
+            elif line.startswith("\n"):
+                pass
+            else:
+                line=line.replace("\n","")
+                ids.append(line)
+        # print(ids)
+             
 
-    # print(p210)
-    #define a distance matrix
-
-    dist=np.empty((p210.shape[0],p210.shape[0]))
-    dist[:] = np.nan
-
+    # print(p210.shape)
+    # define a distance matrix
+    series = []
     for i in range(p210.shape[0]):
-        for j in range(p210.shape[0]):
-            querry = p210[i,:,:]
-            reference = p210[j,:,:]
+        seri = p210[i,:,:]
+        seri = seri[~np.isnan(seri).any(axis=1)]
+        series.append(seri)
+    # print(len(series))
+
+    ds = dtw.distance_matrix_fast(series,window=3)
+    # print(ds)
+    return ds,ids
+
+
+    # dist=np.empty((p210.shape[0],p210.shape[0]))
+    # dist[:] = np.nan
+
+    # for i in range(p210.shape[0]):
+    #     for j in range(p210.shape[0]):
+    #         querry = p210[i,:,:]
+    #         reference = p210[j,:,:]
        
-            querry = querry[~np.isnan(querry).any(axis=1)]
-            reference = reference[~np.isnan(reference).any(axis=1)]
-            # print(querry)
-            # print(reference)
-            d=dtw_ndim.distance(querry, reference)
-            # print(d)
-            dist[i,j]=d
-    print(dist)
+    #         querry = querry[~np.isnan(querry).any(axis=1)]
+    #         reference = reference[~np.isnan(reference).any(axis=1)]
+    #         # print(querry)
+    #         # print(reference)
+    #         d=dtw_ndim.distance(querry, reference)
+    #         # print(d)
+    #         dist[i,j]=d
+    # print(dist.shape)
 
 
 
@@ -140,7 +160,7 @@ def action(string):
         s [0] = 1
     s [1] = float(s[1])
     s [2] = float(s[2])
-    s [3] = float(s[3])
+    s [3] = 0
     return s
        
 
