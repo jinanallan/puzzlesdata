@@ -23,7 +23,7 @@ def main():
                 if filename.endswith('.json'):
                     participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
 
-                    if desired_puzzle == puzzle and run == 2 and attempt == 0:
+                    if desired_puzzle == puzzle :
 
                         f.write(str(participant_id) + "_" + str(run) +
                                 "_" + str(puzzle) + "_" +str(attempt)+"\n" )
@@ -160,6 +160,7 @@ def action(string):
         s [0] = 1
     s [1] = float(s[1])
     s [2] = float(s[2])
+    
     s [3] = 0
     return s
        

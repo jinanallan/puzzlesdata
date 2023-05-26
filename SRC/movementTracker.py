@@ -41,7 +41,8 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, pos
         if type == 'total' or type == 'free':
             attachIndex = (df_events.index[df_events['description'].str.contains("Attach")]+1).tolist() 
             releaseIndex = (df_events.index[df_events['description'].str.contains("Release")]-1).tolist()
-       
+
+   
         else:
             attachIndex = (df_events.index[df_events['description'] == "Attach "+type]+1).tolist() 
             releaseIndex = (df_events.index[df_events['description'] == "Release "+type]-1).tolist() 
@@ -160,6 +161,10 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, pos
 
             else:
                     return x, y 
+            
+
+            
+
         
     except:
         return np.array([]), np.array([])
