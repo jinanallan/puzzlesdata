@@ -119,22 +119,3 @@ Participant:45 for the Puzzle:26 in the Attempt:0 and run:2 took follwing moveme
 Solved: True
 
 Participant:47 for the Puzzle:26 in the Attempt:0 and run:1 took follwing movements:
-['box1 N 1.12s', 'obj1 W 2.48s', 'Glue obj1 to box1', 'box1 N 0.49s']
-Solved: False
-
-Participant:47 for the Puzzle:26 in the Attempt:1 and run:1 took follwing movements:
-['obj2 S 0.4s', 'obj2 E -0.0s', 'obj2 W 0.58s', 'obj2 NW 0.93s', 'Glue obj2 to box1', 'box1 N 0.63s', 'obj3 W 2.17s', 'obj3 E 0.0s', 'Glue obj3 to obj2', 'box1 N 0.88s', 'box1 E -0.08s', 'box1 N 1.22s', 'Glue obj1 to obj3', 'box1 N 0.52s']
-Solved: True
-
-Participant:47 for the Puzzle:26 in the Attempt:0 and run:2 took follwing movements:
-['box1 N 1.35s', 'obj2 W 2.19s', 'Glue obj2 to box1', 'obj3 W 1.5s', 'Glue obj3 to obj2', 'box1 N 0.73s', 'obj1 W 1.29s', 'Glue obj1 to obj3', 'box1 N 0.57s', 'box1 N 0.37s']
-Solved: True
-
-Participant:48 for the Puzzle:26 in the Attempt:0 and run:1 took follwing movements:
-['box1 N 3.0s', 'box1 E 0.87s', 'obj2 NW 1.4s', 'Glue obj1 to obj2', 'obj3 E 0.0s', 'obj2 SW 4.03s', 'Unglue obj1', 'obj2 E 0.82s', 'box1 SE 4.19s', 'Glue obj2 to box1', 'box1 E 0.66s', 'Unglue obj2', 'box1 E 1.1s', 'Glue obj2 to box1', 'obj3 SW 0.85s', 'obj3 W 1.85s', 'Glue obj3 to obj2', 'box1 W 2.4s', 'box1 N 1.98s', 'box1 S 0.87s', 'box1 N 2.07s', 'Glue obj1 to obj3', 'Unglue obj1', 'Glue obj1 to obj3', 'box1 N 1.2s']
-Solved: True
-
-Participant:48 for the Puzzle:26 in the Attempt:0 and run:2 took follwing movements:
-['box1 N 0.74s', 'obj2 W 2.98s', 'obj2 W 1.36s', 'Glue obj2 to box1', 'box1 N 0.85s', 'obj3 W 1.58s', 'obj3 W 1.33s', 'Glue obj3 to obj2', 'box1 N 1.06s', 'box1 S 0.34s', 'obj1 W 2.2s', 'Glue obj1 to obj3', 'box1 N 0.5s', 'box1 N 0.52s']
-Solved: True
-

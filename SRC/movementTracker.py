@@ -12,7 +12,7 @@ def df_from_json(file):
         df = pd.DataFrame(file, index=[0])
     return df
 
-def interaction(df, participant_id, run,type, sparce=False, direction=False, solved=False):
+def interaction(df, participant_id, run,type, sparce=False, direction=False, pos= False, solved=False):
 
     #valid interactions types: box1, obj1, obj2, obj3, obj4
     if type not in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4', 'total', 'free', 'Glue', 'Unglue']: raise ValueError('Invalid interaction type')
@@ -41,17 +41,8 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, sol
         if type == 'total' or type == 'free':
             attachIndex = (df_events.index[df_events['description'].str.contains("Attach")]+1).tolist() 
             releaseIndex = (df_events.index[df_events['description'].str.contains("Release")]-1).tolist()
-        # elif type == 'Glue':
-        #     GlueIndex = (df_events.index[df_events['description'].str.contains(type)]).tolist() 
-        #     for i in range(len(GlueIndex)):
-        #         print("Glue interaction: ")
-        #         print(df_events.loc[GlueIndex[i], 'description'])
 
-        #         # print(df_events.loc[GlueIndex[i], 'timestamp'])
-        #         print("ego location:")
-        #         print(df_events.loc[GlueIndex[i], 'x'])
-        #         print(df_events.loc[GlueIndex[i], 'y']) 
-        #     # releaseIndex = (df_events.index[df_events['description'].str.contains(type)]).tolist()
+   
         else:
             attachIndex = (df_events.index[df_events['description'] == "Attach "+type]+1).tolist() 
             releaseIndex = (df_events.index[df_events['description'] == "Release "+type]-1).tolist() 
@@ -81,26 +72,69 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, sol
                     s=np.append(s,str(startTime)+"_"+glue_description)
             
             
+            if type == 'free':
+               
+                x_start = df_events.loc[0, 'x']
+                startTime = df_events.loc[0, 'timestamp']
+                y_start = df_events.loc[0, 'y']
 
-            for i in range(len(attachIndex)):
-                x_start = df_events.loc[attachIndex[i], 'x']
-                startTime = df_events.loc[attachIndex[i], 'timestamp']
-                y_start = df_events.loc[attachIndex[i], 'y']
-                x_end = df_events.loc[releaseIndex[i], 'x']
-                endTime = df_events.loc[releaseIndex[i], 'timestamp']
-                y_end = df_events.loc[releaseIndex[i], 'y']
+                # x_end = df_events.loc[len(df_events)-1, 'x']
+                # endTime = df_events.loc[len(df_events)-1, 'timestamp']
+                # y_end = df_events.loc[len(df_events)-1, 'y']
 
-                d=endTime-startTime
-                d=d.total_seconds()
-                d=round(d,2)
+                for i in range(len(attachIndex)):
 
-                x=np.array([x_start,x_end])
-                y=np.array([y_start,y_end])
-                geo=nesw(x,y)
+                    x_end = df_events.loc[attachIndex[i]-1, 'x']
+                    endTime = df_events.loc[attachIndex[i]-1, 'timestamp']
+                    y_end = df_events.loc[attachIndex[i]-1, 'y']
 
-                s=np.append(s,str(startTime)+"_"+type+" "+ geo + " " + str(d)+"s")
-        
-            return s
+                    d=endTime-startTime
+                    d=d.total_seconds()
+                    d=round(d,2)
+                    
+                    x=np.array([x_start,x_end])
+                    y=np.array([y_start,y_end])
+                    if pos:
+                        xx,yy=PosChange(x,y)
+                        geo=str(xx)+" " +str(yy)
+                    else:
+                        geo=nesw(x,y)
+
+                    s=np.append(s,str(startTime)+"_"+type+" "+ geo + " " + str(d)+"s")
+
+                    x_start = df_events.loc[releaseIndex[i]+1, 'x']
+                    startTime = df_events.loc[releaseIndex[i]+1, 'timestamp']
+                    y_start = df_events.loc[releaseIndex[i]+1, 'y']
+                            
+                        
+                return s
+
+            else:
+                for i in range(len(attachIndex)):
+                    x_start = df_events.loc[attachIndex[i], 'x']
+                    startTime = df_events.loc[attachIndex[i], 'timestamp']
+                    y_start = df_events.loc[attachIndex[i], 'y']
+                    x_end = df_events.loc[releaseIndex[i], 'x']
+                    endTime = df_events.loc[releaseIndex[i], 'timestamp']
+                    y_end = df_events.loc[releaseIndex[i], 'y']
+
+                    d=endTime-startTime
+                    d=d.total_seconds()
+                    d=round(d,2)
+
+                    x=np.array([x_start,x_end])
+                    y=np.array([y_start,y_end])
+                    if pos: 
+                        xx,yy=PosChange(x,y)
+                        geo=str(xx)+" " +str(yy)
+
+                    else:
+                        geo=nesw(x,y)
+
+                    s=np.append(s,str(startTime)+"_"+type+" "+ geo + " " + str(d)+"s")
+                
+            
+                return s
     
         else:
 
@@ -127,6 +161,10 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, sol
 
             else:
                     return x, y 
+            
+
+            
+
         
     except:
         return np.array([]), np.array([])
@@ -141,10 +179,6 @@ def get_descriptions(df):
     return df_events['description'].unique()
 
 def nesw(x,y):
-    #the first implementation is based on looking at the first and last points
-    #x and y are numpy arrays
-    #returns the direction of movement
-    #0: stationary, 1: up, 2: right, 3: down, 4: left
     x_diff = x[-1]-x[0]
     y_diff = y[-1]-y[0]
     direction_step= np.sqrt(x_diff**2+y_diff**2)
@@ -176,4 +210,14 @@ def nesw(x,y):
     elif angle in range(300, 330):
         direction = "SE"
     return direction
-    
+
+def PosChange(x,y):
+    x_diff = x[-1]-x[0]
+    y_diff = y[-1]-y[0]
+    direction_step= np.sqrt(x_diff**2+y_diff**2)
+    if direction_step != 0:
+        x_diff = x_diff/direction_step
+        y_diff = y_diff/direction_step
+        x_diff = round(x_diff,2)
+        y_diff = round(y_diff,2)
+    return x_diff, y_diff
