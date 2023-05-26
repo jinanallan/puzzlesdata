@@ -1,5 +1,5 @@
 # puzzlesdatareader
-the following plot is Hierarchical Clustering Dendrogram based on path, tw major cluster and one outlier, the cluster on right are those who takes box from right corridor and then push from bottom and the one on the left push from bottom 
+the following plot is puzzle 2 Hierarchical Clustering Dendrogram based on path, two major clusters and one outlier, the cluster on right are those who takes box from right corridor and then push from bottom and the one on the left push from bottom 
 
 ![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Plots_Text/Hierarchical%20Clustering%20Dendrogram%20based%20on%20path%20puzzle%202.png?raw=true)
 
