@@ -20,154 +20,156 @@ def interaction(df, participant_id, run,type, sparce=False, direction=False, pos
     if solved: 
         #return the value of the solved key as string
         return str(df['solved'].values[0])
-    
-    try:
-    
+    else:
 
-        events = df["events"]
-        df_events = pd.DataFrame(events)
-        df_events["code"] = df['events'].apply(lambda x: x.get('code'))
-        df_events["timestamp"] = df['events'].apply(lambda x: x.get('timestamp'))
-        #the time stamp (unix time)  
-        df_events['timestamp'] = df_events['timestamp'].str.split('-').str[0] 
-        df_events['timestamp'] = df_events['timestamp'].astype(int)
-        df_events['timestamp'] = pd.to_datetime(df_events['timestamp'], unit='us')
-        df_events["x"] = df['events'].apply(lambda x: x.get('x'))
-        df_events["y"] = df['events'].apply(lambda x: x.get('y'))
-        df_events["description"] = df['events'].apply(lambda x: x.get('description'))
-
-        df_events = df_events.drop('events', axis=1)
-
-        if type == 'total' or type == 'free':
-            attachIndex = (df_events.index[df_events['description'].str.contains("Attach")]+1).tolist() 
-            releaseIndex = (df_events.index[df_events['description'].str.contains("Release")]-1).tolist()
-
-   
-        else:
-            attachIndex = (df_events.index[df_events['description'] == "Attach "+type]+1).tolist() 
-            releaseIndex = (df_events.index[df_events['description'] == "Release "+type]-1).tolist() 
+        
+        try:
         
 
-        if direction:
-            #here is an array since any type may be interacted multiple times
-            s=np.array([])
-            if type == 'Glue' or type == 'Unglue':
-                GlueAction = (df_events.index[df_events['description'].str.contains(type)]).tolist()
-                for i in range(len(GlueAction)):
-                    x_start = df_events.loc[GlueAction[i], 'x']
-                    startTime = df_events.loc[GlueAction[i], 'timestamp']
-                    y_start = df_events.loc[GlueAction[i], 'y']
-                    # x_end = df_events.loc[GlueAction[i], 'x']
-                    # endTime = df_events.loc[GlueAction[i], 'timestamp']
-                    # y_end = df_events.loc[GlueAction[i], 'y']
-                    glue_description = df_events.loc[GlueAction[i], 'description']
-                    # d=endTime-startTime
-                    # d=d.total_seconds()
-                    # d=round(d,2)
+            events = df["events"]
+            df_events = pd.DataFrame(events)
+            df_events["code"] = df['events'].apply(lambda x: x.get('code'))
+            df_events["timestamp"] = df['events'].apply(lambda x: x.get('timestamp'))
+            #the time stamp (unix time)  
+            df_events['timestamp'] = df_events['timestamp'].str.split('-').str[0] 
+            df_events['timestamp'] = df_events['timestamp'].astype(int)
+            df_events['timestamp'] = pd.to_datetime(df_events['timestamp'], unit='us')
+            df_events["x"] = df['events'].apply(lambda x: x.get('x'))
+            df_events["y"] = df['events'].apply(lambda x: x.get('y'))
+            df_events["description"] = df['events'].apply(lambda x: x.get('description'))
 
-                    # x=np.array([x_start,x_end])
-                    # y=np.array([y_start,y_end])
-                    # geo=nesw(x,y)
+            df_events = df_events.drop('events', axis=1)
 
-                    s=np.append(s,str(startTime)+"_"+glue_description)
-            
-            
-            if type == 'free':
-               
-                x_start = df_events.loc[0, 'x']
-                startTime = df_events.loc[0, 'timestamp']
-                y_start = df_events.loc[0, 'y']
+            if type == 'total' or type == 'free':
+                attachIndex = (df_events.index[df_events['description'].str.contains("Attach")]+1).tolist() 
+                releaseIndex = (df_events.index[df_events['description'].str.contains("Release")]-1).tolist()
 
-                # x_end = df_events.loc[len(df_events)-1, 'x']
-                # endTime = df_events.loc[len(df_events)-1, 'timestamp']
-                # y_end = df_events.loc[len(df_events)-1, 'y']
-
-                for i in range(len(attachIndex)):
-
-                    x_end = df_events.loc[attachIndex[i]-1, 'x']
-                    endTime = df_events.loc[attachIndex[i]-1, 'timestamp']
-                    y_end = df_events.loc[attachIndex[i]-1, 'y']
-
-                    d=endTime-startTime
-                    d=d.total_seconds()
-                    d=round(d,2)
-                    
-                    x=np.array([x_start,x_end])
-                    y=np.array([y_start,y_end])
-                    if pos:
-                        xx,yy=PosChange(x,y)
-                        geo=str(xx)+" " +str(yy)
-                    else:
-                        geo=nesw(x,y)
-
-                    s=np.append(s,str(startTime)+"_"+type+" "+ geo + " " + str(d)+"s")
-
-                    x_start = df_events.loc[releaseIndex[i]+1, 'x']
-                    startTime = df_events.loc[releaseIndex[i]+1, 'timestamp']
-                    y_start = df_events.loc[releaseIndex[i]+1, 'y']
-                            
-                        
-                return s
-
-            else:
-                for i in range(len(attachIndex)):
-                    x_start = df_events.loc[attachIndex[i], 'x']
-                    startTime = df_events.loc[attachIndex[i], 'timestamp']
-                    y_start = df_events.loc[attachIndex[i], 'y']
-                    x_end = df_events.loc[releaseIndex[i], 'x']
-                    endTime = df_events.loc[releaseIndex[i], 'timestamp']
-                    y_end = df_events.loc[releaseIndex[i], 'y']
-
-                    d=endTime-startTime
-                    d=d.total_seconds()
-                    d=round(d,2)
-
-                    x=np.array([x_start,x_end])
-                    y=np.array([y_start,y_end])
-                    if pos: 
-                        xx,yy=PosChange(x,y)
-                        geo=str(xx)+" " +str(yy)
-
-                    else:
-                        geo=nesw(x,y)
-
-                    s=np.append(s,str(startTime)+"_"+type+" "+ geo + " " + str(d)+"s")
-                
-            
-                return s
     
-        else:
+            else:
+                attachIndex = (df_events.index[df_events['description'] == "Attach "+type]+1).tolist() 
+                releaseIndex = (df_events.index[df_events['description'] == "Release "+type]-1).tolist() 
+            
 
-            interactions = np.array([])
-            for i in range(len(attachIndex)):
-                interactions = np.append(
-                    interactions, (range(attachIndex[i], releaseIndex[i])))
-                interactions = interactions.flatten()
-            interactions = interactions.astype(int)
+            if direction:
+                #here is an array since any type may be interacted multiple times
+                s=np.array([])
+                if type == 'Glue' or type == 'Unglue':
+                    GlueAction = (df_events.index[df_events['description'].str.contains(type)]).tolist()
+                    for i in range(len(GlueAction)):
+                        x_start = df_events.loc[GlueAction[i], 'x']
+                        startTime = df_events.loc[GlueAction[i], 'timestamp']
+                        y_start = df_events.loc[GlueAction[i], 'y']
+                        # x_end = df_events.loc[GlueAction[i], 'x']
+                        # endTime = df_events.loc[GlueAction[i], 'timestamp']
+                        # y_end = df_events.loc[GlueAction[i], 'y']
+                        glue_description = df_events.loc[GlueAction[i], 'description']
+                        # d=endTime-startTime
+                        # d=d.total_seconds()
+                        # d=round(d,2)
 
-            x = np.array([])
-            y = np.array([])
-            for index, row in df_events.iterrows():
+                        # x=np.array([x_start,x_end])
+                        # y=np.array([y_start,y_end])
+                        # geo=nesw(x,y)
+
+                        s=np.append(s,str(startTime)+"_"+glue_description)
+                
+                
                 if type == 'free':
-                    if index not in interactions:
+                
+                    x_start = df_events.loc[0, 'x']
+                    startTime = df_events.loc[0, 'timestamp']
+                    y_start = df_events.loc[0, 'y']
+
+                    # x_end = df_events.loc[len(df_events)-1, 'x']
+                    # endTime = df_events.loc[len(df_events)-1, 'timestamp']
+                    # y_end = df_events.loc[len(df_events)-1, 'y']
+
+                    for i in range(len(attachIndex)):
+
+                        x_end = df_events.loc[attachIndex[i]-1, 'x']
+                        endTime = df_events.loc[attachIndex[i]-1, 'timestamp']
+                        y_end = df_events.loc[attachIndex[i]-1, 'y']
+
+                        d=endTime-startTime
+                        d=d.total_seconds()
+                        d=round(d,2)
+                        
+                        x=np.array([x_start,x_end])
+                        y=np.array([y_start,y_end])
+                        if pos:
+                            xx,yy=PosChange(x,y)
+                            geo=str(xx)+" " +str(yy)
+                        else:
+                            geo=nesw(x,y)
+
+                        s=np.append(s,str(startTime)+"_"+type+" "+ geo + " " + str(d)+"s")
+
+                        x_start = df_events.loc[releaseIndex[i]+1, 'x']
+                        startTime = df_events.loc[releaseIndex[i]+1, 'timestamp']
+                        y_start = df_events.loc[releaseIndex[i]+1, 'y']
+                                
+                            
+                    return s
+
+                else:
+                    for i in range(len(attachIndex)):
+                        x_start = df_events.loc[attachIndex[i], 'x']
+                        startTime = df_events.loc[attachIndex[i], 'timestamp']
+                        y_start = df_events.loc[attachIndex[i], 'y']
+                        x_end = df_events.loc[releaseIndex[i], 'x']
+                        endTime = df_events.loc[releaseIndex[i], 'timestamp']
+                        y_end = df_events.loc[releaseIndex[i], 'y']
+
+                        d=endTime-startTime
+                        d=d.total_seconds()
+                        d=round(d,2)
+
+                        x=np.array([x_start,x_end])
+                        y=np.array([y_start,y_end])
+                        if pos: 
+                            xx,yy=PosChange(x,y)
+                            geo=str(xx)+" " +str(yy)
+
+                        else:
+                            geo=nesw(x,y)
+
+                        s=np.append(s,str(startTime)+"_"+type+" "+ geo + " " + str(d)+"s")
+                    
+                
+                    return s
+        
+            else:
+
+                interactions = np.array([])
+                for i in range(len(attachIndex)):
+                    interactions = np.append(
+                        interactions, (range(attachIndex[i], releaseIndex[i])))
+                    interactions = interactions.flatten()
+                interactions = interactions.astype(int)
+
+                x = np.array([])
+                y = np.array([])
+                for index, row in df_events.iterrows():
+                    if type == 'free':
+                        if index not in interactions:
+                            x = np.append(x, row['x'])
+                            y = np.append(y, row['y'])
+                    elif index in interactions: 
                         x = np.append(x, row['x'])
                         y = np.append(y, row['y'])
-                elif index in interactions: 
-                    x = np.append(x, row['x'])
-                    y = np.append(y, row['y'])
+                    
+                if sparce: 
+                    return x[::2], y[::2]
+
+                else:
+                        return x, y 
                 
-            if sparce: 
-                return x[::2], y[::2]
 
-            else:
-                    return x, y 
-            
+                
 
             
-
-        
-    except:
-        return np.array([]), np.array([])
+        except:
+            return np.array([]), np.array([])
     
         
 #get the list of unique descriptions in the json file
