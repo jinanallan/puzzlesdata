@@ -1,124 +1,128 @@
 Participant:31 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 1.79s', 'box1 N 0.91s', 'box1 N 0.0s', 'obj2 S 0.88s', 'obj2 W 2.95s', 'Glue obj2 to box1', 'box1 N 0.0s', 'box1 N 1.09s']
+['free E 1.53s', 'box1 W 1.79s', 'free S 2.18s', 'box1 N 0.91s', 'free S 1.52s', 'box1 N 0.0s', 'free E 2.69s', 'obj2 S 0.88s', 'free NW 0.75s', 'obj2 W 2.95s', 'free SE 3.68s', 'Glue obj2 to box1', 'box1 N 0.0s', 'free NE 0.39s', 'box1 N 1.09s']
+Solved: True
+
+Participant:32 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
+['free E 1.2s', 'obj1 S 2.0s', 'free S 0.93s', 'obj1 W 1.32s', 'free N 3.28s', 'Glue obj1 to box1', 'box1 W 2.07s', 'free S 0.58s', 'box1 N 1.17s', 'free E 0.87s', 'obj2 W 0.83s', 'free N 0.68s', 'obj2 W 1.9s', 'free S 2.18s', 'Glue obj2 to obj1', 'box1 N 0.48s', 'free S 2.17s', 'box1 N 0.67s']
 Solved: True
 
 Participant:31 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 2.55s', 'box1 N 0.57s', 'obj1 NW 2.13s', 'obj2 W 2.67s', 'Glue obj2 to box1', 'box1 N 0.6s', 'box1 N 0.57s']
+['free SE 1.33s', 'box1 W 2.55s', 'free S 1.27s', 'box1 N 0.57s', 'free E 2.16s', 'obj1 NW 2.13s', 'free E 0.75s', 'obj2 W 2.67s', 'free N 2.35s', 'Glue obj2 to box1', 'box1 N 0.6s', 'free S 0.97s', 'box1 N 0.57s']
 Solved: True
 
 Participant:33 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 0.73s', 'box1 N 2.34s', 'obj2 W 1.86s', 'obj2 NW 1.62s', 'Glue obj2 to box1', 'box1 N 0.62s']
+['free E 5.25s', 'box1 W 0.73s', 'free S 1.57s', 'box1 N 2.34s', 'free E 1.72s', 'obj2 W 1.86s', 'free S 3.37s', 'obj2 NW 1.62s', 'free S 2.53s', 'Glue obj2 to box1', 'box1 N 0.62s']
 Solved: True
 
 Participant:33 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 0.48s', 'box1 NW 1.17s', 'box1 N 1.15s', 'obj2 W 2.97s', 'Glue obj2 to box1', 'box1 N 0.83s']
+['free E 1.41s', 'box1 W 0.48s', 'free SE 1.68s', 'box1 NW 1.17s', 'free S 0.73s', 'box1 N 1.15s', 'free E 1.48s', 'obj2 W 2.97s', 'free SE 2.47s', 'Glue obj2 to box1', 'box1 N 0.83s']
 Solved: True
 
 Participant:34 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 3.07s', 'obj2 S 1.35s', 'obj2 W 2.32s', 'Glue obj2 to box1', 'box1 N 0.47s', 'box1 N 0.97s']
+['free S 2.45s', 'box1 W 3.07s', 'free E 1.0s', 'obj2 S 1.35s', 'free N 1.69s', 'obj2 W 2.32s', 'free S 1.48s', 'Glue obj2 to box1', 'box1 N 0.47s', 'free S 0.93s', 'box1 N 0.97s']
 Solved: True
 
 Participant:34 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 2.01s', 'obj2 W 2.74s', 'Glue obj2 to box1', 'box1 N 0.55s']
+['free S 3.03s', 'box1 W 2.01s', 'free E 1.42s', 'obj2 W 2.74s', 'free E 2.96s', 'Glue obj2 to box1', 'box1 N 0.55s']
 Solved: True
 
 Participant:35 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 3.0s', 'obj2 S 1.62s', 'obj2 W 3.1s', 'Glue obj2 to box1', 'box1 N 0.98s']
+['free S 2.03s', 'box1 W 3.0s', 'free E 1.22s', 'obj2 S 1.62s', 'free N 1.88s', 'obj2 W 3.1s', 'free S 3.61s', 'Glue obj2 to box1', 'box1 N 0.98s']
 Solved: True
 
 Participant:35 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 3.02s', 'obj2 W 3.88s', 'Glue obj2 to box1', 'box1 N 1.77s']
+['free S 2.43s', 'box1 W 3.02s', 'free E 1.55s', 'obj2 W 3.88s', 'free N 3.96s', 'Glue obj2 to box1', 'box1 N 1.77s']
 Solved: True
 
 Participant:37 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 2.07s', 'obj1 W 1.88s', 'Glue obj1 to box1', 'box1 N 0.58s', 'obj2 W 0.57s', 'box1 S 0.47s', 'obj2 W 2.97s', 'Glue obj2 to obj1', 'box1 N 0.88s']
+['free S 2.59s', 'box1 W 2.07s', 'free E 2.23s', 'obj1 W 1.88s', 'free E 2.32s', 'Glue obj1 to box1', 'box1 N 0.58s', 'free E 0.9s', 'obj2 W 0.57s', 'free W 0.85s', 'box1 S 0.47s', 'free E 0.97s', 'obj2 W 2.97s', 'free E 2.86s', 'Glue obj2 to obj1', 'box1 N 0.88s']
 Solved: True
 
 Participant:39 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 2.13s', 'box1 N 2.87s', 'obj2 S 2.2s', 'obj2 W 2.05s', 'Glue obj2 to box1', 'box1 N 2.72s']
+['free E 3.2s', 'box1 W 2.13s', 'free S 1.3s', 'box1 N 2.87s', 'free E 2.14s', 'obj2 S 2.2s', 'free S 1.17s', 'obj2 W 2.05s', 'free S 2.34s', 'Glue obj2 to box1', 'box1 N 2.72s']
 Solved: True
 
 Participant:36 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['obj2 S 1.34s', 'obj2 W 0.98s', 'Glue obj2 to box1', 'box1 W 0.52s', 'box1 NE 2.12s']
+['free E 5.43s', 'obj2 S 1.34s', 'free S 0.94s', 'obj2 W 0.98s', 'free S 1.44s', 'Glue obj2 to box1', 'box1 W 0.52s', 'free N 0.35s', 'box1 NE 2.12s']
 Solved: False
 
 Participant:36 for the Puzzle:23 in the Attempt:1 and run:1 took follwing movements:
-['obj1 S 0.9s', 'obj1 N 1.7s', 'Glue obj1 to box1', 'box1 W 2.07s', 'obj2 W 2.37s', 'Glue obj2 to obj1', 'box1 N 0.75s']
+['free E 2.25s', 'obj1 S 0.9s', 'free S 0.97s', 'obj1 N 1.7s', 'free N 1.92s', 'Glue obj1 to box1', 'box1 W 2.07s', 'free E 1.2s', 'obj2 W 2.37s', 'free S 1.63s', 'Glue obj2 to obj1', 'box1 N 0.75s']
 Solved: True
 
 Participant:37 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 1.15s', 'box1 N 1.39s', 'obj2 W 2.67s', 'box1 S 0.42s', 'obj2 N 1.3s', 'obj1 W 2.85s', 'obj1 W 0.54s', 'Glue obj1 to box1', 'box1 N 0.57s', 'obj2 SW 2.34s', 'Glue obj2 to obj1', 'box1 N 0.45s']
+['free SE 1.03s', 'box1 W 1.15s', 'free S 1.57s', 'box1 N 1.39s', 'free E 1.02s', 'obj2 W 2.67s', 'free NW 1.67s', 'box1 S 0.42s', 'free E 0.52s', 'obj2 N 1.3s', 'free E 1.42s', 'obj1 W 2.85s', 'free N 2.95s', 'obj1 W 0.54s', 'free SE 1.59s', 'Glue obj1 to box1', 'box1 N 0.57s', 'free E 0.97s', 'obj2 SW 2.34s', 'free E 2.7s', 'Glue obj2 to obj1', 'box1 N 0.45s']
 Solved: True
 
 Participant:36 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 1.33s', 'box1 N 0.5s', 'obj1 W 2.42s', 'Glue obj1 to box1', 'box1 N 1.12s', 'box1 S 0.22s', 'obj2 W 1.85s', 'Glue obj2 to obj1', 'box1 N 0.55s']
+['free S 0.58s', 'box1 W 1.33s', 'free S 0.97s', 'box1 N 0.5s', 'free E 1.4s', 'obj1 W 2.42s', 'free SE 2.27s', 'Glue obj1 to box1', 'box1 N 1.12s', 'free W 1.48s', 'box1 S 0.22s', 'free E 0.88s', 'obj2 W 1.85s', 'free S 1.67s', 'Glue obj2 to obj1', 'box1 N 0.55s']
 Solved: True
 
 Participant:39 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 0.93s', 'box1 NW 1.33s', 'box1 N 0.73s', 'obj2 W 1.35s', 'obj2 W 1.12s', 'Glue obj2 to box1', 'box1 N 0.87s']
+['free E 1.5s', 'box1 W 0.93s', 'free S 1.9s', 'box1 NW 1.33s', 'free S 1.05s', 'box1 N 0.73s', 'free E 1.52s', 'obj2 W 1.35s', 'free SE 0.65s', 'obj2 W 1.12s', 'free S 2.68s', 'Glue obj2 to box1', 'box1 N 0.87s']
 Solved: True
 
 Participant:41 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 1.98s', 'box1 N 1.07s', 'obj2 S 1.7s', 'obj2 W 2.3s', 'Glue obj2 to box1', 'box1 N 0.83s', 'box1 N 0.83s']
+['free SE 8.01s', 'box1 W 1.98s', 'free S 2.88s', 'box1 N 1.07s', 'free E 1.93s', 'obj2 S 1.7s', 'free NW 1.73s', 'obj2 W 2.3s', 'free S 2.41s', 'Glue obj2 to box1', 'box1 N 0.83s', 'free SE 0.87s', 'box1 N 0.83s']
 Solved: True
 
 Participant:41 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 0.98s', 'box1 NW 1.17s', 'box1 N 1.2s', 'obj2 S 1.23s', 'obj2 W 2.39s', 'Glue obj2 to box1', 'box1 N 2.33s']
+['free E 1.59s', 'box1 W 0.98s', 'free S 0.8s', 'box1 NW 1.17s', 'free S 2.72s', 'box1 N 1.2s', 'free E 0.88s', 'obj2 S 1.23s', 'free N 0.67s', 'obj2 W 2.39s', 'free S 3.06s', 'Glue obj2 to box1', 'box1 N 2.33s']
 Solved: True
 
 Participant:42 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['obj2 S 0.01s', 'obj2 SW 1.07s', 'obj1 N 0.3s', 'obj2 NW 0.11s', 'box1 W 2.47s', 'obj1 SW 2.18s', 'Glue obj1 to box1', 'box1 N 0.63s', 'obj2 W 1.27s', 'Glue obj2 to obj1', 'box1 N 0.52s']
+['free E 2.2s', 'obj2 S 0.01s', 'free E 1.58s', 'obj2 SW 1.07s', 'free N 0.6s', 'obj1 N 0.3s', 'free S 2.87s', 'obj2 NW 0.11s', 'free W 0.85s', 'box1 W 2.47s', 'free E 2.1s', 'obj1 SW 2.18s', 'free S 2.57s', 'Glue obj1 to box1', 'box1 N 0.63s', 'free E 1.08s', 'obj2 W 1.27s', 'free S 2.13s', 'Glue obj2 to obj1', 'box1 N 0.52s']
 Solved: True
 
 Participant:43 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 0.47s', 'box1 W 1.6s', 'obj2 SW 0.73s', 'obj2 W 0.67s', 'box1 N 1.15s', 'obj2 NW 3.51s', 'Glue obj2 to box1', 'box1 N 1.33s']
+['free SE 0.93s', 'box1 W 0.47s', 'free S 1.03s', 'box1 W 1.6s', 'free E 1.72s', 'obj2 SW 0.73s', 'free N 0.58s', 'obj2 W 0.67s', 'free N 1.63s', 'box1 N 1.15s', 'free S 0.57s', 'obj2 NW 3.51s', 'free S 3.13s', 'Glue obj2 to box1', 'box1 N 1.33s']
 Solved: True
 
 Participant:44 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 2.07s', 'box1 W 1.18s', 'box1 N 1.88s', 'box1 N 0.62s', 'box1 E 0.38s', 'box1 NW 0.8s', 'box1 N 0.32s', 'box1 NE 0.48s', 'box1 N 1.58s', 'box1 NW 0.83s', 'box1 N 0.78s', 'box1 N 0.0s', 'box1 N 0.87s', 'box1 N 0.47s']
+['free E 7.18s', 'box1 W 2.07s', 'free NW 0.45s', 'box1 W 1.18s', 'free S 1.15s', 'box1 N 1.88s', 'free W 24.88s', 'box1 N 0.62s', 'free E 2.05s', 'box1 E 0.38s', 'free E 1.63s', 'box1 NW 0.8s', 'free E 3.43s', 'box1 N 0.32s', 'free W 3.12s', 'box1 NE 0.48s', 'free S 0.0s', 'box1 N 1.58s', 'free N 2.65s', 'box1 NW 0.83s', 'free SW 0.35s', 'box1 N 0.78s', 'free W 0.72s', 'box1 N 0.0s', 'free NW 3.66s', 'box1 N 0.87s', 'free S 1.87s', 'box1 N 0.47s']
 Solved: True
 
 Participant:42 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 1.53s', 'obj2 W 1.15s', 'obj2 S 1.88s', 'Glue obj2 to box1', 'box1 N 0.33s', 'box1 N 0.52s']
+['free S 1.67s', 'box1 W 1.53s', 'free E 2.43s', 'obj2 W 1.15s', 'free NE 3.39s', 'obj2 S 1.88s', 'free S 1.37s', 'Glue obj2 to box1', 'box1 N 0.33s', 'free S 1.02s', 'box1 N 0.52s']
 Solved: True
 
 Participant:44 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 0.65s', 'box1 W 0.18s', 'box1 N 1.65s', 'box1 N 1.72s', 'box1 N 0.95s', 'box1 SE 0.1s', 'box1 N 1.55s', 'box1 N 1.03s', 'box1 N 0.3s']
+['free E 1.38s', 'box1 W 0.65s', 'free S 1.3s', 'box1 W 0.18s', 'free N 0.08s', 'box1 N 1.65s', 'free N 0.32s', 'box1 N 1.72s', 'free SW 6.52s', 'box1 N 0.95s', 'free E 0.42s', 'box1 SE 0.1s', 'free N 4.3s', 'box1 N 1.55s', 'free W 1.82s', 'box1 N 1.03s', 'free S 4.97s', 'box1 N 0.3s']
 Solved: True
 
 Participant:43 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 0.48s', 'box1 NW 1.07s', 'box1 N 0.4s', 'obj1 SW 0.0s', 'box1 S 0.5s', 'Glue obj2 to box1', 'box1 N 0.87s']
+['free E 0.88s', 'box1 W 0.48s', 'free S 0.75s', 'box1 NW 1.07s', 'free S 0.85s', 'box1 N 0.4s', 'free E 1.93s', 'obj1 SW 0.0s', 'free E 0.95s', 'free N 1.15s', 'free N 0.33s', 'free W 0.62s', 'box1 S 0.5s', 'free E 0.37s', 'free S 2.41s', 'Glue obj2 to box1', 'box1 N 0.87s']
 Solved: True
 
 Participant:45 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 1.2s', 'box1 N 0.62s', 'obj2 SW 0.63s', 'obj2 W 2.87s', 'Glue obj2 to box1', 'box1 N 0.88s']
+['free SE 0.78s', 'box1 W 1.2s', 'free S 1.93s', 'box1 N 0.62s', 'free E 1.68s', 'obj2 SW 0.63s', 'free N 1.15s', 'obj2 W 2.87s', 'free S 2.86s', 'Glue obj2 to box1', 'box1 N 0.88s']
 Solved: True
 
 Participant:46 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 2.2s', 'box1 N 0.88s', 'obj2 W 3.11s', 'Glue obj2 to box1', 'box1 N 0.15s', 'box1 N 2.05s']
+['free SE 1.58s', 'box1 W 2.2s', 'free S 0.82s', 'box1 N 0.88s', 'free E 1.55s', 'obj2 W 3.11s', 'free E 3.14s', 'Glue obj2 to box1', 'box1 N 0.15s', 'free E 0.07s', 'box1 N 2.05s']
 Solved: True
 
 Participant:46 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 0.68s', 'box1 N 0.78s', 'obj2 W 2.8s', 'Glue obj2 to box1', 'box1 N 0.47s']
+['free SE 1.23s', 'box1 W 0.68s', 'free S 0.85s', 'box1 N 0.78s', 'free E 0.86s', 'obj2 W 2.8s', 'free NW 1.95s', 'Glue obj2 to box1', 'box1 N 0.47s']
 Solved: True
 
 Participant:45 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 1.97s', 'box1 N 1.95s', 'obj2 S 0.82s', 'obj2 W 0.72s', 'obj2 W 1.58s', 'Glue obj2 to box1', 'box1 N 0.77s', 'box1 N 0.32s']
+['free SE 1.31s', 'box1 W 1.97s', 'free S 1.02s', 'box1 N 1.95s', 'free E 1.35s', 'obj2 S 0.82s', 'free N 1.27s', 'obj2 W 0.72s', 'free N 0.73s', 'obj2 W 1.58s', 'free S 2.14s', 'Glue obj2 to box1', 'box1 N 0.77s', 'free S 0.77s', 'box1 N 0.32s']
 Solved: True
 
 Participant:47 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 0.95s', 'box1 N 0.47s', 'box1 N 0.65s', 'box1 N 0.24s', 'box1 N 0.08s']
+['free S 2.95s', 'box1 W 0.95s', 'free W 1.7s', 'box1 N 0.47s', 'free N 4.3s', 'box1 N 0.65s', 'free W 0.61s', 'box1 N 0.24s', 'free N 0.03s', 'box1 N 0.08s']
 Solved: True
 
 Participant:47 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 2.47s', 'obj1 W 1.97s', 'Glue obj1 to box1', 'obj2 W 0.62s', 'obj2 E -0.0s', 'box1 N 0.5s', 'obj2 W 1.44s', 'Glue obj2 to obj1', 'box1 N 0.48s']
+['free S 1.25s', 'box1 W 2.47s', 'free E 1.55s', 'obj1 W 1.97s', 'free E 1.99s', 'Glue obj1 to box1', 'obj2 W 0.62s', 'free W 0.0s', 'free NW 0.8s', 'obj2 E -0.0s', 'box1 N 0.5s', 'free E 2.12s', 'obj2 W 1.44s', 'free S 1.58s', 'Glue obj2 to obj1', 'box1 N 0.48s']
 Solved: True
 
 Participant:48 for the Puzzle:23 in the Attempt:0 and run:1 took follwing movements:
-['box1 W 2.2s', 'box1 N 1.12s', 'box1 N 1.0s', 'box1 N 1.57s']
+['free SE 2.35s', 'box1 W 2.2s', 'free S 1.27s', 'box1 N 1.12s', 'free N 2.87s', 'box1 N 1.0s', 'free SW 0.38s', 'box1 N 1.57s']
 Solved: True
 
 Participant:48 for the Puzzle:23 in the Attempt:0 and run:2 took follwing movements:
-['box1 W 3.4s', 'box1 N 1.25s', 'box1 N 1.52s', 'box1 N 1.62s', 'box1 N 1.4s', 'box1 N 0.35s']
+['free E 1.26s', 'box1 W 3.4s', 'free S 0.93s', 'box1 N 1.25s', 'free SE 1.92s', 'box1 N 1.52s', 'free N 1.68s', 'box1 N 1.62s', 'free W 1.22s', 'box1 N 1.4s', 'free S 1.93s', 'box1 N 0.35s']
 Solved: True
 

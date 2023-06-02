@@ -34,7 +34,7 @@ def main():
                             data = json.load(json_file)
                             df=movementTracker.df_from_json(data) 
 
-                        for type in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4','Glue','Unglue']:
+                        for type in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4','Glue','Unglue','free']:
 
                             # xi, yi = movementTracker.interaction(df, participant_id, run, type)
                             # if xi.size == 0 or yi.size == 0:
@@ -44,6 +44,8 @@ def main():
                             # else:
 
                             o=movementTracker.interaction(df, participant_id, run, type,direction=True)
+                            # if participant_id == 41 and run == 1 and puzzle == 5:
+                                # print(o)
                             eventlist= np.append(eventlist,o)
                     
                         #sortting the list baded on the time of the event
