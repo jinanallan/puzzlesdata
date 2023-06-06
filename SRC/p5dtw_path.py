@@ -14,6 +14,7 @@ def main():
    
     # 1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26
     sequences=[]
+    interaction_lists=[]
     ids=[]
     for desired_puzzle in [5]:
 
@@ -32,13 +33,17 @@ def main():
                             df=movementTracker.df_from_json(data)
                             
                             solved_stats=movementTracker.interaction(df, participant_id, run,type="total",solved=True)
-                            # print(solved_stats)
-                            # print(type(solved_stats))
+
                             if solved_stats== "True":
+
                                 ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
 
                                 x,y,description=wholeSequence.interaction(df, participant_id, run)
                                 transformed_description=np.zeros((len(description),2))
+
+                                interaction_list=wholeSequence.interaction(df, participant_id, run, listed=True)
+                                interaction_lists.append(interaction_list)
+                                
                                 for i in range(len(description)):
 
                                     if description[i]=='box1' :
@@ -85,7 +90,7 @@ def main():
     #             # print(i,j,d)
     #             distance_matrix[i][j]=d
     #             distance_matrix[j][i]=d
-    return distance_matrix,ids
+    return distance_matrix,ids,interaction_lists
     
     
 

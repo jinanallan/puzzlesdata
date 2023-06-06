@@ -10,7 +10,7 @@ def df_from_json(file):
         df = pd.DataFrame(file, index=[0])
     return df
 
-def interaction(df, participant_id, run, sparce=False):
+def interaction(df, participant_id, run, listed=False):
 
     
     try:
@@ -43,12 +43,33 @@ def interaction(df, participant_id, run, sparce=False):
             
             
 
-
+        time_stamp=df_events['timestamp'].values
         x=df_events['x'].values
         y=df_events['y'].values
         description=df_events['description'].values
 
+        interaction_list=[]
+        if listed==True:
+            #compute the duration of each interaction
+            state=description[0]
+            start=time_stamp[0]
+            for i in range(1,len(description)):
+                if description[i]!=state:
+                    end=time_stamp[i-1]
+                    duration=end-start
+                    duration=duration.astype('timedelta64[ns]').astype(int)/1000000000
+                    if duration !=0: interaction_list.append([state,duration])
+                    state=description[i]
+                    start=time_stamp[i]
+            return interaction_list
+
+
+
+        
+
         return x,y,description
+    
+
 
             
 
