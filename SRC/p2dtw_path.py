@@ -14,6 +14,7 @@ def main():
    
     # 1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26
     sequences=[]
+    interaction_lists=[]
     ids=[]
     for desired_puzzle in [2]:
 
@@ -36,6 +37,8 @@ def main():
                             
 
                             x,y,description=wholeSequence.interaction(df, participant_id, run)
+                            interaction_list=wholeSequence.interaction(df, participant_id, run, listed=True)
+                            interaction_lists.append(interaction_list)
 
                             for i in range(len(description)):
 
@@ -67,7 +70,7 @@ def main():
                 # print(i,j,d)
                 distance_matrix[i][j]=d
                 distance_matrix[j][i]=d
-    return distance_matrix,ids
+    return distance_matrix,ids,interaction_lists
     
     
 

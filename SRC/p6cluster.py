@@ -1,12 +1,8 @@
-import p2dtw
-import p2dtw_path
+import p6dtw_path
 import numpy as np
 from matplotlib import pyplot as plt
-import matplotlib.patches as mpatches
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
-
-# distance_matrix1,ids1 = p2dtw.main()
-distance_matrix,ids,interaction_lists = p2dtw_path.main()
+import matplotlib.patches as mpatches
 
 def stacked_barplot_interaction(interaction_lists, ids, cluster_id):
     unique_labels = ['free', 'obj1', 'obj2','obj3', 'obj4','box1']
@@ -36,30 +32,23 @@ def stacked_barplot_interaction(interaction_lists, ids, cluster_id):
 
 
     plt.legend(handles=legend_patches)
+
+# distance_matrix1,ids1 = p5dtw.main()
+distance_matrix,ids,interaction_lists = p6dtw_path.main()
+# # print(interaction_lists)
+
+
+
 # distance_matrix = np.maximum(distance_matrix, distance_matrix.T)
 # distance_matrix = distance_matrix / distance_matrix.max()
 # distance_matrix = 1 - distance_matrix
 # distance_matrix = np.triu(distance_matrix)
 # distance_matrix = distance_matrix[~np.all(distance_matrix == 0, axis=1)]
 
+Z = linkage(distance_matrix, method='ward', metric='euclidean')
+# # print(Z)
 
-# distance_matrix1 = np.maximum(distance_matrix1, distance_matrix1.T)
-# distance_matrix1 = distance_matrix1 / distance_matrix1.max()
-# distance_matrix1 = 1 - distance_matrix1
-# distance_matrix1 = np.triu(distance_matrix1)
-# distance_matrix1 = distance_matrix1[~np.all(distance_matrix1 == 0, axis=1)]
-
-
-# Z1 = linkage(distance_matrix1, method='average')  
-Z = linkage(distance_matrix, method='average')  
-
-plt.figure(figsize=(25, 10))
-dendrogram(Z,labels=ids)
-plt.title('Hierarchical Clustering Dendrogram based on path')
-plt.savefig('/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/clustering/puzzle2/Hierarchical Clustering Dendrogram based on path puzzle 2.png', dpi=300)
-# plt.show()
-
-num_clusters = 3
+num_clusters = 4
 clusters = fcluster(Z, num_clusters, criterion='maxclust')
 # # print(clusters)
 
@@ -75,6 +64,14 @@ for i, cluster_id in enumerate(clusters):
 # for cluster_id, data_ids in cluster_ids.items():
 #     print(f"Cluster {cluster_id}: {data_ids}")
 
+
+
+plt.figure(figsize=(25, 10))
+dendrogram(Z,labels=ids)
+plt.title('Hierarchical Clustering Dendrogram based on path')
+plt.savefig('/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/clustering/puzzle6/Hierarchical Clustering Dendrogram based on path puzzle 6.png', dpi=300)
+# plt.show()
+
 #for each cluster plot the stacked bar plot
 for cluster_id, data_ids in cluster_ids.items():
     # print(f"Cluster {cluster_id}: {data_ids}")
@@ -87,17 +84,10 @@ for cluster_id, data_ids in cluster_ids.items():
                 break
     #plot the stacked bar plot for each cluster
     stacked_barplot_interaction(interaction_lists_cluster, data_ids,cluster_id)
-    plt.savefig(f'/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/clustering/puzzle2/Interaction sequence for cluster {cluster_id} puzzle 2.png', dpi=300)
+    plt.savefig(f'/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/clustering/puzzle6/Interaction sequence for cluster {cluster_id} puzzle 6.png', dpi=300)
     # plt.show()
 
-
-# plt.figure(figsize=(25, 10))
-# dendrogram(Z1,labels=ids1)
-# plt.title('Hierarchical Clustering Dendrogram based on displacement')
-# plt.show()
-
-
-
+        
 
 
 
