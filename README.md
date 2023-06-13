@@ -17,6 +17,7 @@ note:
 * clustering methode is based on [scipy.cluster.hierarchy.linkage](https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html) and "ward" methode for cluster distances
 * distance between each solution is calculated by [dtw](https://dtaidistance.readthedocs.io/en/latest/usage/dtw.html#dtw-between-multiple-time-series)
 * there are parameters in each of the methos as well as number of clusters that need to be determined 
+* the labels of interaction types are transformed by [oneHotEncoding](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html) so that each interaction type has same distance to another one
 
 # earlier results
 as requsted [here](https://github.com/svetlanalevit/puzzle-scenes/projects/1#card-88830295):  
