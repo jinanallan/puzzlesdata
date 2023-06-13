@@ -152,18 +152,21 @@ def cluster(numCluster,puzzleNumber):
 
 
     # make directory for saving plots
-    if not os.path.exists(f'/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/clustering/puzzle {puzzleNumber}'):
-        os.makedirs(f'/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/clustering/puzzle {puzzleNumber}')
-        plotPath=f'/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/clustering/puzzle {puzzleNumber}'
+    if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}'):
+        os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}')
+        plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}'
     else:
-        plotPath=f'/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/clustering/puzzle {puzzleNumber}'
+        plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}'
+    
+    #do the same with relative path
+
 
     plt.figure(figsize=(25, 10))
     dendrogram(Z,labels=ids)
     plt.title('Hierarchical Clustering Dendrogram based on path')
     plt.xlabel('sample index')
     plt.ylabel('distance')
-    plt.savefig(f'{plotPath}/Hierarchical Clustering Dendrogram based on path puzzle {puzzleNumber}.png', dpi=300)
+    plt.savefig(f'{plotPath}/Dendrogram_puzzle{puzzleNumber}.png', dpi=300)
     # plt.show()
 
   
@@ -176,7 +179,7 @@ def cluster(numCluster,puzzleNumber):
                     interaction_lists_cluster.append(interaction_lists[i])
                     break
         stacked_barplot_interaction(interaction_lists_cluster, data_ids,cluster_id)
-        plt.savefig(f'{plotPath}/Interaction sequence for cluster {cluster_id} puzzle {puzzleNumber}.png', dpi=300)
+        plt.savefig(f'{plotPath}/Interaction_stackedbar_cluster{cluster_id}_puzzle{puzzleNumber}.png', dpi=300)
         # plt.show()
 
 puzzleNumber = int(input("Enter the puzzle number: "))
