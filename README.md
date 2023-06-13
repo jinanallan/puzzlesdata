@@ -1,4 +1,4 @@
-# puzzlesdatareader
+# clustering similar solutions
 to run clustering for the desired puzzle:
 ```
  cd puzzlesdata/SRC
