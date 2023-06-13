@@ -16,7 +16,10 @@ import matplotlib.patches as mpatches
 
 def disMat(puzzleNumber):
 
-    folder = '/home/erfan/Downloads/pnp'
+    # folder = '/home/erfan/Downloads/pnp'
+    folder=input("Enter the path of the folder containing pnp the json files: ")
+    folder = str(folder)
+
    
     # pnp puzzle number: 1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26
     sequences=[]
