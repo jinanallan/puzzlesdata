@@ -1,9 +1,24 @@
 # puzzlesdatareader
-the following plot is puzzle 2 Hierarchical Clustering Dendrogram based on path, two major clusters and one outlier, the cluster on right are those who takes box from right corridor and then push from bottom and the one on the left push from bottom 
+to run clustering for the desired puzzle:
+```
+ cd puzzlesdata/SRC
+ python3 strategyClastur.py
+```
+Enter the puzzle number: 
 
-![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Plots_Text/Hierarchical%20Clustering%20Dendrogram%20based%20on%20path%20puzzle%202.png?raw=true)
+Enter the number of clusters: 
+
+Enter the path of the folder containing pnp the json files: 
 
 
+The results is saved in ```/puzzlesdata/Plots_Text/clustering/puzzle {puzzleNumber}```
+
+note:
+* clustering methode is based on [scipy.cluster.hierarchy.linkage](https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html) and "ward" methode for cluster distances
+* distance between each solution is calculated by [dtw](https://dtaidistance.readthedocs.io/en/latest/usage/dtw.html#dtw-between-multiple-time-series)
+* there are parameters in each of the methos as well as number of clusters that need to be determined 
+
+# earlier results
 as requsted [here](https://github.com/svetlanalevit/puzzle-scenes/projects/1#card-88830295):  
 
 The number of participants who solved all the puzzles: 12 out of 15  
