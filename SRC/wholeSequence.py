@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
+
 
 #json file as a pandas dataframe
 def df_from_json(file):
@@ -10,10 +12,22 @@ def df_from_json(file):
         df = pd.DataFrame(file, index=[0])
     return df
 
-def interaction(df, participant_id, run, listed=False):
+def label_encoder(labels, set_of_all_possible_interactions):
+
+    # print(labels)
+    onehot_encoder = OneHotEncoder(categories=[set_of_all_possible_interactions],sparse_output=False)
+    labels = np.array(labels).reshape(-1,1) 
+    # print(labels)
+    onehot_encoded=onehot_encoder.fit_transform(labels)
+    transformed_description=onehot_encoded
+    transformed_description=np.array(transformed_description,dtype=np.double)
+    transformed_description=transformed_description.T
+    return transformed_description
+
+def interaction(df, participant_id, run, listed=False, transformed=False):
 
     
-    try:
+    # try:
     
         events = df["events"]
         df_events = pd.DataFrame(events)
@@ -32,11 +46,19 @@ def interaction(df, participant_id, run, listed=False):
         for index, row in df_events.iterrows():
             if row['description'] == "Moving started ":
                 df_events.loc[index, 'description'] = 'free'
+            elif row['description'] == "Left click":
+                df_events.loc[index, 'description'] = 'free'
+            elif row['description'].startswith("Glue"):
+                df_events.loc[index, 'description'] = 'Glue'
+            elif row['description'].startswith("Unglue"):
+                df_events.loc[index, 'description'] = 'Unglue'
 
+        # df_events = df_events[df_events['description'] != 'Moving started ']
 
         attachIndex = (df_events.index[df_events['description'].str.contains("Attach")]).tolist()
         releaseIndex = (df_events.index[df_events['description'].str.contains("Release")]).tolist()
 
+        
         for i in range(len(attachIndex)):
             df_events.loc[attachIndex[i]:releaseIndex[i],'description']= df_events.loc[attachIndex[i],'description'].split(" ")[1]
   
@@ -62,16 +84,37 @@ def interaction(df, participant_id, run, listed=False):
                     state=description[i]
                     start=time_stamp[i]
             return interaction_list
-
-
-
         
+        elif transformed==True:
+            #compute the duration of each interaction
+            state=description[0]
+            start=time_stamp[0]
+            for i in range(1,len(description)):
+                if description[i]!=state:
 
-        return x,y,description
-    
+                    end=time_stamp[i-1]
+                    duration=end-start
+                    duration=duration.astype('timedelta64[ns]').astype(int)/1000000000
 
-
+                    if duration !=0: interaction_list.append([state,duration])
+                    
+                    state=description[i]
+                    start=time_stamp[i]
             
+            interaction_list=np.array(interaction_list)
+            labels=interaction_list[:,0]
+            labels=list(labels)
+            # interaction_list=np.array(interaction_list)
+            transformed_labels=label_encoder(labels)
+            #vstack the duration of each interaction with the corresponding label
+            transformed_interaction_list=np.vstack((interaction_list[:,1],transformed_labels))
+            transformed_interaction_list=np.array(transformed_interaction_list,dtype=np.double)
+            
+            return transformed_interaction_list
 
-    except:
-        return None
+        else:
+            return x,y,description
+
+    # except:
+    #     print("Error in interaction function")
+    #     return None

@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 import os
 import json
 import matplotlib.pyplot as plt
@@ -7,18 +8,18 @@ import HMPlotter
 import wholeSequence
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import LabelEncoder
-from dtaidistance import dtw
+from dtaidistance import dtw, clustering
 from dtaidistance import dtw_ndim
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 import matplotlib.patches as mpatches
 
 #pairwise distance matrix of each solution
 
-def disMat(puzzleNumber):
+def solutions(puzzleNumber, colorbased=False):
 
-    # folder = '/home/erfan/Downloads/pnp'
-    folder=input("Enter the path of the folder containing pnp the json files: ")
-    folder = str(folder)
+    folder = '/home/erfan/Downloads/pnp'
+    # folder=input("Enter the path of the folder containing pnp the json files: ")
+    # folder = str(folder)
 
    
     # pnp puzzle number: 1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26
@@ -49,35 +50,46 @@ def disMat(puzzleNumber):
 
                         #solution sequence of the puzzle:
                         x,y,description=wholeSequence.interaction(df, participant_id, run)
-                        transformed_description=np.zeros((len(description),2))
+                        # print(description)
+                        # print(type(description))
+                        # transformed_description=np.zeros((len(description),2))
 
                         #full list of interaction containing [type of interaction, time of interaction]:
                         interaction_list=wholeSequence.interaction(df, participant_id, run, listed=True)
                         interaction_lists.append(interaction_list)
-                        
+
                         #coding the verbal description of interaction into a 1*2 vector:
-                        label_encoder = LabelEncoder()
-                        integer_encoded = label_encoder.fit_transform(description)
-                        onehot_encoder = OneHotEncoder(sparse_output=False)
-                        integer_encoded = integer_encoded.reshape(len(integer_encoded), 1)  
-                        onehot_encoded = onehot_encoder.fit_transform(integer_encoded)
-                        transformed_description=onehot_encoded
-                        transformed_description=np.array(transformed_description,dtype=np.double)
-                        transformed_description=transformed_description.T
+                        transformed_description=wholeSequence.label_encoder(description)
+                        # print(transformed_description.shape)
+                        # print(transformed_description)
 
-                        sequence=np.vstack((x,y))
-                        for i in range(len(transformed_description)):
-                            sequence=np.vstack((sequence,transformed_description[i]))
+                        if colorbased==True:
+                          sequence=wholeSequence.interaction(df, participant_id, run, transformed=True)
+                          sequences.append(sequence)
+                        #   print(sequence.shape)
+                          
+                        
+                        else:
+                            sequence=np.vstack((x,y))
+
+                            for i in range(len(transformed_description)):
+                                sequence=np.vstack((sequence,transformed_description[i]))
+                                # print(transformed_description[i])
+                            sequence=sequence.T
+                            sequences.append(sequence)
+                            # print(sequence[0])
+        
 
 
-                        sequence=sequence.T
-                        sequences.append(sequence)
 
     ds = dtw.distance_matrix_fast(sequences)
     distance_matrix=ds
+    # print(distance_matrix[0])
+
 
     
     #following fill the distance martix element by element(instead of using dtw.distance_matrix_fast):
+
 
     # distance_matrix=np.zeros((len(sequences),len(sequences)))
     # for i in range(len(sequences)):
@@ -85,16 +97,27 @@ def disMat(puzzleNumber):
     #         if i!=j and i<j:
     #             querry=sequences[i]
     #             reference=sequences[j]
-    #             d=dtw_ndim.distance_fast(querry, reference, max_step=10, compact=True)
-    #             # print(i,j,d)
+    #             d=dtw_ndim.distance(querry, reference)
+    #             print(i,j,d)
     #             distance_matrix[i][j]=d
     #             distance_matrix[j][i]=d
+    # # # print(distance_matrix)
+    return sequences,ids,interaction_lists
 
-    return distance_matrix,ids,interaction_lists
+# def label_encoder(description):
+#     label_encoder = LabelEncoder()
+#     integer_encoded = label_encoder.fit_transform(description)
+#     onehot_encoder = OneHotEncoder(sparse_output=False)
+#     integer_encoded = integer_encoded.reshape(len(integer_encoded), 1)  
+#     onehot_encoded = onehot_encoder.fit_transform(integer_encoded)
+#     transformed_description=onehot_encoded
+#     transformed_description=np.array(transformed_description,dtype=np.double)
+#     transformed_description=transformed_description.T
+#     return transformed_description
 
 
 def stacked_barplot_interaction(interaction_lists, ids, cluster_id):
-    unique_labels = ['free', 'obj1', 'obj2','obj3', 'obj4','box1']
+    unique_labels = ['free', 'obj1', 'obj2','obj3', 'obj4','box1',"Glue"]
     color_map = {label: i for i, label in enumerate(unique_labels)}
     legend_patches = [mpatches.Patch(color=plt.cm.tab10(color_map[label]), label=label) for label in unique_labels]
 
@@ -122,8 +145,8 @@ def stacked_barplot_interaction(interaction_lists, ids, cluster_id):
 
     plt.legend(handles=legend_patches)
 
-def cluster(numCluster,puzzleNumber):
-    distance_matrix,ids,interaction_lists = disMat(puzzleNumber)
+def Hcluster(numCluster,puzzleNumber, colorbased):
+    distance_matrix,ids,interaction_lists = disMat(puzzleNumber, colorbased)
 
     # distance_matrix = np.maximum(distance_matrix, distance_matrix.T)
     # distance_matrix = distance_matrix / distance_matrix.max()
@@ -182,9 +205,21 @@ def cluster(numCluster,puzzleNumber):
         plt.savefig(f'{plotPath}/Interaction_stackedbar_cluster{cluster_id}_puzzle{puzzleNumber}.png', dpi=300)
         # plt.show()
 
+# def kmedoids(numCluster,puzzleNumber, colorbased):
+#     sequences,ids,interaction_lists = disMat(puzzleNumber, colorbased)
+#     model=clustering.KMedoids(dtw.distance_matrix_fast, {}, k=numCluster)
+#     cluster_ids = model.fit(sequences)
+#     model.plot_medoids()
+
+
+  
 puzzleNumber = int(input("Enter the puzzle number: "))
 numCluster = int(input("Enter the number of clusters: "))
-cluster(numCluster,puzzleNumber)
+colorbased = int(input("Enter 1 for color based clustering and 0 for path based clustering: "))
+Hcluster(numCluster,puzzleNumber, colorbased)
+
+# kmedoids(numCluster,puzzleNumber, colorbased)
+
 
 
 
