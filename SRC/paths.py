@@ -32,6 +32,7 @@ def main():
         if filename.endswith('.json'):
             participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
         if puzzle in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:
+            if participant_id==31: print(filename)
             
          
             fig, ax = plt.subplots()
@@ -80,7 +81,8 @@ def main():
                         plt.ylabel('y')
                         plt.legend()
             plt.title('Participant:'+str(participant_id)+' Puzzle: '+str(puzzle)+' Attempt:'+str(attempt)+' Run:'+str(run)+'\n'+'sparcity:'+str(sparce))
-            plt.savefig('/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/Path_Plots/'+str(puzzle)+'_'+str(participant_id)+'_'+str(attempt)+'_'+str(run)+'.png', dpi=300)
+            plt.savefig('/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/Path_Plots/'+
+                        str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png', dpi=300)
             plt.close()
 
 if __name__ == "__main__":

@@ -16,8 +16,8 @@ def use_regex(input_text):
     particpants = match.group(3)
     run = match.group(4)
     puzzle_id = match.group(5)
-    puzzle_id2 = match.group(6)
-    return int(particpants), int(run), int(puzzle_id), int(puzzle_id2)
+    attempt = match.group(6)
+    return int(particpants), int(run), int(puzzle_id), int(attempt)
 
 def main():
 

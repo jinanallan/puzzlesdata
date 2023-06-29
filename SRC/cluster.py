@@ -5,13 +5,17 @@ import json
 import matplotlib.pyplot as plt
 import movementTracker
 import HMPlotter
+from gif_generator import gif
 from sklearn.preprocessing import OneHotEncoder
-from dtaidistance import dtw, clustering
+from dtaidistance import dtw
 from dtaidistance import dtw_ndim
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 from scipy.spatial.distance import squareform
 import matplotlib.patches as mpatches
+import time
 
+
+start_time = time.time()
 #set the folder path as a global variable:
 
 folder = '/home/erfan/Downloads/pnp'
@@ -145,6 +149,8 @@ def getSolutionSequences(df, puzzleNumber, sequence_type):
     attachIndex = (df_events.index[df_events['description'].str.contains("Attach")]).tolist()
     releaseIndex = (df_events.index[df_events['description'].str.contains("Release")]).tolist()
 
+    # glueIndex = (df_events.index[df_events['description'].str.startswith("Glue")]).tolist()
+
     
     for i in range(len(attachIndex)):
         df_events.loc[attachIndex[i]:releaseIndex[i],'description']= df_events.loc[attachIndex[i],'description'].split(" ")[1]
@@ -184,13 +190,15 @@ def getSolutionSequences(df, puzzleNumber, sequence_type):
             return sequence
     
     elif sequence_type == "color-time":
+        #issue: singular tree
         #in this case we return the sequence as numpy array, each row contains the type of interaction one hot encoded and its duration
         sequence=getSolutionSequences(df, puzzleNumber, sequence_type="string-time")
         string_color=sequence[:,0]
         color=label_encoder(string_color, set_of_all_possible_interactions)
         duration=sequence[:,1]
         sequence=np.vstack((color,duration))
-        # sequence=sequence.T
+        sequence=sequence.T
+        sequence=np.array(sequence,dtype=np.double)
         return sequence
     
 
@@ -200,6 +208,7 @@ def getSolutionSequences(df, puzzleNumber, sequence_type):
         sequence=getSolutionSequences(df, puzzleNumber, sequence_type="string-time")
         string_color=sequence[:,0]
         color=label_encoder(string_color, set_of_all_possible_interactions)
+        color=color.T
         return color
 
 
@@ -271,14 +280,19 @@ def stacked_barplot_interaction(interaction_lists, ids, cluster_id, puzzleNumber
 def hierarchyCluster(numCluster,puzzleNumber, sequence_type):
 
     sequences,ids = getAllSolution(puzzleNumber, sequence_type)
+    # print("\n and it is composed by: \n {}, ... \n, {}".format(sequences[0], sequences[2]))
+  
+    stringtime_sequences,_=getAllSolution(puzzleNumber, "string-time")
 
-    stringtime_sequences,notuse_id=getAllSolution(puzzleNumber, "string-time")
+    #dependent DTW distance in upper triangular matrix
+    distance_matrix=dtw.distance_matrix_fast(sequences, compact=True)
+    # print(distance_matrix)
 
-    distance_matrix=dtw.distance_matrix_fast(sequences)
+    Linkage_matrix = linkage(distance_matrix, method='ward', metric='euclidean')
 
-    condensed_dist_matrix = squareform(distance_matrix)
-
-    Linkage_matrix = linkage(condensed_dist_matrix, method='ward', metric='euclidean')
+    #convert upper triangular matrix to square matrix
+    distance_matrix = squareform(distance_matrix)
+    # print(distance_matrix)
 
     clusters = fcluster(Linkage_matrix, numCluster, criterion='maxclust')
 
@@ -308,26 +322,46 @@ def hierarchyCluster(numCluster,puzzleNumber, sequence_type):
     plt.savefig(f'{plotPath}/Dendrogram_puzzle{puzzleNumber}.png', dpi=300)
     
     for cluster_id, data_ids in cluster_ids.items():
+        list_of_index=[]
         # print(f"Cluster {cluster_id}: {data_ids}")
         interaction_lists_cluster = []
         for data_id in data_ids:
             for i in range(len(ids)):
                 if ids[i] == data_id:
+                    list_of_index.append(i)
                     interaction_lists_cluster.append(stringtime_sequences[i])
                     break
         stacked_barplot_interaction(interaction_lists_cluster, data_ids,cluster_id, puzzleNumber)
         plt.savefig(f'{plotPath}/Interaction_stackedbar_cluster{cluster_id}_puzzle{puzzleNumber}.png', dpi=300)
+    
+        if sequence_type == "color-trajectory":
+            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids)
+            first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif', save_all=True, append_images=frames, duration=500, loop=0)
+        
+        # print(f"Cluster {cluster_id}: {data_ids}")
+        # print(f"Cluster {cluster_id}: {list_of_index}")
+
+        list_of_index=np.array(list_of_index, dtype=int)
+
+        min_distance=np.inf
+        for i in list_of_index:
+            sumofdistance=0
+            for j in list_of_index:
+                sumofdistance += distance_matrix[i, j]
+            if sumofdistance < min_distance:
+                min_distance = sumofdistance
+                index = i
+        print(f"Cluster {cluster_id} representor is: {ids[index]}")
+        
+
 
 # puzzleNumber = int(input("Enter the puzzle number: "))
 # numCluster = int(input("Enter the number of clusters: "))
 # sequence_type = input("Enter the sequence type: ")
-numCluster = 4
+numCluster = 3
 sequence_type = "color-trajectory"
 puzzleNumber = 2
 
 hierarchyCluster(numCluster,puzzleNumber, sequence_type)
 
-
-
-
-    
+print("--- %s seconds ---" % (time.time() - start_time))
