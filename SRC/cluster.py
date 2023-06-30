@@ -16,7 +16,6 @@ import time
 
 
 start_time = time.time()
-#set the folder path as a global variable:
 
 folder = '/home/erfan/Downloads/pnp'
 
@@ -80,7 +79,6 @@ def possibleInteraction(puzzleNumber):
         set_of_all_possible_interactions.sort(reverse=True)
         return set_of_all_possible_interactions
 
-#json file as a pandas dataframe
 def df_from_json(file):
     try:
         df = pd.DataFrame(file)
@@ -197,7 +195,7 @@ def getSolutionSequences(df, puzzleNumber, sequence_type):
         color=label_encoder(string_color, set_of_all_possible_interactions)
         duration=sequence[:,1]
         sequence=np.vstack((color,duration))
-        sequence=sequence.T
+        # sequence=sequence.T
         sequence=np.array(sequence,dtype=np.double)
         return sequence
     
@@ -208,9 +206,8 @@ def getSolutionSequences(df, puzzleNumber, sequence_type):
         sequence=getSolutionSequences(df, puzzleNumber, sequence_type="string-time")
         string_color=sequence[:,0]
         color=label_encoder(string_color, set_of_all_possible_interactions)
-        color=color.T
+        # color=color.T
         return color
-
 
 def getAllSolution(puzzleNumber, sequence_type):
     """
@@ -243,8 +240,7 @@ def getAllSolution(puzzleNumber, sequence_type):
                         sequences.append(sequence)
     return sequences,ids
 
-
-def stacked_barplot_interaction(interaction_lists, ids, cluster_id, puzzleNumber):
+def stacked_barplot_interaction(interaction_lists, ids, cluster_id, puzzleNumber, bold_label):
 
     unique_labels = possibleInteraction(puzzleNumber)
     color_map = {label: i for i, label in enumerate(unique_labels)}
@@ -268,12 +264,18 @@ def stacked_barplot_interaction(interaction_lists, ids, cluster_id, puzzleNumber
         for i in range(1, len(lengths)):
             plt.bar(j, lengths[i], bottom=sum(lengths[:i]), color=colors[i],edgecolor='white', width=0.4 )
           
-  
+        for index, label in enumerate(plt.gca().get_xticklabels()):
+            label.set_fontweight('normal')
+            if ids[index] == bold_label:
+                label.set_fontweight('bold')
+                label.set_fontsize(12)
+                label.set_color('red')
+                break
+
         plt.xticks(range(len(ids)), ids, rotation=90)
         plt.ylabel('Time (s)')
         plt.xlabel('Participant ID')
         plt.title(f'Interaction sequence for cluster {cluster_id}')
-
 
     plt.legend(handles=legend_patches)
 
@@ -308,18 +310,19 @@ def hierarchyCluster(numCluster,puzzleNumber, sequence_type):
     visualize the clusters
     """
 
-    if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}'):
-        os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}')
-        plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}'
+    if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
+        os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
+        plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
     else:
-        plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}'
+        plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
     
     plt.figure(figsize=(20, 10))
     dendrogram(Linkage_matrix,labels=ids)
-    plt.title('Hierarchical Clustering Dendrogram of sequences of puzzle '+str(puzzleNumber)+ " with sequence type "+sequence_type)
+    plt.title('Hierarchical Clustering Dendrogram of sequences of puzzle '+str(puzzleNumber)+ " with sequence type "+sequence_type, fontweight='bold')
     plt.xlabel('sample index')
     plt.ylabel('distance')
-    plt.savefig(f'{plotPath}/Dendrogram_puzzle{puzzleNumber}.png', dpi=300)
+    plt.savefig(f'{plotPath}/Dendrogram_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
+    plt.close()
     
     for cluster_id, data_ids in cluster_ids.items():
         list_of_index=[]
@@ -331,18 +334,12 @@ def hierarchyCluster(numCluster,puzzleNumber, sequence_type):
                     list_of_index.append(i)
                     interaction_lists_cluster.append(stringtime_sequences[i])
                     break
-        stacked_barplot_interaction(interaction_lists_cluster, data_ids,cluster_id, puzzleNumber)
-        plt.savefig(f'{plotPath}/Interaction_stackedbar_cluster{cluster_id}_puzzle{puzzleNumber}.png', dpi=300)
-    
-        if sequence_type == "color-trajectory":
-            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids)
-            first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif', save_all=True, append_images=frames, duration=500, loop=0)
-        
         # print(f"Cluster {cluster_id}: {data_ids}")
         # print(f"Cluster {cluster_id}: {list_of_index}")
 
         list_of_index=np.array(list_of_index, dtype=int)
 
+        #geometric median of cluster 
         min_distance=np.inf
         for i in list_of_index:
             sumofdistance=0
@@ -350,18 +347,28 @@ def hierarchyCluster(numCluster,puzzleNumber, sequence_type):
                 sumofdistance += distance_matrix[i, j]
             if sumofdistance < min_distance:
                 min_distance = sumofdistance
-                index = i
-        print(f"Cluster {cluster_id} representor is: {ids[index]}")
-        
+                meanindex = i
+        print(f"Cluster {cluster_id} representor is: {ids[meanindex]}")
 
+        stacked_barplot_interaction(interaction_lists_cluster, data_ids,cluster_id, puzzleNumber, ids[meanindex])
+        plt.savefig(f'{plotPath}/Interaction_stackedbar_cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
+        plt.close()
+    
 
+        first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids)
+        first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
+                
 # puzzleNumber = int(input("Enter the puzzle number: "))
 # numCluster = int(input("Enter the number of clusters: "))
 # sequence_type = input("Enter the sequence type: ")
 numCluster = 3
-sequence_type = "color-trajectory"
-puzzleNumber = 2
+for puzzleNumber in [2,3,4]:
+    sequence_type = "color-trajectory"
+    hierarchyCluster(numCluster,puzzleNumber, sequence_type)
+    print("--- %s seconds ---" % (time.time() - start_time))
 
-hierarchyCluster(numCluster,puzzleNumber, sequence_type)
+for puzzleNumber in [1,6,5]:
+    sequence_type = "color"
+    hierarchyCluster(numCluster,puzzleNumber, sequence_type)
+    print("--- %s seconds ---" % (time.time() - start_time))
 
-print("--- %s seconds ---" % (time.time() - start_time))
