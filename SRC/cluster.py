@@ -246,7 +246,12 @@ def stacked_barplot_interaction(interaction_lists, ids, cluster_id, puzzleNumber
     color_map = {label: i for i, label in enumerate(unique_labels)}
     legend_patches = [mpatches.Patch(color=plt.cm.tab10(color_map[label]), label=label) for label in unique_labels]
 
-    plt.figure(figsize=(len(ids)+5, 10))
+    plt.figure(figsize=(len(ids)+5, 12))
+    #set the legend and title font size to 20 and bold
+    plt.rcParams['legend.fontsize'] = 20
+    plt.rcParams['axes.titlesize'] = 20
+    plt.rcParams['axes.titleweight'] = 'bold'
+
     for j in range(len(interaction_lists)):
         sequence = interaction_lists[j]
         # Separate the string elements and float elements into separate lists
@@ -264,20 +269,20 @@ def stacked_barplot_interaction(interaction_lists, ids, cluster_id, puzzleNumber
         for i in range(1, len(lengths)):
             plt.bar(j, lengths[i], bottom=sum(lengths[:i]), color=colors[i],edgecolor='white', width=0.4 )
           
-        for index, label in enumerate(plt.gca().get_xticklabels()):
-            label.set_fontweight('normal')
-            if ids[index] == bold_label:
-                label.set_fontweight('bold')
-                label.set_fontsize(12)
-                label.set_color('red')
-                break
+        # for index, label in enumerate(plt.gca().get_xticklabels()):
+        #     label.set_fontweight('normal')
+        #     if ids[index] == bold_label:
+        #         label.set_fontweight('bold')
+        #         label.set_fontsize(12)
+        #         label.set_color('red')
+        #         break
 
         plt.xticks(range(len(ids)), ids, rotation=90)
-        plt.ylabel('Time (s)')
-        plt.xlabel('Participant ID')
-        plt.title(f'Interaction sequence for cluster {cluster_id}')
+        plt.ylabel('Time (s)', fontsize=20)
+        plt.xlabel('Participant ID', fontsize=20)
+        plt.title(f'Interaction sequence for cluster {cluster_id}', fontsize=20)
 
-    plt.legend(handles=legend_patches)
+    plt.legend(handles=legend_patches, loc='upper right')
 
 def hierarchyCluster(numCluster,puzzleNumber, sequence_type):
 
@@ -362,12 +367,12 @@ def hierarchyCluster(numCluster,puzzleNumber, sequence_type):
 # numCluster = int(input("Enter the number of clusters: "))
 # sequence_type = input("Enter the sequence type: ")
 numCluster = 3
-for puzzleNumber in [2,3,4]:
-    sequence_type = "color-trajectory"
-    hierarchyCluster(numCluster,puzzleNumber, sequence_type)
-    print("--- %s seconds ---" % (time.time() - start_time))
+# for puzzleNumber in [2]:
+#     sequence_type = "color-trajectory"
+#     hierarchyCluster(numCluster,puzzleNumber, sequence_type)
+#     print("--- %s seconds ---" % (time.time() - start_time))
 
-for puzzleNumber in [1,6,5]:
+for puzzleNumber in [1]:
     sequence_type = "color"
     hierarchyCluster(numCluster,puzzleNumber, sequence_type)
     print("--- %s seconds ---" % (time.time() - start_time))
