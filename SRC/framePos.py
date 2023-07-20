@@ -4,6 +4,10 @@ import os
 import re
 import numpy as np
 import matplotlib.pyplot as plt
+from dtaidistance import dtw
+from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
+from gif_generator import gif
+
 
 def positional_vector(data):
     """
@@ -62,18 +66,78 @@ def use_regex(input_text):
 frame_folder= "./Data/Frames/"
 frame_files = os.listdir(frame_folder)
 
+
+allSV=[]
+ids=[]
 for file in frame_files:
     if file.endswith(".json"):
         participant_id, run, puzzle, attempt = use_regex(file)
-        if participant_id == 32 and run == 1 and puzzle == 5 and attempt == 0:
+        if puzzle == 2:
+            ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
             with open(os.path.join(frame_folder,file)) as json_file:
                 data = json.load(json_file)
                 vector, object_names = positional_vector(data)
-                print(vector)
-                print(object_names)
+                # print(vector)
+                # print(object_names)
+
+                d=len(vector.columns)        
+                n=len(vector.index)
+                # print(n,d)
+                solutionVector = np.empty([n,d])
+                for ni in range(n):
+                    for di in range(d):
+                        solutionVector[ni][di]=vector.iloc[ni,di]
+                allSV.append(solutionVector)
+            
+                # print(solutionVector)
+print(len(allSV))
+print(len(ids))
+distanceMatrix = dtw.distance_matrix_fast(allSV, compact=True)
+# # print(distanceMatrix)
+# plt.figure(figsize=(10, 10))
+# plt.imshow(distanceMatrix, cmap='hot', interpolation='nearest')
+# plt.show()
+if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
+        os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
+        plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+else:
+    plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+
+Z = linkage(distanceMatrix, 'ward')
+
+plt.figure(figsize=(20, 10))
+dendrogram(Z, labels=ids)
+plt.savefig(f'{plotPath}/dendrogram_puzzle{puzzleNumber}_{sequence_type}.png')
+# plt.show()
+numCluster = 2
+clusters = fcluster(Z, numCluster, criterion='maxclust')
+
+cluster_ids = {}
+puzzleNumber=2
+sequence_type="POSVEC"
+
+
+# Iterate over the data points and assign them to their respective clusters
+for i, cluster_id in enumerate(clusters):
+    if cluster_id not in cluster_ids:
+        cluster_ids[cluster_id] = []
+    cluster_ids[cluster_id].append(ids[i])
+
+for cluster_id, data_ids in cluster_ids.items():
+    print('Cluster ID: {}'.format(cluster_id))
+    print('Data IDs: {}\n'.format(data_ids))
+
+    first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids)
+    first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
+
+
+
+
 
 # TODO: define objects and their IDs present in the last frame **DONE
 # store the X,Y,Z, rotation of each object in a list **Done
-#study the velocity profile and match with the intraction
+#study the velocity profile and match with the intraction 
+# concatenate the dataframe to a single vector **done 
+# Cluster the vectors using DTW **done 
 
 

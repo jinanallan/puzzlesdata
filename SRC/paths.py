@@ -26,15 +26,13 @@ def coloring(type,c):
     
 def main():
      # folder = input("Enter the folder path: ")
-    folder = '/home/erfan/Downloads/pnp'
+    folder = './Data/pnp'
     # desiredpuzzle = int(input("Enter the puzzle number: "))
     for filename in os.listdir(folder):
         if filename.endswith('.json'):
             participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
-        if puzzle in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:
-            if participant_id==31: print(filename)
-            
-         
+            print(participant_id, run, puzzle, attempt)
+        if puzzle in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:         
             fig, ax = plt.subplots()
 
             for j in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4', 'free']:
@@ -49,13 +47,17 @@ def main():
                     data = json.load(json_file)
                     df=movementTracker.df_from_json(data)
                     sparce=True
-                    xi, yi = movementTracker.interaction(df, participant_id, run, type,sparce)
+                    xi, yi = movementTracker.interaction(df, participant_id, run, type, sparce=sparce)
+                    print(xi.size, yi.size)
+                    #check if the file './Plots_Text/Path_Plots/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png' dosent exist then continue
+                    if os.path.isfile('./Plots_Text/Path_Plots/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png'):
+                        break
 
                     if xi.size == 0 or yi.size == 0:
                                 pass
                     else:
                         
-                        imgfolder = '/home/erfan/Documents/Puzzle/puzzlesdata/cropped_puzzles_screenshots'
+                        imgfolder = './cropped_puzzles_screenshots'
                         fname = os.path.join(imgfolder, 'puzzle'+str(puzzle)+'.png')
                         img = Image.open(fname).convert('L')
 
@@ -81,7 +83,7 @@ def main():
                         plt.ylabel('y')
                         plt.legend()
             plt.title('Participant:'+str(participant_id)+' Puzzle: '+str(puzzle)+' Attempt:'+str(attempt)+' Run:'+str(run)+'\n'+'sparcity:'+str(sparce))
-            plt.savefig('/home/erfan/Documents/Puzzle/puzzlesdata/Plots_Text/Path_Plots/'+
+            plt.savefig('./Plots_Text/Path_Plots/'+
                         str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png', dpi=300)
             plt.close()
 
