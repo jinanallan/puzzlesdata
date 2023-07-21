@@ -17,7 +17,7 @@ import time
 
 start_time = time.time()
 
-folder = '/home/erfan/Downloads/pnp'
+folder = './Data/pnp'
 
 def possibleInteraction(puzzleNumber):
         #the objective of this function is to find the set of all possible interactions in a puzzle
@@ -372,7 +372,7 @@ numCluster = 3
 #     hierarchyCluster(numCluster,puzzleNumber, sequence_type)
 #     print("--- %s seconds ---" % (time.time() - start_time))
 
-for puzzleNumber in [1]:
+for puzzleNumber in [5]:
     sequence_type = "color"
     hierarchyCluster(numCluster,puzzleNumber, sequence_type)
     print("--- %s seconds ---" % (time.time() - start_time))

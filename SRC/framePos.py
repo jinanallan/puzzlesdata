@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 from dtaidistance import dtw
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 from gif_generator import gif
-
+import time
+start_time = time.time()
 
 def positional_vector(data):
     """
@@ -66,20 +67,23 @@ def use_regex(input_text):
 frame_folder= "./Data/Frames/"
 frame_files = os.listdir(frame_folder)
 
+puzzleNumber=5
+sequence_type="POSVEC"
+numCluster = 5
+
 
 allSV=[]
 ids=[]
 for file in frame_files:
     if file.endswith(".json"):
         participant_id, run, puzzle, attempt = use_regex(file)
-        if puzzle == 2:
+        if puzzle == puzzleNumber:
             ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
             with open(os.path.join(frame_folder,file)) as json_file:
                 data = json.load(json_file)
                 vector, object_names = positional_vector(data)
                 # print(vector)
                 # print(object_names)
-
                 d=len(vector.columns)        
                 n=len(vector.index)
                 # print(n,d)
@@ -90,13 +94,14 @@ for file in frame_files:
                 allSV.append(solutionVector)
             
                 # print(solutionVector)
-print(len(allSV))
-print(len(ids))
+# print(len(allSV))
+# print(len(ids))
 distanceMatrix = dtw.distance_matrix_fast(allSV, compact=True)
 # # print(distanceMatrix)
 # plt.figure(figsize=(10, 10))
 # plt.imshow(distanceMatrix, cmap='hot', interpolation='nearest')
 # plt.show()
+
 if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
         os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
         plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
@@ -109,14 +114,9 @@ plt.figure(figsize=(20, 10))
 dendrogram(Z, labels=ids)
 plt.savefig(f'{plotPath}/dendrogram_puzzle{puzzleNumber}_{sequence_type}.png')
 # plt.show()
-numCluster = 2
 clusters = fcluster(Z, numCluster, criterion='maxclust')
 
 cluster_ids = {}
-puzzleNumber=2
-sequence_type="POSVEC"
-
-
 # Iterate over the data points and assign them to their respective clusters
 for i, cluster_id in enumerate(clusters):
     if cluster_id not in cluster_ids:
@@ -124,14 +124,16 @@ for i, cluster_id in enumerate(clusters):
     cluster_ids[cluster_id].append(ids[i])
 
 for cluster_id, data_ids in cluster_ids.items():
-    print('Cluster ID: {}'.format(cluster_id))
-    print('Data IDs: {}\n'.format(data_ids))
+    # print('Cluster ID: {}'.format(cluster_id))
+    # print('Data IDs: {}\n'.format(data_ids))
 
     first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids)
     first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
 
 
 
+
+print("--- %s seconds ---" % (time.time() - start_time))  
 
 
 # TODO: define objects and their IDs present in the last frame **DONE
