@@ -1,0 +1,6999 @@
+{
+ "attempt": 1,
+ "end-status": 2,
+ "end-time": "1689757745057780-2023-07-19-09:09:05:57.780",
+ "events": [
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     0.8,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742417000-2023-07-19-09:09:02:417.0",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742417086-2023-07-19-09:09:02:417.86",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.976,
+     0.762,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742417122-2023-07-19-09:09:02:417.122",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742417148-2023-07-19-09:09:02:417.148",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.982,
+     0.762,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742417165-2023-07-19-09:09:02:417.165",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742417211-2023-07-19-09:09:02:417.211",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.988,
+     0.766,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742417229-2023-07-19-09:09:02:417.229",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742417249-2023-07-19-09:09:02:417.249",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.99,
+     0.766,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742417266-2023-07-19-09:09:02:417.266",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742417287-2023-07-19-09:09:02:417.287",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.998,
+     0.766,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742417304-2023-07-19-09:09:02:417.304",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742417324-2023-07-19-09:09:02:417.324",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     0.77,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742417340-2023-07-19-09:09:02:417.340",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742417360-2023-07-19-09:09:02:417.360",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     0.776,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742417376-2023-07-19-09:09:02:417.376",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742417396-2023-07-19-09:09:02:417.396",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.012,
+     0.776,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742417413-2023-07-19-09:09:02:417.413",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742417434-2023-07-19-09:09:02:417.434",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.02,
+     0.78,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742433278-2023-07-19-09:09:02:433.278",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742433317-2023-07-19-09:09:02:433.317",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.024,
+     0.786,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742433337-2023-07-19-09:09:02:433.337",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742433359-2023-07-19-09:09:02:433.359",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.034,
+     0.784,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742449068-2023-07-19-09:09:02:449.68",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742449103-2023-07-19-09:09:02:449.103",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.04,
+     0.788,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742449123-2023-07-19-09:09:02:449.123",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742449146-2023-07-19-09:09:02:449.146",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.05,
+     0.796,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742465467-2023-07-19-09:09:02:465.467",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742465500-2023-07-19-09:09:02:465.500",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.048,
+     0.792,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742465532-2023-07-19-09:09:02:465.532",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742465552-2023-07-19-09:09:02:465.552",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.052,
+     0.798,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742482189-2023-07-19-09:09:02:482.189",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742482219-2023-07-19-09:09:02:482.219",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.05,
+     0.8,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742482249-2023-07-19-09:09:02:482.249",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742482271-2023-07-19-09:09:02:482.271",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.052,
+     0.8,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742498978-2023-07-19-09:09:02:498.978",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742499006-2023-07-19-09:09:02:499.6",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.054,
+     0.8,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742499036-2023-07-19-09:09:02:499.36",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742499056-2023-07-19-09:09:02:499.56",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.044,
+     0.8,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742499072-2023-07-19-09:09:02:499.72",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742499090-2023-07-19-09:09:02:499.90",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.042,
+     0.804,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742515680-2023-07-19-09:09:02:515.680",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742515708-2023-07-19-09:09:02:515.708",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.04,
+     0.81,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742515739-2023-07-19-09:09:02:515.739",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742515758-2023-07-19-09:09:02:515.758",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.028,
+     0.812,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742532261-2023-07-19-09:09:02:532.261",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742532289-2023-07-19-09:09:02:532.289",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.03,
+     0.812,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742532319-2023-07-19-09:09:02:532.319",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742532339-2023-07-19-09:09:02:532.339",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.03,
+     0.812,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742548817-2023-07-19-09:09:02:548.817",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742548844-2023-07-19-09:09:02:548.844",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.022,
+     0.81,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742548861-2023-07-19-09:09:02:548.861",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742548894-2023-07-19-09:09:02:548.894",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.02,
+     0.812,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742565439-2023-07-19-09:09:02:565.439",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742565466-2023-07-19-09:09:02:565.466",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.015,
+     0.812,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742565497-2023-07-19-09:09:02:565.497",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742565516-2023-07-19-09:09:02:565.516",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.01,
+     0.809,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742582129-2023-07-19-09:09:02:582.129",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742582156-2023-07-19-09:09:02:582.156",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.004,
+     0.805,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742582186-2023-07-19-09:09:02:582.186",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742582206-2023-07-19-09:09:02:582.206",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.001,
+     0.805,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742598818-2023-07-19-09:09:02:598.818",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742598844-2023-07-19-09:09:02:598.844",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     0.803,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742598861-2023-07-19-09:09:02:598.861",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742598894-2023-07-19-09:09:02:598.894",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     0.805,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742615438-2023-07-19-09:09:02:615.438",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742615468-2023-07-19-09:09:02:615.468",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     0.803,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742615498-2023-07-19-09:09:02:615.498",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742615517-2023-07-19-09:09:02:615.517",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.998,
+     0.806,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742632144-2023-07-19-09:09:02:632.144",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742632184-2023-07-19-09:09:02:632.184",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.998,
+     0.804,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742632201-2023-07-19-09:09:02:632.201",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742632234-2023-07-19-09:09:02:632.234",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.997,
+     0.804,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742648773-2023-07-19-09:09:02:648.773",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742648799-2023-07-19-09:09:02:648.799",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.997,
+     0.804,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742648830-2023-07-19-09:09:02:648.830",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742648849-2023-07-19-09:09:02:648.849",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.994,
+     0.806,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742665486-2023-07-19-09:09:02:665.486",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742665513-2023-07-19-09:09:02:665.513",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.993,
+     0.809,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742665530-2023-07-19-09:09:02:665.530",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742665562-2023-07-19-09:09:02:665.562",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.983,
+     0.811,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742682090-2023-07-19-09:09:02:682.90",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742682117-2023-07-19-09:09:02:682.117",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.98,
+     0.8180000000000001,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742682134-2023-07-19-09:09:02:682.134",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742682166-2023-07-19-09:09:02:682.166",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.976,
+     0.8160000000000001,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742699000-2023-07-19-09:09:02:699.0",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742699027-2023-07-19-09:09:02:699.27",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.976,
+     0.8160000000000001,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742699057-2023-07-19-09:09:02:699.57",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742699075-2023-07-19-09:09:02:699.75",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.97,
+     0.8160000000000001,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742699091-2023-07-19-09:09:02:699.91",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742699109-2023-07-19-09:09:02:699.109",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.972,
+     0.8160000000000001,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742715617-2023-07-19-09:09:02:715.617",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742715644-2023-07-19-09:09:02:715.644",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.972,
+     0.812,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742715661-2023-07-19-09:09:02:715.661",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742715693-2023-07-19-09:09:02:715.693",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.97,
+     0.81,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742732186-2023-07-19-09:09:02:732.186",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742732213-2023-07-19-09:09:02:732.213",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.972,
+     0.806,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742732231-2023-07-19-09:09:02:732.231",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742732264-2023-07-19-09:09:02:732.264",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.974,
+     0.804,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742748774-2023-07-19-09:09:02:748.774",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742748801-2023-07-19-09:09:02:748.801",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.976,
+     0.802,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742748818-2023-07-19-09:09:02:748.818",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742748851-2023-07-19-09:09:02:748.851",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.978,
+     0.804,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742765402-2023-07-19-09:09:02:765.402",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742765429-2023-07-19-09:09:02:765.429",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.978,
+     0.804,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742765459-2023-07-19-09:09:02:765.459",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742765478-2023-07-19-09:09:02:765.478",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.98,
+     0.8,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742782190-2023-07-19-09:09:02:782.190",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742782218-2023-07-19-09:09:02:782.218",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.983,
+     0.8,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742782235-2023-07-19-09:09:02:782.235",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742782267-2023-07-19-09:09:02:782.267",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.986,
+     0.8,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742798853-2023-07-19-09:09:02:798.853",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742798880-2023-07-19-09:09:02:798.880",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.986,
+     0.794,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742798897-2023-07-19-09:09:02:798.897",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742798929-2023-07-19-09:09:02:798.929",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.993,
+     0.794,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742815483-2023-07-19-09:09:02:815.483",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742815509-2023-07-19-09:09:02:815.509",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.996,
+     0.795,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742815527-2023-07-19-09:09:02:815.527",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742815560-2023-07-19-09:09:02:815.560",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.997,
+     0.792,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742832173-2023-07-19-09:09:02:832.173",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742832199-2023-07-19-09:09:02:832.199",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     0.998,
+     0.788,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742832216-2023-07-19-09:09:02:832.216",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742832264-2023-07-19-09:09:02:832.264",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     0.785,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742848844-2023-07-19-09:09:02:848.844",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742848871-2023-07-19-09:09:02:848.871",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     0.781,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742848888-2023-07-19-09:09:02:848.888",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742848920-2023-07-19-09:09:02:848.920",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     0.779,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742865472-2023-07-19-09:09:02:865.472",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742865499-2023-07-19-09:09:02:865.499",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.002,
+     0.778,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742865516-2023-07-19-09:09:02:865.516",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742865554-2023-07-19-09:09:02:865.554",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.01,
+     0.78,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742882182-2023-07-19-09:09:02:882.182",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742882209-2023-07-19-09:09:02:882.209",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.016,
+     0.78,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742882226-2023-07-19-09:09:02:882.226",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742882258-2023-07-19-09:09:02:882.258",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.016,
+     0.784,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742899013-2023-07-19-09:09:02:899.13",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742899039-2023-07-19-09:09:02:899.39",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.024,
+     0.784,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742899069-2023-07-19-09:09:02:899.69",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742899089-2023-07-19-09:09:02:899.89",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.028,
+     0.784,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742899104-2023-07-19-09:09:02:899.104",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742899123-2023-07-19-09:09:02:899.123",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.024,
+     0.784,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742915619-2023-07-19-09:09:02:915.619",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742915646-2023-07-19-09:09:02:915.646",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.024,
+     0.792,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742915663-2023-07-19-09:09:02:915.663",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742915695-2023-07-19-09:09:02:915.695",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.022,
+     0.794,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742932440-2023-07-19-09:09:02:932.440",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742932467-2023-07-19-09:09:02:932.467",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.019,
+     0.799,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742932485-2023-07-19-09:09:02:932.485",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742932518-2023-07-19-09:09:02:932.518",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.012,
+     0.799,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742948822-2023-07-19-09:09:02:948.822",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742948850-2023-07-19-09:09:02:948.850",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.015,
+     0.8,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742948880-2023-07-19-09:09:02:948.880",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742948900-2023-07-19-09:09:02:948.900",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.009,
+     0.8,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742965410-2023-07-19-09:09:02:965.410",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742965437-2023-07-19-09:09:02:965.437",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.01,
+     0.802,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742965467-2023-07-19-09:09:02:965.467",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742965486-2023-07-19-09:09:02:965.486",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.009,
+     0.807,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742982106-2023-07-19-09:09:02:982.106",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742982132-2023-07-19-09:09:02:982.132",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.009,
+     0.808,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742982149-2023-07-19-09:09:02:982.149",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742982182-2023-07-19-09:09:02:982.182",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.007,
+     0.808,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742998784-2023-07-19-09:09:02:998.784",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742998810-2023-07-19-09:09:02:998.810",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.006,
+     0.806,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757742998827-2023-07-19-09:09:02:998.827",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757742998860-2023-07-19-09:09:02:998.860",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.002,
+     0.807,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743015445-2023-07-19-09:09:03:15.445",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757743015472-2023-07-19-09:09:03:15.472",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.004,
+     0.807,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743015489-2023-07-19-09:09:03:15.489",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757743015521-2023-07-19-09:09:03:15.521",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     0.802,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743032152-2023-07-19-09:09:03:32.152",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757743032178-2023-07-19-09:09:03:32.178",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     0.802,
+     0.101
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743032195-2023-07-19-09:09:03:32.195",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 8,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving not possible",
+   "timestamp": "1689757743032227-2023-07-19-09:09:03:32.227",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 1,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Left click",
+   "timestamp": "1689757743082305-2023-07-19-09:09:03:82.305",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     1.504,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743232216-2023-07-19-09:09:03:232.216",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.504,
+     0.1
+    ],
+    "end": [
+     0.997,
+     1.512,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743232303-2023-07-19-09:09:03:232.303",
+   "x": 1.0,
+   "y": 1.504
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.997,
+     1.512,
+     0.1
+    ],
+    "end": [
+     0.995,
+     1.523,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743265932-2023-07-19-09:09:03:265.932",
+   "x": 0.997,
+   "y": 1.512
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.995,
+     1.523,
+     0.1
+    ],
+    "end": [
+     0.99,
+     1.5359999999999998,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743266014-2023-07-19-09:09:03:266.14",
+   "x": 0.995,
+   "y": 1.523
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.99,
+     1.5359999999999998,
+     0.1
+    ],
+    "end": [
+     0.987,
+     1.5479999999999998,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743266073-2023-07-19-09:09:03:266.73",
+   "x": 0.99,
+   "y": 1.5359999999999998
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.987,
+     1.5479999999999998,
+     0.1
+    ],
+    "end": [
+     0.98,
+     1.5609999999999997,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743266121-2023-07-19-09:09:03:266.121",
+   "x": 0.987,
+   "y": 1.5479999999999998
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.98,
+     1.5609999999999997,
+     0.1
+    ],
+    "end": [
+     0.97,
+     1.5759999999999996,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743282703-2023-07-19-09:09:03:282.703",
+   "x": 0.98,
+   "y": 1.5609999999999997
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.97,
+     1.5759999999999996,
+     0.1
+    ],
+    "end": [
+     0.961,
+     1.5929999999999995,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743282816-2023-07-19-09:09:03:282.816",
+   "x": 0.97,
+   "y": 1.5759999999999996
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.961,
+     1.5929999999999995,
+     0.1
+    ],
+    "end": [
+     0.949,
+     1.6129999999999995,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743282867-2023-07-19-09:09:03:282.867",
+   "x": 0.961,
+   "y": 1.5929999999999995
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.949,
+     1.6129999999999995,
+     0.1
+    ],
+    "end": [
+     0.9349999999999999,
+     1.6329999999999996,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743299121-2023-07-19-09:09:03:299.121",
+   "x": 0.949,
+   "y": 1.6129999999999995
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9349999999999999,
+     1.6329999999999996,
+     0.1
+    ],
+    "end": [
+     0.9229999999999999,
+     1.6509999999999996,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743299226-2023-07-19-09:09:03:299.226",
+   "x": 0.9349999999999999,
+   "y": 1.6329999999999996
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9229999999999999,
+     1.6509999999999996,
+     0.1
+    ],
+    "end": [
+     0.9109999999999999,
+     1.6709999999999996,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743315727-2023-07-19-09:09:03:315.727",
+   "x": 0.9229999999999999,
+   "y": 1.6509999999999996
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9109999999999999,
+     1.6709999999999996,
+     0.1
+    ],
+    "end": [
+     0.9009999999999999,
+     1.6909999999999996,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743315806-2023-07-19-09:09:03:315.806",
+   "x": 0.9109999999999999,
+   "y": 1.6709999999999996
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9009999999999999,
+     1.6909999999999996,
+     0.1
+    ],
+    "end": [
+     0.8929999999999999,
+     1.7089999999999996,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743332371-2023-07-19-09:09:03:332.371",
+   "x": 0.9009999999999999,
+   "y": 1.6909999999999996
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8929999999999999,
+     1.7089999999999996,
+     0.1
+    ],
+    "end": [
+     0.8889999999999999,
+     1.7259999999999995,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743332473-2023-07-19-09:09:03:332.473",
+   "x": 0.8929999999999999,
+   "y": 1.7089999999999996
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8889999999999999,
+     1.7259999999999995,
+     0.1
+    ],
+    "end": [
+     0.8849999999999999,
+     1.7409999999999994,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743348907-2023-07-19-09:09:03:348.907",
+   "x": 0.8889999999999999,
+   "y": 1.7259999999999995
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8849999999999999,
+     1.7409999999999994,
+     0.1
+    ],
+    "end": [
+     0.8849999999999999,
+     1.7539999999999993,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743349008-2023-07-19-09:09:03:349.8",
+   "x": 0.8849999999999999,
+   "y": 1.7409999999999994
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8849999999999999,
+     1.7539999999999993,
+     0.1
+    ],
+    "end": [
+     0.8849999999999999,
+     1.7639999999999993,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743365547-2023-07-19-09:09:03:365.547",
+   "x": 0.8849999999999999,
+   "y": 1.7539999999999993
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8849999999999999,
+     1.7639999999999993,
+     0.1
+    ],
+    "end": [
+     0.8849999999999999,
+     1.7719999999999994,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743365627-2023-07-19-09:09:03:365.627",
+   "x": 0.8849999999999999,
+   "y": 1.7639999999999993
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8849999999999999,
+     1.7719999999999994,
+     0.1
+    ],
+    "end": [
+     0.8849999999999999,
+     1.7769999999999992,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743382290-2023-07-19-09:09:03:382.290",
+   "x": 0.8849999999999999,
+   "y": 1.7719999999999994
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8849999999999999,
+     1.7769999999999992,
+     0.1
+    ],
+    "end": [
+     0.8859999999999999,
+     1.7829999999999993,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743382372-2023-07-19-09:09:03:382.372",
+   "x": 0.8849999999999999,
+   "y": 1.7769999999999992
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8859999999999999,
+     1.7800000000155,
+     0.10149999999224968
+    ],
+    "end": [
+     0.8879999999999999,
+     1.7850000000155,
+     0.10149999999224968
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743398933-2023-07-19-09:09:03:398.933",
+   "x": 0.8859999999999999,
+   "y": 1.7800000000155
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.888,
+     1.7800000000504996,
+     0.10149999999224972
+    ],
+    "end": [
+     0.891,
+     1.7830000000504995,
+     0.10149999999224972
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743399049-2023-07-19-09:09:03:399.49",
+   "x": 0.888,
+   "y": 1.7800000000504996
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.891,
+     1.7800000000304999,
+     0.10149999999224969
+    ],
+    "end": [
+     0.896,
+     1.7830000000304997,
+     0.10149999999224969
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743415529-2023-07-19-09:09:03:415.529",
+   "x": 0.891,
+   "y": 1.7800000000304999
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.896,
+     1.7800000000304999,
+     0.10149999999224972
+    ],
+    "end": [
+     0.905,
+     1.7840000000304999,
+     0.10149999999224972
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743415633-2023-07-19-09:09:03:415.633",
+   "x": 0.896,
+   "y": 1.7800000000304999
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.905,
+     1.7800000000405,
+     0.1014999999922497
+    ],
+    "end": [
+     0.919,
+     1.7820000000405,
+     0.1014999999922497
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743432299-2023-07-19-09:09:03:432.299",
+   "x": 0.905,
+   "y": 1.7800000000405
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9148994949366117,
+     1.780000000014642,
+     0.10149999999224972
+    ],
+    "end": [
+     0.9408994949366117,
+     1.784000000014642,
+     0.10149999999224972
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743432413-2023-07-19-09:09:03:432.413",
+   "x": 0.9148994949366117,
+   "y": 1.780000000014642
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9247832119131179,
+     1.780000000015706,
+     0.10149999999224972
+    ],
+    "end": [
+     0.9487832119131179,
+     1.782000000015706,
+     0.10149999999224972
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743448900-2023-07-19-09:09:03:448.900",
+   "x": 0.9247832119131179,
+   "y": 1.780000000015706
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9347486694955667,
+     1.7800000000088045,
+     0.10149999999224972
+    ],
+    "end": [
+     0.9707486694955667,
+     1.7800000000088045,
+     0.10149999999224972
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743449013-2023-07-19-09:09:03:449.13",
+   "x": 0.9347486694955667,
+   "y": 1.7800000000088045
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9447486694955667,
+     1.7800000000088045,
+     0.10149999999224972
+    ],
+    "end": [
+     0.9787486694955667,
+     1.7800000000088045,
+     0.10149999999224972
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743465615-2023-07-19-09:09:03:465.615",
+   "x": 0.9447486694955667,
+   "y": 1.7800000000088045
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9547486694955667,
+     1.7800000000088045,
+     0.10149999999224972
+    ],
+    "end": [
+     0.9867486694955667,
+     1.7840000000088045,
+     0.10149999999224972
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743465695-2023-07-19-09:09:03:465.695",
+   "x": 0.9547486694955667,
+   "y": 1.7800000000088045
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9646714482627033,
+     1.7800000000129033,
+     0.10149999999224972
+    ],
+    "end": [
+     0.9986714482627034,
+     1.7860000000129033,
+     0.10149999999224972
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743482328-2023-07-19-09:09:03:482.328",
+   "x": 0.9646714482627033,
+   "y": 1.7800000000129033
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9745192838508827,
+     1.7800000000178786,
+     0.10149999999224972
+    ],
+    "end": [
+     0.9985192838508827,
+     1.7820000000178786,
+     0.10149999999224972
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743482501-2023-07-19-09:09:03:482.501",
+   "x": 0.9745192838508827,
+   "y": 1.7800000000178786
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9844847414333315,
+     1.7800000000088043,
+     0.10149999999224972
+    ],
+    "end": [
+     1.0124847414333316,
+     1.7820000000088043,
+     0.10149999999224972
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743499191-2023-07-19-09:09:03:499.191",
+   "x": 0.9844847414333315,
+   "y": 1.7800000000088043
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9944593284316389,
+     1.7800000000076244,
+     0.10149999999224972
+    ],
+    "end": [
+     1.0184593284316388,
+     1.7860000000076244,
+     0.10149999999224972
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743499303-2023-07-19-09:09:03:499.303",
+   "x": 0.9944593284316389,
+   "y": 1.7800000000076244
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.004160753433092,
+     1.7800000000247536,
+     0.10149999999224973
+    ],
+    "end": [
+     1.032160753433092,
+     1.7840000000247536,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743499385-2023-07-19-09:09:03:499.385",
+   "x": 1.004160753433092,
+   "y": 1.7800000000247536
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0140602483697037,
+     1.7800000000146423,
+     0.10149999999224973
+    ],
+    "end": [
+     1.0440602483697037,
+     1.7840000000146423,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743515680-2023-07-19-09:09:03:515.680",
+   "x": 1.0140602483697037,
+   "y": 1.7800000000146423
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.02397252737653,
+     1.780000000013716,
+     0.10149999999224973
+    ],
+    "end": [
+     1.0579725273765301,
+     1.784000000013716,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743515794-2023-07-19-09:09:03:515.794",
+   "x": 1.02397252737653,
+   "y": 1.780000000013716
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.033904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ],
+    "end": [
+     1.063904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743532349-2023-07-19-09:09:03:532.349",
+   "x": 1.033904033419759,
+   "y": 1.7800000000121843
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.043904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ],
+    "end": [
+     1.073904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743532430-2023-07-19-09:09:03:532.430",
+   "x": 1.043904033419759,
+   "y": 1.7800000000121843
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.053904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ],
+    "end": [
+     1.081904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743548929-2023-07-19-09:09:03:548.929",
+   "x": 1.053904033419759,
+   "y": 1.7800000000121843
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.063904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ],
+    "end": [
+     1.087904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743549019-2023-07-19-09:09:03:549.19",
+   "x": 1.063904033419759,
+   "y": 1.7800000000121843
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.073904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ],
+    "end": [
+     1.095904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743565577-2023-07-19-09:09:03:565.577",
+   "x": 1.073904033419759,
+   "y": 1.7800000000121843
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.083904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ],
+    "end": [
+     1.1029040334197588,
+     1.7800000000121843,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743565654-2023-07-19-09:09:03:565.654",
+   "x": 1.083904033419759,
+   "y": 1.7800000000121843
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.093904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ],
+    "end": [
+     1.1129040334197589,
+     1.7800000000121843,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743582293-2023-07-19-09:09:03:582.293",
+   "x": 1.093904033419759,
+   "y": 1.7800000000121843
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.103904033419759,
+     1.7800000000121843,
+     0.10149999999224973
+    ],
+    "end": [
+     1.1209040334197589,
+     1.7770000000121844,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743582382-2023-07-19-09:09:03:582.382",
+   "x": 1.103904033419759,
+   "y": 1.7800000000121843
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1137518690079384,
+     1.778262146673094,
+     0.10149999999224973
+    ],
+    "end": [
+     1.1277518690079384,
+     1.775262146673094,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743598988-2023-07-19-09:09:03:598.988",
+   "x": 1.1137518690079384,
+   "y": 1.778262146673094
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1277518690079384,
+     1.775262146673094,
+     0.10149999999224973
+    ],
+    "end": [
+     1.1387518690079383,
+     1.7682621466730941,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743599091-2023-07-19-09:09:03:599.91",
+   "x": 1.1277518690079384,
+   "y": 1.775262146673094
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1387518690079383,
+     1.7682621466730941,
+     0.10149999999224973
+    ],
+    "end": [
+     1.1527518690079384,
+     1.760262146673094,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743615603-2023-07-19-09:09:03:615.603",
+   "x": 1.1387518690079383,
+   "y": 1.7682621466730941
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1527518690079384,
+     1.760262146673094,
+     0.10149999999224973
+    ],
+    "end": [
+     1.1627518690079384,
+     1.7512621466730942,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743615683-2023-07-19-09:09:03:615.683",
+   "x": 1.1527518690079384,
+   "y": 1.760262146673094
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1627518690079384,
+     1.7512621466730942,
+     0.10149999999224973
+    ],
+    "end": [
+     1.1727518690079384,
+     1.7412621466730942,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743632263-2023-07-19-09:09:03:632.263",
+   "x": 1.1627518690079384,
+   "y": 1.7512621466730942
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1727518690079384,
+     1.7412621466730942,
+     0.10149999999224973
+    ],
+    "end": [
+     1.1847518690079384,
+     1.7292621466730942,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743632371-2023-07-19-09:09:03:632.371",
+   "x": 1.1727518690079384,
+   "y": 1.7412621466730942
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1847518690079384,
+     1.7292621466730942,
+     0.10149999999224973
+    ],
+    "end": [
+     1.1977518690079383,
+     1.7082621466730943,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743648956-2023-07-19-09:09:03:648.956",
+   "x": 1.1847518690079384,
+   "y": 1.7292621466730942
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1977518690079383,
+     1.7082621466730943,
+     0.10149999999224973
+    ],
+    "end": [
+     1.2077518690079383,
+     1.6882621466730943,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743649051-2023-07-19-09:09:03:649.51",
+   "x": 1.1977518690079383,
+   "y": 1.7082621466730943
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2077518690079383,
+     1.6882621466730943,
+     0.10149999999224973
+    ],
+    "end": [
+     1.2237518690079383,
+     1.6642621466730942,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743665560-2023-07-19-09:09:03:665.560",
+   "x": 1.2077518690079383,
+   "y": 1.6882621466730943
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2237518690079383,
+     1.6642621466730942,
+     0.10149999999224973
+    ],
+    "end": [
+     1.2377518690079383,
+     1.6342621466730942,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743665648-2023-07-19-09:09:03:665.648",
+   "x": 1.2237518690079383,
+   "y": 1.6642621466730942
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2377518690079383,
+     1.6342621466730942,
+     0.10149999999224973
+    ],
+    "end": [
+     1.2517518690079383,
+     1.6042621466730942,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743682290-2023-07-19-09:09:03:682.290",
+   "x": 1.2377518690079383,
+   "y": 1.6342621466730942
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2517518690079383,
+     1.6042621466730942,
+     0.10149999999224973
+    ],
+    "end": [
+     1.2657518690079383,
+     1.5702621466730942,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743682417-2023-07-19-09:09:03:682.417",
+   "x": 1.2517518690079383,
+   "y": 1.6042621466730942
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2657518690079383,
+     1.5702621466730942,
+     0.10149999999224973
+    ],
+    "end": [
+     1.2817518690079384,
+     1.5342621466730941,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743699174-2023-07-19-09:09:03:699.174",
+   "x": 1.2657518690079383,
+   "y": 1.5702621466730942
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2817518690079384,
+     1.5342621466730941,
+     0.10149999999224973
+    ],
+    "end": [
+     1.2957518690079384,
+     1.494262146673094,
+     0.10149999999224973
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743699271-2023-07-19-09:09:03:699.271",
+   "x": 1.2817518690079384,
+   "y": 1.5342621466730941
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2916445438581372,
+     1.5216899677473488,
+     0.10160739193498008
+    ],
+    "end": [
+     1.3016445438581372,
+     1.4796899677473487,
+     0.10160739193498008
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743699390-2023-07-19-09:09:03:699.390",
+   "x": 1.2916445438581372,
+   "y": 1.5216899677473488
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.293949724527912,
+     1.5216921268882213,
+     0.10167376488915256
+    ],
+    "end": [
+     1.305949724527912,
+     1.4796921268882213,
+     0.10167376488915256
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743715763-2023-07-19-09:09:03:715.763",
+   "x": 1.293949724527912,
+   "y": 1.5216921268882213
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2992379304105772,
+     1.5072446001981081,
+     0.10167376488915256
+    ],
+    "end": [
+     1.3092379304105772,
+     1.471244600198108,
+     0.10167376488915256
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743715884-2023-07-19-09:09:03:715.884",
+   "x": 1.2992379304105772,
+   "y": 1.5072446001981081
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.301494753727932,
+     1.5073419029388566,
+     0.10167376488915256
+    ],
+    "end": [
+     1.309494753727932,
+     1.4653419029388566,
+     0.10167376488915256
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743732391-2023-07-19-09:09:03:732.391",
+   "x": 1.301494753727932,
+   "y": 1.5073419029388566
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.309494753727932,
+     1.4653419029388566,
+     0.10167376488915256
+    ],
+    "end": [
+     1.321494753727932,
+     1.4273419029388565,
+     0.10167376488915256
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743732513-2023-07-19-09:09:03:732.513",
+   "x": 1.309494753727932,
+   "y": 1.4653419029388566
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.3123288396862964,
+     1.4650007621315748,
+     0.10167376488915254
+    ],
+    "end": [
+     1.3223288396862964,
+     1.4370007621315748,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743748969-2023-07-19-09:09:03:748.969",
+   "x": 1.3123288396862964,
+   "y": 1.4650007621315748
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.3223288396862964,
+     1.4370007621315748,
+     0.10167376488915254
+    ],
+    "end": [
+     1.3323288396862965,
+     1.4170007621315748,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743749073-2023-07-19-09:09:03:749.73",
+   "x": 1.3223288396862964,
+   "y": 1.4370007621315748
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.3288404366019422,
+     1.427336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.3288404366019422,
+     1.417336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743765561-2023-07-19-09:09:03:765.561",
+   "x": 1.3288404366019422,
+   "y": 1.427336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.3288404366019422,
+     1.417336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.3308404366019422,
+     1.416336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743765645-2023-07-19-09:09:03:765.645",
+   "x": 1.3288404366019422,
+   "y": 1.417336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.3308404366019422,
+     1.416336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.3298404366019423,
+     1.416336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743799270-2023-07-19-09:09:03:799.270",
+   "x": 1.3308404366019422,
+   "y": 1.416336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.3298404366019423,
+     1.416336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.3278404366019423,
+     1.418336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743799354-2023-07-19-09:09:03:799.354",
+   "x": 1.3298404366019423,
+   "y": 1.416336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.3278404366019423,
+     1.418336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.3258404366019423,
+     1.420336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743815998-2023-07-19-09:09:03:815.998",
+   "x": 1.3278404366019423,
+   "y": 1.418336375161135
+  },
+  {
+   "code": 1,
+   "coordinates": {
+    "ego": [
+     1.3258404366019423,
+     1.420336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Left click",
+   "timestamp": "1689757743816082-2023-07-19-09:09:03:816.82",
+   "x": 1.3258404366019423,
+   "y": 1.420336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.3258404366019423,
+     1.420336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.3238404366019423,
+     1.421336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743816105-2023-07-19-09:09:03:816.105",
+   "x": 1.3258404366019423,
+   "y": 1.420336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.3238404366019423,
+     1.421336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.3208404366019424,
+     1.421336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743832296-2023-07-19-09:09:03:832.296",
+   "x": 1.3238404366019423,
+   "y": 1.421336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.3208404366019424,
+     1.421336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.3128404366019424,
+     1.425336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743832382-2023-07-19-09:09:03:832.382",
+   "x": 1.3208404366019424,
+   "y": 1.421336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.3128404366019424,
+     1.425336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.3048404366019424,
+     1.4303363751611349,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743848859-2023-07-19-09:09:03:848.859",
+   "x": 1.3128404366019424,
+   "y": 1.425336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.3048404366019424,
+     1.4303363751611349,
+     0.10167376488915254
+    ],
+    "end": [
+     1.2898404366019425,
+     1.4383363751611349,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743848939-2023-07-19-09:09:03:848.939",
+   "x": 1.3048404366019424,
+   "y": 1.4303363751611349
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2898404366019425,
+     1.4383363751611349,
+     0.10167376488915254
+    ],
+    "end": [
+     1.2718404366019425,
+     1.452336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743865542-2023-07-19-09:09:03:865.542",
+   "x": 1.2898404366019425,
+   "y": 1.4383363751611349
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2718404366019425,
+     1.452336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.2498404366019424,
+     1.472336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743865639-2023-07-19-09:09:03:865.639",
+   "x": 1.2718404366019425,
+   "y": 1.452336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2498404366019424,
+     1.472336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.2338404366019424,
+     1.492336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743882399-2023-07-19-09:09:03:882.399",
+   "x": 1.2498404366019424,
+   "y": 1.472336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2338404366019424,
+     1.492336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.2158404366019424,
+     1.512336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743882526-2023-07-19-09:09:03:882.526",
+   "x": 1.2338404366019424,
+   "y": 1.492336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2158404366019424,
+     1.512336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.2038404366019424,
+     1.530336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743899140-2023-07-19-09:09:03:899.140",
+   "x": 1.2158404366019424,
+   "y": 1.512336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.2038404366019424,
+     1.530336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.1898404366019424,
+     1.548336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743899225-2023-07-19-09:09:03:899.225",
+   "x": 1.2038404366019424,
+   "y": 1.530336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1898404366019424,
+     1.548336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.1838404366019424,
+     1.5613363751611349,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743899297-2023-07-19-09:09:03:899.297",
+   "x": 1.1898404366019424,
+   "y": 1.548336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1838404366019424,
+     1.5613363751611349,
+     0.10167376488915254
+    ],
+    "end": [
+     1.1748404366019425,
+     1.571336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743915779-2023-07-19-09:09:03:915.779",
+   "x": 1.1838404366019424,
+   "y": 1.5613363751611349
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1748404366019425,
+     1.571336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.1668404366019425,
+     1.585336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743915852-2023-07-19-09:09:03:915.852",
+   "x": 1.1748404366019425,
+   "y": 1.571336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1668404366019425,
+     1.585336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.1568404366019425,
+     1.603336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743932352-2023-07-19-09:09:03:932.352",
+   "x": 1.1668404366019425,
+   "y": 1.585336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1568404366019425,
+     1.603336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.1408404366019425,
+     1.625336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743932438-2023-07-19-09:09:03:932.438",
+   "x": 1.1568404366019425,
+   "y": 1.603336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1408404366019425,
+     1.625336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.1208404366019424,
+     1.649336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743949042-2023-07-19-09:09:03:949.42",
+   "x": 1.1408404366019425,
+   "y": 1.625336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1208404366019424,
+     1.649336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.1008404366019424,
+     1.673336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743949129-2023-07-19-09:09:03:949.129",
+   "x": 1.1208404366019424,
+   "y": 1.649336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.1008404366019424,
+     1.673336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.0688404366019424,
+     1.697336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743965591-2023-07-19-09:09:03:965.591",
+   "x": 1.1008404366019424,
+   "y": 1.673336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0688404366019424,
+     1.697336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.0348404366019424,
+     1.723336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743965673-2023-07-19-09:09:03:965.673",
+   "x": 1.0688404366019424,
+   "y": 1.697336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0348404366019424,
+     1.723336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     1.0008404366019423,
+     1.749336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743982280-2023-07-19-09:09:03:982.280",
+   "x": 1.0348404366019424,
+   "y": 1.723336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0008404366019423,
+     1.749336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     0.9688404366019423,
+     1.773336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743982394-2023-07-19-09:09:03:982.394",
+   "x": 1.0008404366019423,
+   "y": 1.749336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9688404366019423,
+     1.773336375161135,
+     0.10167376488915254
+    ],
+    "end": [
+     0.9308404366019423,
+     1.793336375161135,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743998932-2023-07-19-09:09:03:998.932",
+   "x": 0.9688404366019423,
+   "y": 1.773336375161135
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9511420721543027,
+     1.780000000027013,
+     0.10167376488915254
+    ],
+    "end": [
+     0.9171420721543027,
+     1.800000000027013,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757743999066-2023-07-19-09:09:03:999.66",
+   "x": 0.9511420721543027,
+   "y": 1.780000000027013
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.942522730002725,
+     1.780000000051202,
+     0.10167376488915254
+    ],
+    "end": [
+     0.910522730002725,
+     1.796000000051202,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744015580-2023-07-19-09:09:04:15.580",
+   "x": 0.942522730002725,
+   "y": 1.780000000051202
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9335784580927259,
+     1.7800000000452214,
+     0.10167376488915253
+    ],
+    "end": [
+     0.8975784580927259,
+     1.7940000000452214,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744015693-2023-07-19-09:09:04:15.693",
+   "x": 0.9335784580927259,
+   "y": 1.7800000000452214
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9242584113773129,
+     1.7800000000367446,
+     0.10167376488915253
+    ],
+    "end": [
+     0.8862584113773129,
+     1.7980000000367446,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744032275-2023-07-19-09:09:04:32.275",
+   "x": 0.9242584113773129,
+   "y": 1.7800000000367446
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9152210329883775,
+     1.7800000000433085,
+     0.10167376488915253
+    ],
+    "end": [
+     0.8772210329883775,
+     1.7900000000433085,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744032388-2023-07-19-09:09:04:32.388",
+   "x": 0.9152210329883775,
+   "y": 1.7800000000433085
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9055502876157511,
+     1.7800000000259493,
+     0.10167376488915253
+    ],
+    "end": [
+     0.869550287615751,
+     1.7980000000259493,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744048974-2023-07-19-09:09:04:48.974",
+   "x": 0.9055502876157511,
+   "y": 1.7800000000259493
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8966060157057519,
+     1.7800000000452214,
+     0.10167376488915254
+    ],
+    "end": [
+     0.8586060157057519,
+     1.7940000000452214,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744049088-2023-07-19-09:09:04:49.88",
+   "x": 0.8966060157057519,
+   "y": 1.7800000000452214
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8872225845375808,
+     1.7800000000350706,
+     0.10167376488915254
+    ],
+    "end": [
+     0.8532225845375808,
+     1.7960000000350707,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744065555-2023-07-19-09:09:04:65.555",
+   "x": 0.8872225845375808,
+   "y": 1.7800000000350706
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8781743975155709,
+     1.7800000000430796,
+     0.10167376488915254
+    ],
+    "end": [
+     0.8421743975155709,
+     1.7920000000430796,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744065668-2023-07-19-09:09:04:65.668",
+   "x": 0.8781743975155709,
+   "y": 1.7800000000430796
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8686875645350658,
+     1.7800000000321228,
+     0.10167376488915254
+    ],
+    "end": [
+     0.8386875645350658,
+     1.7920000000321228,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744082275-2023-07-19-09:09:04:82.275",
+   "x": 0.8686875645350658,
+   "y": 1.7800000000321228
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8594027976262132,
+     1.7800000000376393,
+     0.10167376488915254
+    ],
+    "end": [
+     0.8294027976262132,
+     1.7880000000376393,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744082404-2023-07-19-09:09:04:82.404",
+   "x": 0.8594027976262132,
+   "y": 1.7800000000376393
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8497404482302007,
+     1.7800000000262661,
+     0.10167376488915254
+    ],
+    "end": [
+     0.8197404482302006,
+     1.7900000000262661,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744099239-2023-07-19-09:09:04:99.239",
+   "x": 0.8497404482302007,
+   "y": 1.7800000000262661
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8402536152496956,
+     1.7800000000321228,
+     0.10167376488915254
+    ],
+    "end": [
+     0.8202536152496955,
+     1.7860000000321228,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744099352-2023-07-19-09:09:04:99.352",
+   "x": 0.8402536152496956,
+   "y": 1.7800000000321228
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.830675352397484,
+     1.7800000000292346,
+     0.10167376488915254
+    ],
+    "end": [
+     0.812675352397484,
+     1.7840000000292346,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744099435-2023-07-19-09:09:04:99.435",
+   "x": 0.830675352397484,
+   "y": 1.7800000000292346
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8209134817956445,
+     1.7800000000221927,
+     0.10167376488915254
+    ],
+    "end": [
+     0.8069134817956445,
+     1.7820000000221927,
+     0.10167376488915254
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744115713-2023-07-19-09:09:04:115.713",
+   "x": 0.8209134817956445,
+   "y": 1.7800000000221927
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8110139868590328,
+     1.7800000000146423,
+     0.10167376488915253
+    ],
+    "end": [
+     0.8010139868590328,
+     1.7850000000146422,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744115839-2023-07-19-09:09:04:115.839",
+   "x": 0.8110139868590328,
+   "y": 1.7800000000146423
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8020697149490336,
+     1.7800000000452214,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7960697149490336,
+     1.7820000000452214,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744132369-2023-07-19-09:09:04:132.369",
+   "x": 0.8020697149490336,
+   "y": 1.7800000000452214
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7960697149490336,
+     1.7800000000205,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7940697149490336,
+     1.7800000000205,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744132481-2023-07-19-09:09:04:132.481",
+   "x": 0.7960697149490336,
+   "y": 1.7800000000205
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7940697149490336,
+     1.7800000000205,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7890697149490336,
+     1.7800000000205,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744149025-2023-07-19-09:09:04:149.25",
+   "x": 0.7940697149490336,
+   "y": 1.7800000000205
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7890697149490336,
+     1.7800000000205,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7870697149490335,
+     1.7800000000205,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744149115-2023-07-19-09:09:04:149.115",
+   "x": 0.7890697149490336,
+   "y": 1.7800000000205
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7870697149490335,
+     1.7800000000205,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7840697149490335,
+     1.7800000000205,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744165567-2023-07-19-09:09:04:165.567",
+   "x": 0.7870697149490335,
+   "y": 1.7800000000205
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7840697149490335,
+     1.7800000000205,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7800697149490335,
+     1.7770000000205002,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744165646-2023-07-19-09:09:04:165.646",
+   "x": 0.7840697149490335,
+   "y": 1.7800000000205
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7800697149490335,
+     1.7770000000205002,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7760697149490335,
+     1.7740000000205003,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744182305-2023-07-19-09:09:04:182.305",
+   "x": 0.7800697149490335,
+   "y": 1.7770000000205002
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7760697149490335,
+     1.7740000000205003,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7700697149490335,
+     1.7640000000205003,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744182404-2023-07-19-09:09:04:182.404",
+   "x": 0.7760697149490335,
+   "y": 1.7740000000205003
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7700697149490335,
+     1.7640000000205003,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7700697149490335,
+     1.7590000000205004,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744198946-2023-07-19-09:09:04:198.946",
+   "x": 0.7700697149490335,
+   "y": 1.7640000000205003
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7700697149490335,
+     1.7590000000205004,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7670697149490335,
+     1.7480000000205005,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744199040-2023-07-19-09:09:04:199.40",
+   "x": 0.7700697149490335,
+   "y": 1.7590000000205004
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7670697149490335,
+     1.7480000000205005,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7650697149490335,
+     1.7330000000205006,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744215631-2023-07-19-09:09:04:215.631",
+   "x": 0.7670697149490335,
+   "y": 1.7480000000205005
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7650697149490335,
+     1.7330000000205006,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7610697149490335,
+     1.7110000000205006,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744215718-2023-07-19-09:09:04:215.718",
+   "x": 0.7650697149490335,
+   "y": 1.7330000000205006
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7610697149490335,
+     1.7110000000205006,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7610697149490335,
+     1.6830000000205005,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744232249-2023-07-19-09:09:04:232.249",
+   "x": 0.7610697149490335,
+   "y": 1.7110000000205006
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7610697149490335,
+     1.6830000000205005,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7610697149490335,
+     1.6530000000205005,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744232348-2023-07-19-09:09:04:232.348",
+   "x": 0.7610697149490335,
+   "y": 1.6830000000205005
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7610697149490335,
+     1.6530000000205005,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7610697149490335,
+     1.6170000000205005,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744248941-2023-07-19-09:09:04:248.941",
+   "x": 0.7610697149490335,
+   "y": 1.6530000000205005
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7610697149490335,
+     1.6170000000205005,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7750697149490335,
+     1.5810000000205005,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744249029-2023-07-19-09:09:04:249.29",
+   "x": 0.7610697149490335,
+   "y": 1.6170000000205005
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7750697149490335,
+     1.5810000000205005,
+     0.10167376488915253
+    ],
+    "end": [
+     0.7950697149490336,
+     1.5330000000205004,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744265558-2023-07-19-09:09:04:265.558",
+   "x": 0.7750697149490335,
+   "y": 1.5810000000205005
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.7950697149490336,
+     1.5330000000205004,
+     0.10167376488915253
+    ],
+    "end": [
+     0.8210697149490336,
+     1.4810000000205004,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744265660-2023-07-19-09:09:04:265.660",
+   "x": 0.7950697149490336,
+   "y": 1.5330000000205004
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8210697149490336,
+     1.4810000000205004,
+     0.10167376488915253
+    ],
+    "end": [
+     0.8510697149490336,
+     1.4250000000205003,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744282264-2023-07-19-09:09:04:282.264",
+   "x": 0.8210697149490336,
+   "y": 1.4810000000205004
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8510697149490336,
+     1.4250000000205003,
+     0.10167376488915253
+    ],
+    "end": [
+     0.8850697149490336,
+     1.3630000000205003,
+     0.10167376488915253
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744282453-2023-07-19-09:09:04:282.453",
+   "x": 0.8510697149490336,
+   "y": 1.4250000000205003
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8850532775491119,
+     1.3702646338223938,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9170532775491119,
+     1.3102646338223938,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744299090-2023-07-19-09:09:04:299.90",
+   "x": 0.8850532775491119,
+   "y": 1.3702646338223938
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9170532775491119,
+     1.3102646338223938,
+     0.1016913209740623
+    ],
+    "end": [
+     0.951053277549112,
+     1.2522646338223937,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744299230-2023-07-19-09:09:04:299.230",
+   "x": 0.9170532775491119,
+   "y": 1.3102646338223938
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9271312877658117,
+     1.3003175486254661,
+     0.10169132097406232
+    ],
+    "end": [
+     0.9591312877658117,
+     1.242317548625466,
+     0.10169132097406232
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744299324-2023-07-19-09:09:04:299.324",
+   "x": 0.9271312877658117,
+   "y": 1.3003175486254661
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9319183488932311,
+     1.3003413826352528,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9559183488932311,
+     1.2463413826352527,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744315738-2023-07-19-09:09:04:315.738",
+   "x": 0.9319183488932311,
+   "y": 1.3003413826352528
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9559092272633101,
+     1.247612812573965,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9799092272633101,
+     1.197612812573965,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744315892-2023-07-19-09:09:04:315.892",
+   "x": 0.9559092272633101,
+   "y": 1.247612812573965
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9601716405099345,
+     1.2476433923614718,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9741716405099345,
+     1.1976433923614718,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744332378-2023-07-19-09:09:04:332.378",
+   "x": 0.9601716405099345,
+   "y": 1.2476433923614718
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9741716405099345,
+     1.1976433923614718,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9861716405099346,
+     1.1556433923614717,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744332493-2023-07-19-09:09:04:332.493",
+   "x": 0.9741716405099345,
+   "y": 1.1976433923614718
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9861716405099346,
+     1.1556433923614717,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9961716405099346,
+     1.1176433923614717,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744349018-2023-07-19-09:09:04:349.18",
+   "x": 0.9861716405099346,
+   "y": 1.1556433923614717
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9961716405099346,
+     1.1176433923614717,
+     0.1016913209740623
+    ],
+    "end": [
+     1.0061716405099346,
+     1.0796433923614717,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744349128-2023-07-19-09:09:04:349.128",
+   "x": 0.9961716405099346,
+   "y": 1.1176433923614717
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0061716405099346,
+     1.0796433923614717,
+     0.1016913209740623
+    ],
+    "end": [
+     1.0161716405099346,
+     1.0476433923614716,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744365545-2023-07-19-09:09:04:365.545",
+   "x": 1.0061716405099346,
+   "y": 1.0796433923614717
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0161716405099346,
+     1.0476433923614716,
+     0.1016913209740623
+    ],
+    "end": [
+     1.0221716405099346,
+     1.0156433923614716,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744365640-2023-07-19-09:09:04:365.640",
+   "x": 1.0161716405099346,
+   "y": 1.0476433923614716
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0221716405099346,
+     1.0156433923614716,
+     0.1016913209740623
+    ],
+    "end": [
+     1.0261716405099346,
+     0.9816433923614716,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744382322-2023-07-19-09:09:04:382.322",
+   "x": 1.0221716405099346,
+   "y": 1.0156433923614716
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0261716405099346,
+     0.9816433923614716,
+     0.1016913209740623
+    ],
+    "end": [
+     1.0261716405099346,
+     0.9556433923614716,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744382427-2023-07-19-09:09:04:382.427",
+   "x": 1.0261716405099346,
+   "y": 0.9816433923614716
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0261716405099346,
+     0.9556433923614716,
+     0.1016913209740623
+    ],
+    "end": [
+     1.0261716405099346,
+     0.9256433923614715,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744398934-2023-07-19-09:09:04:398.934",
+   "x": 1.0261716405099346,
+   "y": 0.9556433923614716
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0261716405099346,
+     0.9256433923614715,
+     0.1016913209740623
+    ],
+    "end": [
+     1.0201716405099346,
+     0.9016433923614715,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744399037-2023-07-19-09:09:04:399.37",
+   "x": 1.0261716405099346,
+   "y": 0.9256433923614715
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0201716405099346,
+     0.9016433923614715,
+     0.1016913209740623
+    ],
+    "end": [
+     1.0141716405099346,
+     0.8776433923614715,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744415649-2023-07-19-09:09:04:415.649",
+   "x": 1.0201716405099346,
+   "y": 0.9016433923614715
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0141716405099346,
+     0.8776433923614715,
+     0.1016913209740623
+    ],
+    "end": [
+     1.0061716405099346,
+     0.8436433923614715,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744415736-2023-07-19-09:09:04:415.736",
+   "x": 1.0141716405099346,
+   "y": 0.8776433923614715
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0061716405099346,
+     0.8436433923614715,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9961716405099346,
+     0.8136433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744432246-2023-07-19-09:09:04:432.246",
+   "x": 1.0061716405099346,
+   "y": 0.8436433923614715
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9961716405099346,
+     0.8136433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9901716405099346,
+     0.7896433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744432334-2023-07-19-09:09:04:432.334",
+   "x": 0.9961716405099346,
+   "y": 0.8136433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9901716405099346,
+     0.7896433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9881716405099346,
+     0.7676433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744449015-2023-07-19-09:09:04:449.15",
+   "x": 0.9901716405099346,
+   "y": 0.7896433923614714
+  },
+  {
+   "code": 1,
+   "coordinates": {
+    "ego": [
+     0.9881716405099346,
+     0.7676433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Left click",
+   "timestamp": "1689757744449105-2023-07-19-09:09:04:449.105",
+   "x": 0.9881716405099346,
+   "y": 0.7676433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9881716405099346,
+     0.7676433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9861716405099346,
+     0.7536433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744449127-2023-07-19-09:09:04:449.127",
+   "x": 0.9881716405099346,
+   "y": 0.7676433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9861716405099346,
+     0.7536433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9861716405099346,
+     0.7486433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744465636-2023-07-19-09:09:04:465.636",
+   "x": 0.9861716405099346,
+   "y": 0.7536433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9861716405099346,
+     0.7486433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9841716405099346,
+     0.7466433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744465699-2023-07-19-09:09:04:465.699",
+   "x": 0.9861716405099346,
+   "y": 0.7486433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9841716405099346,
+     0.7466433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9831716405099346,
+     0.7466433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744482581-2023-07-19-09:09:04:482.581",
+   "x": 0.9841716405099346,
+   "y": 0.7466433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9831716405099346,
+     0.7466433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9821716405099346,
+     0.7476433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744516014-2023-07-19-09:09:04:516.14",
+   "x": 0.9831716405099346,
+   "y": 0.7466433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9821716405099346,
+     0.7476433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9821716405099346,
+     0.7546433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744532750-2023-07-19-09:09:04:532.750",
+   "x": 0.9821716405099346,
+   "y": 0.7476433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9821716405099346,
+     0.7546433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9821716405099346,
+     0.7646433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744532827-2023-07-19-09:09:04:532.827",
+   "x": 0.9821716405099346,
+   "y": 0.7546433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9821716405099346,
+     0.7646433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9821716405099346,
+     0.7796433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744549007-2023-07-19-09:09:04:549.7",
+   "x": 0.9821716405099346,
+   "y": 0.7646433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9821716405099346,
+     0.7796433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9821716405099346,
+     0.7986433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744549089-2023-07-19-09:09:04:549.89",
+   "x": 0.9821716405099346,
+   "y": 0.7796433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9821716405099346,
+     0.7986433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9821716405099346,
+     0.8246433923614714,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744565606-2023-07-19-09:09:04:565.606",
+   "x": 0.9821716405099346,
+   "y": 0.7986433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9821716405099346,
+     0.8246433923614714,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9821716405099346,
+     0.8546433923614715,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744565684-2023-07-19-09:09:04:565.684",
+   "x": 0.9821716405099346,
+   "y": 0.8246433923614714
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9821716405099346,
+     0.8546433923614715,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9821716405099346,
+     0.8886433923614715,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744582316-2023-07-19-09:09:04:582.316",
+   "x": 0.9821716405099346,
+   "y": 0.8546433923614715
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9821716405099346,
+     0.8886433923614715,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9821716405099346,
+     0.9246433923614715,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744582406-2023-07-19-09:09:04:582.406",
+   "x": 0.9821716405099346,
+   "y": 0.8886433923614715
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9821716405099346,
+     0.9246433923614715,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9781716405099345,
+     0.9666433923614716,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744598981-2023-07-19-09:09:04:598.981",
+   "x": 0.9821716405099346,
+   "y": 0.9246433923614715
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9781716405099345,
+     0.9666433923614716,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9721716405099345,
+     1.0106433923614715,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744599098-2023-07-19-09:09:04:599.98",
+   "x": 0.9781716405099345,
+   "y": 0.9666433923614716
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9721716405099345,
+     1.0106433923614715,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9661716405099345,
+     1.0586433923614715,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744615635-2023-07-19-09:09:04:615.635",
+   "x": 0.9721716405099345,
+   "y": 1.0106433923614715
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9661716405099345,
+     1.0586433923614715,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9601716405099345,
+     1.1046433923614716,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744615738-2023-07-19-09:09:04:615.738",
+   "x": 0.9661716405099345,
+   "y": 1.0586433923614715
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9601716405099345,
+     1.1046433923614716,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9521716405099345,
+     1.1486433923614716,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744632278-2023-07-19-09:09:04:632.278",
+   "x": 0.9601716405099345,
+   "y": 1.1046433923614716
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9521716405099345,
+     1.1486433923614716,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9461716405099345,
+     1.1986433923614717,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744632380-2023-07-19-09:09:04:632.380",
+   "x": 0.9521716405099345,
+   "y": 1.1486433923614716
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9461716405099345,
+     1.1986433923614717,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9381716405099345,
+     1.2486433923614717,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744648968-2023-07-19-09:09:04:648.968",
+   "x": 0.9461716405099345,
+   "y": 1.1986433923614717
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9381716405099345,
+     1.2486433923614717,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9321716405099345,
+     1.3006433923614718,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744649070-2023-07-19-09:09:04:649.70",
+   "x": 0.9381716405099345,
+   "y": 1.2486433923614717
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9321716405099345,
+     1.3006433923614718,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9261716405099345,
+     1.3506433923614718,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744665608-2023-07-19-09:09:04:665.608",
+   "x": 0.9321716405099345,
+   "y": 1.3006433923614718
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9261716405099345,
+     1.3506433923614718,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9181716405099345,
+     1.4006433923614718,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744665699-2023-07-19-09:09:04:665.699",
+   "x": 0.9261716405099345,
+   "y": 1.3506433923614718
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9181716405099345,
+     1.4006433923614718,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9101716405099345,
+     1.4466433923614719,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744682319-2023-07-19-09:09:04:682.319",
+   "x": 0.9181716405099345,
+   "y": 1.4006433923614718
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9101716405099345,
+     1.4466433923614719,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.484643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744682468-2023-07-19-09:09:04:682.468",
+   "x": 0.9101716405099345,
+   "y": 1.4466433923614719
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.484643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.520643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744699217-2023-07-19-09:09:04:699.217",
+   "x": 0.9061716405099345,
+   "y": 1.484643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.520643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.554643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744699306-2023-07-19-09:09:04:699.306",
+   "x": 0.9061716405099345,
+   "y": 1.520643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.554643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.586643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744699380-2023-07-19-09:09:04:699.380",
+   "x": 0.9061716405099345,
+   "y": 1.554643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.586643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.612643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744715792-2023-07-19-09:09:04:715.792",
+   "x": 0.9061716405099345,
+   "y": 1.586643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.612643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.636643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744715880-2023-07-19-09:09:04:715.880",
+   "x": 0.9061716405099345,
+   "y": 1.612643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.636643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.658643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744732447-2023-07-19-09:09:04:732.447",
+   "x": 0.9061716405099345,
+   "y": 1.636643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.658643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.676643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744732535-2023-07-19-09:09:04:732.535",
+   "x": 0.9061716405099345,
+   "y": 1.658643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.676643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.688643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744749046-2023-07-19-09:09:04:749.46",
+   "x": 0.9061716405099345,
+   "y": 1.676643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.688643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.693643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744749129-2023-07-19-09:09:04:749.129",
+   "x": 0.9061716405099345,
+   "y": 1.688643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.693643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.697643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744765586-2023-07-19-09:09:04:765.586",
+   "x": 0.9061716405099345,
+   "y": 1.693643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.697643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.6986433923614719,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744799273-2023-07-19-09:09:04:799.273",
+   "x": 0.9061716405099345,
+   "y": 1.697643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.6986433923614719,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.6996433923614718,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744799363-2023-07-19-09:09:04:799.363",
+   "x": 0.9061716405099345,
+   "y": 1.6986433923614719
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.6996433923614718,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.6986433923614719,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744848967-2023-07-19-09:09:04:848.967",
+   "x": 0.9061716405099345,
+   "y": 1.6996433923614718
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.6986433923614719,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9061716405099345,
+     1.691643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744849077-2023-07-19-09:09:04:849.77",
+   "x": 0.9061716405099345,
+   "y": 1.6986433923614719
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9061716405099345,
+     1.691643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9081716405099345,
+     1.683643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744882905-2023-07-19-09:09:04:882.905",
+   "x": 0.9061716405099345,
+   "y": 1.691643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9081716405099345,
+     1.683643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9101716405099345,
+     1.666643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744882996-2023-07-19-09:09:04:882.996",
+   "x": 0.9081716405099345,
+   "y": 1.683643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9101716405099345,
+     1.666643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9121716405099345,
+     1.642643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744883049-2023-07-19-09:09:04:883.49",
+   "x": 0.9101716405099345,
+   "y": 1.666643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9121716405099345,
+     1.642643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9141716405099345,
+     1.618643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744883110-2023-07-19-09:09:04:883.110",
+   "x": 0.9121716405099345,
+   "y": 1.642643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9141716405099345,
+     1.618643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9141716405099345,
+     1.596643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744883171-2023-07-19-09:09:04:883.171",
+   "x": 0.9141716405099345,
+   "y": 1.618643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9141716405099345,
+     1.596643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9141716405099345,
+     1.577643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744899469-2023-07-19-09:09:04:899.469",
+   "x": 0.9141716405099345,
+   "y": 1.596643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9141716405099345,
+     1.577643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9101716405099345,
+     1.557643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744899552-2023-07-19-09:09:04:899.552",
+   "x": 0.9141716405099345,
+   "y": 1.577643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9101716405099345,
+     1.557643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9041716405099345,
+     1.543643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744915786-2023-07-19-09:09:04:915.786",
+   "x": 0.9101716405099345,
+   "y": 1.557643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9041716405099345,
+     1.543643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.9021716405099345,
+     1.531643392361472,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744915864-2023-07-19-09:09:04:915.864",
+   "x": 0.9041716405099345,
+   "y": 1.543643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.9021716405099345,
+     1.531643392361472,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8951716405099345,
+     1.5226433923614722,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744932375-2023-07-19-09:09:04:932.375",
+   "x": 0.9021716405099345,
+   "y": 1.531643392361472
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8951716405099345,
+     1.5226433923614722,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8911716405099345,
+     1.5116433923614723,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744932452-2023-07-19-09:09:04:932.452",
+   "x": 0.8951716405099345,
+   "y": 1.5226433923614722
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8911716405099345,
+     1.5116433923614723,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8871716405099345,
+     1.5026433923614724,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744948992-2023-07-19-09:09:04:948.992",
+   "x": 0.8911716405099345,
+   "y": 1.5116433923614723
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8871716405099345,
+     1.5026433923614724,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8861716405099345,
+     1.4976433923614725,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744949067-2023-07-19-09:09:04:949.67",
+   "x": 0.8871716405099345,
+   "y": 1.5026433923614724
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8861716405099345,
+     1.4976433923614725,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8831716405099345,
+     1.4936433923614725,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744965611-2023-07-19-09:09:04:965.611",
+   "x": 0.8861716405099345,
+   "y": 1.4976433923614725
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8831716405099345,
+     1.4936433923614725,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8831716405099345,
+     1.4926433923614726,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744965673-2023-07-19-09:09:04:965.673",
+   "x": 0.8831716405099345,
+   "y": 1.4936433923614725
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8831716405099345,
+     1.4926433923614726,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8821716405099345,
+     1.4906433923614726,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744982279-2023-07-19-09:09:04:982.279",
+   "x": 0.8831716405099345,
+   "y": 1.4926433923614726
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8821716405099345,
+     1.4906433923614726,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8811716405099345,
+     1.4886433923614726,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744982353-2023-07-19-09:09:04:982.353",
+   "x": 0.8821716405099345,
+   "y": 1.4906433923614726
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8811716405099345,
+     1.4886433923614726,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8801716405099345,
+     1.4856433923614727,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757744998929-2023-07-19-09:09:04:998.929",
+   "x": 0.8811716405099345,
+   "y": 1.4886433923614726
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8801716405099345,
+     1.4856433923614727,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8781716405099345,
+     1.4836433923614727,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757745015645-2023-07-19-09:09:05:15.645",
+   "x": 0.8801716405099345,
+   "y": 1.4856433923614727
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8781716405099345,
+     1.4836433923614727,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8771716405099345,
+     1.4826433923614728,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757745015719-2023-07-19-09:09:05:15.719",
+   "x": 0.8781716405099345,
+   "y": 1.4836433923614727
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8771716405099345,
+     1.4826433923614728,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8761716405099345,
+     1.481643392361473,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757745032289-2023-07-19-09:09:05:32.289",
+   "x": 0.8771716405099345,
+   "y": 1.4826433923614728
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8761716405099345,
+     1.481643392361473,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8751716405099345,
+     1.480643392361473,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757745032363-2023-07-19-09:09:05:32.363",
+   "x": 0.8761716405099345,
+   "y": 1.481643392361473
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8751716405099345,
+     1.480643392361473,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8741716405099345,
+     1.4796433923614731,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757745048986-2023-07-19-09:09:05:48.986",
+   "x": 0.8751716405099345,
+   "y": 1.480643392361473
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8741716405099345,
+     1.4796433923614731,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8721716405099345,
+     1.4776433923614731,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757745049060-2023-07-19-09:09:05:49.60",
+   "x": 0.8741716405099345,
+   "y": 1.4796433923614731
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8721716405099345,
+     1.4776433923614731,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8701716405099345,
+     1.4756433923614731,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757745065643-2023-07-19-09:09:05:65.643",
+   "x": 0.8721716405099345,
+   "y": 1.4776433923614731
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     0.8701716405099345,
+     1.4756433923614731,
+     0.1016913209740623
+    ],
+    "end": [
+     0.8681716405099345,
+     1.4756433923614731,
+     0.1016913209740623
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689757745065706-2023-07-19-09:09:05:65.706",
+   "x": 0.8701716405099345,
+   "y": 1.4756433923614731
+  }
+ ],
+ "participantID": "63",
+ "puzzle-file": "../../scenes-30a/1-7-1-push.g",
+ "rating": -1,
+ "run": 2,
+ "solved": false,
+ "start-time": "1689757743117545-2023-07-19-09:09:03:117.545",
+ "time-solved": -1,
+ "total-time": 1.940245861
+}

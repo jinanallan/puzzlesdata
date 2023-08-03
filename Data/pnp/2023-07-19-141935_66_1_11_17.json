@@ -1,0 +1,72 @@
+{
+ "attempt": 17,
+ "end-status": 3,
+ "end-time": "1689777120826753-2023-07-19-14:32:00:826.753",
+ "events": [
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     1.5,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689777120835628-2023-07-19-14:32:00:835.628",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.5,
+     0.1
+    ],
+    "end": [
+     1.0,
+     1.498,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689777120855119-2023-07-19-14:32:00:855.119",
+   "x": 1.0,
+   "y": 1.5
+  },
+  {
+   "code": 7,
+   "coordinates": {
+    "ego": [
+     1.0,
+     1.498,
+     0.1
+    ],
+    "end": [
+     0.998,
+     1.496,
+     0.1
+    ]
+   },
+   "description": "Moving started ",
+   "timestamp": "1689777120868605-2023-07-19-14:32:00:868.605",
+   "x": 1.0,
+   "y": 1.498
+  }
+ ],
+ "participantID": "66",
+ "puzzle-file": "../../scenes-30a/1-6-1-push.g",
+ "rating": -1,
+ "run": 1,
+ "solved": false,
+ "start-time": "1689777113236132-2023-07-19-14:31:53:236.132",
+ "time-solved": -1,
+ "total-time": 7.59063307
+}
