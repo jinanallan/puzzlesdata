@@ -1,3 +1,5 @@
+![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Data/Distribution.png?raw=True)
+
 # clustering similar solutions
 to run clustering for the desired puzzle:
 ```
