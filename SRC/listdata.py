@@ -30,26 +30,28 @@ def use_regex(input_text):
 frame_folder= "./Data/Frames/"
 pnp_folder= "./Data/pnp/"
 
-# list all files in the folders by using those functin above and visulaize them 
 frame_files = os.listdir(frame_folder)
 pnp_files = os.listdir(pnp_folder)
 
-df= pd.DataFrame(columns=["participant_id", "run", "puzzle_id", "attempt", "pnp", "frame"])
-#create a of all the files in the folder as pandas dataframe
-for file in frame_files:
-    if file.endswith(".json"):
-        # print(file)
-        particpants, run, puzzle_id, attempt = use_regex_frames(file)
-        #append is not dataframe attribute
-        new_row = {"participant_id": particpants, "run": run, "puzzle_id": puzzle_id, "attempt": attempt, "pnp": 0, "frame": file}
-        df.loc[len(df)] = new_row
+df= pd.DataFrame(columns=["participant_id", "run", "puzzle_id", "attempt", "file", "frame file"])
+
 for file in pnp_files:
     if file.endswith(".json"):
-        # print(file)
-        particpants, run, puzzle_id, attempt = use_regex(file)
-        # df = df.append({"participant_id": particpants, "run": run, "puzzle_id": puzzle_id, "attempt": attempt, "pnp": 1, "frame": file}, ignore_index=True)
-        new_row = {"participant_id": particpants, "run": run, "puzzle_id": puzzle_id, "attempt": attempt, "pnp": 1, "frame": file}
-        df.loc[len(df)] = new_row
-#save the dataframe as csv file
-df.to_csv("./Data/df.csv", index=False)
 
+        particpants, run, puzzle_id, attempt = use_regex(file)
+    
+        new_row = {"participant_id": particpants, "run": run, "puzzle_id": puzzle_id, "attempt": attempt, "file": file, "frame file": None}
+
+        df.loc[len(df)] = new_row
+
+for file in frame_files:
+    if file.endswith(".json"):
+
+        particpants, run, puzzle_id, attempt = use_regex_frames(file)
+
+        df.loc[(df["participant_id"] == particpants) & (df["run"] == run) &
+                (df["puzzle_id"] == puzzle_id) & (df["attempt"] == attempt), "frame file"] =file
+
+df = df.sort_values(by=["participant_id", "run", "puzzle_id", "attempt"])
+
+df.to_csv("./Data/df.csv", index=False)
