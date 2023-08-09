@@ -1,0 +1,3263 @@
+{
+    "attempt": 0,
+    "end-status": 2,
+    "end-time": "1661848808491-2022-08-30-08:40:08.491",
+    "events": [
+        {
+            "code": 1,
+            "description": "Left click",
+            "timestamp": "1661848801782-2022-08-30-08:40:01.782",
+            "x": 624.0,
+            "y": 579.0
+        },
+        {
+            "code": 3,
+            "description": "Attach obj",
+            "timestamp": "1661848801782-2022-08-30-08:40:01.782",
+            "x": 624.0,
+            "y": 579.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848801842-2022-08-30-08:40:01.842",
+            "x": 623.0,
+            "y": 580.0
+        },
+        {
+            "code": 4,
+            "description": "Release obj",
+            "timestamp": "1661848801902-2022-08-30-08:40:01.902",
+            "x": 623.0,
+            "y": 580.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802018-2022-08-30-08:40:02.18",
+            "x": 624.0,
+            "y": 582.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802018-2022-08-30-08:40:02.18",
+            "x": 629.0,
+            "y": 584.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802032-2022-08-30-08:40:02.32",
+            "x": 641.0,
+            "y": 591.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802032-2022-08-30-08:40:02.32",
+            "x": 658.0,
+            "y": 602.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802047-2022-08-30-08:40:02.47",
+            "x": 682.0,
+            "y": 614.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802048-2022-08-30-08:40:02.48",
+            "x": 698.0,
+            "y": 628.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802061-2022-08-30-08:40:02.61",
+            "x": 724.0,
+            "y": 642.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802062-2022-08-30-08:40:02.62",
+            "x": 752.0,
+            "y": 654.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802076-2022-08-30-08:40:02.76",
+            "x": 780.0,
+            "y": 668.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802092-2022-08-30-08:40:02.92",
+            "x": 812.0,
+            "y": 678.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802093-2022-08-30-08:40:02.93",
+            "x": 842.0,
+            "y": 688.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802109-2022-08-30-08:40:02.109",
+            "x": 872.0,
+            "y": 694.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802110-2022-08-30-08:40:02.110",
+            "x": 900.0,
+            "y": 702.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802110-2022-08-30-08:40:02.110",
+            "x": 926.0,
+            "y": 714.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802126-2022-08-30-08:40:02.126",
+            "x": 954.0,
+            "y": 726.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802126-2022-08-30-08:40:02.126",
+            "x": 980.0,
+            "y": 738.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802143-2022-08-30-08:40:02.143",
+            "x": 1006.0,
+            "y": 752.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802143-2022-08-30-08:40:02.143",
+            "x": 1026.0,
+            "y": 766.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802159-2022-08-30-08:40:02.159",
+            "x": 1044.0,
+            "y": 784.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802160-2022-08-30-08:40:02.160",
+            "x": 1060.0,
+            "y": 800.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802176-2022-08-30-08:40:02.176",
+            "x": 1069.0,
+            "y": 812.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802176-2022-08-30-08:40:02.176",
+            "x": 1073.0,
+            "y": 819.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802193-2022-08-30-08:40:02.193",
+            "x": 1074.0,
+            "y": 821.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802209-2022-08-30-08:40:02.209",
+            "x": 1075.0,
+            "y": 824.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802210-2022-08-30-08:40:02.210",
+            "x": 1077.0,
+            "y": 826.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802226-2022-08-30-08:40:02.226",
+            "x": 1078.0,
+            "y": 827.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802243-2022-08-30-08:40:02.243",
+            "x": 1078.0,
+            "y": 828.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802376-2022-08-30-08:40:02.376",
+            "x": 1076.0,
+            "y": 829.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802376-2022-08-30-08:40:02.376",
+            "x": 1061.0,
+            "y": 827.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802376-2022-08-30-08:40:02.376",
+            "x": 1033.0,
+            "y": 819.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802376-2022-08-30-08:40:02.376",
+            "x": 1003.0,
+            "y": 813.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802376-2022-08-30-08:40:02.376",
+            "x": 969.0,
+            "y": 803.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802376-2022-08-30-08:40:02.376",
+            "x": 929.0,
+            "y": 793.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802376-2022-08-30-08:40:02.376",
+            "x": 883.0,
+            "y": 783.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802376-2022-08-30-08:40:02.376",
+            "x": 853.0,
+            "y": 773.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802376-2022-08-30-08:40:02.376",
+            "x": 821.0,
+            "y": 763.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802376-2022-08-30-08:40:02.376",
+            "x": 795.0,
+            "y": 755.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802376-2022-08-30-08:40:02.376",
+            "x": 775.0,
+            "y": 745.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802377-2022-08-30-08:40:02.377",
+            "x": 760.0,
+            "y": 739.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802377-2022-08-30-08:40:02.377",
+            "x": 754.0,
+            "y": 736.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802393-2022-08-30-08:40:02.393",
+            "x": 748.0,
+            "y": 731.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802393-2022-08-30-08:40:02.393",
+            "x": 748.0,
+            "y": 727.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802409-2022-08-30-08:40:02.409",
+            "x": 751.0,
+            "y": 720.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802409-2022-08-30-08:40:02.409",
+            "x": 761.0,
+            "y": 708.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802426-2022-08-30-08:40:02.426",
+            "x": 773.0,
+            "y": 698.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802426-2022-08-30-08:40:02.426",
+            "x": 788.0,
+            "y": 690.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802443-2022-08-30-08:40:02.443",
+            "x": 807.0,
+            "y": 683.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802443-2022-08-30-08:40:02.443",
+            "x": 831.0,
+            "y": 677.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802459-2022-08-30-08:40:02.459",
+            "x": 850.0,
+            "y": 676.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802459-2022-08-30-08:40:02.459",
+            "x": 870.0,
+            "y": 674.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802476-2022-08-30-08:40:02.476",
+            "x": 886.0,
+            "y": 673.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802476-2022-08-30-08:40:02.476",
+            "x": 903.0,
+            "y": 669.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802493-2022-08-30-08:40:02.493",
+            "x": 914.0,
+            "y": 668.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802493-2022-08-30-08:40:02.493",
+            "x": 929.0,
+            "y": 666.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802509-2022-08-30-08:40:02.509",
+            "x": 941.0,
+            "y": 664.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802509-2022-08-30-08:40:02.509",
+            "x": 951.0,
+            "y": 660.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802510-2022-08-30-08:40:02.510",
+            "x": 959.0,
+            "y": 658.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802526-2022-08-30-08:40:02.526",
+            "x": 963.0,
+            "y": 656.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802526-2022-08-30-08:40:02.526",
+            "x": 966.0,
+            "y": 654.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802543-2022-08-30-08:40:02.543",
+            "x": 967.0,
+            "y": 653.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802543-2022-08-30-08:40:02.543",
+            "x": 968.0,
+            "y": 650.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802559-2022-08-30-08:40:02.559",
+            "x": 968.0,
+            "y": 648.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802559-2022-08-30-08:40:02.559",
+            "x": 965.0,
+            "y": 644.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802576-2022-08-30-08:40:02.576",
+            "x": 963.0,
+            "y": 643.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802576-2022-08-30-08:40:02.576",
+            "x": 962.0,
+            "y": 638.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802593-2022-08-30-08:40:02.593",
+            "x": 958.0,
+            "y": 632.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802593-2022-08-30-08:40:02.593",
+            "x": 955.0,
+            "y": 624.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802609-2022-08-30-08:40:02.609",
+            "x": 953.0,
+            "y": 616.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802609-2022-08-30-08:40:02.609",
+            "x": 950.0,
+            "y": 606.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802626-2022-08-30-08:40:02.626",
+            "x": 948.0,
+            "y": 594.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802626-2022-08-30-08:40:02.626",
+            "x": 948.0,
+            "y": 580.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802643-2022-08-30-08:40:02.643",
+            "x": 948.0,
+            "y": 563.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802643-2022-08-30-08:40:02.643",
+            "x": 948.0,
+            "y": 548.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802659-2022-08-30-08:40:02.659",
+            "x": 948.0,
+            "y": 537.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802659-2022-08-30-08:40:02.659",
+            "x": 948.0,
+            "y": 522.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802676-2022-08-30-08:40:02.676",
+            "x": 948.0,
+            "y": 513.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802676-2022-08-30-08:40:02.676",
+            "x": 948.0,
+            "y": 501.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802693-2022-08-30-08:40:02.693",
+            "x": 948.0,
+            "y": 490.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802693-2022-08-30-08:40:02.693",
+            "x": 948.0,
+            "y": 478.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802709-2022-08-30-08:40:02.709",
+            "x": 948.0,
+            "y": 467.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802709-2022-08-30-08:40:02.709",
+            "x": 951.0,
+            "y": 455.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802709-2022-08-30-08:40:02.709",
+            "x": 954.0,
+            "y": 445.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802726-2022-08-30-08:40:02.726",
+            "x": 962.0,
+            "y": 430.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802726-2022-08-30-08:40:02.726",
+            "x": 967.0,
+            "y": 422.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802743-2022-08-30-08:40:02.743",
+            "x": 975.0,
+            "y": 410.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802743-2022-08-30-08:40:02.743",
+            "x": 984.0,
+            "y": 397.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802759-2022-08-30-08:40:02.759",
+            "x": 992.0,
+            "y": 385.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802759-2022-08-30-08:40:02.759",
+            "x": 997.0,
+            "y": 378.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802776-2022-08-30-08:40:02.776",
+            "x": 1006.0,
+            "y": 369.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802776-2022-08-30-08:40:02.776",
+            "x": 1011.0,
+            "y": 360.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802793-2022-08-30-08:40:02.793",
+            "x": 1019.0,
+            "y": 349.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802793-2022-08-30-08:40:02.793",
+            "x": 1025.0,
+            "y": 339.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802809-2022-08-30-08:40:02.809",
+            "x": 1031.0,
+            "y": 326.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802809-2022-08-30-08:40:02.809",
+            "x": 1038.0,
+            "y": 314.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802826-2022-08-30-08:40:02.826",
+            "x": 1041.0,
+            "y": 303.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802826-2022-08-30-08:40:02.826",
+            "x": 1046.0,
+            "y": 290.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802843-2022-08-30-08:40:02.843",
+            "x": 1047.0,
+            "y": 279.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802843-2022-08-30-08:40:02.843",
+            "x": 1049.0,
+            "y": 268.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802859-2022-08-30-08:40:02.859",
+            "x": 1049.0,
+            "y": 256.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802860-2022-08-30-08:40:02.860",
+            "x": 1050.0,
+            "y": 247.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802876-2022-08-30-08:40:02.876",
+            "x": 1050.0,
+            "y": 233.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802876-2022-08-30-08:40:02.876",
+            "x": 1050.0,
+            "y": 224.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802893-2022-08-30-08:40:02.893",
+            "x": 1050.0,
+            "y": 218.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802893-2022-08-30-08:40:02.893",
+            "x": 1046.0,
+            "y": 211.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802909-2022-08-30-08:40:02.909",
+            "x": 1041.0,
+            "y": 201.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802910-2022-08-30-08:40:02.910",
+            "x": 1036.0,
+            "y": 192.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802910-2022-08-30-08:40:02.910",
+            "x": 1028.0,
+            "y": 181.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802926-2022-08-30-08:40:02.926",
+            "x": 1016.0,
+            "y": 167.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802926-2022-08-30-08:40:02.926",
+            "x": 995.0,
+            "y": 149.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802943-2022-08-30-08:40:02.943",
+            "x": 979.0,
+            "y": 131.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802943-2022-08-30-08:40:02.943",
+            "x": 959.0,
+            "y": 117.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802959-2022-08-30-08:40:02.959",
+            "x": 943.0,
+            "y": 108.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802960-2022-08-30-08:40:02.960",
+            "x": 925.0,
+            "y": 94.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802976-2022-08-30-08:40:02.976",
+            "x": 911.0,
+            "y": 85.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802976-2022-08-30-08:40:02.976",
+            "x": 902.0,
+            "y": 82.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802993-2022-08-30-08:40:02.993",
+            "x": 891.0,
+            "y": 76.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848802993-2022-08-30-08:40:02.993",
+            "x": 879.0,
+            "y": 73.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803009-2022-08-30-08:40:03.9",
+            "x": 869.0,
+            "y": 69.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803009-2022-08-30-08:40:03.9",
+            "x": 856.0,
+            "y": 62.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803026-2022-08-30-08:40:03.26",
+            "x": 844.0,
+            "y": 59.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803026-2022-08-30-08:40:03.26",
+            "x": 830.0,
+            "y": 52.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803043-2022-08-30-08:40:03.43",
+            "x": 815.0,
+            "y": 47.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803043-2022-08-30-08:40:03.43",
+            "x": 804.0,
+            "y": 42.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803059-2022-08-30-08:40:03.59",
+            "x": 796.0,
+            "y": 38.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803060-2022-08-30-08:40:03.60",
+            "x": 788.0,
+            "y": 35.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803076-2022-08-30-08:40:03.76",
+            "x": 782.0,
+            "y": 34.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803076-2022-08-30-08:40:03.76",
+            "x": 780.0,
+            "y": 34.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803093-2022-08-30-08:40:03.93",
+            "x": 772.0,
+            "y": 31.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803093-2022-08-30-08:40:03.93",
+            "x": 765.0,
+            "y": 28.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803109-2022-08-30-08:40:03.109",
+            "x": 759.0,
+            "y": 26.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803110-2022-08-30-08:40:03.110",
+            "x": 752.0,
+            "y": 24.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803110-2022-08-30-08:40:03.110",
+            "x": 749.0,
+            "y": 23.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803126-2022-08-30-08:40:03.126",
+            "x": 744.0,
+            "y": 20.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803126-2022-08-30-08:40:03.126",
+            "x": 742.0,
+            "y": 19.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803143-2022-08-30-08:40:03.143",
+            "x": 740.0,
+            "y": 18.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803143-2022-08-30-08:40:03.143",
+            "x": 737.0,
+            "y": 17.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803159-2022-08-30-08:40:03.159",
+            "x": 735.0,
+            "y": 15.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803160-2022-08-30-08:40:03.160",
+            "x": 732.0,
+            "y": 14.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803176-2022-08-30-08:40:03.176",
+            "x": 731.0,
+            "y": 14.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803176-2022-08-30-08:40:03.176",
+            "x": 730.0,
+            "y": 13.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803193-2022-08-30-08:40:03.193",
+            "x": 728.0,
+            "y": 13.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803193-2022-08-30-08:40:03.193",
+            "x": 725.0,
+            "y": 12.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803209-2022-08-30-08:40:03.209",
+            "x": 723.0,
+            "y": 11.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803209-2022-08-30-08:40:03.209",
+            "x": 722.0,
+            "y": 11.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803226-2022-08-30-08:40:03.226",
+            "x": 719.0,
+            "y": 10.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803226-2022-08-30-08:40:03.226",
+            "x": 717.0,
+            "y": 9.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803243-2022-08-30-08:40:03.243",
+            "x": 714.0,
+            "y": 8.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803243-2022-08-30-08:40:03.243",
+            "x": 711.0,
+            "y": 7.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803259-2022-08-30-08:40:03.259",
+            "x": 707.0,
+            "y": 5.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803260-2022-08-30-08:40:03.260",
+            "x": 706.0,
+            "y": 5.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803276-2022-08-30-08:40:03.276",
+            "x": 705.0,
+            "y": 4.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803276-2022-08-30-08:40:03.276",
+            "x": 703.0,
+            "y": 4.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803293-2022-08-30-08:40:03.293",
+            "x": 702.0,
+            "y": 4.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803309-2022-08-30-08:40:03.309",
+            "x": 700.0,
+            "y": 3.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803310-2022-08-30-08:40:03.310",
+            "x": 698.0,
+            "y": 3.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803310-2022-08-30-08:40:03.310",
+            "x": 697.0,
+            "y": 3.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803326-2022-08-30-08:40:03.326",
+            "x": 696.0,
+            "y": 3.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803326-2022-08-30-08:40:03.326",
+            "x": 695.0,
+            "y": 3.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803343-2022-08-30-08:40:03.343",
+            "x": 692.0,
+            "y": 3.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803343-2022-08-30-08:40:03.343",
+            "x": 686.0,
+            "y": 3.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803359-2022-08-30-08:40:03.359",
+            "x": 678.0,
+            "y": 3.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803360-2022-08-30-08:40:03.360",
+            "x": 671.0,
+            "y": 3.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803376-2022-08-30-08:40:03.376",
+            "x": 667.0,
+            "y": 0.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803376-2022-08-30-08:40:03.376",
+            "x": 664.0,
+            "y": -1.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803393-2022-08-30-08:40:03.393",
+            "x": 658.0,
+            "y": -1.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803393-2022-08-30-08:40:03.393",
+            "x": 653.0,
+            "y": -2.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803409-2022-08-30-08:40:03.409",
+            "x": 651.0,
+            "y": -2.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803409-2022-08-30-08:40:03.409",
+            "x": 648.0,
+            "y": -2.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803426-2022-08-30-08:40:03.426",
+            "x": 647.0,
+            "y": -2.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803426-2022-08-30-08:40:03.426",
+            "x": 646.0,
+            "y": -2.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803443-2022-08-30-08:40:03.443",
+            "x": 642.0,
+            "y": -4.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803443-2022-08-30-08:40:03.443",
+            "x": 641.0,
+            "y": -4.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803459-2022-08-30-08:40:03.459",
+            "x": 638.0,
+            "y": -4.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803460-2022-08-30-08:40:03.460",
+            "x": 636.0,
+            "y": -4.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803476-2022-08-30-08:40:03.476",
+            "x": 631.0,
+            "y": -5.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803476-2022-08-30-08:40:03.476",
+            "x": 630.0,
+            "y": -5.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803493-2022-08-30-08:40:03.493",
+            "x": 627.0,
+            "y": -5.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803510-2022-08-30-08:40:03.510",
+            "x": 625.0,
+            "y": -6.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803510-2022-08-30-08:40:03.510",
+            "x": 624.0,
+            "y": -6.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803826-2022-08-30-08:40:03.826",
+            "x": 622.0,
+            "y": -6.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803826-2022-08-30-08:40:03.826",
+            "x": 620.0,
+            "y": -6.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803826-2022-08-30-08:40:03.826",
+            "x": 619.0,
+            "y": -6.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803826-2022-08-30-08:40:03.826",
+            "x": 615.0,
+            "y": -6.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803827-2022-08-30-08:40:03.827",
+            "x": 612.0,
+            "y": -6.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803827-2022-08-30-08:40:03.827",
+            "x": 611.0,
+            "y": -6.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803827-2022-08-30-08:40:03.827",
+            "x": 610.0,
+            "y": -6.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803827-2022-08-30-08:40:03.827",
+            "x": 609.0,
+            "y": -6.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803827-2022-08-30-08:40:03.827",
+            "x": 607.0,
+            "y": -6.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848803827-2022-08-30-08:40:03.827",
+            "x": 606.0,
+            "y": -6.0
+        },
+        {
+            "code": 1,
+            "description": "Left click",
+            "timestamp": "1661848803926-2022-08-30-08:40:03.926",
+            "x": 606.0,
+            "y": -6.0
+        },
+        {
+            "code": 3,
+            "description": "Attach obj",
+            "timestamp": "1661848803926-2022-08-30-08:40:03.926",
+            "x": 606.0,
+            "y": -6.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804143-2022-08-30-08:40:04.143",
+            "x": 606.0,
+            "y": -5.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804143-2022-08-30-08:40:04.143",
+            "x": 606.0,
+            "y": -4.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804143-2022-08-30-08:40:04.143",
+            "x": 608.0,
+            "y": 0.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804143-2022-08-30-08:40:04.143",
+            "x": 613.0,
+            "y": 7.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804143-2022-08-30-08:40:04.143",
+            "x": 619.0,
+            "y": 14.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804143-2022-08-30-08:40:04.143",
+            "x": 627.0,
+            "y": 25.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804143-2022-08-30-08:40:04.143",
+            "x": 635.0,
+            "y": 35.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804143-2022-08-30-08:40:04.143",
+            "x": 643.0,
+            "y": 47.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804143-2022-08-30-08:40:04.143",
+            "x": 646.0,
+            "y": 53.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804143-2022-08-30-08:40:04.143",
+            "x": 652.0,
+            "y": 65.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804143-2022-08-30-08:40:04.143",
+            "x": 659.0,
+            "y": 79.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804144-2022-08-30-08:40:04.144",
+            "x": 667.0,
+            "y": 93.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804144-2022-08-30-08:40:04.144",
+            "x": 672.0,
+            "y": 105.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804144-2022-08-30-08:40:04.144",
+            "x": 678.0,
+            "y": 115.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804144-2022-08-30-08:40:04.144",
+            "x": 684.0,
+            "y": 124.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804144-2022-08-30-08:40:04.144",
+            "x": 690.0,
+            "y": 133.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804144-2022-08-30-08:40:04.144",
+            "x": 696.0,
+            "y": 139.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804144-2022-08-30-08:40:04.144",
+            "x": 705.0,
+            "y": 148.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804144-2022-08-30-08:40:04.144",
+            "x": 715.0,
+            "y": 157.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804144-2022-08-30-08:40:04.144",
+            "x": 723.0,
+            "y": 165.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804160-2022-08-30-08:40:04.160",
+            "x": 732.0,
+            "y": 173.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804160-2022-08-30-08:40:04.160",
+            "x": 742.0,
+            "y": 182.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804176-2022-08-30-08:40:04.176",
+            "x": 756.0,
+            "y": 193.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804176-2022-08-30-08:40:04.176",
+            "x": 771.0,
+            "y": 205.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804193-2022-08-30-08:40:04.193",
+            "x": 788.0,
+            "y": 219.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804193-2022-08-30-08:40:04.193",
+            "x": 802.0,
+            "y": 229.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804209-2022-08-30-08:40:04.209",
+            "x": 814.0,
+            "y": 238.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804210-2022-08-30-08:40:04.210",
+            "x": 828.0,
+            "y": 247.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804226-2022-08-30-08:40:04.226",
+            "x": 843.0,
+            "y": 259.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804226-2022-08-30-08:40:04.226",
+            "x": 862.0,
+            "y": 267.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804243-2022-08-30-08:40:04.243",
+            "x": 882.0,
+            "y": 277.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804243-2022-08-30-08:40:04.243",
+            "x": 902.0,
+            "y": 285.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804259-2022-08-30-08:40:04.259",
+            "x": 921.0,
+            "y": 291.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804260-2022-08-30-08:40:04.260",
+            "x": 941.0,
+            "y": 299.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804276-2022-08-30-08:40:04.276",
+            "x": 953.0,
+            "y": 305.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804276-2022-08-30-08:40:04.276",
+            "x": 967.0,
+            "y": 310.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804293-2022-08-30-08:40:04.293",
+            "x": 983.0,
+            "y": 316.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804293-2022-08-30-08:40:04.293",
+            "x": 999.0,
+            "y": 320.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804310-2022-08-30-08:40:04.310",
+            "x": 1014.0,
+            "y": 325.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804310-2022-08-30-08:40:04.310",
+            "x": 1025.0,
+            "y": 327.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804310-2022-08-30-08:40:04.310",
+            "x": 1036.0,
+            "y": 332.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804326-2022-08-30-08:40:04.326",
+            "x": 1045.0,
+            "y": 334.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804326-2022-08-30-08:40:04.326",
+            "x": 1055.0,
+            "y": 335.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804343-2022-08-30-08:40:04.343",
+            "x": 1064.0,
+            "y": 340.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804343-2022-08-30-08:40:04.343",
+            "x": 1069.0,
+            "y": 341.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804359-2022-08-30-08:40:04.359",
+            "x": 1072.0,
+            "y": 343.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804360-2022-08-30-08:40:04.360",
+            "x": 1073.0,
+            "y": 343.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804376-2022-08-30-08:40:04.376",
+            "x": 1074.0,
+            "y": 343.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804393-2022-08-30-08:40:04.393",
+            "x": 1075.0,
+            "y": 344.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804409-2022-08-30-08:40:04.409",
+            "x": 1077.0,
+            "y": 344.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804426-2022-08-30-08:40:04.426",
+            "x": 1079.0,
+            "y": 346.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804443-2022-08-30-08:40:04.443",
+            "x": 1081.0,
+            "y": 347.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804443-2022-08-30-08:40:04.443",
+            "x": 1083.0,
+            "y": 348.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804459-2022-08-30-08:40:04.459",
+            "x": 1084.0,
+            "y": 348.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804460-2022-08-30-08:40:04.460",
+            "x": 1085.0,
+            "y": 349.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804476-2022-08-30-08:40:04.476",
+            "x": 1087.0,
+            "y": 349.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804493-2022-08-30-08:40:04.493",
+            "x": 1088.0,
+            "y": 350.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804693-2022-08-30-08:40:04.693",
+            "x": 1088.0,
+            "y": 351.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804693-2022-08-30-08:40:04.693",
+            "x": 1088.0,
+            "y": 352.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804693-2022-08-30-08:40:04.693",
+            "x": 1088.0,
+            "y": 353.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804726-2022-08-30-08:40:04.726",
+            "x": 1088.0,
+            "y": 354.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804752-2022-08-30-08:40:04.752",
+            "x": 1088.0,
+            "y": 355.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804818-2022-08-30-08:40:04.818",
+            "x": 1088.0,
+            "y": 356.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804832-2022-08-30-08:40:04.832",
+            "x": 1088.0,
+            "y": 358.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804833-2022-08-30-08:40:04.833",
+            "x": 1089.0,
+            "y": 360.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804848-2022-08-30-08:40:04.848",
+            "x": 1090.0,
+            "y": 362.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804848-2022-08-30-08:40:04.848",
+            "x": 1090.0,
+            "y": 363.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804861-2022-08-30-08:40:04.861",
+            "x": 1092.0,
+            "y": 367.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804876-2022-08-30-08:40:04.876",
+            "x": 1092.0,
+            "y": 368.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804876-2022-08-30-08:40:04.876",
+            "x": 1092.0,
+            "y": 370.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804893-2022-08-30-08:40:04.893",
+            "x": 1093.0,
+            "y": 372.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804893-2022-08-30-08:40:04.893",
+            "x": 1094.0,
+            "y": 377.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804909-2022-08-30-08:40:04.909",
+            "x": 1094.0,
+            "y": 378.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804910-2022-08-30-08:40:04.910",
+            "x": 1095.0,
+            "y": 380.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804910-2022-08-30-08:40:04.910",
+            "x": 1097.0,
+            "y": 385.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804926-2022-08-30-08:40:04.926",
+            "x": 1098.0,
+            "y": 387.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848804993-2022-08-30-08:40:04.993",
+            "x": 1098.0,
+            "y": 388.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805232-2022-08-30-08:40:05.232",
+            "x": 1098.0,
+            "y": 389.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805242-2022-08-30-08:40:05.242",
+            "x": 1098.0,
+            "y": 390.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805264-2022-08-30-08:40:05.264",
+            "x": 1098.0,
+            "y": 391.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805264-2022-08-30-08:40:05.264",
+            "x": 1100.0,
+            "y": 395.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805265-2022-08-30-08:40:05.265",
+            "x": 1102.0,
+            "y": 398.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805277-2022-08-30-08:40:05.277",
+            "x": 1103.0,
+            "y": 400.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805277-2022-08-30-08:40:05.277",
+            "x": 1105.0,
+            "y": 403.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805294-2022-08-30-08:40:05.294",
+            "x": 1106.0,
+            "y": 405.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805295-2022-08-30-08:40:05.295",
+            "x": 1108.0,
+            "y": 409.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805310-2022-08-30-08:40:05.310",
+            "x": 1110.0,
+            "y": 413.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805310-2022-08-30-08:40:05.310",
+            "x": 1112.0,
+            "y": 416.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805326-2022-08-30-08:40:05.326",
+            "x": 1112.0,
+            "y": 419.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805326-2022-08-30-08:40:05.326",
+            "x": 1114.0,
+            "y": 421.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805343-2022-08-30-08:40:05.343",
+            "x": 1116.0,
+            "y": 423.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805343-2022-08-30-08:40:05.343",
+            "x": 1117.0,
+            "y": 425.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805359-2022-08-30-08:40:05.359",
+            "x": 1118.0,
+            "y": 427.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805376-2022-08-30-08:40:05.376",
+            "x": 1120.0,
+            "y": 429.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805376-2022-08-30-08:40:05.376",
+            "x": 1121.0,
+            "y": 430.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805393-2022-08-30-08:40:05.393",
+            "x": 1121.0,
+            "y": 431.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805393-2022-08-30-08:40:05.393",
+            "x": 1122.0,
+            "y": 432.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805409-2022-08-30-08:40:05.409",
+            "x": 1122.0,
+            "y": 434.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805426-2022-08-30-08:40:05.426",
+            "x": 1122.0,
+            "y": 435.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805443-2022-08-30-08:40:05.443",
+            "x": 1122.0,
+            "y": 436.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805459-2022-08-30-08:40:05.459",
+            "x": 1122.0,
+            "y": 437.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805460-2022-08-30-08:40:05.460",
+            "x": 1122.0,
+            "y": 438.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805476-2022-08-30-08:40:05.476",
+            "x": 1123.0,
+            "y": 440.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805476-2022-08-30-08:40:05.476",
+            "x": 1123.0,
+            "y": 441.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805493-2022-08-30-08:40:05.493",
+            "x": 1123.0,
+            "y": 442.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805493-2022-08-30-08:40:05.493",
+            "x": 1125.0,
+            "y": 446.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805510-2022-08-30-08:40:05.510",
+            "x": 1126.0,
+            "y": 447.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805510-2022-08-30-08:40:05.510",
+            "x": 1126.0,
+            "y": 448.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805510-2022-08-30-08:40:05.510",
+            "x": 1126.0,
+            "y": 450.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805526-2022-08-30-08:40:05.526",
+            "x": 1127.0,
+            "y": 452.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805527-2022-08-30-08:40:05.527",
+            "x": 1127.0,
+            "y": 453.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805543-2022-08-30-08:40:05.543",
+            "x": 1127.0,
+            "y": 455.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805543-2022-08-30-08:40:05.543",
+            "x": 1127.0,
+            "y": 457.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805559-2022-08-30-08:40:05.559",
+            "x": 1128.0,
+            "y": 458.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805576-2022-08-30-08:40:05.576",
+            "x": 1129.0,
+            "y": 459.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805576-2022-08-30-08:40:05.576",
+            "x": 1130.0,
+            "y": 461.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805593-2022-08-30-08:40:05.593",
+            "x": 1131.0,
+            "y": 462.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805609-2022-08-30-08:40:05.609",
+            "x": 1132.0,
+            "y": 463.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805626-2022-08-30-08:40:05.626",
+            "x": 1134.0,
+            "y": 464.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805643-2022-08-30-08:40:05.643",
+            "x": 1135.0,
+            "y": 465.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805643-2022-08-30-08:40:05.643",
+            "x": 1136.0,
+            "y": 466.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805659-2022-08-30-08:40:05.659",
+            "x": 1136.0,
+            "y": 467.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805660-2022-08-30-08:40:05.660",
+            "x": 1137.0,
+            "y": 470.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805676-2022-08-30-08:40:05.676",
+            "x": 1138.0,
+            "y": 471.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805676-2022-08-30-08:40:05.676",
+            "x": 1141.0,
+            "y": 475.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805693-2022-08-30-08:40:05.693",
+            "x": 1141.0,
+            "y": 477.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805693-2022-08-30-08:40:05.693",
+            "x": 1143.0,
+            "y": 480.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805710-2022-08-30-08:40:05.710",
+            "x": 1145.0,
+            "y": 484.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805710-2022-08-30-08:40:05.710",
+            "x": 1146.0,
+            "y": 486.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805726-2022-08-30-08:40:05.726",
+            "x": 1147.0,
+            "y": 488.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848805743-2022-08-30-08:40:05.743",
+            "x": 1147.0,
+            "y": 489.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806042-2022-08-30-08:40:06.42",
+            "x": 1147.0,
+            "y": 490.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806052-2022-08-30-08:40:06.52",
+            "x": 1147.0,
+            "y": 491.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806077-2022-08-30-08:40:06.77",
+            "x": 1147.0,
+            "y": 493.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806077-2022-08-30-08:40:06.77",
+            "x": 1147.0,
+            "y": 494.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806093-2022-08-30-08:40:06.93",
+            "x": 1147.0,
+            "y": 496.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806110-2022-08-30-08:40:06.110",
+            "x": 1149.0,
+            "y": 498.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806110-2022-08-30-08:40:06.110",
+            "x": 1150.0,
+            "y": 500.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806126-2022-08-30-08:40:06.126",
+            "x": 1151.0,
+            "y": 503.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806127-2022-08-30-08:40:06.127",
+            "x": 1152.0,
+            "y": 505.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806143-2022-08-30-08:40:06.143",
+            "x": 1153.0,
+            "y": 507.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806143-2022-08-30-08:40:06.143",
+            "x": 1154.0,
+            "y": 508.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806160-2022-08-30-08:40:06.160",
+            "x": 1154.0,
+            "y": 509.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806268-2022-08-30-08:40:06.268",
+            "x": 1154.0,
+            "y": 510.0
+        },
+        {
+            "code": 4,
+            "description": "Release obj",
+            "timestamp": "1661848806582-2022-08-30-08:40:06.582",
+            "x": 1154.0,
+            "y": 510.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806622-2022-08-30-08:40:06.622",
+            "x": 1154.0,
+            "y": 508.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806668-2022-08-30-08:40:06.668",
+            "x": 1154.0,
+            "y": 507.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806692-2022-08-30-08:40:06.692",
+            "x": 1155.0,
+            "y": 506.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806742-2022-08-30-08:40:06.742",
+            "x": 1156.0,
+            "y": 506.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806768-2022-08-30-08:40:06.768",
+            "x": 1158.0,
+            "y": 504.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806769-2022-08-30-08:40:06.769",
+            "x": 1160.0,
+            "y": 503.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806782-2022-08-30-08:40:06.782",
+            "x": 1164.0,
+            "y": 501.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806783-2022-08-30-08:40:06.783",
+            "x": 1168.0,
+            "y": 499.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806796-2022-08-30-08:40:06.796",
+            "x": 1172.0,
+            "y": 497.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806810-2022-08-30-08:40:06.810",
+            "x": 1180.0,
+            "y": 493.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806811-2022-08-30-08:40:06.811",
+            "x": 1186.0,
+            "y": 491.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806826-2022-08-30-08:40:06.826",
+            "x": 1196.0,
+            "y": 487.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806826-2022-08-30-08:40:06.826",
+            "x": 1209.0,
+            "y": 482.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806843-2022-08-30-08:40:06.843",
+            "x": 1223.0,
+            "y": 475.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806843-2022-08-30-08:40:06.843",
+            "x": 1233.0,
+            "y": 469.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806860-2022-08-30-08:40:06.860",
+            "x": 1242.0,
+            "y": 463.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806860-2022-08-30-08:40:06.860",
+            "x": 1251.0,
+            "y": 459.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806876-2022-08-30-08:40:06.876",
+            "x": 1269.0,
+            "y": 445.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806876-2022-08-30-08:40:06.876",
+            "x": 1291.0,
+            "y": 427.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806893-2022-08-30-08:40:06.893",
+            "x": 1311.0,
+            "y": 409.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806893-2022-08-30-08:40:06.893",
+            "x": 1335.0,
+            "y": 385.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806910-2022-08-30-08:40:06.910",
+            "x": 1349.0,
+            "y": 365.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806910-2022-08-30-08:40:06.910",
+            "x": 1361.0,
+            "y": 347.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806910-2022-08-30-08:40:06.910",
+            "x": 1375.0,
+            "y": 329.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806926-2022-08-30-08:40:06.926",
+            "x": 1382.0,
+            "y": 319.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806927-2022-08-30-08:40:06.927",
+            "x": 1388.0,
+            "y": 311.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806943-2022-08-30-08:40:06.943",
+            "x": 1393.0,
+            "y": 303.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806943-2022-08-30-08:40:06.943",
+            "x": 1396.0,
+            "y": 299.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806960-2022-08-30-08:40:06.960",
+            "x": 1399.0,
+            "y": 296.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806960-2022-08-30-08:40:06.960",
+            "x": 1401.0,
+            "y": 294.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806976-2022-08-30-08:40:06.976",
+            "x": 1401.0,
+            "y": 293.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806976-2022-08-30-08:40:06.976",
+            "x": 1402.0,
+            "y": 292.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848806993-2022-08-30-08:40:06.993",
+            "x": 1402.0,
+            "y": 291.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807126-2022-08-30-08:40:07.126",
+            "x": 1401.0,
+            "y": 289.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807126-2022-08-30-08:40:07.126",
+            "x": 1399.0,
+            "y": 287.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807126-2022-08-30-08:40:07.126",
+            "x": 1396.0,
+            "y": 284.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807143-2022-08-30-08:40:07.143",
+            "x": 1389.0,
+            "y": 278.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807143-2022-08-30-08:40:07.143",
+            "x": 1379.0,
+            "y": 268.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807159-2022-08-30-08:40:07.159",
+            "x": 1364.0,
+            "y": 255.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807160-2022-08-30-08:40:07.160",
+            "x": 1340.0,
+            "y": 239.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807176-2022-08-30-08:40:07.176",
+            "x": 1314.0,
+            "y": 223.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807176-2022-08-30-08:40:07.176",
+            "x": 1284.0,
+            "y": 205.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807193-2022-08-30-08:40:07.193",
+            "x": 1246.0,
+            "y": 185.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807193-2022-08-30-08:40:07.193",
+            "x": 1208.0,
+            "y": 165.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807210-2022-08-30-08:40:07.210",
+            "x": 1164.0,
+            "y": 145.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807210-2022-08-30-08:40:07.210",
+            "x": 1118.0,
+            "y": 129.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807226-2022-08-30-08:40:07.226",
+            "x": 1076.0,
+            "y": 117.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807226-2022-08-30-08:40:07.226",
+            "x": 1028.0,
+            "y": 109.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807243-2022-08-30-08:40:07.243",
+            "x": 982.0,
+            "y": 105.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807243-2022-08-30-08:40:07.243",
+            "x": 936.0,
+            "y": 101.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807260-2022-08-30-08:40:07.260",
+            "x": 896.0,
+            "y": 115.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807260-2022-08-30-08:40:07.260",
+            "x": 856.0,
+            "y": 135.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807276-2022-08-30-08:40:07.276",
+            "x": 820.0,
+            "y": 157.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807276-2022-08-30-08:40:07.276",
+            "x": 782.0,
+            "y": 181.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807293-2022-08-30-08:40:07.293",
+            "x": 744.0,
+            "y": 207.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807293-2022-08-30-08:40:07.293",
+            "x": 704.0,
+            "y": 235.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807310-2022-08-30-08:40:07.310",
+            "x": 666.0,
+            "y": 255.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807310-2022-08-30-08:40:07.310",
+            "x": 632.0,
+            "y": 273.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807310-2022-08-30-08:40:07.310",
+            "x": 596.0,
+            "y": 285.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807326-2022-08-30-08:40:07.326",
+            "x": 554.0,
+            "y": 293.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807327-2022-08-30-08:40:07.327",
+            "x": 514.0,
+            "y": 303.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807343-2022-08-30-08:40:07.343",
+            "x": 484.0,
+            "y": 311.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807343-2022-08-30-08:40:07.343",
+            "x": 442.0,
+            "y": 323.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807360-2022-08-30-08:40:07.360",
+            "x": 414.0,
+            "y": 331.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807360-2022-08-30-08:40:07.360",
+            "x": 394.0,
+            "y": 335.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807376-2022-08-30-08:40:07.376",
+            "x": 377.0,
+            "y": 335.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807376-2022-08-30-08:40:07.376",
+            "x": 369.0,
+            "y": 337.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807393-2022-08-30-08:40:07.393",
+            "x": 365.0,
+            "y": 337.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807393-2022-08-30-08:40:07.393",
+            "x": 364.0,
+            "y": 337.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807410-2022-08-30-08:40:07.410",
+            "x": 362.0,
+            "y": 339.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807426-2022-08-30-08:40:07.426",
+            "x": 362.0,
+            "y": 344.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807426-2022-08-30-08:40:07.426",
+            "x": 360.0,
+            "y": 347.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807443-2022-08-30-08:40:07.443",
+            "x": 360.0,
+            "y": 352.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807443-2022-08-30-08:40:07.443",
+            "x": 360.0,
+            "y": 355.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807460-2022-08-30-08:40:07.460",
+            "x": 360.0,
+            "y": 361.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807460-2022-08-30-08:40:07.460",
+            "x": 360.0,
+            "y": 363.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807476-2022-08-30-08:40:07.476",
+            "x": 360.0,
+            "y": 366.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807476-2022-08-30-08:40:07.476",
+            "x": 360.0,
+            "y": 368.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807493-2022-08-30-08:40:07.493",
+            "x": 361.0,
+            "y": 370.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807493-2022-08-30-08:40:07.493",
+            "x": 363.0,
+            "y": 374.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807510-2022-08-30-08:40:07.510",
+            "x": 364.0,
+            "y": 375.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807510-2022-08-30-08:40:07.510",
+            "x": 365.0,
+            "y": 376.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807727-2022-08-30-08:40:07.727",
+            "x": 366.0,
+            "y": 376.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807727-2022-08-30-08:40:07.727",
+            "x": 367.0,
+            "y": 376.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807727-2022-08-30-08:40:07.727",
+            "x": 369.0,
+            "y": 374.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807727-2022-08-30-08:40:07.727",
+            "x": 372.0,
+            "y": 371.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807727-2022-08-30-08:40:07.727",
+            "x": 374.0,
+            "y": 368.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807727-2022-08-30-08:40:07.727",
+            "x": 378.0,
+            "y": 363.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807727-2022-08-30-08:40:07.727",
+            "x": 382.0,
+            "y": 357.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807727-2022-08-30-08:40:07.727",
+            "x": 386.0,
+            "y": 352.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807727-2022-08-30-08:40:07.727",
+            "x": 389.0,
+            "y": 347.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807727-2022-08-30-08:40:07.727",
+            "x": 393.0,
+            "y": 343.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807727-2022-08-30-08:40:07.727",
+            "x": 400.0,
+            "y": 336.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807743-2022-08-30-08:40:07.743",
+            "x": 405.0,
+            "y": 331.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807743-2022-08-30-08:40:07.743",
+            "x": 411.0,
+            "y": 325.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807760-2022-08-30-08:40:07.760",
+            "x": 421.0,
+            "y": 318.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807760-2022-08-30-08:40:07.760",
+            "x": 427.0,
+            "y": 313.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807776-2022-08-30-08:40:07.776",
+            "x": 433.0,
+            "y": 308.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807776-2022-08-30-08:40:07.776",
+            "x": 438.0,
+            "y": 306.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807793-2022-08-30-08:40:07.793",
+            "x": 440.0,
+            "y": 305.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807793-2022-08-30-08:40:07.793",
+            "x": 444.0,
+            "y": 302.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807810-2022-08-30-08:40:07.810",
+            "x": 446.0,
+            "y": 301.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807810-2022-08-30-08:40:07.810",
+            "x": 448.0,
+            "y": 300.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807826-2022-08-30-08:40:07.826",
+            "x": 449.0,
+            "y": 299.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848807826-2022-08-30-08:40:07.826",
+            "x": 450.0,
+            "y": 298.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808032-2022-08-30-08:40:08.32",
+            "x": 451.0,
+            "y": 297.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808052-2022-08-30-08:40:08.52",
+            "x": 452.0,
+            "y": 297.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808064-2022-08-30-08:40:08.64",
+            "x": 453.0,
+            "y": 299.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808080-2022-08-30-08:40:08.80",
+            "x": 454.0,
+            "y": 300.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808081-2022-08-30-08:40:08.81",
+            "x": 458.0,
+            "y": 303.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808094-2022-08-30-08:40:08.94",
+            "x": 460.0,
+            "y": 306.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808094-2022-08-30-08:40:08.94",
+            "x": 463.0,
+            "y": 308.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808110-2022-08-30-08:40:08.110",
+            "x": 465.0,
+            "y": 311.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808110-2022-08-30-08:40:08.110",
+            "x": 468.0,
+            "y": 314.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808127-2022-08-30-08:40:08.127",
+            "x": 469.0,
+            "y": 316.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808127-2022-08-30-08:40:08.127",
+            "x": 472.0,
+            "y": 319.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808143-2022-08-30-08:40:08.143",
+            "x": 473.0,
+            "y": 322.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808143-2022-08-30-08:40:08.143",
+            "x": 474.0,
+            "y": 323.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808160-2022-08-30-08:40:08.160",
+            "x": 476.0,
+            "y": 328.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808160-2022-08-30-08:40:08.160",
+            "x": 477.0,
+            "y": 329.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808176-2022-08-30-08:40:08.176",
+            "x": 478.0,
+            "y": 330.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808176-2022-08-30-08:40:08.176",
+            "x": 479.0,
+            "y": 331.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808193-2022-08-30-08:40:08.193",
+            "x": 480.0,
+            "y": 333.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1661848808193-2022-08-30-08:40:08.193",
+            "x": 482.0,
+            "y": 335.0
+        }
+    ],
+    "participantID": "22",
+    "puzzle-file": "../../scenes-30a/2-5-1-dyn.g",
+    "rating": -1,
+    "run": 1,
+    "solved": false,
+    "start-time": "1661848801039-2022-08-30-08:40:01.39",
+    "time-solved": -1,
+    "total-time": 7.451659904
+}

@@ -1,0 +1,29 @@
+{
+    "attempt": 2,
+    "end-status": 3,
+    "end-time": "1659017755994-2022-07-28-14:15:55.994",
+    "events": [
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1659017755985-2022-07-28-14:15:55.985",
+            "x": 213.0,
+            "y": 298.0
+        },
+        {
+            "code": 7,
+            "description": "Moving started ",
+            "timestamp": "1659017755985-2022-07-28-14:15:55.985",
+            "x": 213.0,
+            "y": 300.0
+        }
+    ],
+    "participantID": "8",
+    "puzzle-file": "../../scenes-30a/1-6-1-push.g",
+    "rating": -1,
+    "run": 1,
+    "solved": false,
+    "start-time": "1659017755134-2022-07-28-14:15:55.134",
+    "time-solved": -1,
+    "total-time": 0.860547141
+}
