@@ -14,6 +14,8 @@ plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
 plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('ytick', labelsize=SMALL_SIZE) 
 plt.rc('legend', fontsize=SMALL_SIZE) 
+#remove tight layout
+plt.rcParams.update({'figure.autolayout': True})
 
 # def use_regex_frames(input_text):
 #     pattern = re.compile(r"([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_frames", re.IGNORECASE)
@@ -84,32 +86,44 @@ for index, row in df.iterrows():
         sol_matrix2[i][j] += 1
 
 sol_matrix1 = sol_matrix1.astype(int)
-sol_matrix2 = sol_matrix2.astype(int)
+columnsun1 = np.sum(sol_matrix1, axis=0).astype(float)*-1
+columnsun1 /= len(unique_participants)
+sol_matrix2 = sol_matrix2.astype(int) 
+columnsun2 = np.sum(sol_matrix2, axis=0).astype(float)*-1
+columnsun2 /= len(unique_participants)
 
 plt.figure(figsize=(20,10))
 plt.suptitle('Number of attempts at each run', fontsize=20)
 plt.subplot(1, 2, 1)
 plt.imshow(sol_matrix1, cmap="turbo", vmin=0)
+plt.bar(height=columnsun1, x=np.arange(len(unique_puzzles)), bottom=-0.5, color="lightslategray")
+# plt.axhline(y=min(columnsun1)-0.5, color='k', linestyle=':', linewidth=1, )
+
 for i in range(len(unique_participants)):
     for j in range(len(unique_puzzles)):
         plt.text(j, i, sol_matrix1[i, j], ha="center", va="center", color="w", fontsize=8, fontweight="bold")
-plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles)
+
+plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
+plt.tick_params(axis='x', which='both', bottom=True, top=True, labelbottom=True, labeltop=True)
 plt.yticks(np.arange(len(unique_participants)), unique_participants)
-plt.xlabel("Puzzle ID")
-plt.ylabel("Participant ID") 
-plt.title("Run 1")
+plt.xlabel("Puzzle ID" , labelpad=20)
+plt.ylabel("Participant ID - avg. number of attempts", labelpad=20) 
+plt.title("Run 1" , pad=20)
 # plt.colorbar()
 
 plt.subplot(1, 2, 2)
 plt.imshow(sol_matrix2, cmap="turbo", vmin=0)
+plt.bar(height=columnsun2, x=np.arange(len(unique_puzzles)), bottom=-0.5, color="lightslategray" )
+
 for i in range(len(unique_participants)):
     for j in range(len(unique_puzzles)):
         plt.text(j, i, sol_matrix2[i, j], ha="center", va="center", color="w", fontsize=8, fontweight="bold")
 
-plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles)
+plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
+plt.tick_params(axis='x', which='both', bottom=True, top=True, labelbottom=True, labeltop=True)
 plt.yticks(np.arange(len(unique_participants)), unique_participants)
-plt.xlabel("Puzzle ID")
-plt.ylabel("Participant ID") 
+plt.xlabel("Puzzle ID", labelpad=20)
+plt.ylabel("Participant ID - avg. number of attempts", labelpad=20 ) 
 # plt.colorbar()
-plt.title("Run 2")
+plt.title("Run 2", pad=20)
 plt.savefig("./Data/Distribution.png", dpi=300)
