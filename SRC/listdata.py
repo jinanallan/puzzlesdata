@@ -17,57 +17,59 @@ plt.rc('legend', fontsize=SMALL_SIZE)
 #remove tight layout
 plt.rcParams.update({'figure.autolayout': True})
 
-# def use_regex_frames(input_text):
-#     pattern = re.compile(r"([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_frames", re.IGNORECASE)
+def use_regex_frames(input_text):
+    pattern = re.compile(r"([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_frames", re.IGNORECASE)
 
-#     match = pattern.match(input_text)
+    match = pattern.match(input_text)
     
-#     particpants = match.group(3)
-#     run = match.group(4)
-#     puzzle_id = match.group(5)
-#     attempt = match.group(6)
-#     return int(particpants), int(run), int(puzzle_id), int(attempt)
+    particpants = match.group(3)
+    run = match.group(4)
+    puzzle_id = match.group(5)
+    attempt = match.group(6)
+    return int(particpants), int(run), int(puzzle_id), int(attempt)
 
-# def use_regex(input_text):
-#     pattern = re.compile(r"([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)", re.IGNORECASE)
+def use_regex(input_text):
+    pattern = re.compile(r"([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)", re.IGNORECASE)
 
-#     match = pattern.match(input_text)
+    match = pattern.match(input_text)
     
-#     particpants = match.group(3)
-#     run = match.group(4)
-#     puzzle_id = match.group(5)
-#     attempt = match.group(6)
-#     return int(particpants), int(run), int(puzzle_id), int(attempt)
+    particpants = match.group(3)
+    run = match.group(4)
+    puzzle_id = match.group(5)
+    attempt = match.group(6)
+    return int(particpants), int(run), int(puzzle_id), int(attempt)
 
-# frame_folder= "./Data/Frames/"
-# pnp_folder= "./Data/pnp/"
+df= pd.DataFrame(columns=["participant_id", "run", "puzzle_id", "attempt", "file", "frame file"])
 
-# frame_files = os.listdir(frame_folder)
-# pnp_files = os.listdir(pnp_folder)
+for pilot in [3,4]:
+    frame_folder= "./Data/pilot{}/Frames/".format(pilot)
+    pnp_folder= "./Data/pilot{}/Ego-based/".format(pilot)
 
-# df= pd.DataFrame(columns=["participant_id", "run", "puzzle_id", "attempt", "file", "frame file"])
+    frame_files = os.listdir(frame_folder)
+    pnp_files = os.listdir(pnp_folder)
 
-# for file in pnp_files:
-#     if file.endswith(".json"):
 
-#         particpants, run, puzzle_id, attempt = use_regex(file)
-    
-#         new_row = {"participant_id": particpants, "run": run, "puzzle_id": puzzle_id, "attempt": attempt, "file": file, "frame file": None}
+    for file in pnp_files:
+        if file.endswith(".json"):
 
-#         df.loc[len(df)] = new_row
+            particpants, run, puzzle_id, attempt = use_regex(file)
+        
+            new_row = {"participant_id": particpants, "run": run, "puzzle_id": puzzle_id, "attempt": attempt, "file": file, "frame file": None}
 
-# for file in frame_files:
-#     if file.endswith(".json"):
+            df.loc[len(df)] = new_row
 
-#         particpants, run, puzzle_id, attempt = use_regex_frames(file)
+    for file in frame_files:
+        if file.endswith(".json"):
 
-#         df.loc[(df["participant_id"] == particpants) & (df["run"] == run) &
-#                 (df["puzzle_id"] == puzzle_id) & (df["attempt"] == attempt), "frame file"] =file
+            particpants, run, puzzle_id, attempt = use_regex_frames(file)
 
-# df = df.sort_values(by=["participant_id", "run", "puzzle_id", "attempt"])
+            df.loc[(df["participant_id"] == particpants) & (df["run"] == run) &
+                    (df["puzzle_id"] == puzzle_id) & (df["attempt"] == attempt), "frame file"] =file
 
-# df.to_csv("./Data/df.csv", index=False)
-df= pd.read_csv("./Data/df.csv")
+df = df.sort_values(by=["participant_id", "run", "puzzle_id", "attempt"])
+
+df.to_csv("./Data/df.csv", index=False)
+# df= pd.read_csv("./Data/df.csv")
 
 unique_participants = df["participant_id"].unique().tolist()
 unique_puzzles = df["puzzle_id"].unique().tolist()

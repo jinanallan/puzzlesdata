@@ -10,7 +10,7 @@ from gif_generator import gif
 import time
 start_time = time.time()
 
-def positional_vector(data):
+def position  al_vector(data):
     """
     Get the positional vector of the objects from frames json file
 

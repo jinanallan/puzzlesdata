@@ -27,66 +27,68 @@ def coloring(type,c):
     
 def main():
      # folder = input("Enter the folder path: ")
-    folder = './Data/pnp'
-    # desiredpuzzle = int(input("Enter the puzzle number: "))
-    for filename in os.listdir(folder):
-        if filename.endswith('.json'):
-            participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
-            # print(participant_id, run, puzzle, attempt)
-        if  not os.path.isfile('./Plots_Text/Path_Plots/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png'):
+    for pilot in [3,4]:
+        folder = './Data/pilot{}/Ego-based'.format(pilot)
+        # desiredpuzzle = int(input("Enter the puzzle number: "))
+        for filename in os.listdir(folder):
+            if filename.endswith('.json'):
+                participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
+                print(participant_id, run, puzzle, attempt)
+                # print(participant_id, run, puzzle, attempt)
+            if  not os.path.isfile('./Plots_Text/Path_Plots/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png'):
 
-            if puzzle in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:         
-                fig, ax = plt.subplots()
+                if puzzle in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:         
+                    fig, ax = plt.subplots()
 
-                for j in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4', 'free']:
-                    pl=[]
-                    #color dict for each type in rgb
-                    type = j   
-                    # def color_dict(type):
-                    #      for 
-                        
-
-                    with open(os.path.join(folder, filename)) as json_file:
-                        data = json.load(json_file)
-                        df=movementTracker.df_from_json(data)
-                        sparce=True
-                        xi, yi = movementTracker.interaction(df, participant_id, run, type, sparce=sparce)
-                        solved = movementTracker.interaction(df, participant_id, run, type, solved=True)
-                        # print(xi.size, yi.size)
-                        
-                        imgfolder = './cropped_puzzles_screenshots'
-                        fname = os.path.join(imgfolder, 'puzzle'+str(puzzle)+'.png')
-                        img = Image.open(fname).convert('L')
-
-                        img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
-
-                        if xi.size == 0 or yi.size == 0:
-                            continue
-                        else:
-
-                            #diffrent colors for each type
-                            colors=[coloring(type,i) for i in np.linspace(0.2,1,len(xi))]
-                            # cm=mcolors.LinearSegmentedColormap.from_list('mylist', colors, N=len(xi))
-
-                            if type=='free':
-                                s=5
-                            else:
-                                s=25
-                            ax.scatter(xi, yi,
-                                                s=s,
-                                                c=colors,
-                                                label=type,
-                                    marker= ".")
+                    for j in ['box1', 'box2', 'obj1', 'obj2', 'obj3', 'obj4', 'free']:
+                        pl=[]
+                        #color dict for each type in rgb
+                        type = j   
+                        # def color_dict(type):
+                        #      for 
                             
-                            plt.xlim(-2, 2)
-                            plt.ylim(-2, 2)
-                            plt.xlabel('x')
-                            plt.ylabel('y')
-                            plt.legend()
-                plt.title('Participant: '+str(participant_id)+' Puzzle: '+str(puzzle)+' Attempt: '+str(attempt)+' Run: '+str(run)+'\n Solved: '+str(solved))
-                plt.savefig('./Plots_Text/Path_Plots/'+
-                            str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png', dpi=300)
-                plt.close()
+
+                        with open(os.path.join(folder, filename)) as json_file:
+                            data = json.load(json_file)
+                            df=movementTracker.df_from_json(data)
+                            sparce=True
+                            xi, yi = movementTracker.interaction(df, participant_id, run, type, sparce=sparce)
+                            solved = movementTracker.interaction(df, participant_id, run, type, solved=True)
+                            # print(xi.size, yi.size)
+                            
+                            imgfolder = './cropped_puzzles_screenshots'
+                            fname = os.path.join(imgfolder, 'puzzle'+str(puzzle)+'.png')
+                            img = Image.open(fname).convert('L')
+
+                            img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
+
+                            if xi.size == 0 or yi.size == 0:
+                                continue
+                            else:
+
+                                #diffrent colors for each type
+                                colors=[coloring(type,i) for i in np.linspace(0.2,1,len(xi))]
+                                # cm=mcolors.LinearSegmentedColormap.from_list('mylist', colors, N=len(xi))
+
+                                if type=='free':
+                                    s=5
+                                else:
+                                    s=25
+                                ax.scatter(xi, yi,
+                                                    s=s,
+                                                    c=colors,
+                                                    label=type,
+                                        marker= ".")
+                                
+                                plt.xlim(-2, 2)
+                                plt.ylim(-2, 2)
+                                plt.xlabel('x')
+                                plt.ylabel('y')
+                                plt.legend()
+                    plt.title('Participant: '+str(participant_id)+' Puzzle: '+str(puzzle)+' Attempt: '+str(attempt)+' Run: '+str(run)+'\n Solved: '+str(solved))
+                    plt.savefig('./Plots_Text/Path_Plots/'+
+                                str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png', dpi=300)
+                    plt.close()
 
 if __name__ == "__main__":
     main()
