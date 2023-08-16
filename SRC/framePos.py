@@ -10,7 +10,7 @@ from gif_generator import gif
 import time
 start_time = time.time()
 
-def position  al_vector(data):
+def positional_vector(data):
     """
     Get the positional vector of the objects from frames json file
 
@@ -64,7 +64,7 @@ def use_regex(input_text):
     attempt = match.group(6)
     return int(particpants), int(run), int(puzzle_id), int(attempt)
 
-frame_folder= "./Data/Frames/"
+frame_folder= "./Data/pilot3/Frames/"
 frame_files = os.listdir(frame_folder)
 
 puzzleNumber=5
