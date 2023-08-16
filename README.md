@@ -1,3 +1,4 @@
+![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/test.png?raw=True)
 ![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Data/Distribution.png?raw=True)
 
 # clustering similar solutions
