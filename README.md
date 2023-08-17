@@ -1,8 +1,5 @@
 ![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/test.png?raw=True)
-<<<<<<< HEAD
 ![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Data/timeDistribution.png?raw=True)
-=======
->>>>>>> 26e08dc8b80974b9fb84cb7b6d217100e2716a3a
 ![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Data/Distribution.png?raw=True)
 
 # clustering similar solutions
