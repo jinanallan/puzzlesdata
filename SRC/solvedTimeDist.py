@@ -43,52 +43,132 @@ unique_participants = df["participant_id"].unique().tolist()
 unique_participants= np.array(unique_participants)
 unique_puzzles = df["puzzle_id"].unique().tolist()
 unique_puzzles = np.array(unique_puzzles)
+
 sol_matrix1 = np.zeros((len(unique_participants), len(unique_puzzles)))
 sol_matrix2 = np.zeros((len(unique_participants), len(unique_puzzles)))
 
+sol_matrix1_best = np.empty((len(unique_participants), len(unique_puzzles)))
+sol_matrix2_best = np.empty((len(unique_participants), len(unique_puzzles)))
+sol_matrix1_best[:] = np.inf
+sol_matrix2_best[:] = np.inf
+
+sol_att_matrix1 = np.genfromtxt("./Data/sol_matrix1.csv", delimiter=',')
+sol_att_matrix2 = np.genfromtxt("./Data/sol_matrix2.csv", delimiter=',')
 
 for pilot in [3,4]:
 
     folder = "./Data/Pilot{}/Ego-based/".format(pilot)
-
     for file in os.listdir(folder):
-        if file.endswith(".json"):
 
+        if file.endswith(".json"):
+            
             particpants, run, puzzle_id, attempt = use_regex_frames(file)
+
             df = df_from_json(folder+file)
             df = df.iloc[0]
 
             total_time= df["total-time"]
+            total_time = float("{:.2f}".format(total_time))
             solved= df['solved'] 
+          
+            particpants_index = np.where(unique_participants == particpants)[0][0]
+            puzzle_id_index = np.where(unique_puzzles == puzzle_id)[0][0]
 
-            particpants = np.where(unique_participants == particpants)[0][0]
-            puzzle_id = np.where(unique_puzzles == puzzle_id)[0][0]
+            
+            if run == 1:
+                n_attempts = sol_att_matrix1[particpants_index, puzzle_id_index]
+                n_attempts = n_attempts.astype(int)
+            else:
+                n_attempts = sol_att_matrix2[particpants_index, puzzle_id_index]
+                n_attempts = n_attempts.astype(int)
+
+            
+
+            if solved and n_attempts>attempt+1:
+                print("participant {} puzzle {} run {} **attempt {} total time {} solved {} while n_attempts {}".
+                      format(particpants, puzzle_id, run, attempt, total_time, solved, n_attempts))
+                #conclusion: it is possible to solve a puzzle and do more attempts
+
+            #finding the fastest time
+
 
             if solved:
                 if run == 1:
-                    sol_matrix1[particpants, puzzle_id] = total_time
+                    sol_matrix1[particpants_index, puzzle_id_index] = total_time
+                    if total_time < sol_matrix1_best[particpants_index, puzzle_id_index]:
+                        sol_matrix1_best[particpants_index, puzzle_id_index] = total_time
                 else:
-                    sol_matrix2[particpants, puzzle_id] = total_time
+                    sol_matrix2[particpants_index, puzzle_id_index] = total_time
+                    if total_time < sol_matrix2_best[particpants_index, puzzle_id_index]:
+                        sol_matrix2_best[particpants_index, puzzle_id_index] = total_time
             else:
                 if run == 1:
-                    sol_matrix1[particpants, puzzle_id] = -1
+                    sol_matrix1[particpants_index, puzzle_id_index] = -1
                 else:
-                    sol_matrix2[particpants, puzzle_id] = -1
+                    sol_matrix2[particpants_index, puzzle_id_index] = -1
 
-plt.figure(figsize=(20,15))
-plt.suptitle('Time Solved [s]', fontsize=20)
+# plt.figure(figsize=(20,15))
+# plt.suptitle('Time Solved [s]', fontsize=20)
+# plt.subplot(1, 2, 1)
+# vmax = np.max(sol_matrix1)
+# plt.imshow(sol_matrix1, cmap="hot")
+
+# for i in range(len(unique_participants)):
+#     for j in range(len(unique_puzzles)):
+
+#         if sol_matrix1[i, j] == 0:
+#             plt.text(j, i,"*", ha="center", va="center", color="w", fontsize=8, fontweight="bold")
+
+#         if sol_matrix1[i, j] == -1:
+#             plt.text(j, i,"N", ha="center", va="center", color="w", fontsize=8, fontweight="bold")
+
+# plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
+# plt.tick_params(axis='x', which='both', bottom=True, top=True, labelbottom=True, labeltop=True)
+# plt.yticks(np.arange(len(unique_participants)), unique_participants)
+# plt.xlabel("Puzzle ID" , labelpad=20)
+# plt.ylabel("Participant ID ", labelpad=20) 
+# plt.title("Run 1" , pad=20)
+# plt.text(0, 2+len(unique_participants), "N = not solved", ha="center", va="center", color="black", fontsize=10, fontweight="bold")
+# plt.colorbar( orientation='vertical', pad=0.2, shrink=0.5, label="Time [s]")
+
+# plt.subplot(1, 2, 2)
+# plt.imshow(sol_matrix2, cmap="hot", vmax=vmax)
+# for i in range(len(unique_participants)):
+#     for j in range(len(unique_puzzles)):
+#         if sol_matrix2[i, j] == 0:
+#             plt.text(j, i,"*", ha="center", va="center", color="w", fontsize=8, fontweight="bold")
+
+#         if sol_matrix2[i, j] == -1:
+#             plt.text(j, i,"N", ha="center", va="center", color="w", fontsize=8, fontweight="bold")
+# plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
+# plt.tick_params(axis='x', which='both', bottom=True, top=True, labelbottom=True, labeltop=True)
+# plt.yticks(np.arange(len(unique_participants)), unique_participants)
+# plt.xlabel("Puzzle ID", labelpad=20)
+# plt.ylabel("Participant ID", labelpad=20 ) 
+# plt.title("Run 2", pad=20)
+# #"N" = not solved
+# #"*" = missing data
+# plt.text(0, 2+len(unique_participants), "* = missing data", ha="center", va="center", color="black", fontsize=10, fontweight="bold")
+# #share colorbar
+# plt.colorbar( orientation='vertical', pad=0.2, shrink=0.5, label="Time [s]")
+
+# plt.savefig("./Data/timeDistribution.png", dpi=300)
+
+#best time
+plt.figure(figsize=(20,11))
+plt.suptitle('Best Time Solved [s]', fontsize=20)
 plt.subplot(1, 2, 1)
-vmax = np.max(sol_matrix1)
-plt.imshow(sol_matrix1, cmap="hot")
+vmax = np.max(sol_matrix1_best[sol_matrix1_best != np.inf])
+plt.imshow(sol_matrix1_best, cmap="hot", vmax=vmax)
 
 for i in range(len(unique_participants)):
     for j in range(len(unique_puzzles)):
 
-        if sol_matrix1[i, j] == 0:
-            plt.text(j, i,"*", ha="center", va="center", color="w", fontsize=8, fontweight="bold")
+        # if sol_matrix1_best[i, j] == 0:
+        #     plt.text(j, i,"*", ha="center", va="center", color="w", fontsize=8, fontweight="bold")
 
-        if sol_matrix1[i, j] == -1:
-            plt.text(j, i,"N", ha="center", va="center", color="w", fontsize=8, fontweight="bold")
+        if sol_matrix1_best[i, j] == np.inf:
+            plt.text(j, i,"N", ha="center", va="center", color="black", fontsize=8, fontweight="bold")
 
 plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
 plt.tick_params(axis='x', which='both', bottom=True, top=True, labelbottom=True, labeltop=True)
@@ -96,18 +176,22 @@ plt.yticks(np.arange(len(unique_participants)), unique_participants)
 plt.xlabel("Puzzle ID" , labelpad=20)
 plt.ylabel("Participant ID ", labelpad=20) 
 plt.title("Run 1" , pad=20)
-plt.text(0, 2+len(unique_participants), "N = not solved", ha="center", va="center", color="black", fontsize=10, fontweight="bold")
-plt.colorbar( orientation='vertical', pad=0.2, shrink=0.5, label="Time [s]")
+plt.text(0, 1+len(unique_participants), "N = not solved or no data", ha="center", va="center", color="black", fontsize=10, fontweight="bold")
+plt.text(0, 2+len(unique_participants), "max time run 1: {} [s]".format(vmax), ha="center", va="center", color="black", fontsize=10, fontweight="bold")
+plt.colorbar( orientation='vertical', pad=0.1, shrink=0.5, label="Time [s]")
 
 plt.subplot(1, 2, 2)
-plt.imshow(sol_matrix2, cmap="hot", vmax=vmax)
+plt.imshow(sol_matrix2_best, cmap="hot", vmax=vmax)
+vmax2 = np.max(sol_matrix2_best[sol_matrix2_best != np.inf])
 for i in range(len(unique_participants)):
     for j in range(len(unique_puzzles)):
-        if sol_matrix2[i, j] == 0:
-            plt.text(j, i,"*", ha="center", va="center", color="w", fontsize=8, fontweight="bold")
 
-        if sol_matrix2[i, j] == -1:
-            plt.text(j, i,"N", ha="center", va="center", color="w", fontsize=8, fontweight="bold")
+        # if sol_matrix2_best[i, j] == 0:
+        #     plt.text(j, i,"*", ha="center", va="center", color="w", fontsize=8, fontweight="bold")
+
+        if sol_matrix2_best[i, j] == np.inf:
+            plt.text(j, i,"N", ha="center", va="center", color="black", fontsize=8, fontweight="bold")
+
 plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
 plt.tick_params(axis='x', which='both', bottom=True, top=True, labelbottom=True, labeltop=True)
 plt.yticks(np.arange(len(unique_participants)), unique_participants)
@@ -115,10 +199,9 @@ plt.xlabel("Puzzle ID", labelpad=20)
 plt.ylabel("Participant ID", labelpad=20 ) 
 plt.title("Run 2", pad=20)
 #"N" = not solved
-#"*" = missing data
-plt.text(0, 2+len(unique_participants), "* = missing data", ha="center", va="center", color="black", fontsize=10, fontweight="bold")
-#share colorbar
-plt.colorbar( orientation='vertical', pad=0.2, shrink=0.5, label="Time [s]")
+plt.text(0, 1+len(unique_participants), "N = not solved or no data", ha="center", va="center", color="black", fontsize=10, fontweight="bold")
+plt.text(0, 2+len(unique_participants), "max time run 2: {} [s]".format(vmax2), ha="center", va="center", color="black", fontsize=10, fontweight="bold")
 
-plt.savefig("./Data/timeDistribution.png", dpi=300)
-                
+plt.colorbar( orientation='vertical', pad=0.1, shrink=0.5, label="Time [s]")
+
+plt.savefig("./Data/bestTimeDistribution.png", dpi=300)

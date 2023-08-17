@@ -57,7 +57,7 @@ def velocity_profile(data):
                 positional_vector.at[row,(id,'y')]=y
         row+=1
 
-    fig, ax = plt.subplots(len(present_objects),1,figsize=(10,5*len(present_objects)))
+    fig, ax = plt.subplots(len(present_objects),1,figsize=(10,3*len(present_objects)+1))
     velocity_vector = positional_vector.diff()
     velocity_vector = velocity_vector.drop(0)
     velocity_vector = velocity_vector.reset_index(drop=True)
@@ -78,6 +78,8 @@ def velocity_profile(data):
         ax[i].set_ylabel("velocity")
         ax[i].set_ylim(0, 1.1*vmax)
         ax[i].legend()
+      
+        fig.tight_layout(pad=3.0)
     return fig, ax
 
 frame_folder= "./Data/Pilot3/Frames/"

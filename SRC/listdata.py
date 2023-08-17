@@ -42,8 +42,8 @@ def use_regex(input_text):
 df= pd.DataFrame(columns=["participant_id", "run", "puzzle_id", "attempt", "file", "frame file"])
 
 for pilot in [3,4]:
-    frame_folder= "./Data/pilot{}/Frames/".format(pilot)
-    pnp_folder= "./Data/pilot{}/Ego-based/".format(pilot)
+    frame_folder= "./Data/Pilot{}/Frames/".format(pilot)
+    pnp_folder= "./Data/Pilot{}/Ego-based/".format(pilot)
 
     frame_files = os.listdir(frame_folder)
     pnp_files = os.listdir(pnp_folder)
@@ -93,6 +93,10 @@ columnsun1 /= len(unique_participants)
 sol_matrix2 = sol_matrix2.astype(int) 
 columnsun2 = np.sum(sol_matrix2, axis=0).astype(float)*-1
 columnsun2 /= len(unique_participants)
+
+np.savetxt("./Data/sol_matrix1.csv", sol_matrix1, delimiter=",")
+np.savetxt("./Data/sol_matrix2.csv", sol_matrix2, delimiter=",")
+
 
 plt.figure(figsize=(20,10))
 plt.suptitle('Number of attempts at each run', fontsize=20)
