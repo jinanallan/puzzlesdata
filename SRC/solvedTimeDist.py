@@ -90,15 +90,14 @@ for i in range(len(unique_participants)):
         if sol_matrix1[i, j] == -1:
             plt.text(j, i,"N", ha="center", va="center", color="w", fontsize=8, fontweight="bold")
 
-plt.text(0, 2+len(unique_participants), "N = not solved", ha="center", va="center", color="black", fontsize=8, fontweight="bold")
 plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
 plt.tick_params(axis='x', which='both', bottom=True, top=True, labelbottom=True, labeltop=True)
 plt.yticks(np.arange(len(unique_participants)), unique_participants)
 plt.xlabel("Puzzle ID" , labelpad=20)
 plt.ylabel("Participant ID ", labelpad=20) 
 plt.title("Run 1" , pad=20)
-
-
+plt.text(0, 2+len(unique_participants), "N = not solved", ha="center", va="center", color="black", fontsize=10, fontweight="bold")
+plt.colorbar( orientation='vertical', pad=0.2, shrink=0.5, label="Time [s]")
 
 plt.subplot(1, 2, 2)
 plt.imshow(sol_matrix2, cmap="hot", vmax=vmax)
@@ -117,7 +116,9 @@ plt.ylabel("Participant ID", labelpad=20 )
 plt.title("Run 2", pad=20)
 #"N" = not solved
 #"*" = missing data
-plt.text(0, 1+len(unique_participants), "* = missing data", ha="center", va="center", color="black", fontsize=8, fontweight="bold")
-# plt.colorbar()
+plt.text(0, 2+len(unique_participants), "* = missing data", ha="center", va="center", color="black", fontsize=10, fontweight="bold")
+#share colorbar
+plt.colorbar( orientation='vertical', pad=0.2, shrink=0.5, label="Time [s]")
+
 plt.savefig("./Data/timeDistribution.png", dpi=300)
                 
