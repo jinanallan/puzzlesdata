@@ -28,7 +28,7 @@ def coloring(type,c):
 def main():
      # folder = input("Enter the folder path: ")
     for pilot in [3,4]:
-        folder = './Data/pilot{}/Ego-based'.format(pilot)
+        folder = './Data/Pilot{}/Ego-based'.format(pilot)
         # desiredpuzzle = int(input("Enter the puzzle number: "))
         for filename in os.listdir(folder):
             if filename.endswith('.json'):

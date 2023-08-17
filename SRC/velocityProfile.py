@@ -80,7 +80,7 @@ def velocity_profile(data):
         ax[i].legend()
     return fig, ax
 
-frame_folder= "./Data/pilot3/Frames/"
+frame_folder= "./Data/Pilot3/Frames/"
 frame_files = os.listdir(frame_folder)
 puzzleNumber = 21
 

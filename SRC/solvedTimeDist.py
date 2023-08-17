@@ -49,7 +49,7 @@ sol_matrix2 = np.zeros((len(unique_participants), len(unique_puzzles)))
 
 for pilot in [3,4]:
 
-    folder = "./Data/pilot{}/Ego-based/".format(pilot)
+    folder = "./Data/Pilot{}/Ego-based/".format(pilot)
 
     for file in os.listdir(folder):
         if file.endswith(".json"):
