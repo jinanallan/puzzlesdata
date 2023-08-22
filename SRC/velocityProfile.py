@@ -21,11 +21,23 @@ def velocity_profile(data):
     plot the velocity profile of the objects in the puzzle
 
     Accepts:
-        data: the json file
+        data: the json file (frames)
     Reurns: 
         velocity profile of the objects
     """
     data = pd.DataFrame(data)
+
+    end_time = data.timestamp[len(data.frames)-1].split("-")[0]
+    end_time = int(end_time)
+    end_time = pd.to_datetime(end_time, unit='us')
+    
+    start_time = data.timestamp[0].split("-")[0]
+    start_time = int(start_time)
+    start_time = pd.to_datetime(start_time, unit='us')
+    
+    T = end_time - start_time
+    T = T.total_seconds()
+    # print(T)
 
     last_frame = data.frames[len(data.frames)-1]
     present_objects = {}
@@ -57,43 +69,67 @@ def velocity_profile(data):
                 positional_vector.at[row,(id,'y')]=y
         row+=1
 
-    fig, ax = plt.subplots(len(present_objects),1,figsize=(10,3*len(present_objects)+1))
     velocity_vector = positional_vector.diff()
     velocity_vector = velocity_vector.drop(0)
     velocity_vector = velocity_vector.reset_index(drop=True)
-
-    vmax=0
+    v=np.zeros((len(velocity_vector),len(present_objects)))
 
     for i in range(len(present_objects)):
         vx = velocity_vector[positional_vector.columns[i*2][0],'x']
         vx=np.array(vx, dtype=np.float64)
         vy = velocity_vector[positional_vector.columns[i*2][0],'y']
         vy=np.array(vy, dtype=np.float64)
-        v=np.sqrt(vx**2+vy**2)
-        if v.max()>vmax:
-            vmax=v.max()
-        ax[i].plot(v, label=present_objects[positional_vector.columns[i*2][0]])
+        v_temp=np.sqrt(vx**2+vy**2)
+        v[:,i]=v_temp
+
+
+    fig, ax = plt.subplots(len(present_objects),1,figsize=(10,3*len(present_objects)+4))
+
+    for i in range(len(present_objects)):
+        
+     
+        vmax=v.max()
+        ax[i].plot(v[:,i], label=present_objects[positional_vector.columns[i*2][0]], color="C"+str(i))
+        #plot vertical lines where v[:,i] is equal to v[:,0]
+        if i != 0:
+            same_as_ego = np.where(v[:,i] == v[:,0])
+            vline = v[:,i][same_as_ego]
+            same_as_ego = np.delete(same_as_ego, np.where(vline == 0))
+
+
+            for index in np.arange(0, len(v)):
+                if index in same_as_ego:
+                    # ax[0].plot(index, v[index,0], color="C"+str(i), marker='.')
+                    ax[0].axvline(x=index, color="C"+str(i), linestyle='--', alpha=0.1)
+
+            # for j in range(len(same_as_ego)):
+            #     ax[0].axvline(x=same_as_ego[j], color=color, linestyle='--')
+
         ax[i].set_title(present_objects[positional_vector.columns[i*2][0]]+" velocity profile")
-        ax[i].set_xlabel("time step")
+        ax[i].set_xlabel("time step [s]")
         ax[i].set_ylabel("velocity")
+        ax[i].set_xlim(0, len(v))
+        ax[i].set_xticks(np.arange(0, len(v), step=round(len(v)/T)*5), np.arange(0, T, step=5))
         ax[i].set_ylim(0, 1.1*vmax)
         ax[i].legend()
-      
-        fig.tight_layout(pad=3.0)
+
+        fig.tight_layout(pad=5.0)
+
     return fig, ax
+
 
 frame_folder= "./Data/Pilot3/Frames/"
 frame_files = os.listdir(frame_folder)
-puzzleNumber = 21
-
 
 for file in frame_files:
     if file.endswith(".json"):
         participant_id, run, puzzle, attempt = use_regex(file)
-        if puzzle == puzzleNumber and attempt == 0 and run == 2 and participant_id == 35:
+        # print("Saved: ", str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png")
+        if participant_id == 31 and run == 1 and puzzle == 20 and attempt == 0:
             with open(os.path.join(frame_folder,file)) as json_file:
                 data = json.load(json_file)
                 fig, ax = velocity_profile(data)
                 #set the title of the plot
                 fig.suptitle("Participant: "+str(participant_id)+" Run: "+str(run)+" Puzzle: "+str(puzzle)+" Attempt: "+str(attempt))
-                fig.savefig("test.png")
+                fig.savefig("./test.png", dpi=300)
+                plt.close(fig)
