@@ -231,7 +231,7 @@ def getAllSolution(puzzleNumber, sequence_type):
                         data = json.load(json_file)
                         df=movementTracker.df_from_json(data)
                         
-                        solved_stats=movementTracker.interaction(df, participant_id, run,type="total",solved=True)
+                        solved_stats, _=movementTracker.interaction(df, participant_id, run,type="total",solved=True)
                         
                         if solved_stats== "True":
 
@@ -373,8 +373,7 @@ numCluster = 3
 #     hierarchyCluster(numCluster,puzzleNumber, sequence_type)
 #     print("--- %s seconds ---" % (time.time() - start_time))
 
-for puzzleNumber in [5]:
-    sequence_type = "color"
+for puzzleNumber in [2]:
+    sequence_type = "color-trajectory"
     hierarchyCluster(numCluster,puzzleNumber, sequence_type)
     print("--- %s seconds ---" % (time.time() - start_time))
-
