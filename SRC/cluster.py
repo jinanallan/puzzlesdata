@@ -17,62 +17,63 @@ import time
 
 start_time = time.time()
 
-folder = './Data/pnp'
+folders = ['./Data/Pilot3/Ego-based', './Data/Pilot4/Ego-based']
 
 def possibleInteraction(puzzleNumber):
         #the objective of this function is to find the set of all possible interactions in a puzzle
 
         # pnp puzzle number: 1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26
         set_of_all_possible_interactions = set()
-        for filename in sorted(os.listdir(folder)):
-            if filename.endswith('.json'):
+        for folder in folders:
+            for filename in sorted(os.listdir(folder)):
+                if filename.endswith('.json'):
 
-                #the participant id, run, puzzle, attempt from the file name:
-                participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
+                    #the participant id, run, puzzle, attempt from the file name:
+                    participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
 
-                if puzzleNumber == puzzle :
-                    
+                    if puzzleNumber == puzzle :
+                        
 
-                    with open(os.path.join(folder, filename)) as json_file:
+                        with open(os.path.join(folder, filename)) as json_file:
 
-                        data = json.load(json_file)
-                        df=movementTracker.df_from_json(data)
+                            data = json.load(json_file)
+                            df=movementTracker.df_from_json(data)
 
-                        try: 
-                            events = df["events"] 
-                            
-                            df_events = pd.DataFrame(events)
-                            df_events["description"] = df['events'].apply(lambda x: x.get('description'))
+                            try: 
+                                events = df["events"] 
+                                
+                                df_events = pd.DataFrame(events)
+                                df_events["description"] = df['events'].apply(lambda x: x.get('description'))
 
-                            attachIndex = (df_events.index[df_events['description'].str.contains("Attach")]).tolist()
-                            releaseIndex = (df_events.index[df_events['description'].str.contains("Release")]).tolist()
+                                attachIndex = (df_events.index[df_events['description'].str.contains("Attach")]).tolist()
+                                releaseIndex = (df_events.index[df_events['description'].str.contains("Release")]).tolist()
 
-                            # assign the name of the object (obj,box) to the events between "attach" and "release" events    
-                            for i in range(len(attachIndex)):
-                                df_events.loc[attachIndex[i]:releaseIndex[i],'description']= df_events.loc[attachIndex[i],'description'].split(" ")[1]
-                            
-                            for index, row in df_events.iterrows():
-                                if row["description"] == "Moving started ":
-                                    df_events.at[index, "description"] = "free"
-                                    # assign "free" to all the events that are not  between "attach" or "release" events    
-                                elif row["description"] == "Left click":
-                                    df_events.at[index, "description"] = "free"
-                                    #assign "free" to events that are "left click"
-                                elif row["description"].startswith('Glue'):
-                                    df_events.at[index, "description"] = "Glue"
-                                elif row["description"].startswith('Unglue'):
-                                    df_events.at[index, "description"] = "Unglue"
-                                    #for now the only row as "Glue" or "Unglue" is marked without details of glueing action
+                                # assign the name of the object (obj,box) to the events between "attach" and "release" events    
+                                for i in range(len(attachIndex)):
+                                    df_events.loc[attachIndex[i]:releaseIndex[i],'description']= df_events.loc[attachIndex[i],'description'].split(" ")[1]
+                                
+                                for index, row in df_events.iterrows():
+                                    if row["description"] == "Moving started ":
+                                        df_events.at[index, "description"] = "free"
+                                        # assign "free" to all the events that are not  between "attach" or "release" events    
+                                    elif row["description"] == "Left click":
+                                        df_events.at[index, "description"] = "free"
+                                        #assign "free" to events that are "left click"
+                                    elif row["description"].startswith('Glue'):
+                                        df_events.at[index, "description"] = "Glue"
+                                    elif row["description"].startswith('Unglue'):
+                                        df_events.at[index, "description"] = "Unglue"
+                                        #for now the only row as "Glue" or "Unglue" is marked without details of glueing action
 
 
-                            possible_interactions = df_events["description"].unique()
-                            #add the list of all possible interactions to a set:
-                            for i in range(len(possible_interactions)):
-                                set_of_all_possible_interactions.add(possible_interactions[i])
-                            
-                        except:
-                            #as for some dataframes, the events column is not available, we pass
-                            pass
+                                possible_interactions = df_events["description"].unique()
+                                #add the list of all possible interactions to a set:
+                                for i in range(len(possible_interactions)):
+                                    set_of_all_possible_interactions.add(possible_interactions[i])
+                                
+                            except:
+                                #as for some dataframes, the events column is not available, we pass
+                                pass
 
         set_of_all_possible_interactions=list(set_of_all_possible_interactions)
         #order the list of all possible interactions alphabetically
@@ -216,28 +217,28 @@ def getAllSolution(puzzleNumber, sequence_type):
 
     sequences=[]
     ids=[]
-    
-    for filename in sorted(os.listdir(folder)):
-        if filename.endswith('.json'):
+    for folder in folders:
+        for filename in sorted(os.listdir(folder)):
+            if filename.endswith('.json'):
 
-            #the participant id, run, puzzle, attempt from the file name:
-            participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
+                #the participant id, run, puzzle, attempt from the file name:
+                participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
 
-            if puzzleNumber == puzzle:
-                
-                with open(os.path.join(folder, filename)) as json_file:
-
-                    data = json.load(json_file)
-                    df=movementTracker.df_from_json(data)
+                if puzzleNumber == puzzle:
                     
-                    solved_stats=movementTracker.interaction(df, participant_id, run,type="total",solved=True)
-                    
-                    if solved_stats== "True":
+                    with open(os.path.join(folder, filename)) as json_file:
 
-                        ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
+                        data = json.load(json_file)
+                        df=movementTracker.df_from_json(data)
+                        
+                        solved_stats=movementTracker.interaction(df, participant_id, run,type="total",solved=True)
+                        
+                        if solved_stats== "True":
 
-                        sequence=getSolutionSequences(df, puzzleNumber, sequence_type)
-                        sequences.append(sequence)
+                            ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
+
+                            sequence=getSolutionSequences(df, puzzleNumber, sequence_type)
+                            sequences.append(sequence)
     return sequences,ids
 
 def stacked_barplot_interaction(interaction_lists, ids, cluster_id, puzzleNumber, bold_label):
