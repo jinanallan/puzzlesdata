@@ -16,7 +16,7 @@ def use_regex(input_text):
     attempt = match.group(6)
     return int(particpants), int(run), int(puzzle_id), int(attempt)
 
-def velocity_profile(data):
+def velocity_profile(data, acceleration=False):
     """
     plot the velocity profile of the objects in the puzzle
 
@@ -72,6 +72,11 @@ def velocity_profile(data):
     velocity_vector = positional_vector.diff()
     velocity_vector = velocity_vector.drop(0)
     velocity_vector = velocity_vector.reset_index(drop=True)
+    if acceleration:
+        acceleration_vector = velocity_vector.diff()
+        acceleration_vector = acceleration_vector.drop(0)
+        acceleration_vector = acceleration_vector.reset_index(drop=True)
+        velocity_vector = acceleration_vector
     v=np.zeros((len(velocity_vector),len(present_objects)))
 
     for i in range(len(present_objects)):
@@ -88,6 +93,7 @@ def velocity_profile(data):
     for i in range(len(present_objects)):
         
      
+        nl=0
         vmax=v.max()
         ax[i].plot(v[:,i], label=present_objects[positional_vector.columns[i*2][0]], color="C"+str(i))
         #plot vertical lines where v[:,i] is equal to v[:,0]
@@ -99,19 +105,29 @@ def velocity_profile(data):
 
             for index in np.arange(0, len(v)):
                 if index in same_as_ego:
-                    # ax[0].plot(index, v[index,0], color="C"+str(i), marker='.')
-                    ax[0].axvline(x=index, color="C"+str(i), linestyle='--', alpha=0.1)
 
+                    if nl==0: 
+                        ax[0].axvline(x=index, color="C"+str(i), linestyle='--', alpha=0.1, label=present_objects[positional_vector.columns[i*2][0]]+
+                                  " match")
+                        nl+=1
+                    else:
+                        ax[0].axvline(x=index, color="C"+str(i), linestyle='--', alpha=0.1)
+                        
+                    ax[0].legend()
             # for j in range(len(same_as_ego)):
             #     ax[0].axvline(x=same_as_ego[j], color=color, linestyle='--')
 
         ax[i].set_title(present_objects[positional_vector.columns[i*2][0]]+" velocity profile")
+        if acceleration:
+            ax[i].set_title(present_objects[positional_vector.columns[i*2][0]]+" acceleration profile")
         ax[i].set_xlabel("time step [s]")
-        ax[i].set_ylabel("velocity")
+        ax[i].set_ylabel("velocity magnitude [1/s]")
+        if acceleration:
+            ax[i].set_ylabel("acceleration magnitude [1/s^2]")
         ax[i].set_xlim(0, len(v))
         ax[i].set_xticks(np.arange(0, len(v), step=round(len(v)/T)*5), np.arange(0, T, step=5))
         ax[i].set_ylim(0, 1.1*vmax)
-        ax[i].legend()
+        ax[i].legend(loc='upper right')
 
         fig.tight_layout(pad=5.0)
 
@@ -125,11 +141,15 @@ for file in frame_files:
     if file.endswith(".json"):
         participant_id, run, puzzle, attempt = use_regex(file)
         # print("Saved: ", str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png")
-        if participant_id == 31 and run == 1 and puzzle == 20 and attempt == 0:
+        if participant_id == 38 and run == 1 and puzzle == 17 and attempt == 0:
             with open(os.path.join(frame_folder,file)) as json_file:
                 data = json.load(json_file)
                 fig, ax = velocity_profile(data)
+                figa, axa = velocity_profile(data, acceleration=True)
                 #set the title of the plot
                 fig.suptitle("Participant: "+str(participant_id)+" Run: "+str(run)+" Puzzle: "+str(puzzle)+" Attempt: "+str(attempt))
+                figa.suptitle("Participant: "+str(participant_id)+" Run: "+str(run)+" Puzzle: "+str(puzzle)+" Attempt: "+str(attempt))
                 fig.savefig("./test.png", dpi=300)
+                figa.savefig("./test_acc.png", dpi=300)
                 plt.close(fig)
+                plt.close(figa)
