@@ -64,35 +64,36 @@ def use_regex(input_text):
     attempt = match.group(6)
     return int(particpants), int(run), int(puzzle_id), int(attempt)
 
-frame_folder= "./Data/pilot3/Frames/"
-frame_files = os.listdir(frame_folder)
+frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 puzzleNumber=5
 sequence_type="POSVEC"
-numCluster = 5
+numCluster = 4
 
 
 allSV=[]
 ids=[]
-for file in frame_files:
-    if file.endswith(".json"):
-        participant_id, run, puzzle, attempt = use_regex(file)
-        if puzzle == puzzleNumber:
-            ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
-            with open(os.path.join(frame_folder,file)) as json_file:
-                data = json.load(json_file)
-                vector, object_names = positional_vector(data)
-                # print(vector)
-                # print(object_names)
-                d=len(vector.columns)        
-                n=len(vector.index)
-                # print(n,d)
-                solutionVector = np.empty([n,d])
-                for ni in range(n):
-                    for di in range(d):
-                        solutionVector[ni][di]=vector.iloc[ni,di]
-                allSV.append(solutionVector)
-            
+for frame_folder in frame_folders:
+    frame_files = os.listdir(frame_folder)
+    for file in frame_files:
+        if file.endswith(".json"):
+            participant_id, run, puzzle, attempt = use_regex(file)
+            if puzzle == puzzleNumber:
+                ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
+                with open(os.path.join(frame_folder,file)) as json_file:
+                    data = json.load(json_file)
+                    vector, object_names = positional_vector(data)
+                    # print(vector)
+                    # print(object_names)
+                    d=len(vector.columns)        
+                    n=len(vector.index)
+                    # print(n,d)
+                    solutionVector = np.empty([n,d])
+                    for ni in range(n):
+                        for di in range(d):
+                            solutionVector[ni][di]=vector.iloc[ni,di]
+                    allSV.append(solutionVector)
+                
                 # print(solutionVector)
 # print(len(allSV))
 # print(len(ids))

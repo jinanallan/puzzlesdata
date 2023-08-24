@@ -141,7 +141,7 @@ for file in frame_files:
     if file.endswith(".json"):
         participant_id, run, puzzle, attempt = use_regex(file)
         # print("Saved: ", str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png")
-        if participant_id == 38 and run == 1 and puzzle == 17 and attempt == 0:
+        if participant_id == 33 and run == 1 and puzzle == 17 and attempt == 0:
             with open(os.path.join(frame_folder,file)) as json_file:
                 data = json.load(json_file)
                 fig, ax = velocity_profile(data)

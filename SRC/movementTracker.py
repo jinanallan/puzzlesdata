@@ -23,7 +23,9 @@ def interaction(df, participant_id, run, type, sparce=False, direction=False, po
 
     if solved:
         # return the value of the solved key as string
-        return str(df['solved'].values[0])
+        total_time= df["total-time"].values[0]
+        total_time = float("{:.2f}".format(total_time))
+        return str(df['solved'].values[0]) , total_time
     else:
 
         try:

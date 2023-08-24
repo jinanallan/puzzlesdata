@@ -2,11 +2,11 @@ import numpy as np
 import os
 import json
 import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
 import movementTracker
 import HMPlotter
 from PIL import Image
 import time
+
 start_time = time.time()
 
 def coloring(type,c):
@@ -33,9 +33,9 @@ def main():
         for filename in os.listdir(folder):
             if filename.endswith('.json'):
                 participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
-                print(participant_id, run, puzzle, attempt)
                 # print(participant_id, run, puzzle, attempt)
-            if  not os.path.isfile('./Plots_Text/Path_Plots/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png'):
+                print(participant_id, run, puzzle, attempt)
+            if  os.path.isfile('./Plots_Text/Path_Plots/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png'):
 
                 if puzzle in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:         
                     fig, ax = plt.subplots()
@@ -53,7 +53,7 @@ def main():
                             df=movementTracker.df_from_json(data)
                             sparce=True
                             xi, yi = movementTracker.interaction(df, participant_id, run, type, sparce=sparce)
-                            solved = movementTracker.interaction(df, participant_id, run, type, solved=True)
+                            solved , total_time = movementTracker.interaction(df, participant_id, run, type, solved=True)
                             # print(xi.size, yi.size)
                             
                             imgfolder = './cropped_puzzles_screenshots'
@@ -85,7 +85,8 @@ def main():
                                 plt.xlabel('x')
                                 plt.ylabel('y')
                                 plt.legend()
-                    plt.title('Participant: '+str(participant_id)+' Puzzle: '+str(puzzle)+' Attempt: '+str(attempt)+' Run: '+str(run)+'\n Solved: '+str(solved))
+                                title= f'Participant: {participant_id}, Run: {run}, Puzzle: {puzzle}, Attempt: {attempt}, \n Solved: {solved}, Total time: {total_time} s'.format(participant_id, run, puzzle, attempt, solved, total_time)
+                                plt.title(title, fontsize=14)
                     plt.savefig('./Plots_Text/Path_Plots/'+
                                 str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png', dpi=300)
                     plt.close()
