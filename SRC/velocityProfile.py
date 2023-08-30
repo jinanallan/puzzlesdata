@@ -18,16 +18,17 @@ def use_regex(input_text):
 
 def velocity_profile(data, acceleration=False):
     """
-    plot the velocity profile of the objects in the puzzle
+    plot the velocity or accelaration profile of the objects in the puzzle
 
     Accepts:
         data: the json file (frames)
+        acceleration: if True, plots the acceleration profile, otherwise plots the velocity profile
     Reurns: 
         velocity profile of the objects
     """
     data = pd.DataFrame(data)
 
-    end_time = data.timestamp[len(data.frames)-1].split("-")[0]
+    end_time = data.timestamp[len(data.frames)-2].split("-")[0]
     end_time = int(end_time)
     end_time = pd.to_datetime(end_time, unit='us')
     
@@ -122,10 +123,15 @@ def velocity_profile(data, acceleration=False):
             ax[i].set_title(present_objects[positional_vector.columns[i*2][0]]+" acceleration profile")
         ax[i].set_xlabel("time step [s]")
         ax[i].set_ylabel("velocity magnitude [1/s]")
+
         if acceleration:
             ax[i].set_ylabel("acceleration magnitude [1/s^2]")
-        ax[i].set_xlim(0, len(v))
-        ax[i].set_xticks(np.arange(0, len(v), step=round(len(v)/T)*5), np.arange(0, T, step=5))
+        ax[i].set_xlim(0, len(v))  
+
+        if T < 10:
+            ax[i].set_xticks(np.arange(0, len(v), step=round(len(v)/T)*1), np.arange(0, T, step=1))
+        else:
+            ax[i].set_xticks(np.arange(0, len(v), step=round(len(v)/T)*10), np.arange(0, T, step=10))
         ax[i].set_ylim(0, 1.1*vmax)
         ax[i].legend(loc='upper right')
 
@@ -140,16 +146,17 @@ frame_files = os.listdir(frame_folder)
 for file in frame_files:
     if file.endswith(".json"):
         participant_id, run, puzzle, attempt = use_regex(file)
-        # print("Saved: ", str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png")
-        if participant_id == 33 and run == 1 and puzzle == 17 and attempt == 0:
-            with open(os.path.join(frame_folder,file)) as json_file:
+        # if participant_id == 34 and run ==2 and puzzle == 1 and attempt == 0:
+        with open(os.path.join(frame_folder,file)) as json_file:
+            if not os.path.exists("./Plots_Text/Velocity_Profile/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png"):
+                # print("Saved: ", str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png")
                 data = json.load(json_file)
                 fig, ax = velocity_profile(data)
                 figa, axa = velocity_profile(data, acceleration=True)
-                #set the title of the plot
+            #set the title of the plot
                 fig.suptitle("Participant: "+str(participant_id)+" Run: "+str(run)+" Puzzle: "+str(puzzle)+" Attempt: "+str(attempt))
                 figa.suptitle("Participant: "+str(participant_id)+" Run: "+str(run)+" Puzzle: "+str(puzzle)+" Attempt: "+str(attempt))
-                fig.savefig("./test.png", dpi=300)
-                figa.savefig("./test_acc.png", dpi=300)
+                fig.savefig("./Plots_Text/Velocity_Profile/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png", dpi=300)
+                figa.savefig("./Plots_Text/Velocity_Profile/Acceleration/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png", dpi=300)
                 plt.close(fig)
                 plt.close(figa)
