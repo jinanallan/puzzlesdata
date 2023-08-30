@@ -1,4 +1,4 @@
-![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/test.png?raw=True)
+![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Plots_Text/Velocity_Profile/35_2_17_2.png?raw=True)
 ![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Data/bestTimeDistribution.png?raw=True)
 ![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Data/Distribution.png?raw=True)
 
