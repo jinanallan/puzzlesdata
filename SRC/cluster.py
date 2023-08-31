@@ -284,7 +284,6 @@ def stacked_barplot_interaction(interaction_lists, ids, cluster_id, puzzleNumber
         plt.title(f'Interaction sequence for cluster {cluster_id}', fontsize=20)
 
     plt.legend(handles=legend_patches, loc='upper right')
-
 def hierarchyCluster(numCluster,puzzleNumber, sequence_type):
 
     sequences,ids = getAllSolution(puzzleNumber, sequence_type)

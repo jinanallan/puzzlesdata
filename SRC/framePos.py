@@ -4,7 +4,7 @@ import os
 import re
 import numpy as np
 import matplotlib.pyplot as plt
-from dtaidistance import dtw
+from dtaidistance import dtw, dtw_ndim
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 from gif_generator import gif
 import time
@@ -66,7 +66,7 @@ def use_regex(input_text):
 
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
-puzzleNumber=2
+puzzleNumber=5
 sequence_type="POSVEC"
 numCluster = 3
 
@@ -95,13 +95,34 @@ for frame_folder in frame_folders:
                     allSV.append(solutionVector)
                 
                 # print(solutionVector)
-# print(len(allSV))
-# print(len(ids))
-distanceMatrix = dtw.distance_matrix_fast(allSV, compact=True)
-# # print(distanceMatrix)
-# plt.figure(figsize=(10, 10))
-# plt.imshow(distanceMatrix, cmap='hot', interpolation='nearest')
-# plt.show()
+
+# distanceMatrix = dtw.distance_matrix_fast(allSV, compact=True, use_pruning=True)
+
+# for sequence in allSV:
+#     print(sequence.shape)
+
+
+
+
+def dtwI(sequences):
+    n=len(sequences)
+    d=len(sequences[0][0])
+    distanceMatrix = np.empty([n,n])
+    for i in range(n):
+        for j in range(i+1,n):
+            dtw_i=0
+            for k in range(d):
+                print(i,j,k)
+                dtw_i+=dtw.distance_fast(sequences[i][:,k], sequences[j][:,k])
+                # print(dtw_i)
+            distanceMatrix[i][j]=dtw_i
+    # make distanceMatrix in form of scipy pdist  output
+    distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
+
+    return distanceMatrix
+
+distanceMatrix = dtwI(allSV)
+
 
 if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
         os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
