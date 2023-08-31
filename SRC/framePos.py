@@ -66,9 +66,9 @@ def use_regex(input_text):
 
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
-puzzleNumber=6
+puzzleNumber=1
 sequence_type="POSVEC"
-numCluster = 3
+numCluster = 2
 
 
 allSV=[]
