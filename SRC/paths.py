@@ -35,7 +35,8 @@ def main():
                 participant_id, run, puzzle, attempt = HMPlotter.use_regex(filename)
                 # print(participant_id, run, puzzle, attempt)
                 print(participant_id, run, puzzle, attempt)
-            if  os.path.isfile('./Plots_Text/Path_Plots/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png'):
+            # if  os.path.isfile('./Plots_Text/Path_Plots/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png'):
+            if participant_id==34 and run==1 and puzzle==1 and attempt==0:
 
                 if puzzle in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:         
                     fig, ax = plt.subplots()
@@ -53,6 +54,7 @@ def main():
                             df=movementTracker.df_from_json(data)
                             sparce=True
                             xi, yi = movementTracker.interaction(df, participant_id, run, type, sparce=sparce)
+    
                             solved , total_time = movementTracker.interaction(df, participant_id, run, type, solved=True)
                             # print(xi.size, yi.size)
                             

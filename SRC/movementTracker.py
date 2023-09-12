@@ -28,7 +28,7 @@ def interaction(df, participant_id, run, type, sparce=False, direction=False, po
         return str(df['solved'].values[0]) , total_time
     else:
 
-        try:
+        # try:
 
             events = df["events"]
             df_events = pd.DataFrame(events)
@@ -47,18 +47,20 @@ def interaction(df, participant_id, run, type, sparce=False, direction=False, po
                 lambda x: x.get('description'))
 
             df_events = df_events.drop('events', axis=1)
-
+            # attachIndex = []
             if type == 'total' or type == 'free':
                 attachIndex = (
                     df_events.index[df_events['description'].str.contains("Attach")]+1).tolist()
                 releaseIndex = (
                     df_events.index[df_events['description'].str.contains("Release")]-1).tolist()
+                # print(attachIndex, releaseIndex)                            
 
             else:
                 attachIndex = (
                     df_events.index[df_events['description'] == "Attach "+type]+1).tolist()
                 releaseIndex = (
                     df_events.index[df_events['description'] == "Release "+type]-1).tolist()
+                # print(attachIndex, releaseIndex)
 
             if direction:
                 # here is an array since any type may be interacted multiple times
@@ -153,10 +155,15 @@ def interaction(df, participant_id, run, type, sparce=False, direction=False, po
             else:
 
                 interactions = np.array([])
+
                 for i in range(len(attachIndex)):
-                    interactions = np.append(
-                        interactions, (range(attachIndex[i], releaseIndex[i])))
-                    interactions = interactions.flatten()
+                    if releaseIndex==[]:
+                        break
+                    else:
+                    # print(attachIndex[i], releaseIndex[i])
+                        interactions = np.append(
+                            interactions, (range(attachIndex[i], releaseIndex[i])))
+                        interactions = interactions.flatten()
                 interactions = interactions.astype(int)
 
                 x = np.array([])
@@ -176,8 +183,8 @@ def interaction(df, participant_id, run, type, sparce=False, direction=False, po
                 else:
                     return x, y
 
-        except:
-            return np.array([]), np.array([])
+        # except:
+        #     return np.array([]), np.array([])
 
 
 # get the list of unique descriptions in the json file
