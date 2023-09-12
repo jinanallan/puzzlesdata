@@ -4,9 +4,9 @@ import os
 import re
 import numpy as np
 import matplotlib.pyplot as plt
-from dtaidistance import dtw, dtw_ndim
+from dtaidistance import dtw
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
-from gif_generator import gif
+from gifGenerator import gif
 import time
 start_time = time.time()
 
@@ -53,58 +53,14 @@ def positional_vector(data):
         row+=1
     return positional_vector, present_objects
 
-def use_regex(input_text):
-    pattern = re.compile(r"([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_frames", re.IGNORECASE)
-
-    match = pattern.match(input_text)
-    
-    particpants = match.group(3)
-    run = match.group(4)
-    puzzle_id = match.group(5)
-    attempt = match.group(6)
-    return int(particpants), int(run), int(puzzle_id), int(attempt)
-
-frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
-
-puzzleNumber=1
-sequence_type="POSVEC"
-numCluster = 3
-
-
-allSV=[]
-ids=[]
-for frame_folder in frame_folders:
-    frame_files = os.listdir(frame_folder)
-    for file in frame_files:
-        if file.endswith(".json"):
-            participant_id, run, puzzle, attempt = use_regex(file)
-            if puzzle == puzzleNumber:
-                ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
-                with open(os.path.join(frame_folder,file)) as json_file:
-                    data = json.load(json_file)
-                    vector, object_names = positional_vector(data)
-                    # print(vector)
-                    # print(object_names)
-                    d=len(vector.columns)        
-                    n=len(vector.index)
-                    # print(n,d)
-                    solutionVector = np.empty([n,d])
-                    for ni in range(n):
-                        for di in range(d):
-                            solutionVector[ni][di]=vector.iloc[ni,di]
-                    allSV.append(solutionVector)
-                
-                # print(solutionVector)
-
-# distanceMatrix = dtw.distance_matrix_fast(allSV, compact=True, use_pruning=True)
-
-# for sequence in allSV:
-#     print(sequence.shape)
-
-
-
-
 def dtwI(sequences):
+    """
+    Get the distance matrix of the sequences using Independent dtw
+    Accepts:
+        sequences: list of sequences (each sequence is a positional vector of a puzzle solution)
+    Returns:
+        distanceMatrix: pairwise distance matrix of the sequences in form of scipy pdist output
+    """
     n=len(sequences)
     d=len(sequences[0][0])
     distanceMatrix = np.empty([n,n])
@@ -118,11 +74,25 @@ def dtwI(sequences):
             distanceMatrix[i][j]=dtw_i
     # make distanceMatrix in form of scipy pdist  output
     distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
-
     return distanceMatrix
 
-distanceMatrix = dtwI(allSV)
+def use_regex(input_text):
+    pattern = re.compile(r"([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_frames", re.IGNORECASE)
 
+    match = pattern.match(input_text)
+    
+    particpants = match.group(3)
+    run = match.group(4)
+    puzzle_id = match.group(5)
+    attempt = match.group(6)
+    return int(particpants), int(run), int(puzzle_id), int(attempt)
+
+frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
+
+puzzleNumber=4
+sequence_type="POSVEC"
+numCluster = 2
+use_saved_linkage = False
 
 if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
         os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
@@ -130,12 +100,42 @@ if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_t
 else:
     plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
 
-Z = linkage(distanceMatrix, 'ward')
+if use_saved_linkage:
+    Z= np.loadtxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt')
+else:
+    allSV=[]
+    ids=[]
+    for frame_folder in frame_folders:
+        frame_files = os.listdir(frame_folder)
+        for file in frame_files:
+            if file.endswith(".json"):
+                participant_id, run, puzzle, attempt = use_regex(file)
+                if puzzle == puzzleNumber:
+                    ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
+                    with open(os.path.join(frame_folder,file)) as json_file:
+                        data = json.load(json_file)
+                        vector, object_names = positional_vector(data)
+                        # print(vector)
+                        # print(object_names)
+                        d=len(vector.columns)        
+                        n=len(vector.index)
+                        # print(n,d)
+                        solutionVector = np.empty([n,d])
+                        for ni in range(n):
+                            for di in range(d):
+                                solutionVector[ni][di]=vector.iloc[ni,di]
+                        allSV.append(solutionVector)
+                    
+    distanceMatrix = dtwI(allSV)
 
-plt.figure(figsize=(20, 10))
-dendrogram(Z, labels=ids)
-plt.savefig(f'{plotPath}/dendrogram_puzzle{puzzleNumber}_{sequence_type}.png')
-# plt.show()
+    Z = linkage(distanceMatrix, 'ward')
+
+    np.savetxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt', Z)
+
+    plt.figure(figsize=(20, 10))
+    dendrogram(Z, labels=ids)
+    plt.savefig(f'{plotPath}/dendrogram_puzzle{puzzleNumber}_{sequence_type}.png')
+
 clusters = fcluster(Z, numCluster, criterion='maxclust')
 
 cluster_ids = {}
@@ -146,8 +146,6 @@ for i, cluster_id in enumerate(clusters):
     cluster_ids[cluster_id].append(ids[i])
 
 for cluster_id, data_ids in cluster_ids.items():
-    # print('Cluster ID: {}'.format(cluster_id))
-    # print('Data IDs: {}\n'.format(data_ids))
 
     first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids)
     first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
@@ -156,12 +154,5 @@ for cluster_id, data_ids in cluster_ids.items():
 
 
 print("--- %s seconds ---" % (time.time() - start_time))  
-
-
-# TODO: define objects and their IDs present in the last frame **DONE
-# store the X,Y,Z, rotation of each object in a list **Done
-#study the velocity profile and match with the intraction 
-# concatenate the dataframe to a single vector **done 
-# Cluster the vectors using DTW **done 
 
 

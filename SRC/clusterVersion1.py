@@ -315,11 +315,11 @@ def hierarchyCluster(numCluster,puzzleNumber, sequence_type):
     visualize the clusters
     """
 
-    if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
-        os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
-        plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+    if not os.path.exists(f'./Plots_Text/clustering/First_version/puzzle{puzzleNumber}_{sequence_type}'):
+        os.makedirs(f'./Plots_Text/clustering/First_version/puzzle{puzzleNumber}_{sequence_type}')
+        plotPath=f'./Plots_Text/clustering/First_version/puzzle{puzzleNumber}_{sequence_type}'
     else:
-        plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+        plotPath=f'./Plots_Text/clustering/First_version/puzzle{puzzleNumber}_{sequence_type}'
     
     plt.figure(figsize=(20, 10))
     dendrogram(Linkage_matrix,labels=ids)
