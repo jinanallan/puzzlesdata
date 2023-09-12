@@ -92,7 +92,7 @@ frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 puzzleNumber=4
 sequence_type="POSVEC"
 numCluster = 2
-use_saved_linkage = False
+use_saved_linkage = True
 
 if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
         os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
@@ -102,6 +102,16 @@ else:
 
 if use_saved_linkage:
     Z= np.loadtxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt')
+    allSV=[]
+    ids=[]
+    for frame_folder in frame_folders:
+        frame_files = os.listdir(frame_folder)
+        for file in frame_files:
+            if file.endswith(".json"):
+                participant_id, run, puzzle, attempt = use_regex(file)
+                if puzzle == puzzleNumber:
+                    ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
+             
 else:
     allSV=[]
     ids=[]
