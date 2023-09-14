@@ -1,0 +1,177 @@
+import json
+import pandas as pd
+import os
+import re
+import numpy as np
+import matplotlib.pyplot as plt
+from dtaidistance import dtw
+from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
+from gifGenerator import gif
+import time
+start_time = time.time()
+
+def positional_vector(data):
+    """
+    Get the positional vector of the objects from frames json file
+
+    Accepts:
+        data: the json file
+    Reurns: 
+        positional_vector: dataframe with the positional vector
+        object_names: dict of object names and their IDs
+    """
+    data = pd.DataFrame(data)
+
+    last_frame = data.frames[len(data.frames)-1]
+    present_objects = {}
+    for definition in last_frame:
+        present_objects[definition["ID"]] = definition["name"]
+
+    universal_Objects = ["box1","box2", "obj1","obj2", "obj3","obj4","ego"]
+    
+    for x in list(present_objects):
+        if present_objects[x] not in universal_Objects:
+            # print(present_objects[x])
+            present_objects.pop(x)
+    
+    positional_vector=pd.DataFrame(columns=present_objects)
+    sub_columns = pd.MultiIndex.from_product([positional_vector.columns, ['x', 'y']], names=['ID', 'position'])
+    positional_vector = pd.DataFrame(index=range(len(data.frames)), columns=sub_columns)
+
+    row=0
+    for frame in data.frames:
+        # print(frame)
+        for object in frame:
+            if object["ID"] in present_objects.keys():
+                # print(object["ID"], present_objects[object["ID"]])
+                id=object["ID"]
+                # id=str(id)
+                x=object["X"][0]
+                y=object["X"][1]
+                positional_vector.at[row,(id,'x')]=x
+                positional_vector.at[row,(id,'y')]=y
+        row+=1
+    return positional_vector, present_objects
+
+def dtwI(sequences):
+    """
+    Get the distance matrix of the sequences using Independent dtw
+    Accepts:
+        sequences: list of sequences (each sequence is a positional vector of a puzzle solution)
+    Returns:
+        distanceMatrix: pairwise distance matrix of the sequences in form of scipy pdist output
+    """
+    n=len(sequences)
+    d=len(sequences[0][0])
+    distanceMatrix = np.empty([n,n])
+    for i in range(n):
+        for j in range(i+1,n):
+            dtw_i=0
+            for k in range(d):
+                print(i,j,k)
+                dtw_i+=dtw.distance_fast(sequences[i][:,k], sequences[j][:,k])
+                # print(dtw_i)
+            distanceMatrix[i][j]=dtw_i
+    # make distanceMatrix in form of scipy pdist  output
+    distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
+    return distanceMatrix
+
+def use_regex(input_text):
+    pattern = re.compile(r"([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_frames", re.IGNORECASE)
+
+    match = pattern.match(input_text)
+    
+    particpants = match.group(3)
+    run = match.group(4)
+    puzzle_id = match.group(5)
+    attempt = match.group(6)
+    return int(particpants), int(run), int(puzzle_id), int(attempt)
+
+frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
+
+#specify the puzzle numbers you want to cluster 
+#if first time running, set use_saved_linkage to False to generate linkage matrix and dendrogram 
+# then choose the number of clusters and set use_saved_linkage to True to generate the gifs
+
+
+sequence_type="POSVEC"
+pcns=[[1,3],[2,3], [3,3], [4,2], [5,3], [6,3], [21,3], [22,3], [23,2], [24,4], [25,3], [26,2]]
+
+use_saved_linkage = True
+
+for pcn in pcns:
+    puzzleNumber = pcn[0]
+    numCluster = pcn[1]
+    if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
+            os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
+            plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+    else:
+        plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+
+    if use_saved_linkage:
+        Z= np.loadtxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt')
+        allSV=[]
+        ids=[]
+        for frame_folder in frame_folders:
+            frame_files = os.listdir(frame_folder)
+            for file in frame_files:
+                if file.endswith(".json"):
+                    participant_id, run, puzzle, attempt = use_regex(file)
+                    if puzzle == puzzleNumber:
+                        ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
+        clusters = fcluster(Z, numCluster, criterion='maxclust')
+
+        cluster_ids = {}
+        # Iterate over the data points and assign them to their respective clusters
+        for i, cluster_id in enumerate(clusters):
+            if cluster_id not in cluster_ids:
+                cluster_ids[cluster_id] = []
+            cluster_ids[cluster_id].append(ids[i])
+
+        for cluster_id, data_ids in cluster_ids.items():
+
+            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids)
+            first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
+
+    else:
+        allSV=[]
+        ids=[]
+        for frame_folder in frame_folders:
+            frame_files = os.listdir(frame_folder)
+            for file in frame_files:
+                if file.endswith(".json"):
+                    participant_id, run, puzzle, attempt = use_regex(file)
+                    if puzzle == puzzleNumber:
+                        ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
+                        with open(os.path.join(frame_folder,file)) as json_file:
+                            data = json.load(json_file)
+                            vector, object_names = positional_vector(data)
+                            # print(vector)
+                            # print(object_names)
+                            d=len(vector.columns)        
+                            n=len(vector.index)
+                            # print(n,d)
+                            solutionVector = np.empty([n,d])
+                            for ni in range(n):
+                                for di in range(d):
+                                    solutionVector[ni][di]=vector.iloc[ni,di]
+                            allSV.append(solutionVector)
+                        
+        distanceMatrix = dtwI(allSV)
+
+        Z = linkage(distanceMatrix, 'ward')
+
+        np.savetxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt', Z)
+
+        plt.figure(figsize=(20, 10))
+        dendrogram(Z, labels=ids)
+        plt.savefig(f'{plotPath}/dendrogram_puzzle{puzzleNumber}_{sequence_type}.png')
+        plt.close()
+
+
+
+
+
+print("--- %s seconds ---" % (time.time() - start_time))  
+
+
