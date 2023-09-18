@@ -4,7 +4,7 @@ import pandas as pd
 import os
 import json
 import movementTracker
-import HMPlotter
+
 def dropEvents(df):
     try:
         df=df.drop('events', axis=1)

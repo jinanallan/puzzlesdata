@@ -1,8 +1,6 @@
 #the goal is to generate stacked bar plots from the txt files in the Direction folder
 # count the number of participants who took box1 NW as their first move
 
-
-import os
 import numpy as np
 import re
 import matplotlib.pyplot as plt

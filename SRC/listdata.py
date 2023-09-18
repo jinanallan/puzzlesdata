@@ -1,9 +1,10 @@
 import re
 import os
-import json
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+
+#number of attempts at each run for each participant and puzzle is computed and saved in a csv file and visualized in this script
 
 SMALL_SIZE = 10
 MEDIUM_SIZE = 16

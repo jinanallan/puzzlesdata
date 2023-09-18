@@ -5,7 +5,7 @@ import json
 import matplotlib.pyplot as plt
 import movementTracker
 import HMPlotter
-from gif_generator import gif
+from gifGenerator import gif
 from sklearn.preprocessing import OneHotEncoder
 from dtaidistance import dtw
 from dtaidistance import dtw_ndim
