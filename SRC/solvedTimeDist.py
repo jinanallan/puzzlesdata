@@ -125,17 +125,19 @@ for particpants in [40]:
         puzzle_id_index = np.where(unique_puzzles == puzzle_id)[0][0]
         sol_matrix2_best[particpants_index, puzzle_id_index] = np.nan
 
-                    
-# plt.figure(figsize=(20,11))
-# plt.suptitle('avg Best Time Solved [s]', fontsize=20)
-# plt.subplot(1, 2, 1)
-# plt.bar(unique_puzzles, columnsun1, color="black")
-# plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
-# plt.subplot(1, 2, 2)
-# plt.bar(unique_puzzles, columnsun2, color="black")
-# plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
-# plt.savefig("./Data/avgBestTimeDistribution.png", dpi=300)
-# plt.close()
+columnsun1 = np.mean(np.ma.masked_invalid(sol_matrix1), axis=0)
+columnsun2 = np.mean(np.ma.masked_invalid(sol_matrix2), axis=0)
+
+plt.figure(figsize=(20,11))
+plt.suptitle('avg Best Time Solved [s]', fontsize=20)
+plt.subplot(1, 2, 1)
+plt.bar(unique_puzzles, columnsun1, color="black")
+plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
+plt.subplot(1, 2, 2)
+plt.bar(unique_puzzles, columnsun2, color="black")
+plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
+plt.savefig("./Data/avgBestTimeDistribution.png", dpi=300)
+plt.close()
 
 # plt.figure(figsize=(20,15))
 # plt.suptitle('Time Solved [s]', fontsize=20)
