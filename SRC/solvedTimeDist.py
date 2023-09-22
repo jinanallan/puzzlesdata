@@ -55,6 +55,12 @@ sol_matrix2_best[:] = np.inf
 sol_att_matrix1 = np.genfromtxt("./Data/sol_matrix1.csv", delimiter=',')
 sol_att_matrix2 = np.genfromtxt("./Data/sol_matrix2.csv", delimiter=',')
 
+attCol1 = np.mean(sol_att_matrix1, axis=0)
+attCol2 = np.mean(sol_att_matrix2, axis=0)
+ascore = attCol1+attCol2
+ascore = ascore/2
+ascore = (ascore - np.min(ascore))/(np.max(ascore) - np.min(ascore))
+
 for pilot in [3,4]:
 
     folder = "./Data/Pilot{}/Ego-based/".format(pilot)
@@ -128,16 +134,11 @@ for particpants in [40]:
 columnsun1 = np.mean(np.ma.masked_invalid(sol_matrix1), axis=0)
 columnsun2 = np.mean(np.ma.masked_invalid(sol_matrix2), axis=0)
 
-plt.figure(figsize=(20,11))
-plt.suptitle('avg Best Time Solved [s]', fontsize=20)
-plt.subplot(1, 2, 1)
-plt.bar(unique_puzzles, columnsun1, color="black")
-plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
-plt.subplot(1, 2, 2)
-plt.bar(unique_puzzles, columnsun2, color="black")
-plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
-plt.savefig("./Data/avgBestTimeDistribution.png", dpi=300)
-plt.close()
+#best time score is normalized (between 0 and 1) value of  columnsun1+columnsun2
+bScore = columnsun1+columnsun2
+bScore = bScore/2
+bScore = (bScore - np.min(bScore))/(np.max(bScore) - np.min(bScore))
+
 
 # plt.figure(figsize=(20,15))
 # plt.suptitle('Time Solved [s]', fontsize=20)
@@ -243,3 +244,34 @@ plt.text(0, 2+len(unique_participants), "max time run 2: {} [s]".format(vmax2), 
 plt.colorbar( orientation='vertical', pad=0.1, shrink=0.5, label="Time [s]")
 
 plt.savefig("./Data/bestTimeDistribution.png", dpi=300)
+#scale ascore and bScore between 1 and 10
+ascore = ascore*9+1
+bScore = bScore*9+1
+difScore = bScore*ascore
+difScore = difScore/np.max(difScore)
+difScore = difScore*9+1
+
+plt.figure(figsize=(20,11))
+plt.suptitle(' attempt score - time score - diff score', fontsize=20)
+plt.subplot(1, 3, 1)
+plt.bar(unique_puzzles, ascore, color="black")
+plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
+plt.yticks(np.arange(0, 11, 1))
+plt.xlabel("Puzzle ID" , labelpad=20)
+plt.ylabel("Score", labelpad=20)
+plt.yticks(np.arange(0, 11, 1))
+plt.subplot(1, 3, 2)
+plt.bar(unique_puzzles, bScore, color="black")
+plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
+plt.xlabel("Puzzle ID" , labelpad=20)
+plt.ylabel("Score", labelpad=20)
+plt.yticks(np.arange(0, 11, 1))
+plt.subplot(1, 3, 3)
+plt.bar(unique_puzzles, difScore, color="black")
+plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
+plt.xlabel("Puzzle ID" , labelpad=20)
+plt.ylabel("Score", labelpad=20)
+plt.yticks(np.arange(0, 11, 1))
+plt.tight_layout()
+plt.savefig("./Data/difScore.png", dpi=300)
+plt.close()
