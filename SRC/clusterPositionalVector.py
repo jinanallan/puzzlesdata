@@ -4,12 +4,30 @@ import os
 import re
 import numpy as np
 import matplotlib.pyplot as plt
+from PIL import Image
+import matplotlib.colors as mcolors
 from dtaidistance import dtw
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 from gifGenerator import gif
 import time
 start_time = time.time()
 
+def coloring(object):
+    if object=='box1':
+        return [(0,0,1,c) for c in np.linspace(0,1,100)]
+    elif object=='box2':
+        return [(0,1,0,c) for c in np.linspace(0,1,100)]
+    elif object=='obj1':
+        return [(1,0,0,c) for c in np.linspace(0,1,100)]
+    elif object=='obj2':
+        return [(1,0,1,c) for c in np.linspace(0,1,100)]
+    elif object=='obj3':
+        return [(1,1,0,c) for c in np.linspace(0,1,100)]
+    elif object=='obj4':
+        return [(0,1,1,c) for c in np.linspace(0,1,100)]
+    elif object=='ego':
+        return [(0,0,0,c) for c in np.linspace(0,1,100)]
+    
 def positional_vector(data):
     """
     Get the positional vector of the objects from frames json file
@@ -18,7 +36,7 @@ def positional_vector(data):
         data: the json file
     Reurns: 
         positional_vector: dataframe with the positional vector
-        object_names: dict of object names and their IDs
+        present_objects: dict of object names and their IDs
     """
     data = pd.DataFrame(data)
 
@@ -87,6 +105,50 @@ def use_regex(input_text):
     attempt = match.group(6)
     return int(particpants), int(run), int(puzzle_id), int(attempt)
 
+def Heatmap(cluster_id, data_ids, puzzleNumber):
+    """
+    Output a heatmap of solutions within a cluster 
+
+    Accepts:
+        cluster_id: the cluster id
+        data_ids: list of ids of solutions within the cluster
+    Reurns:
+        Plot of the heatmap of solutions within a cluster
+    """ 
+    cluster_vector = pd.DataFrame()
+    for id in data_ids:
+        try:
+           #find the file name that ends with {id}_frames.json in Pilot 3 folder
+            filename = [f for f in os.listdir('./Data/Pilot3/Frames/') if f.endswith(f'{id}_frames.json')][0]
+            data = json.load(open(f'./Data/Pilot3/Frames/{filename}'))
+            # print(filename)
+        except:
+            filename = [f for f in os.listdir('./Data/Pilot4/Frames/') if f.endswith(f'{id}_frames.json')][0]
+            data = json.load(open(f'./Data/Pilot4/Frames/{filename}'))
+
+        vector, present_objects = positional_vector(data)
+
+        cluster_vector = pd.concat([cluster_vector, vector], axis=0)
+
+    cluster_vector = cluster_vector.reset_index(drop=True)
+
+    fig, ax = plt.subplots()
+    # imgfolder = './cropped_puzzles_screenshots'
+    # fname = os.path.join(imgfolder, 'puzzle'+str(puzzleNumber)+'.png')
+    # img = Image.open(fname).convert('L')
+    # img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
+    for i,object in enumerate(present_objects):
+        colors = coloring(present_objects[object])
+        cmapred = mcolors.LinearSegmentedColormap.from_list('mycmap', colors, N=100)
+        x = cluster_vector[object]['x']
+        y = cluster_vector[object]['y']
+        plt.hist2d(x, y, bins=(10, 10),cmap=cmapred)
+    plt.xlim(-2, 2)
+    plt.ylim(-2, 2)
+    plt.title(f'Heatmap of the cluster {cluster_id} in puzzle {puzzleNumber}' )
+    plt.show()
+    plt.close(fig)
+
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 #specify the puzzle numbers you want to cluster 
@@ -95,7 +157,8 @@ frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 
 sequence_type="POSVEC"
-pcns=[[1,3],[2,3], [3,3], [4,2], [5,3], [6,3], [21,3], [22,3], [23,2], [24,4], [25,3], [26,2]]
+# pcns=[[1,3],[2,3], [3,3], [4,2], [5,3], [6,3], [21,3], [22,3], [23,2], [24,4], [25,3], [26,2]]
+pcns=[[21,3]]
 
 use_saved_linkage = True
 
@@ -129,7 +192,7 @@ for pcn in pcns:
             cluster_ids[cluster_id].append(ids[i])
 
         for cluster_id, data_ids in cluster_ids.items():
-
+            Heatmap(cluster_id, data_ids, puzzleNumber)
             first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids)
             first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
 
@@ -167,10 +230,6 @@ for pcn in pcns:
         dendrogram(Z, labels=ids)
         plt.savefig(f'{plotPath}/dendrogram_puzzle{puzzleNumber}_{sequence_type}.png')
         plt.close()
-
-
-
-
 
 print("--- %s seconds ---" % (time.time() - start_time))  
 
