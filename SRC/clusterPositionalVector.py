@@ -4,29 +4,47 @@ import os
 import re
 import numpy as np
 import matplotlib.pyplot as plt
-from PIL import Image
 import matplotlib.colors as mcolors
+from PIL import Image
 from dtaidistance import dtw
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 from gifGenerator import gif
 import time
+import subprocess
+
 start_time = time.time()
 
-def coloring(object):
-    if object=='box1':
-        return [(0,0,1,c) for c in np.linspace(0,1,100)]
-    elif object=='box2':
-        return [(0,1,0,c) for c in np.linspace(0,1,100)]
-    elif object=='obj1':
-        return [(1,0,0,c) for c in np.linspace(0,1,100)]
-    elif object=='obj2':
-        return [(1,0,1,c) for c in np.linspace(0,1,100)]
-    elif object=='obj3':
-        return [(1,1,0,c) for c in np.linspace(0,1,100)]
-    elif object=='obj4':
-        return [(0,1,1,c) for c in np.linspace(0,1,100)]
-    elif object=='ego':
-        return [(0,0,0,c) for c in np.linspace(0,1,100)]
+def coloring(object,dummy = False):
+    if dummy:
+        if object=='box1':
+            return (0,0,1) 
+        elif object=='box2':
+            return (0,1,0) 
+        elif object=='obj1':
+            return (1,0,0) 
+        elif object=='obj2':
+            return (1,0,1) 
+        elif object=='obj3':
+            return (1,1,0) 
+        elif object=='obj4':
+            return (0,1,1) 
+        elif object=='ego':
+            return (0,0,0) 
+    else:
+        if object=='box1':
+            return [(0,0,1,c) for c in np.linspace(0,1,100)]
+        elif object=='box2':
+            return [(0,1,0,c) for c in np.linspace(0,1,100)]
+        elif object=='obj1':
+            return [(1,0,0,c) for c in np.linspace(0,1,100)]
+        elif object=='obj2':
+            return [(1,0,1,c) for c in np.linspace(0,1,100)]
+        elif object=='obj3':
+            return [(1,1,0,c) for c in np.linspace(0,1,100)]
+        elif object=='obj4':
+            return [(0,1,1,c) for c in np.linspace(0,1,100)]
+        elif object=='ego':
+            return [(0,0,0,c) for c in np.linspace(0,1,100)]
     
 def positional_vector(data):
     """
@@ -116,13 +134,52 @@ def Heatmap(cluster_id, data_ids, puzzleNumber):
         Plot of the heatmap of solutions within a cluster
     """ 
     cluster_vector = pd.DataFrame()
+    n=len(data_ids)
+    #solved rate 
+    sr=0
+    #average time
+    at=0
+
+    
     for id in data_ids:
         try:
-           #find the file name that ends with {id}_frames.json in Pilot 3 folder
+            filenameTemp = [f for f in os.listdir('./Data/Pilot3/Ego-based/') if f.endswith(f'{id}.json')][0]
+            dataTemp = json.load(open(f'./Data/Pilot3/Ego-based/{filenameTemp}'))
+
+            try:
+                df = pd.DataFrame(dataTemp)
+            except:
+                df = pd.DataFrame(dataTemp, index=[0])
+        
+    
+            solved = df['solved'].values[0]
+            total_time = df['total-time'].values[0]
+            at+=total_time
+
+            if solved:
+                sr+=1
+    
+
             filename = [f for f in os.listdir('./Data/Pilot3/Frames/') if f.endswith(f'{id}_frames.json')][0]
             data = json.load(open(f'./Data/Pilot3/Frames/{filename}'))
-            # print(filename)
         except:
+            filenameTemp= [f for f in os.listdir('./Data/Pilot4/Ego-based/') if f.endswith(f'{id}.json')][0]
+            dataTemp = json.load(open(f'./Data/Pilot4/Ego-based/{filenameTemp}'))
+
+
+            try:
+                df = pd.DataFrame(dataTemp)
+            except:
+                df = pd.DataFrame(dataTemp, index=[0])
+
+            solved = df['solved'].values[0]
+            total_time = df['total-time'].values[0]
+            at+=total_time
+
+            if solved:
+                sr+=1
+             
+
             filename = [f for f in os.listdir('./Data/Pilot4/Frames/') if f.endswith(f'{id}_frames.json')][0]
             data = json.load(open(f'./Data/Pilot4/Frames/{filename}'))
 
@@ -130,23 +187,32 @@ def Heatmap(cluster_id, data_ids, puzzleNumber):
 
         cluster_vector = pd.concat([cluster_vector, vector], axis=0)
 
+    sr=sr/n
+    at=at/n
+
     cluster_vector = cluster_vector.reset_index(drop=True)
 
     fig, ax = plt.subplots()
-    # imgfolder = './cropped_puzzles_screenshots'
-    # fname = os.path.join(imgfolder, 'puzzle'+str(puzzleNumber)+'.png')
-    # img = Image.open(fname).convert('L')
-    # img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
+    
+    imgfolder = './cropped_puzzles_screenshots'
+    fname = os.path.join(imgfolder, 'puzzle'+str(puzzleNumber)+'.png')
+    img = Image.open(fname).convert('L')
+    img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
     for i,object in enumerate(present_objects):
         colors = coloring(present_objects[object])
-        cmapred = mcolors.LinearSegmentedColormap.from_list('mycmap', colors, N=100)
+        cmap = mcolors.LinearSegmentedColormap.from_list('mycmap', colors, N=100)
         x = cluster_vector[object]['x']
         y = cluster_vector[object]['y']
-        plt.hist2d(x, y, bins=(10, 10),cmap=cmapred)
+        plt.hist2d(x, y, bins=(45, 45),cmap=cmap, norm=mcolors.LogNorm())
+        #dummy scatter plot for legend
+        sc = plt.scatter([],[], color=coloring(present_objects[object], True), label=present_objects[object])
+        
+    plt.legend(title=f'Number of solutions: {n}\n Solved rate: {sr:.2f} \n Average time: {at:.2f} seconds',loc='upper left', bbox_to_anchor=(1.05, 1))
     plt.xlim(-2, 2)
     plt.ylim(-2, 2)
     plt.title(f'Heatmap of the cluster {cluster_id} in puzzle {puzzleNumber}' )
-    plt.show()
+    plt.savefig(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png',
+                bbox_inches='tight', dpi=300)
     plt.close(fig)
 
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
@@ -157,8 +223,8 @@ frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 
 sequence_type="POSVEC"
-# pcns=[[1,3],[2,3], [3,3], [4,2], [5,3], [6,3], [21,3], [22,3], [23,2], [24,4], [25,3], [26,2]]
-pcns=[[21,3]]
+pcns=[[1,3],[2,3], [3,3], [4,2], [5,3], [6,3], [21,3], [22,3], [23,2], [24,4], [25,3], [26,2]]
+# pcns=[[24,4]]
 
 use_saved_linkage = True
 
@@ -192,9 +258,9 @@ for pcn in pcns:
             cluster_ids[cluster_id].append(ids[i])
 
         for cluster_id, data_ids in cluster_ids.items():
-            Heatmap(cluster_id, data_ids, puzzleNumber)
             first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids)
             first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
+            Heatmap(cluster_id, data_ids, puzzleNumber)
 
     else:
         allSV=[]
@@ -232,5 +298,21 @@ for pcn in pcns:
         plt.close()
 
 print("--- %s seconds ---" % (time.time() - start_time))  
+repo_path = './'
+commit_message = 'Automated commit'
+
+# Change directory to the Git repository
+os.chdir(repo_path)
+
+# Add changes to the Git staging area
+subprocess.run(['git', 'add', '.'])
+
+# Commit changes with a commit message
+subprocess.run(['git', 'commit', '-m', "Automated commit: run heatmap of all clusters, all puzzles"])
+
+# Push changes to GitHub
+subprocess.run(['git', 'push'])
+
+subprocess.run(['sudo', 'shutdown', '-h', '+5'])
 
 

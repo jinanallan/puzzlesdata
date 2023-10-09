@@ -125,12 +125,15 @@ def main():
                                         continue
                                     else:
                                         t = objects_names[object]
-                                        colors=[coloring(t,j) for j in np.linspace(0.2,1,len(xi))]
+                                        colors=[coloring(t,j) for j in np.linspace(0.0,1,len(xi))]
                                         #diffrent colors for each type
                                         # colors=[coloring(type,i) for i in np.linspace(0.2,1,len(xi))]
                                         # cm=mcolors.LinearSegmentedColormap.from_list('mylist', colors, N=len(xi))
                                         c=np.arange(0,len(xi))
-                                        ax.scatter(xi, yi, alpha=0.1,label=objects_names[object], c = colors, s=15,
+                                        #map alpha from first to last point in xi
+                                        #increase alpha from first to last point in xi
+
+                                        ax.scatter(xi, yi, alpha=0.2,label=objects_names[object], c = colors, s=15,edgecolors='face',
                                                 marker= ".")
                                         
                                         plt.xlim(-2, 2)
