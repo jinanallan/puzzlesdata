@@ -207,26 +207,27 @@ def Heatmap(cluster_id, data_ids, puzzleNumber):
         #dummy scatter plot for legend
         sc = plt.scatter([],[], color=coloring(present_objects[object], True), label=present_objects[object])
         
-    plt.legend(title=f'Number of solutions: {n}\n Solved rate: {sr:.2f} \n Average time: {at:.2f} seconds',loc='upper left', bbox_to_anchor=(1.05, 1))
+    plt.legend(title=f'Number of solutions: {n}\n Solved rate: {sr:.2f} \n Average time: {at:.2f} seconds',loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=4)
     plt.xlim(-2, 2)
     plt.ylim(-2, 2)
-    plt.title(f'Heatmap of the cluster {cluster_id} in puzzle {puzzleNumber}' )
+    plt.title(f'cluster {cluster_id}' )
     plt.savefig(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png',
-                bbox_inches='tight', dpi=300)
+                bbox_inches='tight', dpi=720)
     plt.close(fig)
 
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
-#specify the puzzle numbers you want to cluster 
+#specify the puzzle numbers and number of clusters you want to cluster 
 #if first time running, set use_saved_linkage to False to generate linkage matrix and dendrogram 
 # then choose the number of clusters and set use_saved_linkage to True to generate the gifs
 
 
 sequence_type="POSVEC"
 pcns=[[1,3],[2,3], [3,3], [4,2], [5,3], [6,3], [21,3], [22,3], [23,2], [24,4], [25,3], [26,2]]
-# pcns=[[24,4]]
+# pcns=[[1,5]]
 
 use_saved_linkage = True
+
 
 for pcn in pcns:
     puzzleNumber = pcn[0]
@@ -261,6 +262,32 @@ for pcn in pcns:
             first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids)
             first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
             Heatmap(cluster_id, data_ids, puzzleNumber)
+        
+        fig = plt.figure()
+        fig.set_figheight(10)
+        fig.set_figwidth(20)
+        
+        ax1 = plt.subplot2grid((2, numCluster), (0, 0), colspan=numCluster)
+        ax1.set_title(f'Dendrogram of puzzle {puzzleNumber} solutions', fontsize=20)
+        ax1.set_xlabel('Solution ID')
+        # ax1.set_ylabel('Distance')
+        dendrogram(Z, labels=ids, ax=ax1, count_sort= "descending", leaf_font_size=10 )
+        #horizontal line where we cut the dendrogram
+        plt.axhline(y=Z[-numCluster+1,2], color='black', linestyle='--')
+        
+        #pad between dendrogram and heatmap
+        plt.subplots_adjust(left=0.05, bottom=0.05, right=0.95, top=0.95, hspace=0.4)
+
+        plt.figtext(0.5, 0.45, "Heatmap of solutions within each cluster", ha="center", va="center", fontsize=20)
+
+        for i in np.arange(1,numCluster+1):
+            ax2 = plt.subplot2grid((2, numCluster), (1, i-1))
+            ax2.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png')) 
+            ax2.set_axis_off()
+        plt.savefig(f'{plotPath}/dendrogram_heatmap_puzzle{puzzleNumber}.png', dpi=720)
+
+
+
 
     else:
         allSV=[]
@@ -297,9 +324,11 @@ for pcn in pcns:
         plt.savefig(f'{plotPath}/dendrogram_puzzle{puzzleNumber}_{sequence_type}.png')
         plt.close()
 
-print("--- %s seconds ---" % (time.time() - start_time))  
+
+print("--- %s seconds ---" % (time.time() - start_time)) 
+
 repo_path = './'
-commit_message = 'Automated commit'
+
 
 # Change directory to the Git repository
 os.chdir(repo_path)
@@ -308,7 +337,7 @@ os.chdir(repo_path)
 subprocess.run(['git', 'add', '.'])
 
 # Commit changes with a commit message
-subprocess.run(['git', 'commit', '-m', "Automated commit: run heatmap of all clusters, all puzzles"])
+subprocess.run(['git', 'commit', '-m', "Automated commit: joint figure of dendrogram and heatmap runned for all pnp puzzles"])
 
 # Push changes to GitHub
 subprocess.run(['git', 'push'])
