@@ -271,7 +271,7 @@ for pcn in pcns:
         ax1.set_title(f'Dendrogram of puzzle {puzzleNumber} solutions', fontsize=20)
         ax1.set_xlabel('Solution ID')
         # ax1.set_ylabel('Distance')
-        dendrogram(Z, labels=ids, ax=ax1, count_sort= "descending", leaf_font_size=10 )
+        dendrogram(Z, labels=ids, ax=ax1, leaf_font_size=10 )
         #horizontal line where we cut the dendrogram
         plt.axhline(y=Z[-numCluster+1,2], color='black', linestyle='--')
         
@@ -327,21 +327,16 @@ for pcn in pcns:
 
 print("--- %s seconds ---" % (time.time() - start_time)) 
 
-repo_path = './'
+# repo_path = './'
 
+# os.chdir(repo_path)
 
-# Change directory to the Git repository
-os.chdir(repo_path)
+# subprocess.run(['git', 'add', '.'])
 
-# Add changes to the Git staging area
-subprocess.run(['git', 'add', '.'])
+# subprocess.run(['git', 'commit', '-m', "Automated commit: joint figure of dendrogram and heatmap runned for all pnp puzzles"])
 
-# Commit changes with a commit message
-subprocess.run(['git', 'commit', '-m', "Automated commit: joint figure of dendrogram and heatmap runned for all pnp puzzles"])
+# subprocess.run(['git', 'push'])
 
-# Push changes to GitHub
-subprocess.run(['git', 'push'])
-
-subprocess.run(['sudo', 'shutdown', '-h', '+5'])
+# subprocess.run(['sudo', 'shutdown', '-h', '+5'])
 
 
