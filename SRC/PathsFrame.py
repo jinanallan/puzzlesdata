@@ -17,6 +17,8 @@ def coloring(type,c):
         return (0,1,0,c)
     elif type=='obj1':
         return (1,0,0,c)
+    elif type=='obj1_a':
+        return (1,0.5,0,c)
     elif type=='obj2':
         return (1,0,1,c)
     elif type=='obj3':
@@ -42,14 +44,15 @@ def positional_vector(data):
     present_objects = {}
     for definition in last_frame:
         present_objects[definition["ID"]] = definition["name"]
+    # print(present_objects)
 
-    universal_Objects = ["box1","box2", "obj1","obj2", "obj3","obj4","ego"]
+    universal_Objects = ["box1","box2", "obj1","obj2", "obj3","obj4","ego","obj1_a"]
     
     for x in list(present_objects):
         if present_objects[x] not in universal_Objects:
             # print(present_objects[x])
             present_objects.pop(x)
-    
+    # print(present_objects)
     positional_vector=pd.DataFrame(columns=present_objects)
     sub_columns = pd.MultiIndex.from_product([positional_vector.columns, ['x', 'y']], names=['ID', 'position'])
     positional_vector = pd.DataFrame(index=range(len(data.frames)), columns=sub_columns)
@@ -88,7 +91,7 @@ def main():
             if filename.endswith('.json'):
                 participant_id, run, puzzle, attempt = use_regex(filename)
  
-            if participant_id==40 :
+            if puzzle==26 :
 
                 with open(os.path.join(folder,filename)) as json_file:
                             

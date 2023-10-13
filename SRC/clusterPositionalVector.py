@@ -22,6 +22,8 @@ def coloring(object,dummy = False):
             return (0,1,0) 
         elif object=='obj1':
             return (1,0,0) 
+        elif type=='obj1_a':
+            return (1,0.5,0)
         elif object=='obj2':
             return (1,0,1) 
         elif object=='obj3':
@@ -37,6 +39,8 @@ def coloring(object,dummy = False):
             return [(0,1,0,c) for c in np.linspace(0,1,100)]
         elif object=='obj1':
             return [(1,0,0,c) for c in np.linspace(0,1,100)]
+        elif object=='obj1_a':
+            return [(1,0.5,0,c) for c in np.linspace(0,1,100)]
         elif object=='obj2':
             return [(1,0,1,c) for c in np.linspace(0,1,100)]
         elif object=='obj3':
@@ -63,7 +67,7 @@ def positional_vector(data):
     for definition in last_frame:
         present_objects[definition["ID"]] = definition["name"]
 
-    universal_Objects = ["box1","box2", "obj1","obj2", "obj3","obj4","ego"]
+    universal_Objects = ["box1","box2", "obj1","obj2", "obj3","obj4","ego","obj1_a"]
     
     for x in list(present_objects):
         if present_objects[x] not in universal_Objects:
@@ -223,8 +227,8 @@ frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 
 sequence_type="POSVEC"
-pcns=[[1,3],[2,3], [3,3], [4,2], [5,3], [6,3], [21,3], [22,3], [23,2], [24,4], [25,3], [26,2]]
-# pcns=[[1,5]]
+# pcns=[[1,3],[2,3], [3,3], [4,2], [5,3], [6,3], [21,3], [22,3], [23,2], [24,4], [25,3], [26,2]]
+pcns=[[26,4]]
 
 use_saved_linkage = True
 
@@ -257,7 +261,14 @@ for pcn in pcns:
             if cluster_id not in cluster_ids:
                 cluster_ids[cluster_id] = []
             cluster_ids[cluster_id].append(ids[i])
+        
+        #turn dict keys to int
+        cluster_ids = {int(k): v for k, v in cluster_ids.items()}
 
+        #save the cluster ids as json file
+        with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}_{sequence_type}.json', 'w') as fp:
+            json.dump(cluster_ids, fp)
+    
         for cluster_id, data_ids in cluster_ids.items():
             first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids)
             first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
@@ -327,16 +338,19 @@ for pcn in pcns:
 
 print("--- %s seconds ---" % (time.time() - start_time)) 
 
-# repo_path = './'
+repo_path = './'
 
-# os.chdir(repo_path)
+os.chdir(repo_path)
 
-# subprocess.run(['git', 'add', '.'])
+subprocess.run(['git', 'add', '.'])
 
-# subprocess.run(['git', 'commit', '-m', "Automated commit: joint figure of dendrogram and heatmap runned for all pnp puzzles"])
+subprocess.run(['git', 'commit', '-m', "reccognize obj1_a for puzzle 26 and rerun distance matrix and clustering, "])
 
-# subprocess.run(['git', 'push'])
+subprocess.run(['git', 'push'])
 
 # subprocess.run(['sudo', 'shutdown', '-h', '+5'])
+
+# subprocess.Popen(['echo', password], stdout=subprocess.PIPE)
+
 
 
