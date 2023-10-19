@@ -203,6 +203,7 @@ def Heatmap(cluster_id, data_ids, puzzleNumber):
     img = Image.open(fname).convert('L')
     img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
     for i,object in enumerate(present_objects):
+        if present_objects[object] != 'ego':
         colors = coloring(present_objects[object])
         cmap = mcolors.LinearSegmentedColormap.from_list('mycmap', colors, N=100)
         x = cluster_vector[object]['x']

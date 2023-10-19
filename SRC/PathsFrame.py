@@ -7,26 +7,44 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from PIL import Image
 import time
+import movementTracker
 
 start_time = time.time()
-
-def coloring(type,c):
-    if type=='box1':
-        return (0,0,1,c)
-    elif type=='box2':
-        return (0,1,0,c)
-    elif type=='obj1':
-        return (1,0,0,c)
-    elif type=='obj1_a':
-        return (1,0.5,0,c)
-    elif type=='obj2':
-        return (1,0,1,c)
-    elif type=='obj3':
-        return (1,1,0,c)
-    elif type=='obj4':
-        return (0,1,1,c)
-    elif type=='ego':
-        return (0,0,0,c)
+def coloring(object,dummy = False):
+    if dummy:
+        if object=='box1':
+            return (0,0,1) 
+        elif object=='box2':
+            return (0,1,0) 
+        elif object=='obj1':
+            return (1,0,0) 
+        elif type=='obj1_a':
+            return (1,0.5,0)
+        elif object=='obj2':
+            return (1,0,1) 
+        elif object=='obj3':
+            return (1,1,0) 
+        elif object=='obj4':
+            return (0,1,1) 
+        elif object=='ego':
+            return (0,0,0) 
+    else:
+        if object=='box1':
+            return [(0,0,1,c) for c in np.linspace(0,1,100)]
+        elif object=='box2':
+            return [(0,1,0,c) for c in np.linspace(0,1,100)]
+        elif object=='obj1':
+            return [(1,0,0,c) for c in np.linspace(0,1,100)]
+        elif object=='obj1_a':
+            return [(1,0.5,0,c) for c in np.linspace(0,1,100)]
+        elif object=='obj2':
+            return [(1,0,1,c) for c in np.linspace(0,1,100)]
+        elif object=='obj3':
+            return [(1,1,0,c) for c in np.linspace(0,1,100)]
+        elif object=='obj4':
+            return [(0,1,1,c) for c in np.linspace(0,1,100)]
+        elif object=='ego':
+            return [(0,0,0,c) for c in np.linspace(0,1,100)]
     
 def positional_vector(data):
     """
@@ -86,68 +104,129 @@ def use_regex(input_text):
 def main():
  for pilot in [3,4]:
         folder = './Data/Pilot{}/Frames'.format(pilot)
+        ego_folder = './Data/Pilot{}/Ego-based'.format(pilot)
 
+        n = len(os.listdir(folder))
+        filecounter = 0
         for filename in os.listdir(folder):
+            print(filename)
+            ego_filename = filename[:-12] + '.json'
+            # print(filename)
+            # print(ego_filename)
+            df = pd.read_json(os.path.join(ego_folder, ego_filename))
+            print(f'{filecounter}/{n}')
+            filecounter += 1
             if filename.endswith('.json'):
                 participant_id, run, puzzle, attempt = use_regex(filename)
- 
-            if puzzle==26 :
+            #check if the file is already plotted
+            
+            
+            solved , total_time = movementTracker.interaction(df, participant_id, run, "free", solved=True)
+            # print(solved, total_time)
+            if not os.path.isfile('./Plots_Text/Path_Plots/frameBased/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png') and puzzle in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:
 
                 with open(os.path.join(folder,filename)) as json_file:
                             
-                            data = json.load(json_file)
-                            vector, objects_names = positional_vector(data)
-                            
-                            total_objects = len(objects_names)
-                            # print(objects_names)
-                            # print(total_objects)
-                            # cm_list= ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges','Reds', 'PuRd']
-                          
-                            fig, ax = plt.subplots()
-                            for i in range(total_objects):
+                        data = json.load(json_file)
+                        vector, objects_names = positional_vector(data)
+                        total_objects_len = len(objects_names)
 
-                                object = list(objects_names)[i]
-                                if True:
-                                 
-        
-                                    xi = vector[object]['x']
-                                    yi = vector[object]['y']
-                                    xi = np.array(xi)
-                                    yi = np.array(yi)
-                                    # print(xi.size, yi.size)
-                                    # print(xi, yi)
+                        # velocity_vector = vector.diff()
+                        # velocity_vector = velocity_vector.drop(0)
+                        # velocity_vector = velocity_vector.reset_index(drop=True)
+                        # #drop ego 
+                        
+
+                        # v=np.zeros((len(velocity_vector),(total_objects_len-1)*2))
+
+                        # for i in range((total_objects_len-1)):
+                        #     vx = velocity_vector[vector.columns[i*2][0],'x']
+                        #     vx=np.array(vx, dtype=np.float64)
+                        #     vy = velocity_vector[vector.columns[i*2][0],'y']
+                        #     vy=np.array(vy, dtype=np.float64)
+                        #     # v_temp=np.sqrt(vx**2+vy**2)
+                        #     v[:,i*2]=vx
+                        #     v[:,i*2+1]=vy
+                        
+                        #     # Initialize a dictionary to store which parts of the velocity vectors are equal
+                        #     equal_velocity_parts = {}
+
+                        #     for i in range((total_objects_len-1)):
+                        #         for j in range(i + 1, (total_objects_len-1)):
+                        #             vx1 = v[:, i * 2]  # vx values for object i
+                        #             vy1 = v[:, i * 2 + 1]  # vy values for object i
+                        #             vx2 = v[:, j * 2]  # vx values for object j
+                        #             vy2 = v[:, j * 2 + 1]  # vy values for object j
+
+                        #             # Compare the vx components of object i and object j
+                        #             equal_vx = np.where(vx1 == vx2)[0]
+                                    
+                        #             # Compare the vy components of object i and object j
+                        #             equal_vy = np.where(vy1 == vy2)[0]
+
+                        #             # Store the equal components in the dictionary
+                        #             if i not in equal_velocity_parts:
+                        #                 equal_velocity_parts[i] = {"equal_vx": [], "equal_vy": []}
+                        #             if j not in equal_velocity_parts:
+                        #                 equal_velocity_parts[j] = {"equal_vx": [], "equal_vy": []}
+
+                        #             equal_velocity_parts[i]["equal_vx"].extend(equal_vx)
+                        #             equal_velocity_parts[j]["equal_vx"].extend(equal_vx)
+
+                        #             equal_velocity_parts[i]["equal_vy"].extend(equal_vy)
+                        #             equal_velocity_parts[j]["equal_vy"].extend(equal_vy)
+
+                        #     # 'equal_velocity_parts' now contains the parts of the velocity vectors that are equal between objects.
+                        #     # The keys are the indices of the objects, and the values are dictionaries containing equal vx and vy components.
+                        #     print(equal_velocity_parts.keys())
+
+                                
+                        fig, ax = plt.subplots()
+                        for i in range(total_objects_len):
+
+                            object = list(objects_names)[i]
+                            if objects_names[object] != 'ego':
+                                
+    
+                                xi = vector[object]['x']
+                                yi = vector[object]['y']
+                                xi = np.array(xi)
+                                yi = np.array(yi)
+                                # print(xi.size, yi.size)
+                                # print(xi, yi)
 
 
-                                    imgfolder = './cropped_puzzles_screenshots'
-                                    fname = os.path.join(imgfolder, 'puzzle'+str(puzzle)+'.png')
-                                    img = Image.open(fname).convert('L')
+                                imgfolder = './cropped_puzzles_screenshots'
+                                fname = os.path.join(imgfolder, 'puzzle'+str(puzzle)+'.png')
+                                img = Image.open(fname).convert('L')
 
-                                    img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
+                                img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
 
-                                    if xi.size == 0 or yi.size == 0:
-                                        continue
-                                    else:
-                                        t = objects_names[object]
-                                        colors=[coloring(t,j) for j in np.linspace(0.0,1,len(xi))]
-                                        #diffrent colors for each type
-                                        # colors=[coloring(type,i) for i in np.linspace(0.2,1,len(xi))]
-                                        # cm=mcolors.LinearSegmentedColormap.from_list('mylist', colors, N=len(xi))
-                                        c=np.arange(0,len(xi))
-                                        #map alpha from first to last point in xi
-                                        #increase alpha from first to last point in xi
+                                if xi.size == 0 or yi.size == 0:
+                                    continue
+                                else:
+                                    t = objects_names[object]
+                                    colors=[coloring(t,j) for j in np.linspace(0.1,1,len(xi))]
+                                    #diffrent colors for each type
+                                    # colors=[coloring(type,i) for i in np.linspace(0.2,1,len(xi))]
+                                    # cm=mcolors.LinearSegmentedColormap.from_list('mylist', colors, N=len(xi))
+                                    c=np.arange(0,len(xi))
+                                    #map alpha from first to last point in xi
+                                    #increase alpha from first to last point in xi
 
-                                        ax.scatter(xi, yi, alpha=0.2,label=objects_names[object], c = colors, s=15,edgecolors='face',
-                                                marker= ".")
-                                        
-                                        plt.xlim(-2, 2)
-                                        plt.ylim(-2, 2)
-                                        plt.xlabel('x')
-                                        plt.ylabel('y')
-                                        plt.legend()
-                                        title= f'Participant: {participant_id}, Run: {run}, Puzzle: {puzzle}, Attempt: {attempt}'.format(participant_id, run, puzzle, attempt)
-                                        plt.title(title, fontsize=14)
-                                        # plt.show()
-                plt.savefig('./Temp_Frame_Path_Plots/'+
+                                    ax.scatter(xi, yi,alpha=0.1, c = colors, s=10,
+                                            marker= ".")
+                                    sc = plt.scatter([],[], color=coloring(objects_names[object], True), label=objects_names[object])
+                                    
+                                    plt.xlim(-2, 2)
+                                    plt.ylim(-2, 2)
+                                    plt.xlabel('x')
+                                    plt.ylabel('y')
+                                    plt.legend(loc='upper right', bbox_to_anchor=(1.3, 1))
+                                    title= f'Participant: {participant_id}, Run: {run}, Puzzle: {puzzle}, Attempt: {attempt}, \n Solved: {solved}, Total time: {total_time} s'.format(participant_id, run, puzzle, attempt, solved, total_time)
+                                    plt.title(title, fontsize=14)
+                                    # plt.show()
+                plt.savefig('./Plots_Text/Path_Plots/frameBased/'+
                                 str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png', dpi=300)
                 plt.close()
                                 
