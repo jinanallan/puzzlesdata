@@ -8,17 +8,17 @@ import matplotlib as mpl
 from PIL import Image
 import time
 import movementTracker
+import json
 
 start_time = time.time()
-def coloring(object,dummy = False):
-    if dummy:
+def coloring(object):
         if object=='box1':
             return (0,0,1) 
         elif object=='box2':
             return (0,1,0) 
         elif object=='obj1':
             return (1,0,0) 
-        elif type=='obj1_a':
+        elif object=='obj1_a':
             return (1,0.5,0)
         elif object=='obj2':
             return (1,0,1) 
@@ -28,23 +28,6 @@ def coloring(object,dummy = False):
             return (0,1,1) 
         elif object=='ego':
             return (0,0,0) 
-    else:
-        if object=='box1':
-            return [(0,0,1,c) for c in np.linspace(0,1,100)]
-        elif object=='box2':
-            return [(0,1,0,c) for c in np.linspace(0,1,100)]
-        elif object=='obj1':
-            return [(1,0,0,c) for c in np.linspace(0,1,100)]
-        elif object=='obj1_a':
-            return [(1,0.5,0,c) for c in np.linspace(0,1,100)]
-        elif object=='obj2':
-            return [(1,0,1,c) for c in np.linspace(0,1,100)]
-        elif object=='obj3':
-            return [(1,1,0,c) for c in np.linspace(0,1,100)]
-        elif object=='obj4':
-            return [(0,1,1,c) for c in np.linspace(0,1,100)]
-        elif object=='ego':
-            return [(0,0,0,c) for c in np.linspace(0,1,100)]
     
 def positional_vector(data):
     """
@@ -109,11 +92,18 @@ def main():
         n = len(os.listdir(folder))
         filecounter = 0
         for filename in os.listdir(folder):
-            print(filename)
+        
             ego_filename = filename[:-12] + '.json'
             # print(filename)
             # print(ego_filename)
-            df = pd.read_json(os.path.join(ego_folder, ego_filename))
+            ego_filename=os.path.join(ego_folder, ego_filename)
+            # print(ego_filename)
+            ego_file = json.load(open(ego_filename))
+            try:
+                df = pd.DataFrame(ego_file)
+            except:
+                 df = pd.DataFrame(ego_file, index=[0])
+            # print(df)
             print(f'{filecounter}/{n}')
             filecounter += 1
             if filename.endswith('.json'):
@@ -206,7 +196,7 @@ def main():
                                     continue
                                 else:
                                     t = objects_names[object]
-                                    colors=[coloring(t,j) for j in np.linspace(0.1,1,len(xi))]
+                                    
                                     #diffrent colors for each type
                                     # colors=[coloring(type,i) for i in np.linspace(0.2,1,len(xi))]
                                     # cm=mcolors.LinearSegmentedColormap.from_list('mylist', colors, N=len(xi))
@@ -214,9 +204,9 @@ def main():
                                     #map alpha from first to last point in xi
                                     #increase alpha from first to last point in xi
 
-                                    ax.scatter(xi, yi,alpha=0.1, c = colors, s=10,
+                                    ax.scatter(xi, yi,alpha=0.1, color= coloring(objects_names[object]), s=10, edgecolors='face',
                                             marker= ".")
-                                    sc = plt.scatter([],[], color=coloring(objects_names[object], True), label=objects_names[object])
+                                    sc = plt.scatter([],[], color=coloring(objects_names[object]), label=objects_names[object])
                                     
                                     plt.xlim(-2, 2)
                                     plt.ylim(-2, 2)

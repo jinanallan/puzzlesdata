@@ -22,7 +22,7 @@ def coloring(object,dummy = False):
             return (0,1,0) 
         elif object=='obj1':
             return (1,0,0) 
-        elif type=='obj1_a':
+        elif object=='obj1_a':
             return (1,0.5,0)
         elif object=='obj2':
             return (1,0,1) 
@@ -127,7 +127,7 @@ def use_regex(input_text):
     attempt = match.group(6)
     return int(particpants), int(run), int(puzzle_id), int(attempt)
 
-def Heatmap(cluster_id, data_ids, puzzleNumber):
+def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False):
     """
     Output a heatmap of solutions within a cluster 
 
@@ -188,7 +188,7 @@ def Heatmap(cluster_id, data_ids, puzzleNumber):
             data = json.load(open(f'./Data/Pilot4/Frames/{filename}'))
 
         vector, present_objects = positional_vector(data)
-
+        
         cluster_vector = pd.concat([cluster_vector, vector], axis=0)
 
     sr=sr/n
@@ -203,14 +203,16 @@ def Heatmap(cluster_id, data_ids, puzzleNumber):
     img = Image.open(fname).convert('L')
     img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
     for i,object in enumerate(present_objects):
-        if present_objects[object] != 'ego':
-        colors = coloring(present_objects[object])
-        cmap = mcolors.LinearSegmentedColormap.from_list('mycmap', colors, N=100)
-        x = cluster_vector[object]['x']
-        y = cluster_vector[object]['y']
-        plt.hist2d(x, y, bins=(45, 45),cmap=cmap, norm=mcolors.LogNorm())
-        #dummy scatter plot for legend
-        sc = plt.scatter([],[], color=coloring(present_objects[object], True), label=present_objects[object])
+        if ignore_ego and present_objects[object]=='ego':
+            continue
+        else:
+            colors = coloring(present_objects[object])
+            cmap = mcolors.LinearSegmentedColormap.from_list('mycmap', colors, N=100)
+            x = cluster_vector[object]['x']
+            y = cluster_vector[object]['y']
+            plt.hist2d(x, y, bins=(45, 45),cmap=cmap, norm=mcolors.LogNorm())
+            #dummy scatter plot for legend
+            sc = plt.scatter([],[], color=coloring(present_objects[object], True), label=present_objects[object])
         
     plt.legend(title=f'Number of solutions: {n}\n Solved rate: {sr:.2f} \n Average time: {at:.2f} seconds',loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=4)
     plt.xlim(-2, 2)
@@ -228,11 +230,10 @@ frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 
 sequence_type="POSVEC"
-# pcns=[[1,3],[2,3], [3,3], [4,2], [5,3], [6,3], [21,3], [22,3], [23,2], [24,4], [25,3], [26,2]]
-pcns=[[26,4]]
+pcns=[[1,3],[2,3], [3,3], [4,2], [5,3], [6,3], [21,3], [22,3], [23,2], [24,4], [25,3], [26,4]]
+# pcns=[[26,4]]
 
 use_saved_linkage = True
-
 
 for pcn in pcns:
     puzzleNumber = pcn[0]
@@ -271,9 +272,9 @@ for pcn in pcns:
             json.dump(cluster_ids, fp)
     
         for cluster_id, data_ids in cluster_ids.items():
-            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids)
+            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, frameBased=True)
             first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
-            Heatmap(cluster_id, data_ids, puzzleNumber)
+            Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=True)
         
         fig = plt.figure()
         fig.set_figheight(10)
@@ -345,7 +346,7 @@ os.chdir(repo_path)
 
 subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "reccognize obj1_a for puzzle 26 and rerun distance matrix and clustering, "])
+subprocess.run(['git', 'commit', '-m', "path plots based on frame files added and respective clustering visualization "])
 
 subprocess.run(['git', 'push'])
 
