@@ -95,7 +95,7 @@ def coloring(object,dummy = False):
             return [(0,0,0,c) for c in np.linspace(0,1,100)]
 def attachment_plot(positional_vector, present_objects):
     """
-    Plot the attachment of objects to the during the solution in form of whether the object is moving or not 
+    Plot the attachment of objects to the during the solution in form of: whether the object is moving or not 
     and if moving at the same time as another object, then they are attached (valid for pick and place puzzles)
 
     Accepts:
