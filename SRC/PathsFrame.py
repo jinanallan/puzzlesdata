@@ -9,7 +9,7 @@ from PIL import Image
 import time
 import movementTracker
 import json
-
+import subprocess
 start_time = time.time()
 def coloring(object):
         if object=='box1':
@@ -113,7 +113,7 @@ def main():
             
             solved , total_time = movementTracker.interaction(df, participant_id, run, "free", solved=True)
             # print(solved, total_time)
-            if not os.path.isfile('./Plots_Text/Path_Plots/frameBased/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png') and puzzle in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:
+            if not os.path.isfile('./Plots_Text/Path_Plots/frameBased/includeEgo'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png') and puzzle in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:
 
                 with open(os.path.join(folder,filename)) as json_file:
                             
@@ -175,7 +175,7 @@ def main():
                         for i in range(total_objects_len):
 
                             object = list(objects_names)[i]
-                            if objects_names[object] != 'ego':
+                            if True: #objects_names[object] != 'ego' in case ignoring ego
                                 
     
                                 xi = vector[object]['x']
@@ -216,10 +216,20 @@ def main():
                                     title= f'Participant: {participant_id}, Run: {run}, Puzzle: {puzzle}, Attempt: {attempt}, \n Solved: {solved}, Total time: {total_time} s'.format(participant_id, run, puzzle, attempt, solved, total_time)
                                     plt.title(title, fontsize=14)
                                     # plt.show()
-                plt.savefig('./Plots_Text/Path_Plots/frameBased/'+
+                plt.savefig('./Plots_Text/Path_Plots/frameBased/includeEgo/'+
                                 str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png', dpi=300)
                 plt.close()
                                 
 if __name__ == "__main__":
     main()
     print("--- %s seconds ---" % (time.time() - start_time))
+
+    repo_path = './'
+
+os.chdir(repo_path)
+
+subprocess.run(['git', 'add', '.'])
+
+subprocess.run(['git', 'commit', '-m', "frame based path plots with ego added "])
+
+subprocess.run(['git', 'push'])
