@@ -15,8 +15,7 @@ def use_regex(input_text):
     puzzle_id = match.group(5)
     attempt = match.group(6)
     return int(particpants), int(run), int(puzzle_id), int(attempt)
-
-def positional_vector(data):
+def positional_vector(data, ignore_ego=False):
     """
     Get the positional vector of the objects from frames json file
 
@@ -34,6 +33,8 @@ def positional_vector(data):
         present_objects[definition["ID"]] = definition["name"]
 
     universal_Objects = ["box1","box2", "obj1","obj2", "obj3","obj4","ego","obj1_a"]
+    if ignore_ego:
+        universal_Objects.remove("ego")
     
     for x in list(present_objects):
         if present_objects[x] not in universal_Objects:
@@ -110,39 +111,53 @@ def attachment_plot(positional_vector, present_objects):
     velocity_vector = positional_vector.diff()
     velocity_vector = velocity_vector.drop(0)
     velocity_vector = velocity_vector.reset_index(drop=True)
-
+    v=np.zeros((len(velocity_vector),len(present_objects)))
     for i, object_i in enumerate(present_objects):
-         
-        
         # print (i, object_i)
         object_i_name = present_objects[object_i]
         vx_i = velocity_vector[positional_vector.columns[i*2][0],'x']
         vx_i=np.array(vx_i, dtype=np.float64)
         vy_i = velocity_vector[positional_vector.columns[i*2][0],'y']
         vy_i=np.array(vy_i, dtype=np.float64)
-        v=np.sqrt(vx_i**2 + vy_i**2)
+        v_temp=np.sqrt(vx_i**2 + vy_i**2)
+        v[:,i]=v_temp
         for t in np.arange(0,T-1):
-             if v[t]>0:
-                  plt.scatter(t, i, color=coloring(present_objects[object_i], True), s=50, marker='s')
-    plt.xlabel('time steps')
+                if v_temp[t]>0:
+                    plt.scatter(t, i, color=coloring(present_objects[object_i], True), s=50, marker='s')
+
+    for t in np.arange(0,T-1):
+        for i, object_i in enumerate(present_objects):
+            for j in range(i+1,len(present_objects)):
+                object_j = list(present_objects.keys())[j]
+                if v[t,i]>0 and v[t,j]>0:
+                    plt.scatter(t, j, color="black", s=20, marker='*')
+                    plt.scatter(t, i, color="black", s=20, marker='*')
+    plt.xlabel('time steps [s]')
     plt.yticks(np.arange(len(present_objects)), present_objects.values())
+    #each time step is 0.01s
+    plt.xticks(np.arange(0,T, 1000), np.arange(0,T/100, 10))
+    plt.savefig('./Plots_Text/attachment_plot_ex.png', dpi=300)
     plt.show()
                   
-                  
-        # for j in range(i+1,len(present_objects)):
-        #     object_j = list(present_objects.keys())[j]
-        #     print (j, object_j)
-        #     object_j_name = present_objects[object_j]
-        #     vx_j = velocity_vector[positional_vector.columns[j*2][0],'x']
-        #     vx_j=np.array(vx_j, dtype=np.float64)
-        #     vy_j = velocity_vector[positional_vector.columns[j*2][0],'y']
-        #     vy_j=np.array(vy_j, dtype=np.float64)
+                    
+    #     for j in range(i+1,len(present_objects)):
+    #         object_j = list(present_objects.keys())[j]
+    #         print (j, object_j)
+    #         object_j_name = present_objects[object_j]
+    #         vx_j = velocity_vector[positional_vector.columns[j*2][0],'x']
+    #         vx_j=np.array(vx_j, dtype=np.float64)
+    #         vy_j = velocity_vector[positional_vector.columns[j*2][0],'y']
+    #         vy_j=np.array(vy_j, dtype=np.float64)
 
-        #     for t in np.arange(0,T-1):
-        #         norm = np.sqrt((vx_i[t]-vx_j[t])**2 + (vy_i[t]-vy_j[t])**2)
-        #         if norm < 0.1:
-        #            print("Objects {} and {} are attached at time {}".format(object_i_name, object_j_name, t))
-
+    #         for t in np.arange(0,T-1):
+    #             norm = np.sqrt((vx_i[t]-vx_j[t])**2 + (vy_i[t]-vy_j[t])**2)
+    #             if norm < 0.1:
+    #                 # print("Objects {} and {} are attached at time {}".format(object_i_name, object_j_name, t))
+    #                 plt.scatter(t, i, color=coloring(present_objects[object_i], True), s=50, marker='s')
+    #                 plt.scatter(t, j, color=coloring(present_objects[object_j], True), s=50, marker='s')
+    # plt.xlabel('time steps')
+    # plt.yticks(np.arange(len(present_objects)), present_objects.values())
+    # plt.show()
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 for frame_folder in frame_folders:
@@ -150,9 +165,9 @@ for frame_folder in frame_folders:
             for file in frame_files:
                 if file.endswith(".json"):
                     participant_id, run, puzzle, attempt = use_regex(file)
-                    if puzzle == 26 and run == 1 and attempt == 0 and participant_id == 59:
+                    if puzzle == 24 and run == 2 and attempt == 0 and participant_id == 33:
                         # print(file)
                         with open(frame_folder+file) as f:
                             data = json.load(f)
-                            positional_vector, present_objects = positional_vector(data)
+                            positional_vector, present_objects = positional_vector(data, ignore_ego=True)
                             attachment_plot(positional_vector, present_objects)
