@@ -231,7 +231,7 @@ frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
 # pcns=[[1,3],[2,3], [3,3], [4,2], [5,3], [6,3], [21,3], [22,3], [23,2], [24,4], [25,3], [26,4]]
-pcns=[[1,5]]
+pcns=[[25,5]]
 
 use_saved_linkage = True
 
@@ -272,7 +272,7 @@ for pcn in pcns:
             json.dump(cluster_ids, fp)
     
         for cluster_id, data_ids in cluster_ids.items():
-            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, frameBased=True)
+            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, frameBased=True, includeEgo=False)
             first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
             Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=True)
         
@@ -340,15 +340,15 @@ for pcn in pcns:
 
 print("--- %s seconds ---" % (time.time() - start_time)) 
 
-repo_path = './'
+# repo_path = './'
 
-os.chdir(repo_path)
+# os.chdir(repo_path)
 
-subprocess.run(['git', 'add', '.'])
+# subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "path plots based on frame files added and respective clustering visualization "])
+# subprocess.run(['git', 'commit', '-m', "path plots based on frame files added and respective clustering visualization "])
 
-subprocess.run(['git', 'push'])
+# subprocess.run(['git', 'push'])
 
 # subprocess.run(['sudo', 'shutdown', '-h', '+5'])
 

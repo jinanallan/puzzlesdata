@@ -140,23 +140,23 @@ def velocity_profile(data, acceleration=False):
     return fig, ax
 
 
-frame_folder= "./Data/Pilot3/Frames/"
+frame_folder= "./Data/Pilot4/Frames/"
 frame_files = os.listdir(frame_folder)
 
 for file in frame_files:
     if file.endswith(".json"):
         participant_id, run, puzzle, attempt = use_regex(file)
-        # if participant_id == 34 and run ==2 and puzzle == 1 and attempt == 0:
-        with open(os.path.join(frame_folder,file)) as json_file:
-            if not os.path.exists("./Plots_Text/Velocity_Profile/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png"):
-                # print("Saved: ", str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png")
-                data = json.load(json_file)
-                fig, ax = velocity_profile(data)
-                figa, axa = velocity_profile(data, acceleration=True)
-            #set the title of the plot
-                fig.suptitle("Participant: "+str(participant_id)+" Run: "+str(run)+" Puzzle: "+str(puzzle)+" Attempt: "+str(attempt))
-                figa.suptitle("Participant: "+str(participant_id)+" Run: "+str(run)+" Puzzle: "+str(puzzle)+" Attempt: "+str(attempt))
-                fig.savefig("./Plots_Text/Velocity_Profile/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png", dpi=300)
-                figa.savefig("./Plots_Text/Velocity_Profile/Acceleration/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png", dpi=300)
-                plt.close(fig)
-                plt.close(figa)
+        if participant_id == 59 and run ==1 and puzzle == 26 and attempt == 0:
+            with open(os.path.join(frame_folder,file)) as json_file:
+                if not os.path.exists("./Plots_Text/Velocity_Profile/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png"):
+                    # print("Saved: ", str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png")
+                    data = json.load(json_file)
+                    fig, ax = velocity_profile(data)
+                    figa, axa = velocity_profile(data, acceleration=True)
+                #set the title of the plot
+                    fig.suptitle("Participant: "+str(participant_id)+" Run: "+str(run)+" Puzzle: "+str(puzzle)+" Attempt: "+str(attempt))
+                    figa.suptitle("Participant: "+str(participant_id)+" Run: "+str(run)+" Puzzle: "+str(puzzle)+" Attempt: "+str(attempt))
+                    fig.savefig("./Plots_Text/Velocity_Profile/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png", dpi=300)
+                    figa.savefig("./Plots_Text/Velocity_Profile/Acceleration/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png", dpi=300)
+                    plt.close(fig)
+                    plt.close(figa)
