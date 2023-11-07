@@ -127,7 +127,7 @@ def use_regex(input_text):
     attempt = match.group(6)
     return int(particpants), int(run), int(puzzle_id), int(attempt)
 
-def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False):
+def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=True):
     """
     Output a heatmap of solutions within a cluster 
 
@@ -210,7 +210,10 @@ def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False):
             cmap = mcolors.LinearSegmentedColormap.from_list('mycmap', colors, N=100)
             x = cluster_vector[object]['x']
             y = cluster_vector[object]['y']
-            plt.hist2d(x, y, bins=(45, 45),cmap=cmap, norm=mcolors.LogNorm())
+            if log_scale:
+                plt.hist2d(x, y, bins=(45, 45),cmap=cmap, norm=mcolors.LogNorm())
+            else:
+                plt.hist2d(x, y, bins=(45, 45),cmap=cmap)
             #dummy scatter plot for legend
             sc = plt.scatter([],[], color=coloring(present_objects[object], True), label=present_objects[object])
         
@@ -231,9 +234,10 @@ frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
 # pcns=[[1,3],[2,3], [3,3], [4,2], [5,3], [6,3], [21,3], [22,3], [23,2], [24,4], [25,3], [26,4]]
-pcns=[[25,5]]
+pcns=[[17,7]]
 
 use_saved_linkage = True
+log_scale = True
 
 for pcn in pcns:
     puzzleNumber = pcn[0]
@@ -272,9 +276,9 @@ for pcn in pcns:
             json.dump(cluster_ids, fp)
     
         for cluster_id, data_ids in cluster_ids.items():
-            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, frameBased=True, includeEgo=False)
+            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, frameBased=True, includeEgo=True)
             first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
-            Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=True)
+            Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=log_scale)
         
         fig = plt.figure()
         fig.set_figheight(10)
@@ -297,7 +301,7 @@ for pcn in pcns:
             ax2 = plt.subplot2grid((2, numCluster), (1, i-1))
             ax2.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png')) 
             ax2.set_axis_off()
-        plt.savefig(f'{plotPath}/dendrogram_heatmap_puzzle{puzzleNumber}.png', dpi=720)
+        plt.savefig(f'{plotPath}/dendrogram_heatmap_puzzle{puzzleNumber}.png', dpi=300)
 
 
 

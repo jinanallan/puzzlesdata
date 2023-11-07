@@ -91,7 +91,8 @@ def main():
 
         n = len(os.listdir(folder))
         filecounter = 0
-        for filename in os.listdir(folder):
+       
+        for filename in sorted(os.listdir(folder)):
         
             ego_filename = filename[:-12] + '.json'
             # print(filename)
@@ -113,8 +114,9 @@ def main():
             
             solved , total_time = movementTracker.interaction(df, participant_id, run, "free", solved=True)
             # print(solved, total_time)
-            if not os.path.isfile('./Plots_Text/Path_Plots/frameBased/includeEgo'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png') and puzzle in [1, 2, 3, 4,5, 6, 21, 22, 23, 24, 25, 26]:
-
+     
+            if ( not os.path.isfile('./Plots_Text/Path_Plots/frameBased/includeEgo/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png')) :
+                print("entered:" , str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png')
                 with open(os.path.join(folder,filename)) as json_file:
                             
                         data = json.load(json_file)
@@ -226,10 +228,10 @@ if __name__ == "__main__":
 
     repo_path = './'
 
-os.chdir(repo_path)
+# os.chdir(repo_path)
 
-subprocess.run(['git', 'add', '.'])
+# subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "frame based path plots with ego added "])
+# subprocess.run(['git', 'commit', '-m', "frame based path plots with ego added "])
 
-subprocess.run(['git', 'push'])
+# subprocess.run(['git', 'push'])
