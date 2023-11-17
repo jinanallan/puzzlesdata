@@ -2,13 +2,17 @@ from PIL import Image
 import os
 import re
 
-def gif(desired_puzzle, ids=[],frameBased=False, includeEgo=False):
+def gif(desired_puzzle, ids=[],frameBased=False, includeEgo=False, attachment=False):
 
     pathimage_folder = "./Plots_Text/Path_Plots"
     if frameBased:
         pathimage_folder = "./Plots_Text/Path_Plots/frameBased"
         if includeEgo:
             pathimage_folder = "./Plots_Text/Path_Plots/frameBased/includeEgo"
+    
+    if attachment:
+        pathimage_folder = "./Plots_Text/Path_Plots/frameBased/pathAttachment"
+
     png_files = [f for f in os.listdir(pathimage_folder) if f.endswith('.png')]
 
     def use_regex(input_text):
