@@ -206,7 +206,7 @@ def main():
             solved , total_time = movementTracker.interaction(df, participant_id, run, "free", solved=True)
             # print(solved, total_time)
      
-            if ( not os.path.isfile('./Plots_Text/Path_Plots/frameBased/pathAttachment/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png')) and puzzle in [21,22,23,24,25,26] :
+            if ( not os.path.isfile('./Plots_Text/Path_Plots/frameBased/pathAttachment/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png')) and puzzle in [16,17,18,19,20] :
                 print("entered:" , str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png')
                 with open(os.path.join(folder,filename)) as json_file:
                             

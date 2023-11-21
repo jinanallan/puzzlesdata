@@ -233,8 +233,8 @@ frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 
 sequence_type="POSVEC"
-pcns=[[21,3], [22,3], [23,4], [24,4], [25,5], [26,4]]
-# pcns=[[17,7]]
+# pcns=[[21,3], [22,3], [23,4], [24,4], [25,5], [26,4]]
+pcns=[ [18,4]]
 
 use_saved_linkage = True
 log_scale = True
@@ -276,7 +276,7 @@ for pcn in pcns:
             json.dump(cluster_ids, fp)
     
         for cluster_id, data_ids in cluster_ids.items():
-            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True)
+            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=False, frameBased=True, includeEgo=True)
             first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
             Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=log_scale)
         
