@@ -6,11 +6,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from PIL import Image
+import matplotlib.cm as cm
 from dtaidistance import dtw
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
+from scipy.spatial.distance import squareform
+from sklearn.metrics import silhouette_score, silhouette_samples
 from gifGenerator import gif
 import time
 import subprocess
+import json
 
 start_time = time.time()
 
@@ -50,13 +54,14 @@ def coloring(object,dummy = False):
         elif object=='ego':
             return [(0,0,0,c) for c in np.linspace(0,1,100)]
     
-def positional_vector(data):
+def positional_vector(data : dict) -> pd.DataFrame():
     """
     Get the positional vector of the objects from frames json file
 
     Accepts:
         data: the json file
-    Reurns: 
+
+    Returns: 
         positional_vector: dataframe with the positional vector
         present_objects: dict of object names and their IDs
     """
@@ -93,7 +98,7 @@ def positional_vector(data):
         row+=1
     return positional_vector, present_objects
 
-def dtwI(sequences):
+def dtwI(sequences : list) -> np.ndarray:
     """
     Get the distance matrix of the sequences using Independent dtw
     Accepts:
@@ -112,7 +117,7 @@ def dtwI(sequences):
                 dtw_i+=dtw.distance_fast(sequences[i][:,k], sequences[j][:,k])
                 # print(dtw_i)
             distanceMatrix[i][j]=dtw_i
-    # make distanceMatrix in form of scipy pdist  output
+    # distanceMatrix in form of scipy pdist  output
     distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
     return distanceMatrix
 
@@ -227,136 +232,163 @@ def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=True
 
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
-#specify the puzzle numbers and number of clusters you want to cluster 
-#if first time running, set use_saved_linkage to False to generate linkage matrix and dendrogram 
-# then choose the number of clusters and set use_saved_linkage to True to generate the gifs
-
-
 sequence_type="POSVEC"
-# pcns=[[21,3], [22,3], [23,4], [24,4], [25,5], [26,4]]
-pcns=[ [18,4]]
+puzzels = [1,2,3,4,5,6,21,22,23,24,25,26,16,17,18,19,20]
 
-use_saved_linkage = True
 log_scale = True
 
-for pcn in pcns:
-    puzzleNumber = pcn[0]
-    numCluster = pcn[1]
+for puzzleNumber in puzzels:
+
     if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
             os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
             plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
     else:
         plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
 
-    if use_saved_linkage:
-        Z= np.loadtxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt')
-        allSV=[]
-        ids=[]
-        for frame_folder in frame_folders:
-            frame_files = os.listdir(frame_folder)
-            for file in frame_files:
-                if file.endswith(".json"):
-                    participant_id, run, puzzle, attempt = use_regex(file)
-                    if puzzle == puzzleNumber:
-                        ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
-        clusters = fcluster(Z, numCluster, criterion='maxclust')
+    allSV=[]
+    ids=[]
 
-        cluster_ids = {}
-        # Iterate over the data points and assign them to their respective clusters
-        for i, cluster_id in enumerate(clusters):
-            if cluster_id not in cluster_ids:
-                cluster_ids[cluster_id] = []
-            cluster_ids[cluster_id].append(ids[i])
-        
-        #turn dict keys to int
-        cluster_ids = {int(k): v for k, v in cluster_ids.items()}
+    for frame_folder in frame_folders:
+        frame_files = os.listdir(frame_folder)
+        for file in frame_files:
+            if file.endswith(".json"):
+                participant_id, run, puzzle, attempt = use_regex(file)
+                if puzzle == puzzleNumber:
+                    ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
+                    with open(os.path.join(frame_folder,file)) as json_file:
+                        data = json.load(json_file)
+                        vector, object_names = positional_vector(data)
+                        # print(vector)
+                        # print(object_names)
+                        d=len(vector.columns)        
+                        n=len(vector.index)
+                        # print(n,d)
+                        solutionVector = np.empty([n,d])
+                        for ni in range(n):
+                            for di in range(d):
+                                solutionVector[ni][di]=vector.iloc[ni,di]
+                        allSV.append(solutionVector)
 
-        #save the cluster ids as json file
-        with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}_{sequence_type}.json', 'w') as fp:
-            json.dump(cluster_ids, fp)
-    
-        for cluster_id, data_ids in cluster_ids.items():
-            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True)
-            first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
-            Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=log_scale)
-        
-        fig = plt.figure()
-        fig.set_figheight(10)
-        fig.set_figwidth(20)
-        
-        ax1 = plt.subplot2grid((2, numCluster), (0, 0), colspan=numCluster)
-        ax1.set_title(f'Dendrogram of puzzle {puzzleNumber} solutions', fontsize=20)
-        ax1.set_xlabel('Solution ID')
-        # ax1.set_ylabel('Distance')
-        dendrogram(Z, labels=ids, ax=ax1, leaf_font_size=10 )
-        #horizontal line where we cut the dendrogram
-        plt.axhline(y=Z[-numCluster+1,2], color='black', linestyle='--')
-        
-        #pad between dendrogram and heatmap
-        plt.subplots_adjust(left=0.05, bottom=0.05, right=0.95, top=0.95, hspace=0.4)
-
-        plt.figtext(0.5, 0.45, "Heatmap of solutions within each cluster", ha="center", va="center", fontsize=20)
-
-        for i in np.arange(1,numCluster+1):
-            ax2 = plt.subplot2grid((2, numCluster), (1, i-1))
-            ax2.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png')) 
-            ax2.set_axis_off()
-        plt.savefig(f'{plotPath}/dendrogram_heatmap_puzzle{puzzleNumber}.png', dpi=300)
-
-
-
-
-    else:
-        allSV=[]
-        ids=[]
-        for frame_folder in frame_folders:
-            frame_files = os.listdir(frame_folder)
-            for file in frame_files:
-                if file.endswith(".json"):
-                    participant_id, run, puzzle, attempt = use_regex(file)
-                    if puzzle == puzzleNumber:
-                        ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
-                        with open(os.path.join(frame_folder,file)) as json_file:
-                            data = json.load(json_file)
-                            vector, object_names = positional_vector(data)
-                            # print(vector)
-                            # print(object_names)
-                            d=len(vector.columns)        
-                            n=len(vector.index)
-                            # print(n,d)
-                            solutionVector = np.empty([n,d])
-                            for ni in range(n):
-                                for di in range(d):
-                                    solutionVector[ni][di]=vector.iloc[ni,di]
-                            allSV.append(solutionVector)
-                        
+    if os.path.isfile(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt'):
+        distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt')
+    else:               
         distanceMatrix = dtwI(allSV)
+        np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt', distanceMatrix)
 
+    if os.path.isfile(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt'):
+        Z = np.loadtxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt')
+    else:
         Z = linkage(distanceMatrix, 'ward')
-
         np.savetxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt', Z)
 
-        plt.figure(figsize=(20, 10))
-        dendrogram(Z, labels=ids)
-        plt.savefig(f'{plotPath}/dendrogram_puzzle{puzzleNumber}_{sequence_type}.png')
-        plt.close()
+    np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}_{sequence_type}.txt', ids, fmt="%s")
 
+    distanceMatrixSQ = squareform(distanceMatrix)
 
+    if os.path.isfile(f'{plotPath}/silhouette_scores_puzzle{puzzleNumber}_{sequence_type}.txt'):
+        with open(f'{plotPath}/silhouette_scores_puzzle{puzzleNumber}_{sequence_type}.txt', 'r') as fp:
+            max_silhouette_avg = 0
+            for line in fp:
+                if line.startswith('For n_clusters ='):
+                    n_clusters = int(line.split()[3])
+                    silhouette_avg = float(line.split()[-1])
+                    if silhouette_avg > max_silhouette_avg:
+                        max_silhouette_avg = silhouette_avg
+                        numCluster = n_clusters
+    else:
+        with open(f'{plotPath}/silhouette_scores_puzzle{puzzleNumber}_{sequence_type}.txt', 'w') as fp:
+            max_silhouette_avg = 0
+
+            for n_clusters in range(2, 10):
+                fig, ax1 = plt.subplots(1, 1)
+                fig.set_size_inches(18, 7)
+
+                clusters = fcluster(Z, n_clusters, criterion='maxclust')
+                silhouette_avg = silhouette_score(distanceMatrixSQ, clusters, metric='precomputed')
+                silhouette_avg = round(silhouette_avg, 3)
+
+                fp.write(f'For n_clusters = {n_clusters} The average silhouette_score is : {silhouette_avg}\n')
+                print("For n_clusters =", n_clusters, "The average silhouette_score is :", silhouette_avg)
+
+                if silhouette_avg > max_silhouette_avg:
+                    max_silhouette_avg = silhouette_avg
+                    numCluster = n_clusters
+
+                sample_silhouette_values = silhouette_samples(distanceMatrixSQ, clusters, metric='precomputed')
+                
+                y_lower = 10
+                for i in range(n_clusters):
+                    ith_cluster_silhouette_values = sample_silhouette_values[clusters == i+1]
+                    ith_cluster_silhouette_values.sort()
+                    size_cluster_i = ith_cluster_silhouette_values.shape[0]
+                    y_upper = y_lower + size_cluster_i
+                    color = cm.nipy_spectral(float(i) / n_clusters)
+                    ax1.fill_betweenx(np.arange(y_lower, y_upper), 0, ith_cluster_silhouette_values, facecolor=color, edgecolor=color, alpha=0.7)
+                    ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i+1))
+                    y_lower = y_upper + 10
+
+                ax1.set_title("The silhouette plot for the various clusters.")
+                ax1.set_xlabel("The silhouette coefficient values")
+                ax1.set_ylabel("Cluster label")
+                ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
+                ax1.set_yticks([])
+                ax1.set_xticks([-0.2, 0, 0.2, 0.4, 0.6, 0.8, 1])
+                plt.savefig(f'{plotPath}/silhouette_puzzle{puzzleNumber}_{sequence_type}_n{n_clusters}.png')
+                plt.close(fig)
+        
+   
+    clusters = fcluster(Z, numCluster, criterion='maxclust')
+
+    cluster_ids = {}
+    # Iterate over the data points and assign them to their respective clusters
+    for i, cluster_id in enumerate(clusters):
+        if cluster_id not in cluster_ids:
+            cluster_ids[cluster_id] = []
+        cluster_ids[cluster_id].append(ids[i])
+    
+    #turn dict keys to int
+    cluster_ids = {int(k): v for k, v in cluster_ids.items()}
+
+    #save the cluster ids as json file
+    with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}_{sequence_type}.json', 'w') as fp:
+        json.dump(cluster_ids, fp)
+
+    for cluster_id, data_ids in cluster_ids.items():
+        first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True)
+        first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
+        Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=True, log_scale=log_scale)
+    
+    fig = plt.figure()
+    fig.set_figheight(10)
+    fig.set_figwidth(20)
+    
+    ax1 = plt.subplot2grid((2, numCluster), (0, 0), colspan=numCluster)
+    ax1.set_title(f'Dendrogram of puzzle {puzzleNumber} solutions', fontsize=20)
+    ax1.set_xlabel('Solution ID')
+    # ax1.set_ylabel('Distance')
+    dendrogram(Z, labels=ids, ax=ax1, leaf_font_size=10 )
+    #horizontal line where we cut the dendrogram
+    plt.axhline(y=Z[-numCluster+1,2], color='black', linestyle='--')
+    
+    #pad between dendrogram and heatmap
+    plt.subplots_adjust(left=0.05, bottom=0.05, right=0.95, top=0.95, hspace=0.4)
+
+    plt.figtext(0.5, 0.45, "Heatmap of solutions within each cluster", ha="center", va="center", fontsize=20)
+
+    for i in np.arange(1,numCluster+1):
+        ax2 = plt.subplot2grid((2, numCluster), (1, i-1))
+        ax2.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png')) 
+        ax2.set_axis_off()
+    plt.savefig(f'{plotPath}/dendrogram_heatmap_puzzle{puzzleNumber}.png', dpi=300)
+          
 print("--- %s seconds ---" % (time.time() - start_time)) 
 
-# repo_path = './'
+repo_path = './'
 
-# os.chdir(repo_path)
+os.chdir(repo_path)
 
-# subprocess.run(['git', 'add', '.'])
+subprocess.run(['git', 'add', '.'])
 
-# subprocess.run(['git', 'commit', '-m', "path plots based on frame files added and respective clustering visualization "])
+subprocess.run(['git', 'commit', '-m', "Selecting the number of clusters with silhouette analysis"])
 
-# subprocess.run(['git', 'push'])
-
-# subprocess.run(['sudo', 'shutdown', '-h', '+5'])
-
-# subprocess.Popen(['echo', password], stdout=subprocess.PIPE)
-
-
-
+subprocess.run(['git', 'push'])

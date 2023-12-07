@@ -206,7 +206,7 @@ def main():
             solved , total_time = movementTracker.interaction(df, participant_id, run, "free", solved=True)
             # print(solved, total_time)
      
-            if ( not os.path.isfile('./Plots_Text/Path_Plots/frameBased/pathAttachment/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png')) and puzzle in [16,17,18,19,20] :
+            if ( not os.path.isfile('./Plots_Text/Path_Plots/frameBased/pathAttachment/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png')) and puzzle in [1,2,3,4,5,6,] :
                 print("entered:" , str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png')
                 with open(os.path.join(folder,filename)) as json_file:
                             
@@ -320,12 +320,12 @@ if __name__ == "__main__":
     main()
     print("--- %s seconds ---" % (time.time() - start_time))
 
-    repo_path = './'
+#     repo_path = './'
 
-os.chdir(repo_path)
+# os.chdir(repo_path)
 
-subprocess.run(['git', 'add', '.'])
+# subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "joint plot of attachment and path for puzzle 21 to 26"])
+# subprocess.run(['git', 'commit', '-m', "joint plot of attachment and path for puzzle 21 to 26"])
 
 # subprocess.run(['git', 'push'])
