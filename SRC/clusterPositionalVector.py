@@ -15,6 +15,7 @@ from gifGenerator import gif
 import time
 import subprocess
 import json
+from clusteringEvaluation import clusteringEvaluation
 
 start_time = time.time()
 
@@ -281,62 +282,67 @@ for puzzleNumber in puzzels:
         Z = linkage(distanceMatrix, 'ward')
         np.savetxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt', Z)
 
-    np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}_{sequence_type}.txt', ids, fmt="%s")
+    # np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}_{sequence_type}.txt', ids, fmt="%s")
 
     distanceMatrixSQ = squareform(distanceMatrix)
 
-    if os.path.isfile(f'{plotPath}/silhouette_scores_puzzle{puzzleNumber}_{sequence_type}.txt'):
-        with open(f'{plotPath}/silhouette_scores_puzzle{puzzleNumber}_{sequence_type}.txt', 'r') as fp:
-            max_silhouette_avg = 0
-            for line in fp:
-                if line.startswith('For n_clusters ='):
-                    n_clusters = int(line.split()[3])
-                    silhouette_avg = float(line.split()[-1])
-                    if silhouette_avg > max_silhouette_avg:
-                        max_silhouette_avg = silhouette_avg
-                        numCluster = n_clusters
-    else:
-        with open(f'{plotPath}/silhouette_scores_puzzle{puzzleNumber}_{sequence_type}.txt', 'w') as fp:
-            max_silhouette_avg = 0
+    fig = clusteringEvaluation(Z,distanceMatrix,puzzleNumber)
 
-            for n_clusters in range(2, 10):
-                fig, ax1 = plt.subplots(1, 1)
-                fig.set_size_inches(18, 7)
+    fig.savefig(f'{plotPath}/evaluation_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
+    print(f"evaluation_puzzle{puzzleNumber}_{sequence_type}.png saved")
+    plt.close(fig)
 
-                clusters = fcluster(Z, n_clusters, criterion='maxclust')
-                silhouette_avg = silhouette_score(distanceMatrixSQ, clusters, metric='precomputed')
-                silhouette_avg = round(silhouette_avg, 3)
+    # Silhouette analysis plot and deciding the number of clusters based on the max silhouette score
+    max_silhouette_avg = 0
 
-                fp.write(f'For n_clusters = {n_clusters} The average silhouette_score is : {silhouette_avg}\n')
-                print("For n_clusters =", n_clusters, "The average silhouette_score is :", silhouette_avg)
+    fig, axs = plt.subplots(2, 4, figsize=(20, 10), sharex=False, sharey=True)
 
-                if silhouette_avg > max_silhouette_avg:
-                    max_silhouette_avg = silhouette_avg
-                    numCluster = n_clusters
+    fig.text(0.5, 0.04, 'Silhouette coefficient values', ha='center', fontsize=14)
+    fig.text(0.04, 0.5, 'Cluster label', va='center', rotation='vertical', fontsize=14)
+    
+    for n_clusters in range(2, 10):
 
-                sample_silhouette_values = silhouette_samples(distanceMatrixSQ, clusters, metric='precomputed')
-                
-                y_lower = 10
-                for i in range(n_clusters):
-                    ith_cluster_silhouette_values = sample_silhouette_values[clusters == i+1]
-                    ith_cluster_silhouette_values.sort()
-                    size_cluster_i = ith_cluster_silhouette_values.shape[0]
-                    y_upper = y_lower + size_cluster_i
-                    color = cm.nipy_spectral(float(i) / n_clusters)
-                    ax1.fill_betweenx(np.arange(y_lower, y_upper), 0, ith_cluster_silhouette_values, facecolor=color, edgecolor=color, alpha=0.7)
-                    ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i+1))
-                    y_lower = y_upper + 10
-
-                ax1.set_title("The silhouette plot for the various clusters.")
-                ax1.set_xlabel("The silhouette coefficient values")
-                ax1.set_ylabel("Cluster label")
-                ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
-                ax1.set_yticks([])
-                ax1.set_xticks([-0.2, 0, 0.2, 0.4, 0.6, 0.8, 1])
-                plt.savefig(f'{plotPath}/silhouette_puzzle{puzzleNumber}_{sequence_type}_n{n_clusters}.png')
-                plt.close(fig)
+        ax1 = axs[(n_clusters-2)//4][(n_clusters-2)%4]
         
-   
+        clusters = fcluster(Z, n_clusters, criterion='maxclust')
+        silhouette_avg = silhouette_score(distanceMatrixSQ, clusters, metric='precomputed')
+        silhouette_avg = round(silhouette_avg, 3)
+
+        print("For n_clusters =", n_clusters, "The average silhouette_score is :", silhouette_avg)
+
+        if silhouette_avg > max_silhouette_avg:
+            max_silhouette_avg = silhouette_avg
+            numCluster = n_clusters
+
+        sample_silhouette_values = silhouette_samples(distanceMatrixSQ, clusters, metric='precomputed')
+        
+        y_lower = 10
+        for i in range(n_clusters):
+            ith_cluster_silhouette_values = sample_silhouette_values[clusters == i+1]
+            ith_cluster_silhouette_values.sort()
+            size_cluster_i = ith_cluster_silhouette_values.shape[0]
+            y_upper = y_lower + size_cluster_i
+            color = cm.nipy_spectral(float(i) / n_clusters)
+            ax1.fill_betweenx(np.arange(y_lower, y_upper), 0, ith_cluster_silhouette_values, facecolor=color, edgecolor=color, alpha=0.7)
+            ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i+1))
+            y_lower = y_upper + 10
+
+        ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
+        ax1.set_yticks([])
+        ax1.set_xticks(np.arange(-0.1, 0.8, 0.1))
+        #set x tick font size 
+        for tick in ax1.xaxis.get_major_ticks():
+            tick.label1.set_fontsize(8)
+        ax1.set_xlim([-0.1, 0.8])
+        ax1.set_ylim([0, len(distanceMatrixSQ) + (n_clusters+1) * 10])
+        ax1.set_title(f'Number of clusters: {n_clusters}\nSilhouette score: {silhouette_avg}', fontsize=12)
+
+
+    plt.suptitle(f"Silhouette analysis for puzzle {puzzleNumber}", fontsize=14, fontweight='bold')
+    plt.savefig(f'{plotPath}/silhouette_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
+    print(f"silhouette_puzzle{puzzleNumber}_{sequence_type}.png saved")
+    plt.close(fig)
+
     clusters = fcluster(Z, numCluster, criterion='maxclust')
 
     cluster_ids = {}
@@ -383,12 +389,12 @@ for puzzleNumber in puzzels:
           
 print("--- %s seconds ---" % (time.time() - start_time)) 
 
-repo_path = './'
+# repo_path = './'
 
-os.chdir(repo_path)
+# os.chdir(repo_path)
 
-subprocess.run(['git', 'add', '.'])
+# subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "Selecting the number of clusters with silhouette analysis"])
+# subprocess.run(['git', 'commit', '-m', "Selecting the number of clusters with silhouette analysis"])
 
-subprocess.run(['git', 'push'])
+# subprocess.run(['git', 'push'])
