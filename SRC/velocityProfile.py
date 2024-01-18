@@ -16,7 +16,7 @@ def use_regex(input_text):
     attempt = match.group(6)
     return int(particpants), int(run), int(puzzle_id), int(attempt)
 
-def velocity_profile(data, acceleration=False):
+def velocity_profile(data, acceleration=False, ignore_Unattached_ego=True):
     """
     plot the velocity or accelaration profile of the objects in the puzzle
 
@@ -73,21 +73,44 @@ def velocity_profile(data, acceleration=False):
     velocity_vector = positional_vector.diff()
     velocity_vector = velocity_vector.drop(0)
     velocity_vector = velocity_vector.reset_index(drop=True)
-    if acceleration:
-        acceleration_vector = velocity_vector.diff()
-        acceleration_vector = acceleration_vector.drop(0)
-        acceleration_vector = acceleration_vector.reset_index(drop=True)
-        velocity_vector = acceleration_vector
+    # if acceleration:
+    #     acceleration_vector = velocity_vector.diff()
+    #     acceleration_vector = acceleration_vector.drop(0)
+    #     acceleration_vector = acceleration_vector.reset_index(drop=True)
+    #     velocity_vector = acceleration_vector
+
     v=np.zeros((len(velocity_vector),len(present_objects)))
-
-    for i in range(len(present_objects)):
-        vx = velocity_vector[positional_vector.columns[i*2][0],'x']
-        vx=np.array(vx, dtype=np.float64)
-        vy = velocity_vector[positional_vector.columns[i*2][0],'y']
-        vy=np.array(vy, dtype=np.float64)
-        v_temp=np.sqrt(vx**2+vy**2)
+    for i, object_i in enumerate(present_objects):
+        # print (i, object_i)
+        object_i_name = present_objects[object_i]
+        vx_i = velocity_vector[positional_vector.columns[i*2][0],'x']
+        vx_i=np.array(vx_i, dtype=np.float64)
+        vy_i = velocity_vector[positional_vector.columns[i*2][0],'y']
+        vy_i=np.array(vy_i, dtype=np.float64)
+        v_temp=np.sqrt(vx_i**2 + vy_i**2)
         v[:,i]=v_temp
-
+    
+    if ignore_Unattached_ego:
+        print("ignore_Unattached_ego")
+        for step in range(len(v)):
+            if v[step,0] == np.sum(v[step,:]) and v[step,0] != 0:
+                positional_vector.at[step,(6,'x')] = np.nan
+                positional_vector.at[step,(6,'y')] = np.nan
+ 
+    velocity_vector = positional_vector.diff()
+    velocity_vector = velocity_vector.drop(0)
+    velocity_vector = velocity_vector.reset_index(drop=True)
+    v=np.zeros((len(velocity_vector),len(present_objects)))
+    for i, object_i in enumerate(present_objects):
+        # print (i, object_i)
+        object_i_name = present_objects[object_i]
+        vx_i = velocity_vector[positional_vector.columns[i*2][0],'x']
+        vx_i=np.array(vx_i, dtype=np.float64)
+        vy_i = velocity_vector[positional_vector.columns[i*2][0],'y']
+        vy_i=np.array(vy_i, dtype=np.float64)
+        v_temp=np.sqrt(vx_i**2 + vy_i**2)
+        v[:,i]=v_temp
+       
 
     fig, ax = plt.subplots(len(present_objects),1,figsize=(10,3*len(present_objects)+4))
 
@@ -95,7 +118,7 @@ def velocity_profile(data, acceleration=False):
         
      
         nl=0
-        vmax=v.max()
+        # vmax=v.max()
         ax[i].plot(v[:,i], label=present_objects[positional_vector.columns[i*2][0]], color="C"+str(i))
         #plot vertical lines where v[:,i] is equal to v[:,0]
         if i != 0:
@@ -132,7 +155,7 @@ def velocity_profile(data, acceleration=False):
             ax[i].set_xticks(np.arange(0, len(v), step=round(len(v)/T)*1), np.arange(0, T, step=1))
         else:
             ax[i].set_xticks(np.arange(0, len(v), step=round(len(v)/T)*10), np.arange(0, T, step=10))
-        ax[i].set_ylim(0, 1.1*vmax)
+        # ax[i].set_ylim(0, 1.1*vmax)
         ax[i].legend(loc='upper right')
 
         fig.tight_layout(pad=5.0)
@@ -146,17 +169,17 @@ frame_files = os.listdir(frame_folder)
 for file in frame_files:
     if file.endswith(".json"):
         participant_id, run, puzzle, attempt = use_regex(file)
-        if participant_id == 59 and run ==1 and puzzle == 26 and attempt == 0:
+        if participant_id == 59 and run ==1 and puzzle == 22 and attempt == 0:
             with open(os.path.join(frame_folder,file)) as json_file:
-                if not os.path.exists("./Plots_Text/Velocity_Profile/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png"):
+                if True: #not os.path.exists("./Plots_Text/Velocity_Profile/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png"):
                     # print("Saved: ", str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png")
                     data = json.load(json_file)
                     fig, ax = velocity_profile(data)
-                    figa, axa = velocity_profile(data, acceleration=True)
+                    # figa, axa = velocity_profile(data, acceleration=True)
                 #set the title of the plot
                     fig.suptitle("Participant: "+str(participant_id)+" Run: "+str(run)+" Puzzle: "+str(puzzle)+" Attempt: "+str(attempt))
-                    figa.suptitle("Participant: "+str(participant_id)+" Run: "+str(run)+" Puzzle: "+str(puzzle)+" Attempt: "+str(attempt))
-                    fig.savefig("./Plots_Text/Velocity_Profile/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png", dpi=300)
-                    figa.savefig("./Plots_Text/Velocity_Profile/Acceleration/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png", dpi=300)
+                    # figa.suptitle("Participant: "+str(participant_id)+" Run: "+str(run)+" Puzzle: "+str(puzzle)+" Attempt: "+str(attempt))
+                    fig.savefig("./Plots_Text/Velocity_Profile/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+"wiii.png", dpi=300)
+                    # figa.savefig("./Plots_Text/Velocity_Profile/Acceleration/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png", dpi=300)
                     plt.close(fig)
-                    plt.close(figa)
+                    # plt.close(figa)
