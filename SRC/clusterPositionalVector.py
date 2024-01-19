@@ -55,7 +55,7 @@ def coloring(object,dummy = False):
         elif object=='ego':
             return [(0,0,0,c) for c in np.linspace(0,1,100)]
     
-def positional_vector(data : dict) -> pd.DataFrame():
+def positional_vector(data : dict, ignore_Unattached_ego : bool = False) -> pd.DataFrame():
     """
     Get the positional vector of the objects from frames json file
 
@@ -97,6 +97,32 @@ def positional_vector(data : dict) -> pd.DataFrame():
                 positional_vector.at[row,(id,'x')]=x
                 positional_vector.at[row,(id,'y')]=y
         row+=1
+    
+    if ignore_Unattached_ego:
+
+        velocity_vector = positional_vector.diff()
+        velocity_vector = velocity_vector.drop(0)
+        velocity_vector = velocity_vector.reset_index(drop=True)
+        
+        v=np.zeros((len(velocity_vector),len(present_objects)))
+
+        for i, object_i in enumerate(present_objects):
+
+            vx_i = velocity_vector[positional_vector.columns[i*2][0],'x']
+            vx_i=np.array(vx_i, dtype=np.float64)
+            vy_i = velocity_vector[positional_vector.columns[i*2][0],'y']
+            vy_i=np.array(vy_i, dtype=np.float64)
+            v_temp=np.sqrt(vx_i**2 + vy_i**2)
+            v[:,i]=v_temp
+        
+        for step in range(1,len(v)):
+            if v[step,0] == np.sum(v[step,:]) :
+                positional_vector.at[step,(6,'x')] = np.nan
+                positional_vector.at[step,(6,'y')] = np.nan
+                    
+        positional_vector[6,'x']=positional_vector[6,'x'].interpolate(method='pad')
+        positional_vector[6,'y']=positional_vector[6,'y'].interpolate(method='pad')
+
     return positional_vector, present_objects
 
 def dtwI(sequences : list) -> np.ndarray:
@@ -227,7 +253,7 @@ def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=True
     plt.xlim(-2, 2)
     plt.ylim(-2, 2)
     plt.title(f'cluster {cluster_id}' )
-    plt.savefig(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png',
+    plt.savefig(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png',
                 bbox_inches='tight', dpi=720)
     plt.close(fig)
 
@@ -237,14 +263,15 @@ sequence_type="POSVEC"
 puzzels = [1,2,3,4,5,6,21,22,23,24,25,26,16,17,18,19,20]
 
 log_scale = True
+ignore_Unattached_ego = True
 
 for puzzleNumber in puzzels:
 
-    if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
-            os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
-            plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+    if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'):
+            os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}')
+            plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'
     else:
-        plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+        plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'
 
     allSV=[]
     ids=[]
@@ -258,7 +285,7 @@ for puzzleNumber in puzzels:
                     ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
                     with open(os.path.join(frame_folder,file)) as json_file:
                         data = json.load(json_file)
-                        vector, object_names = positional_vector(data)
+                        vector, object_names = positional_vector(data, ignore_Unattached_ego)
                         # print(vector)
                         # print(object_names)
                         d=len(vector.columns)        
