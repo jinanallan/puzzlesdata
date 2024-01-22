@@ -8,6 +8,7 @@ import matplotlib.colors as mcolors
 from PIL import Image
 import matplotlib.cm as cm
 from dtaidistance import dtw
+from dtaidistance import dtw_barycenter
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 from scipy.spatial.distance import squareform
 from sklearn.metrics import silhouette_score, silhouette_samples
@@ -159,7 +160,7 @@ def use_regex(input_text):
     attempt = match.group(6)
     return int(particpants), int(run), int(puzzle_id), int(attempt)
 
-def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=True):
+def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=True, dba=True ):
     """
     Output a heatmap of solutions within a cluster 
 
@@ -227,7 +228,7 @@ def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=True
     at=at/n
 
     cluster_vector = cluster_vector.reset_index(drop=True)
-
+    
     fig, ax = plt.subplots()
     
     imgfolder = './cropped_puzzles_screenshots'
@@ -260,11 +261,11 @@ def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=True
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
-puzzels = [21,22,23,24,25,26,16,17,18,19,20]
+puzzels = [2] #[21,22,23,24,25,26,16,17,18,19,20]
 
 log_scale = True
 ignore_Unattached_ego = True
-manual_number_of_clusters = False
+manual_number_of_clusters = True
 
 for puzzleNumber in puzzels:
 
@@ -393,6 +394,7 @@ for puzzleNumber in puzzels:
         first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True)
         first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
         Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=True, log_scale=log_scale)
+        
     
     fig = plt.figure()
     fig.set_figheight(10)
