@@ -8,7 +8,7 @@ import matplotlib.colors as mcolors
 from PIL import Image
 import matplotlib.cm as cm
 from dtaidistance import dtw
-from dtaidistance import dtw_barycenter
+from tslearn.barycenters import softdtw_barycenter
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 from scipy.spatial.distance import squareform
 from sklearn.metrics import silhouette_score, silhouette_samples
@@ -160,7 +160,7 @@ def use_regex(input_text):
     attempt = match.group(6)
     return int(particpants), int(run), int(puzzle_id), int(attempt)
 
-def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=True, dba=True ):
+def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=True ):
     """
     Output a heatmap of solutions within a cluster 
 
@@ -258,14 +258,59 @@ def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=True
                 bbox_inches='tight', dpi=720)
     plt.close(fig)
 
+def softbarycenter(cluster_id, data_ids, puzzleNumber):
+    cluster_vector = list() 
+
+    for id in data_ids:
+        try:
+            
+            filename = [f for f in os.listdir('./Data/Pilot3/Frames/') if f.endswith(f'{id}_frames.json')][0]
+            data = json.load(open(f'./Data/Pilot3/Frames/{filename}'))
+
+        except:
+            
+            filename = [f for f in os.listdir('./Data/Pilot4/Frames/') if f.endswith(f'{id}_frames.json')][0]
+            data = json.load(open(f'./Data/Pilot4/Frames/{filename}'))
+
+        vector, present_objects = positional_vector(data)
+   
+        d=len(vector.columns)
+        n=len(vector.index)
+        solutionVector = np.empty([n,d])
+        for ni in range(n):
+            for di in range(d):
+                solutionVector[ni][di]=vector.iloc[ni,di]
+        cluster_vector.append(solutionVector)
+
+    if len(cluster_vector) > 1:
+        avg = softdtw_barycenter(cluster_vector, gamma=1., max_iter=50, tol=1e-3)
+        fig, ax = plt.subplots()
+        imgfolder = './cropped_puzzles_screenshots'
+        fname = os.path.join(imgfolder, 'puzzle'+str(puzzleNumber)+'.png')
+        img = Image.open(fname).convert('L')
+        img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
+        for i,object in enumerate(present_objects):
+
+            x = avg[:,i*2]
+            y = avg[:,i*2+1]
+        
+            plt.scatter(x,y, alpha=0.1, color= coloring(present_objects[object], dummy=True), s=10, edgecolors='face',
+                                        marker= ".", label=present_objects[object])
+            plt.legend(title=f'Number of solutions: {len(cluster_vector)}',loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=4)
+            plt.xlim(-2, 2)
+            plt.ylim(-2, 2)
+            plt.title(f'cluster {cluster_id} barycenter' )
+            plt.savefig(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png',
+                        bbox_inches='tight', dpi=720)
+
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
-puzzels = [2] #[21,22,23,24,25,26,16,17,18,19,20]
+puzzels = [1,5,6] #[21,22,23,24,25,26,16,17,18,19,20]
 
 log_scale = True
 ignore_Unattached_ego = True
-manual_number_of_clusters = True
+manual_number_of_clusters = False
 
 for puzzleNumber in puzzels:
 
@@ -314,6 +359,7 @@ for puzzleNumber in puzzels:
     # np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}_{sequence_type}.txt', ids, fmt="%s")
     if manual_number_of_clusters:
         numCluster = int(input("Enter the number of clusters: "))
+
     else:
         distanceMatrixSQ = squareform(distanceMatrix)
 
@@ -339,7 +385,7 @@ for puzzleNumber in puzzels:
             silhouette_avg = silhouette_score(distanceMatrixSQ, clusters, metric='precomputed')
             silhouette_avg = round(silhouette_avg, 3)
 
-            print("For n_clusters =", n_clusters, "The average silhouette_score is :", silhouette_avg)
+            # print("For n_clusters =", n_clusters, "The average silhouette_score is :", silhouette_avg)
 
             if silhouette_avg > max_silhouette_avg:
                 max_silhouette_avg = silhouette_avg
@@ -371,7 +417,7 @@ for puzzleNumber in puzzels:
 
         plt.suptitle(f"Silhouette analysis for puzzle {puzzleNumber}", fontsize=14, fontweight='bold')
         plt.savefig(f'{plotPath}/silhouette_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
-        print(f"silhouette_puzzle{puzzleNumber}_{sequence_type}.png saved")
+        # print(f"silhouette_puzzle{puzzleNumber}_{sequence_type}.png saved")
         plt.close(fig)
 
     clusters = fcluster(Z, numCluster, criterion='maxclust')
@@ -391,9 +437,10 @@ for puzzleNumber in puzzels:
         json.dump(cluster_ids, fp)
 
     for cluster_id, data_ids in cluster_ids.items():
-        first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True)
-        first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
-        Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=True, log_scale=log_scale)
+        # first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True)
+        # first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
+        # Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=True, log_scale=log_scale)
+        softbarycenter(cluster_id, data_ids, puzzleNumber)
         
     
     fig = plt.figure()
@@ -421,12 +468,12 @@ for puzzleNumber in puzzels:
           
 print("--- %s seconds ---" % (time.time() - start_time)) 
 
-# repo_path = './'
+repo_path = './'
 
-# os.chdir(repo_path)
+os.chdir(repo_path)
 
-# subprocess.run(['git', 'add', '.'])
+subprocess.run(['git', 'add', '.'])
 
-# subprocess.run(['git', 'commit', '-m', "Selecting the number of clusters with silhouette analysis"])
+subprocess.run(['git', 'commit', '-m', "perform SoftDTW barycenter on each cluster and save the plots"])
 
-# subprocess.run(['git', 'push'])
+subprocess.run(['git', 'push'])

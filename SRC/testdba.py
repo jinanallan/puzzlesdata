@@ -1,43 +1,51 @@
-# test DTW barycenter averaging for multiple n dim time series
 
-from dtaidistance import dtw_barycenter
-import numpy as np
+import numpy
 import matplotlib.pyplot as plt
-import pandas as pd
-import os
 
-#generate random time series
-def generate_random_ts(n, l):
-    return np.random.randint(1, 10, (n, l)).astype(np.double)
+from tslearn.barycenters import \
+    euclidean_barycenter, \
+    dtw_barycenter_averaging, \
+    dtw_barycenter_averaging_subgradient, \
+    softdtw_barycenter
+from tslearn.datasets import CachedDatasets
 
-#add an event in the middle of the time series which is a spike of hight 100
-def add_event(ts, m):
-    ts[0][int(len(ts[0])/2)+m] += 100
-    return ts
-x = generate_random_ts(1, 200) 
-y =  generate_random_ts(1, 200)
-z = generate_random_ts(1, 200)
-h= generate_random_ts(1, 200)
+# fetch the example data set
+numpy.random.seed(0)
+X_train, y_train, _, _ = CachedDatasets().load_dataset("Trace")
+X = X_train[y_train == 2]
+length_of_sequence = X.shape[1]
+print(type(X))
 
-x = add_event(x,7)
-y = add_event(y,8)
-z = add_event(z,-4)
-h = add_event(h,2)
-
-
+def plot_helper(barycenter):
+    # plot all points of the data set
+    for series in X:
+        plt.plot(series.ravel(), "k-", alpha=.2)
+    # plot the given barycenter of them
+    plt.plot(barycenter.ravel(), "r-", linewidth=2)
 
 
-#make a list of time series
-data = [x, y, z,h]
-plt.plot(x[0], label='x')
-plt.plot(y[0], label='y')
-plt.plot(z[0], label='z')
-plt.plot(h[0], label='h')
+# plot the four variants with the same number of iterations and a tolerance of
+# 1e-3 where applicable
+ax1 = plt.subplot(4, 1, 1)
+plt.title("Euclidean barycenter")
+plot_helper(euclidean_barycenter(X))
 
-#compute the barycenter
-avg=dtw_barycenter.dba_loop(data, use_c=True, c=h)
-print(avg)
-print(len(avg[0]))
-plt.plot(avg[0], label='avg')
-plt.legend()
+plt.subplot(4, 1, 2, sharex=ax1)
+plt.title("DBA (vectorized version of Petitjean's EM)")
+plot_helper(dtw_barycenter_averaging(X, max_iter=50, tol=1e-3))
+
+plt.subplot(4, 1, 3, sharex=ax1)
+plt.title("DBA (subgradient descent approach)")
+plot_helper(dtw_barycenter_averaging_subgradient(X, max_iter=50, tol=1e-3))
+
+plt.subplot(4, 1, 4, sharex=ax1)
+plt.title("Soft-DTW barycenter ($\gamma$=1.0)")
+plot_helper(softdtw_barycenter(X, gamma=1., max_iter=50, tol=1e-3))
+# print(softdtw_barycenter(X, gamma=1., max_iter=50, tol=1e-3))
+
+# clip the axes for better readability
+ax1.set_xlim([0, length_of_sequence])
+
+# show the plot(s)
+plt.tight_layout()
 plt.show()
