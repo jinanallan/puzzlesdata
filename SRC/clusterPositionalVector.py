@@ -9,6 +9,7 @@ from PIL import Image
 import matplotlib.cm as cm
 from dtaidistance import dtw
 from tslearn.barycenters import softdtw_barycenter
+from tslearn.metrics import soft_dtw, cdist_soft_dtw_normalized
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 from scipy.spatial.distance import squareform
 from sklearn.metrics import silhouette_score, silhouette_samples
@@ -17,6 +18,7 @@ import time
 import subprocess
 import json
 from clusteringEvaluation import clusteringEvaluation
+import torch
 
 start_time = time.time()
 
@@ -80,7 +82,9 @@ def positional_vector(data : dict, ignore_Unattached_ego : bool = False) -> pd.D
         if present_objects[x] not in universal_Objects:
             # print(present_objects[x])
             present_objects.pop(x)
-    
+
+    ego_id= [k for k,v in present_objects.items() if v=='ego'][0]
+
     positional_vector=pd.DataFrame(columns=present_objects)
     sub_columns = pd.MultiIndex.from_product([positional_vector.columns, ['x', 'y']], names=['ID', 'position'])
     positional_vector = pd.DataFrame(index=range(len(data.frames)), columns=sub_columns)
@@ -118,11 +122,11 @@ def positional_vector(data : dict, ignore_Unattached_ego : bool = False) -> pd.D
         
         for step in range(1,len(v)):
             if v[step,0] == np.sum(v[step,:]) :
-                positional_vector.at[step,(6,'x')] = np.nan
-                positional_vector.at[step,(6,'y')] = np.nan
+                positional_vector.at[step,(ego_id,'x')] = np.nan
+                positional_vector.at[step,(ego_id,'y')] = np.nan
                     
-        positional_vector[6,'x']=positional_vector[6,'x'].interpolate(method='pad')
-        positional_vector[6,'y']=positional_vector[6,'y'].interpolate(method='pad')
+        positional_vector[ego_id,'x']=positional_vector[ego_id,'x'].interpolate(method='pad')
+        positional_vector[ego_id,'y']=positional_vector[ego_id,'y'].interpolate(method='pad')
 
     return positional_vector, present_objects
 
@@ -149,6 +153,26 @@ def dtwI(sequences : list) -> np.ndarray:
     distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
     return distanceMatrix
 
+def softdtw_score(sequences : list) -> np.ndarray:
+    n=len(sequences)
+    d=len(sequences[0][0])
+    # distanceMatrix = np.empty([n,n])
+    # for i in range(n):
+    #     for j in range(i+1,n):
+    #         print(i,j)
+    #         s_i= torch.from_numpy(sequences[i]).float()
+    #         s_j= torch.from_numpy(sequences[j]).float()
+    #         # dtw_i=soft_dtw(s_i, s_j, gamma=1.)#, be="pytorch", compute_with_backend=True)
+    #         soft_dtw_loss=SoftDTWLossPyTorch(gamma=1., normalize=True)
+    #         dtw_i_mean=soft_dtw_loss(s_i, s_j).mean()
+    #         #float(dtw_i)   
+    #         dtw_i_mean=dtw_i_mean.item()
+    #         distanceMatrix[i][j]=dtw_i_mean
+    distanceMatrix = cdist_soft_dtw_normalized(sequences, gamma=1.)
+    # distanceMatrix in form of scipy pdist  output
+    distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
+    return distanceMatrix
+
 def use_regex(input_text):
     pattern = re.compile(r"([0-9]{4}-[0-9]{2}-[0-9]{2})-([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_([0-9]+)_frames", re.IGNORECASE)
 
@@ -160,7 +184,7 @@ def use_regex(input_text):
     attempt = match.group(6)
     return int(particpants), int(run), int(puzzle_id), int(attempt)
 
-def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=True ):
+def Heatmap(cluster_id, data_ids, puzzleNumber, pathplot,ignore_ego=False, log_scale=True ):
     """
     Output a heatmap of solutions within a cluster 
 
@@ -254,11 +278,11 @@ def Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=False, log_scale=True
     plt.xlim(-2, 2)
     plt.ylim(-2, 2)
     plt.title(f'cluster {cluster_id}' )
-    plt.savefig(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png',
+    plt.savefig(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png',
                 bbox_inches='tight', dpi=720)
     plt.close(fig)
 
-def softbarycenter(cluster_id, data_ids, puzzleNumber):
+def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
     cluster_vector = list() 
 
     for id in data_ids:
@@ -300,26 +324,40 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber):
             plt.xlim(-2, 2)
             plt.ylim(-2, 2)
             plt.title(f'cluster {cluster_id} barycenter' )
-            plt.savefig(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png',
+            plt.savefig(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png',
                         bbox_inches='tight', dpi=720)
+
 
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
-puzzels = [1,5,6] #[21,22,23,24,25,26,16,17,18,19,20]
+puzzels = [1,2] #[21,22,23,24,25,26,16,17,18,19,20]
 
 log_scale = True
 ignore_Unattached_ego = True
 manual_number_of_clusters = False
+softdtwscore = True
 
 for puzzleNumber in puzzels:
-
-    if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'):
-            os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}')
+    if softdtwscore:
+        if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'):
+            os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}')
+            plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
+        else:
+            plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
+  
+    elif ignore_Unattached_ego:
+        if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'):
+                os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}')
+                plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'
+        else:
             plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'
     else:
-        plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'
-
+        if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
+                os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
+                plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+        else:
+            plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
     allSV=[]
     ids=[]
 
@@ -346,6 +384,9 @@ for puzzleNumber in puzzels:
 
     if os.path.isfile(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt'):
         distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt')
+    elif softdtwscore:
+        distanceMatrix = softdtw_score(allSV)
+        np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt', distanceMatrix)
     else:               
         distanceMatrix = dtwI(allSV)
         np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt', distanceMatrix)
@@ -437,10 +478,10 @@ for puzzleNumber in puzzels:
         json.dump(cluster_ids, fp)
 
     for cluster_id, data_ids in cluster_ids.items():
-        # first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True)
-        # first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
-        # Heatmap(cluster_id, data_ids, puzzleNumber, ignore_ego=True, log_scale=log_scale)
-        softbarycenter(cluster_id, data_ids, puzzleNumber)
+        first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True)
+        first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
+        Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=True, log_scale=log_scale)
+        softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
         
     
     fig = plt.figure()
@@ -474,6 +515,6 @@ os.chdir(repo_path)
 
 subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "perform SoftDTW barycenter on each cluster and save the plots"])
+subprocess.run(['git', 'commit', '-m', "perform softdtw score and clustering "])
 
 subprocess.run(['git', 'push'])
