@@ -206,12 +206,12 @@ def main():
             solved , total_time = movementTracker.interaction(df, participant_id, run, "free", solved=True)
             # print(solved, total_time)
      
-            if ( not os.path.isfile('./Plots_Text/Path_Plots/frameBased/pathAttachment/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png')) and puzzle in [1,2,3,4,5,6,] :
+            if ( not os.path.isfile('./Plots_Text/Path_Plots/frameBased/pathAttachment/includeEgo/'+ str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png')) and puzzle in [1,2,3,4,5,6,] :
                 print("entered:" , str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png')
                 with open(os.path.join(folder,filename)) as json_file:
                             
                         data = json.load(json_file)
-                        vector, objects_names = positional_vector(data, ignore_ego=True)
+                        vector, objects_names = positional_vector(data, ignore_ego=False)
                         total_objects_len = len(objects_names)
 
                         # velocity_vector = vector.diff()
@@ -312,7 +312,7 @@ def main():
                                 mainfig.tight_layout()
                                 mainfig.subplots_adjust(top=0.85)
 
-                plt.savefig('./Plots_Text/Path_Plots/frameBased/pathAttachment/'+
+                plt.savefig('./Plots_Text/Path_Plots/frameBased/pathAttachment/includeEgo/'+
                                 str(participant_id)+'_'+ str(run)+'_'+str(puzzle)+'_'+str(attempt)+'.png', dpi=300)
                 plt.close()
                                 

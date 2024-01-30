@@ -331,7 +331,7 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
-puzzels = [1,2] #[21,22,23,24,25,26,16,17,18,19,20]
+puzzels = [2] #[21,22,23,24,25,26,16,17,18,19,20]
 
 log_scale = True
 ignore_Unattached_ego = True
@@ -478,7 +478,7 @@ for puzzleNumber in puzzels:
         json.dump(cluster_ids, fp)
 
     for cluster_id, data_ids in cluster_ids.items():
-        first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True)
+        first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True, includeEgo=True)
         first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
         Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=True, log_scale=log_scale)
         softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
