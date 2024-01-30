@@ -168,6 +168,7 @@ def softdtw_score(sequences : list) -> np.ndarray:
     #         #float(dtw_i)   
     #         dtw_i_mean=dtw_i_mean.item()
     #         distanceMatrix[i][j]=dtw_i_mean
+    print("computing distance matrix based on normalized softdtw score")
     distanceMatrix = cdist_soft_dtw_normalized(sequences, gamma=1.)
     # distanceMatrix in form of scipy pdist  output
     distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
@@ -331,12 +332,13 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
-puzzels = [2] #[21,22,23,24,25,26,16,17,18,19,20]
+puzzels = [3,4,5,6] #[21,22,23,24,25,26,16,17,18,19,20]
 
 log_scale = True
 ignore_Unattached_ego = True
-manual_number_of_clusters = True
+manual_number_of_clusters = False
 softdtwscore = True
+ignore_ego_visualization = True
 
 for puzzleNumber in puzzels:
     if softdtwscore:
@@ -478,9 +480,9 @@ for puzzleNumber in puzzels:
         json.dump(cluster_ids, fp)
 
     for cluster_id, data_ids in cluster_ids.items():
-        first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True, includeEgo=True)
+        first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True, includeEgo=not ignore_ego_visualization)
         first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
-        Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=False, log_scale=log_scale)
+        Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
         if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png'):
             softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
         
@@ -510,12 +512,12 @@ for puzzleNumber in puzzels:
           
 print("--- %s seconds ---" % (time.time() - start_time)) 
 
-# repo_path = './'
+repo_path = './'
 
-# os.chdir(repo_path)
+os.chdir(repo_path)
 
-# subprocess.run(['git', 'add', '.'])
+subprocess.run(['git', 'add', '.'])
 
-# subprocess.run(['git', 'commit', '-m', "perform softdtw score and clustering "])
+subprocess.run(['git', 'commit', '-m', "p3 to p6 clustering with softdtw divergence score"])
 
-# subprocess.run(['git', 'push'])
+subprocess.run(['git', 'push'])
