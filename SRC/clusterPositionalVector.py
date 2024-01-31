@@ -512,12 +512,12 @@ for puzzleNumber in puzzels:
           
 print("--- %s seconds ---" % (time.time() - start_time)) 
 
-repo_path = './'
+# repo_path = './'
 
-os.chdir(repo_path)
+# os.chdir(repo_path)
 
-subprocess.run(['git', 'add', '.'])
+# subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "p3 to p6 clustering with softdtw divergence score"])
+# subprocess.run(['git', 'commit', '-m', "p3 to p6 clustering with softdtw divergence score"])
 
-subprocess.run(['git', 'push'])
+# subprocess.run(['git', 'push'])
