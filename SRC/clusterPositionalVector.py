@@ -332,13 +332,13 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
-puzzels = [3,4,5,6] #[21,22,23,24,25,26,16,17,18,19,20]
+puzzels = [3] #[21,22,23,24,25,26,16,17,18,19,20]
 
 log_scale = True
 ignore_Unattached_ego = True
-manual_number_of_clusters = False
+manual_number_of_clusters = True
 softdtwscore = True
-ignore_ego_visualization = True
+ignore_ego_visualization = False
 
 for puzzleNumber in puzzels:
     if softdtwscore:
