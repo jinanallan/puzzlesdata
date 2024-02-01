@@ -332,22 +332,27 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
-puzzels = [3] #[21,22,23,24,25,26,16,17,18,19,20]
+puzzels = [21,22,23,24,25,26,16,17,18,19,20] #[21,22,23,24,25,26,16,17,18,19,20]
 
 log_scale = True
-ignore_Unattached_ego = True
-manual_number_of_clusters = True
+ignore_Unattached_ego = True 
+manual_number_of_clusters = False 
 softdtwscore = True
-ignore_ego_visualization = False
+ignore_ego_visualization = True
 
 for puzzleNumber in puzzels:
-    if softdtwscore:
+    if softdtwscore and ignore_Unattached_ego:
         if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'):
             os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}')
             plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
         else:
             plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
-  
+    elif softdtwscore:
+        if not os.path.exists(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'):
+            os.makedirs(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}')
+            plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
+        else:
+            plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
     elif ignore_Unattached_ego:
         if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'):
                 os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}')
@@ -480,18 +485,20 @@ for puzzleNumber in puzzels:
         json.dump(cluster_ids, fp)
 
     for cluster_id, data_ids in cluster_ids.items():
-        first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True, includeEgo=not ignore_ego_visualization)
-        first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
-        Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
+        if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif'):
+            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True, includeEgo=not ignore_ego_visualization)
+            first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
+        if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png'):
+            Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
         if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png'):
             softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
         
     
     fig = plt.figure()
-    fig.set_figheight(10)
+    fig.set_figheight(15)
     fig.set_figwidth(20)
     
-    ax1 = plt.subplot2grid((2, numCluster), (0, 0), colspan=numCluster)
+    ax1 = plt.subplot2grid((3, numCluster), (0, 0), colspan=numCluster)
     ax1.set_title(f'Dendrogram of puzzle {puzzleNumber} solutions', fontsize=20)
     ax1.set_xlabel('Solution ID')
     # ax1.set_ylabel('Distance')
@@ -500,15 +507,28 @@ for puzzleNumber in puzzels:
     plt.axhline(y=Z[-numCluster+1,2], color='black', linestyle='--')
     
     #pad between dendrogram and heatmap
-    plt.subplots_adjust(left=0.05, bottom=0.05, right=0.95, top=0.95, hspace=0.4)
+    plt.subplots_adjust(left=0.05, bottom=0.02, right=0.95, top=0.98, hspace=0.1)
 
-    plt.figtext(0.5, 0.45, "Heatmap of solutions within each cluster", ha="center", va="center", fontsize=20)
+    plt.figtext(0.5, 0.60, "Heatmap and Barycebter of solutions within each cluster", ha="center", va="center", fontsize=20)
 
     for i in np.arange(1,numCluster+1):
-        ax2 = plt.subplot2grid((2, numCluster), (1, i-1))
+        ax2 = plt.subplot2grid((3, numCluster), (1, i-1))
         ax2.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png')) 
         ax2.set_axis_off()
-    plt.savefig(f'{plotPath}/dendrogram_heatmap_puzzle{puzzleNumber}.png', dpi=300)
+    
+
+    for i in np.arange(1,numCluster+1):
+        ax3 = plt.subplot2grid((3, numCluster), (2, i-1))
+        try :
+            ax3.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png')) 
+            ax3.set_axis_off()
+        except:
+            
+            ax3.text(0.5, 0.5, 'None', ha='center', va='center', fontsize=20)
+
+            ax3.set_axis_off()
+        
+    plt.savefig(f'{plotPath}/dendrogram_heatmap_barycenter_puzzle{puzzleNumber}.png', dpi=300)
           
 print("--- %s seconds ---" % (time.time() - start_time)) 
 
@@ -518,6 +538,6 @@ print("--- %s seconds ---" % (time.time() - start_time))
 
 # subprocess.run(['git', 'add', '.'])
 
-# subprocess.run(['git', 'commit', '-m', "p3 to p6 clustering with softdtw divergence score"])
+# subprocess.run(['git', 'commit', '-m', "p3 include ignore unattached soft dtw and barycenter in dendogram"])
 
 # subprocess.run(['git', 'push'])
