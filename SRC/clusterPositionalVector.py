@@ -58,7 +58,7 @@ def coloring(object,dummy = False):
         elif object=='ego':
             return [(0,0,0,c) for c in np.linspace(0,1,100)]
     
-def positional_vector(data : dict, ignore_Unattached_ego : bool = False) -> pd.DataFrame():
+def positional_vector(data : dict, ignore_Unattached_ego : bool = False, total_time : bool = False) -> pd.DataFrame():
     """
     Get the positional vector of the objects from frames json file
 
@@ -68,6 +68,7 @@ def positional_vector(data : dict, ignore_Unattached_ego : bool = False) -> pd.D
     Returns: 
         positional_vector: dataframe with the positional vector
         present_objects: dict of object names and their IDs
+        total_time: total time of the solution
     """
     data = pd.DataFrame(data)
 
@@ -128,7 +129,12 @@ def positional_vector(data : dict, ignore_Unattached_ego : bool = False) -> pd.D
         positional_vector[ego_id,'x']=positional_vector[ego_id,'x'].interpolate(method='pad')
         positional_vector[ego_id,'y']=positional_vector[ego_id,'y'].interpolate(method='pad')
 
-    return positional_vector, present_objects
+    t = len(positional_vector)*0.01
+    t=round(t,2)
+    if total_time:
+        return positional_vector, present_objects, t
+    else:
+        return positional_vector, present_objects
 
 def dtwI(sequences : list) -> np.ndarray:
     """
@@ -329,16 +335,18 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
                         bbox_inches='tight', dpi=720)
 
 
+
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
-puzzels = [21,22,23,24,25,26,16,17,18,19,20] #[21,22,23,24,25,26,16,17,18,19,20]
+puzzels = [1] #[21,22,23,24,25,26,16,17,18,19,20]
 
 log_scale = True
 ignore_Unattached_ego = True 
 manual_number_of_clusters = False 
 softdtwscore = True
 ignore_ego_visualization = True
+preprocessing = True
 
 for puzzleNumber in puzzels:
     if softdtwscore and ignore_Unattached_ego:
@@ -367,6 +375,7 @@ for puzzleNumber in puzzels:
             plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
     allSV=[]
     ids=[]
+    total_time_list = []
 
     for frame_folder in frame_folders:
         frame_files = os.listdir(frame_folder)
@@ -377,17 +386,47 @@ for puzzleNumber in puzzels:
                     ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
                     with open(os.path.join(frame_folder,file)) as json_file:
                         data = json.load(json_file)
-                        vector, object_names = positional_vector(data, ignore_Unattached_ego)
+                        vector, object_names, total_time = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
                         # print(vector)
                         # print(object_names)
                         d=len(vector.columns)        
                         n=len(vector.index)
-                        # print(n,d)
+
                         solutionVector = np.empty([n,d])
                         for ni in range(n):
                             for di in range(d):
                                 solutionVector[ni][di]=vector.iloc[ni,di]
+
                         allSV.append(solutionVector)
+                        total_time_list.append(total_time)
+
+    #histogram of total time
+    plt.hist(total_time_list, bins=20)
+    plt.title(f'Total time of solutions for puzzle {puzzleNumber}')
+    plt.xlabel('Total time (s)')
+    plt.ylabel('Number of solutions')
+    # plt.savefig(f'{plotPath}/total_time_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
+    plt.show()
+    if preprocessing:
+        # print(total_time_list)
+        ouliers=[]
+        median_total_time = np.median(total_time_list)
+        MAD = np.median([np.abs(x - median_total_time) for x in total_time_list])
+        print(f"Median total time: {median_total_time}")
+        print(f"MAD: {MAD}")
+
+        for i in range(len(total_time_list)):
+            if np.abs(total_time_list[i] - median_total_time) > 5*MAD:
+                ouliers.append(i)
+
+    
+        print([i for j, i in enumerate(ids) if j in ouliers])
+        print([i for j, i in enumerate(total_time_list) if j in ouliers])
+        allSV = [i for j, i in enumerate(allSV) if j not in ouliers]
+        ids = [i for j, i in enumerate(ids) if j not in ouliers]
+        print(f"Removed {len(ouliers)} outliers")
+
+
 
     if os.path.isfile(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt'):
         distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt')
