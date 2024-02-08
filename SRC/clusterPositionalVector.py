@@ -20,7 +20,7 @@ import json
 from clusteringEvaluation import clusteringEvaluation
 import torch
 
-start_time = time.time()
+
 
 def coloring(object,dummy = False):
     if dummy:
@@ -174,8 +174,12 @@ def softdtw_score(sequences : list) -> np.ndarray:
     #         #float(dtw_i)   
     #         dtw_i_mean=dtw_i_mean.item()
     #         distanceMatrix[i][j]=dtw_i_mean
+    #turn the list of sequences to a tensor
+    for i in range(n):
+        sequences[i]=torch.from_numpy(sequences[i]).float()
+
     print("computing distance matrix based on normalized softdtw score")
-    distanceMatrix = cdist_soft_dtw_normalized(sequences, gamma=1.)
+    distanceMatrix = cdist_soft_dtw_normalized(sequences, gamma=1., be="pytorch", compute_with_backend=True)
     # distanceMatrix in form of scipy pdist  output
     distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
     return distanceMatrix
@@ -334,19 +338,34 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
             plt.savefig(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png',
                         bbox_inches='tight', dpi=720)
 
+start_time = time.time()
 
+# Specify the GPU you want to use
+gpu_id = 0  # Change this to the GPU ID you want to use
+
+# Set the GPU device if CUDA is available, otherwise use CPU
+if torch.cuda.is_available():
+    torch.cuda.set_device(gpu_id)
+    device = torch.device("cuda")
+    print(f"Using GPU: {torch.cuda.get_device_name(gpu_id)}")
+else:
+    device = torch.device("cpu")
+    print("CUDA is not available. Using CPU.")
+
+# Now you can use your PyTorch tensors and models on the specified device
 
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
-puzzels = [1] #[21,22,23,24,25,26,16,17,18,19,20]
+puzzels = [22,23,24,25,26,16,18,19,20]
 
-log_scale = True
-ignore_Unattached_ego = True 
-manual_number_of_clusters = False 
+preprocessing = False
 softdtwscore = True
+ignore_Unattached_ego = True 
+
+manual_number_of_clusters = False 
 ignore_ego_visualization = True
-preprocessing = True
+log_scale = True
 
 for puzzleNumber in puzzels:
     if softdtwscore and ignore_Unattached_ego:
@@ -386,27 +405,38 @@ for puzzleNumber in puzzels:
                     ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
                     with open(os.path.join(frame_folder,file)) as json_file:
                         data = json.load(json_file)
-                        vector, object_names, total_time = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
-                        # print(vector)
-                        # print(object_names)
-                        d=len(vector.columns)        
-                        n=len(vector.index)
+                        if preprocessing:
+                            vector, object_names, total_time = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
 
-                        solutionVector = np.empty([n,d])
-                        for ni in range(n):
-                            for di in range(d):
-                                solutionVector[ni][di]=vector.iloc[ni,di]
+                            # print(vector)
+                            # print(object_names)
+                            d=len(vector.columns)        
+                            n=len(vector.index)
 
-                        allSV.append(solutionVector)
-                        total_time_list.append(total_time)
+                            solutionVector = np.empty([n,d])
+                            for ni in range(n):
+                                for di in range(d):
+                                    solutionVector[ni][di]=vector.iloc[ni,di]
 
-    #histogram of total time
-    plt.hist(total_time_list, bins=20)
-    plt.title(f'Total time of solutions for puzzle {puzzleNumber}')
-    plt.xlabel('Total time (s)')
-    plt.ylabel('Number of solutions')
-    # plt.savefig(f'{plotPath}/total_time_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
-    plt.show()
+                            allSV.append(solutionVector)
+                            total_time_list.append(total_time)
+
+                        else:
+                            vector, object_names = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
+
+                    
+                            d=len(vector.columns)        
+                            n=len(vector.index)
+
+                            solutionVector = np.empty([n,d])
+                            for ni in range(n):
+                                for di in range(d):
+                                    solutionVector[ni][di]=vector.iloc[ni,di]
+
+                            allSV.append(solutionVector)
+
+
+
     if preprocessing:
         # print(total_time_list)
         ouliers=[]
@@ -416,7 +446,7 @@ for puzzleNumber in puzzels:
         print(f"MAD: {MAD}")
 
         for i in range(len(total_time_list)):
-            if np.abs(total_time_list[i] - median_total_time) > 5*MAD:
+            if np.abs(total_time_list[i] - median_total_time) > 3*MAD:
                 ouliers.append(i)
 
     
@@ -569,14 +599,37 @@ for puzzleNumber in puzzels:
         
     plt.savefig(f'{plotPath}/dendrogram_heatmap_barycenter_puzzle{puzzleNumber}.png', dpi=300)
           
-print("--- %s seconds ---" % (time.time() - start_time)) 
+    plt.close(fig)
+    #print for each puzzle how long it took and with which parameters
+    print(f"--- Puzzle {puzzleNumber} ---")
+    print("--- %s seconds ---" % (time.time() - start_time)) 
+    print(f"Number of clusters: {numCluster}")
+    print(f"Softdtw score: {softdtwscore}")
+    print(f"Ignore unattached ego: {ignore_Unattached_ego}")
+    print(f"Log scale: {log_scale}")
+    print(f"Preprocessing: {preprocessing}")
+    print(f"Manual number of clusters: {manual_number_of_clusters}")
+    print(f"Ignore ego visualization: {ignore_ego_visualization}")
+    print(f"Sequence type: {sequence_type}")
+    #save the above print in a txt file
+    with open(f'{plotPath}/puzzle{puzzleNumber}_{sequence_type}_info.txt', 'w') as f:
+        print(f"--- Puzzle {puzzleNumber} ---", file=f)
+        print("--- %s seconds ---" % (time.time() - start_time), file=f)
+        print(f"Number of clusters: {numCluster}", file=f)
+        print(f"Softdtw score: {softdtwscore}", file=f)
+        print(f"Ignore unattached ego: {ignore_Unattached_ego}", file=f)
+        print(f"Log scale: {log_scale}", file=f)
+        print(f"Preprocessing: {preprocessing}", file=f)
+        print(f"Manual number of clusters: {manual_number_of_clusters}", file=f)
+        print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
+        print(f"Sequence type: {sequence_type}", file=f)
 
-# repo_path = './'
+repo_path = './'
 
-# os.chdir(repo_path)
+os.chdir(repo_path)
 
-# subprocess.run(['git', 'add', '.'])
+subprocess.run(['git', 'add', '.'])
 
-# subprocess.run(['git', 'commit', '-m', "p3 include ignore unattached soft dtw and barycenter in dendogram"])
+subprocess.run(['git', 'commit', '-m', "run test with pytorch on the server"])
 
-# subprocess.run(['git', 'push'])
+subprocess.run(['git', 'push'])
