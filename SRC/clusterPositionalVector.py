@@ -159,27 +159,18 @@ def dtwI(sequences : list) -> np.ndarray:
     distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
     return distanceMatrix
 
-def softdtw_score(sequences : list) -> np.ndarray:
+def softdtw_score(sequences : list, torch_be : bool, device ) -> np.ndarray:
     n=len(sequences)
-    d=len(sequences[0][0])
-    # distanceMatrix = np.empty([n,n])
-    # for i in range(n):
-    #     for j in range(i+1,n):
-    #         print(i,j)
-    #         s_i= torch.from_numpy(sequences[i]).float()
-    #         s_j= torch.from_numpy(sequences[j]).float()
-    #         # dtw_i=soft_dtw(s_i, s_j, gamma=1.)#, be="pytorch", compute_with_backend=True)
-    #         soft_dtw_loss=SoftDTWLossPyTorch(gamma=1., normalize=True)
-    #         dtw_i_mean=soft_dtw_loss(s_i, s_j).mean()
-    #         #float(dtw_i)   
-    #         dtw_i_mean=dtw_i_mean.item()
-    #         distanceMatrix[i][j]=dtw_i_mean
-    #turn the list of sequences to a tensor
+
     for i in range(n):
         sequences[i]=torch.from_numpy(sequences[i]).float()
+        if torch.cuda.is_available():  # Check if GPU is available
+            sequences[i] = sequences[i].to(device)  # Move tensor to GPU
+
 
     print("computing distance matrix based on normalized softdtw score")
-    distanceMatrix = cdist_soft_dtw_normalized(sequences, gamma=1., be="pytorch", compute_with_backend=True)
+    distanceMatrix = cdist_soft_dtw_normalized(sequences, gamma=1., be="pytorch", compute_with_backend=torch_be)
+    print("end of distance computation")
     # distanceMatrix in form of scipy pdist  output
     distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
     return distanceMatrix
@@ -341,12 +332,11 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
 start_time = time.time()
 
 # Specify the GPU you want to use
-gpu_id = 0  # Change this to the GPU ID you want to use
+gpu_id =2  # Change this to the GPU ID you want to use
 
 # Set the GPU device if CUDA is available, otherwise use CPU
 if torch.cuda.is_available():
-    torch.cuda.set_device(gpu_id)
-    device = torch.device("cuda")
+    device = torch.cuda.set_device(gpu_id)
     print(f"Using GPU: {torch.cuda.get_device_name(gpu_id)}")
 else:
     device = torch.device("cpu")
@@ -357,11 +347,12 @@ else:
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
-puzzels = [22,23,24,25,26,16,18,19,20]
+puzzels = [1, 22, 23]
 
-preprocessing = False
+preprocessing = True
 softdtwscore = True
 ignore_Unattached_ego = True 
+torch_be=False
 
 manual_number_of_clusters = False 
 ignore_ego_visualization = True
@@ -461,7 +452,7 @@ for puzzleNumber in puzzels:
     if os.path.isfile(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt'):
         distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt')
     elif softdtwscore:
-        distanceMatrix = softdtw_score(allSV)
+        distanceMatrix = softdtw_score(allSV, torch_be=torch_be, device=device)
         np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt', distanceMatrix)
     else:               
         distanceMatrix = dtwI(allSV)
@@ -500,7 +491,7 @@ for puzzleNumber in puzzels:
             
             clusters = fcluster(Z, n_clusters, criterion='maxclust')
             silhouette_avg = silhouette_score(distanceMatrixSQ, clusters, metric='precomputed')
-            silhouette_avg = round(silhouette_avg, 3)
+            silhouette_avg = round(silhouette_avg, 2)
 
             # print("For n_clusters =", n_clusters, "The average silhouette_score is :", silhouette_avg)
 
