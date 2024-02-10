@@ -163,6 +163,7 @@ def softdtw_score(sequences : list, torch_be : bool, device ) -> np.ndarray:
     n=len(sequences)
 
     for i in range(n):
+        # print(f"{i}th time series from {n}")
         sequences[i]=torch.from_numpy(sequences[i]).float()
         if torch.cuda.is_available():  # Check if GPU is available
             sequences[i] = sequences[i].to(device)  # Move tensor to GPU
@@ -332,7 +333,7 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
 start_time = time.time()
 
 # Specify the GPU you want to use
-gpu_id =2  # Change this to the GPU ID you want to use
+gpu_id =5  # Change this to the GPU ID you want to use
 
 # Set the GPU device if CUDA is available, otherwise use CPU
 if torch.cuda.is_available():
@@ -347,7 +348,7 @@ else:
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
-puzzels = [1, 22, 23]
+puzzels = [18,19,20]
 
 preprocessing = True
 softdtwscore = True
@@ -621,6 +622,6 @@ os.chdir(repo_path)
 
 subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "run test with pytorch on the server"])
+subprocess.run(['git', 'commit', '-m', "p18 19 20"])
 
 subprocess.run(['git', 'push'])
