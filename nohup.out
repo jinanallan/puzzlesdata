@@ -1,0 +1,100 @@
+[main 4fcef163] p18 19 20
+ 40 files changed, 25558 insertions(+), 4 deletions(-)
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/Cluster1_puzzle18_POSVEC.gif
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/Cluster1_puzzle18_POSVEC_heatmap.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/Cluster1_puzzle18_POSVEC_softbarycenter.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/Cluster2_puzzle18_POSVEC.gif
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/Cluster2_puzzle18_POSVEC_heatmap.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/Cluster2_puzzle18_POSVEC_softbarycenter.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/cluster_ids_puzzle18_POSVEC.json
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/dendrogram_heatmap_barycenter_puzzle18.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/distanceMatrix_puzzle18_POSVEC.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/evaluation_puzzle18_POSVEC.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/linkage_puzzle18_POSVEC.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/puzzle18_POSVEC_info.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/silhouette_puzzle18_POSVEC.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/Cluster1_puzzle19_POSVEC.gif
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/Cluster1_puzzle19_POSVEC_heatmap.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/Cluster1_puzzle19_POSVEC_softbarycenter.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/Cluster2_puzzle19_POSVEC.gif
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/Cluster2_puzzle19_POSVEC_heatmap.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/cluster_ids_puzzle19_POSVEC.json
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/dendrogram_heatmap_barycenter_puzzle19.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/distanceMatrix_puzzle19_POSVEC.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/evaluation_puzzle19_POSVEC.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/linkage_puzzle19_POSVEC.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/puzzle19_POSVEC_info.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/silhouette_puzzle19_POSVEC.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/Cluster1_puzzle20_POSVEC.gif
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/Cluster1_puzzle20_POSVEC_heatmap.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/Cluster1_puzzle20_POSVEC_softbarycenter.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/Cluster2_puzzle20_POSVEC.gif
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/Cluster2_puzzle20_POSVEC_heatmap.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/Cluster2_puzzle20_POSVEC_softbarycenter.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/cluster_ids_puzzle20_POSVEC.json
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/dendrogram_heatmap_barycenter_puzzle20.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/distanceMatrix_puzzle20_POSVEC.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/evaluation_puzzle20_POSVEC.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/linkage_puzzle20_POSVEC.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/puzzle20_POSVEC_info.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/silhouette_puzzle20_POSVEC.png
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+Using GPU: NVIDIA GeForce RTX 3090
+Median total time: 11.825
+MAD: 3.325000000000001
+['39_1_18_2', '44_1_18_2', '33_1_18_0', '44_1_18_0', '60_1_18_2', '61_1_18_0', '67_1_18_0', '59_1_18_0', '60_1_18_0', '66_2_18_1', '60_2_18_0', '66_1_18_0', '64_2_18_0', '53_1_18_0']
+[24.8, 27.16, 23.13, 34.48, 24.42, 22.56, 25.55, 23.22, 32.34, 0.53, 22.49, 26.32, 23.05, 22.59]
+Removed 14 outliers
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle18_POSVEC.png saved
+--- Puzzle 18 ---
+--- 2101.1814827919006 seconds ---
+Number of clusters: 2
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+Sequence type: POSVEC
+Median total time: 16.63
+MAD: 6.8199999999999985
+['44_2_19_2', '43_2_19_1', '38_1_19_1', '35_1_19_0', '45_1_19_0', '35_2_19_0', '36_1_19_1', '59_1_19_1', '53_1_19_0', '56_1_19_2', '55_1_19_2', '56_2_19_1', '65_1_19_3', '56_1_19_4', '64_1_19_0', '56_1_19_6', '58_1_19_4', '60_1_19_0', '65_1_19_6', '51_2_19_1', '56_1_19_3']
+[73.45, 48.94, 47.73, 48.04, 41.13, 61.06, 50.27, 564.86, 49.33, 40.1, 84.55, 50.34, 47.11, 59.43, 51.89, 42.35, 39.4, 69.26, 82.6, 56.18, 40.3]
+Removed 21 outliers
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle19_POSVEC.png saved
+--- Puzzle 19 ---
+--- 8102.838165044785 seconds ---
+Number of clusters: 2
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+Sequence type: POSVEC
+Median total time: 8.69
+MAD: 2.200000000000001
+['39_1_20_1', '36_1_20_0', '39_1_20_3', '42_2_20_0', '44_1_20_0', '41_1_20_0', '48_1_20_1', '46_1_20_3', '39_1_20_0', '36_1_20_3', '53_1_20_0', '60_1_20_1', '65_1_20_8', '53_2_20_0', '56_1_20_2', '65_1_20_12', '67_2_20_0', '59_1_20_0', '53_1_20_1']
+[29.53, 27.63, 17.37, 16.63, 37.55, 24.85, 15.84, 15.52, 30.0, 1.82, 22.34, 23.44, 16.3, 17.49, 23.41, 15.42, 17.58, 29.73, 54.74]
+Removed 19 outliers
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle20_POSVEC.png saved
+--- Puzzle 20 ---
+--- 9683.898563146591 seconds ---
+Number of clusters: 2
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+Sequence type: POSVEC
