@@ -348,11 +348,11 @@ else:
 frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
 
 sequence_type="POSVEC"
-puzzels = [18,19,20]
+puzzels = [1,2,3,4,5,6,21,22,23,24,25,26]
 
-preprocessing = True
+preprocessing = False
 softdtwscore = True
-ignore_Unattached_ego = True 
+ignore_Unattached_ego = False 
 torch_be=False
 
 manual_number_of_clusters = False 
@@ -400,8 +400,6 @@ for puzzleNumber in puzzels:
                         if preprocessing:
                             vector, object_names, total_time = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
 
-                            # print(vector)
-                            # print(object_names)
                             d=len(vector.columns)        
                             n=len(vector.index)
 
@@ -570,7 +568,7 @@ for puzzleNumber in puzzels:
     #pad between dendrogram and heatmap
     plt.subplots_adjust(left=0.05, bottom=0.02, right=0.95, top=0.98, hspace=0.1)
 
-    plt.figtext(0.5, 0.60, "Heatmap and Barycebter of solutions within each cluster", ha="center", va="center", fontsize=20)
+    plt.figtext(0.5, 0.60, "Heatmap and Barycenter of solutions within each cluster", ha="center", va="center", fontsize=20)
 
     for i in np.arange(1,numCluster+1):
         ax2 = plt.subplot2grid((3, numCluster), (1, i-1))
@@ -602,7 +600,7 @@ for puzzleNumber in puzzels:
     print(f"Preprocessing: {preprocessing}")
     print(f"Manual number of clusters: {manual_number_of_clusters}")
     print(f"Ignore ego visualization: {ignore_ego_visualization}")
-    print(f"Sequence type: {sequence_type}")
+    # print(f"Sequence type: {sequence_type}")
     #save the above print in a txt file
     with open(f'{plotPath}/puzzle{puzzleNumber}_{sequence_type}_info.txt', 'w') as f:
         print(f"--- Puzzle {puzzleNumber} ---", file=f)
@@ -614,14 +612,14 @@ for puzzleNumber in puzzels:
         print(f"Preprocessing: {preprocessing}", file=f)
         print(f"Manual number of clusters: {manual_number_of_clusters}", file=f)
         print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
-        print(f"Sequence type: {sequence_type}", file=f)
+        # print(f"Sequence type: {sequence_type}", file=f)
 
 repo_path = './'
 
-os.chdir(repo_path)
+# os.chdir(repo_path)
 
-subprocess.run(['git', 'add', '.'])
+# subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "p18 19 20"])
+# subprocess.run(['git', 'commit', '-m', "p18 19 20"])
 
-subprocess.run(['git', 'push'])
+# subprocess.run(['git', 'push'])

@@ -98,3 +98,172 @@ Preprocessing: True
 Manual number of clusters: False
 Ignore ego visualization: True
 Sequence type: POSVEC
+Using GPU: NVIDIA GeForce RTX 3090
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle1_POSVEC.png saved
+Traceback (most recent call last):
+  File "/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py", line 551, in <module>
+    Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
+  File "/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py", line 250, in Heatmap
+    vector, present_objects = positional_vector(data)
+  File "/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py", line 104, in positional_vector
+    positional_vector.at[row,(id,'y')]=y
+  File "/home/erfan/anaconda3/lib/python3.10/site-packages/pandas/core/indexing.py", line 2442, in __setitem__
+    return super().__setitem__(key, value)
+  File "/home/erfan/anaconda3/lib/python3.10/site-packages/pandas/core/indexing.py", line 2386, in __setitem__
+    key = tuple(com.apply_if_callable(x, self.obj) for x in key)
+KeyboardInterrupt
+/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py:556: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  fig = plt.figure()
+/home/erfan/puzzlesdata/SRC/clusteringEvaluation.py:31: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  fig = plt.figure(figsize=(15, 5))
+/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py:482: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  fig, axs = plt.subplots(2, 4, figsize=(20, 10), sharex=False, sharey=True)
+/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py:259: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  fig, ax = plt.subplots()
+/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py:314: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  fig, ax = plt.subplots()
+Using GPU: NVIDIA GeForce RTX 3090
+evaluation_puzzle1_POSVEC.png saved
+--- Puzzle 1 ---
+--- 572.9574348926544 seconds ---
+Number of clusters: 9
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle2_POSVEC.png saved
+--- Puzzle 2 ---
+--- 3412.6610159873962 seconds ---
+Number of clusters: 2
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle3_POSVEC.png saved
+--- Puzzle 3 ---
+--- 5754.795026063919 seconds ---
+Number of clusters: 2
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle4_POSVEC.png saved
+--- Puzzle 4 ---
+--- 18937.984493494034 seconds ---
+Number of clusters: 2
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle5_POSVEC.png saved
+--- Puzzle 5 ---
+--- 25220.50160884857 seconds ---
+Number of clusters: 2
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle6_POSVEC.png saved
+--- Puzzle 6 ---
+--- 27815.36230826378 seconds ---
+Number of clusters: 6
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle21_POSVEC.png saved
+--- Puzzle 21 ---
+--- 74147.56474328041 seconds ---
+Number of clusters: 5
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle22_POSVEC.png saved
+--- Puzzle 22 ---
+--- 94986.87941980362 seconds ---
+Number of clusters: 2
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle23_POSVEC.png saved
+--- Puzzle 23 ---
+--- 98790.99920010567 seconds ---
+Number of clusters: 7
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle24_POSVEC.png saved
+--- Puzzle 24 ---
+--- 165514.30685925484 seconds ---
+Number of clusters: 3
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle25_POSVEC.png saved
+--- Puzzle 25 ---
+--- 261325.81205177307 seconds ---
+Number of clusters: 2
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score
+end of distance computation
+evaluation_puzzle26_POSVEC.png saved
+--- Puzzle 26 ---
+--- 289001.5512878895 seconds ---
+Number of clusters: 6
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
