@@ -159,19 +159,24 @@ def dtwI(sequences : list) -> np.ndarray:
     distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
     return distanceMatrix
 
-def softdtw_score(sequences : list, torch_be : bool, device ) -> np.ndarray:
+def softdtw_score(sequences : list, torch_be : bool, gamma: float, device=None ) -> np.ndarray:
     n=len(sequences)
+    if torch_be:
+        if device is None:
+            raise ValueError("Device must be specified when torch_be is True.")
+        for i in range(n):
+            # print(f"{i}th time series from {n}")
+            sequences[i]=torch.from_numpy(sequences[i]).float()
+            if torch.cuda.is_available():  # Check if GPU is available
+                sequences[i] = sequences[i].to(device)  # Move tensor to GPU
 
-    for i in range(n):
-        # print(f"{i}th time series from {n}")
-        sequences[i]=torch.from_numpy(sequences[i]).float()
-        if torch.cuda.is_available():  # Check if GPU is available
-            sequences[i] = sequences[i].to(device)  # Move tensor to GPU
-
-
-    print("computing distance matrix based on normalized softdtw score")
-    distanceMatrix = cdist_soft_dtw_normalized(sequences, gamma=1., be="pytorch", compute_with_backend=torch_be)
-    print("end of distance computation")
+        print("computing distance matrix based on normalized softdtw score")
+        distanceMatrix = cdist_soft_dtw_normalized(sequences, gamma=gamma, be="pytorch", compute_with_backend=torch_be)
+        print("end of distance computation")
+    else:
+        print("computing distance matrix based on normalized softdtw score")
+        distanceMatrix = cdist_soft_dtw_normalized(sequences, gamma=gamma, be="numpy")
+        print("end of distance computation")
     # distanceMatrix in form of scipy pdist  output
     distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
     return distanceMatrix
@@ -330,291 +335,355 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
             plt.savefig(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png',
                         bbox_inches='tight', dpi=720)
 
-start_time = time.time()
 
-# Specify the GPU you want to use
-gpu_id =5  # Change this to the GPU ID you want to use
+def do_cluster(**kwargs):
+    """
+    Main function to do the clustering of the positional vectors
+    """
+    start_time = time.time()
+    if "torch" in kwargs and kwargs["torch"]: # Check if the user wants to use PyTorch
 
-# Set the GPU device if CUDA is available, otherwise use CPU
-if torch.cuda.is_available():
-    device = torch.cuda.set_device(gpu_id)
-    print(f"Using GPU: {torch.cuda.get_device_name(gpu_id)}")
-else:
-    device = torch.device("cpu")
-    print("CUDA is not available. Using CPU.")
+        # Specify the GPU you want to use
+        gpu_id =5  # Change this to the GPU ID you want to use
 
-# Now you can use your PyTorch tensors and models on the specified device
-
-frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
-
-sequence_type="POSVEC"
-puzzels = [1,2,3,4,5,6,21,22,23,24,25,26]
-
-preprocessing = False
-softdtwscore = True
-ignore_Unattached_ego = False 
-torch_be=False
-
-manual_number_of_clusters = False 
-ignore_ego_visualization = True
-log_scale = True
-
-for puzzleNumber in puzzels:
-    if softdtwscore and ignore_Unattached_ego:
-        if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'):
-            os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}')
-            plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
+        # Set the GPU device if CUDA is available, otherwise use CPU
+        if torch.cuda.is_available():
+            device = torch.cuda.set_device(gpu_id)
+            print(f"Using GPU: {torch.cuda.get_device_name(gpu_id)}")
         else:
-            plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
-    elif softdtwscore:
-        if not os.path.exists(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'):
-            os.makedirs(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}')
-            plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
-        else:
-            plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
-    elif ignore_Unattached_ego:
-        if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'):
-                os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}')
+            device = torch.device("cpu")
+            print("CUDA is not available. Using CPU.")
+    
+
+    # Now you can use your PyTorch tensors and models on the specified device
+    if "frame_folders" in kwargs:
+        frame_folders = kwargs["frame_folders"]
+    else:
+        frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
+
+    if "sequence_type" in kwargs:
+        sequence_type = kwargs["sequence_type"]
+    else:
+        sequence_type="POSVEC"
+    
+    if "puzzles" in kwargs:
+        puzzles = kwargs["puzzles"]
+    else:
+        puzzles = [1,2,3,4,5,6,21,22,23,24,25,26]
+
+    if "preprocessing" in kwargs:
+        preprocessing = kwargs["preprocessing"]
+    else:
+        preprocessing = False
+
+    if "softdtwscore" in kwargs:
+        softdtwscore = kwargs["softdtwscore"]
+    else:
+        softdtwscore = True
+
+    if "ignore_Unattached_ego" in kwargs:
+        ignore_Unattached_ego = kwargs["ignore_Unattached_ego"]
+    else:
+        ignore_Unattached_ego = False
+
+    if "torch_be" in kwargs: # Check if the user wants to use PyTorch as backend for softdtw
+        torch_be = kwargs["torch_be"]
+    else:
+        torch_be = False
+
+    if "manual_number_of_clusters" in kwargs:
+        manual_number_of_clusters = kwargs["manual_number_of_clusters"]
+    else:
+        manual_number_of_clusters = False
+
+    if "ignore_ego_visualization" in kwargs:
+        ignore_ego_visualization = kwargs["ignore_ego_visualization"]
+    else:
+        ignore_ego_visualization = True
+
+    if "log_scale" in kwargs:
+        log_scale = kwargs["log_scale"]
+    else:
+        log_scale = True
+
+    if "gamma" in kwargs:
+        gamma = kwargs["gamma"]
+    else:
+        gamma = 1.
+
+    for puzzleNumber in puzzles:
+        if softdtwscore and ignore_Unattached_ego:
+            if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'):
+                os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}')
+                plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
+            else:
+                plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
+        elif softdtwscore:
+            if not os.path.exists(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'):
+                os.makedirs(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}')
+                plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
+            else:
+                plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
+        elif ignore_Unattached_ego:
+            if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'):
+                    os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}')
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'
+            else:
                 plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'
         else:
-            plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'
-    else:
-        if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
-                os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
+            if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
+                    os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
+                    plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+            else:
                 plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+        allSV=[]
+        ids=[]
+        total_time_list = []
+
+        for frame_folder in frame_folders:
+            frame_files = os.listdir(frame_folder)
+            for file in frame_files:
+                if file.endswith(".json"):
+                    participant_id, run, puzzle, attempt = use_regex(file)
+                    if puzzle == puzzleNumber:
+                        ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
+                        with open(os.path.join(frame_folder,file)) as json_file:
+                            data = json.load(json_file)
+                            if preprocessing:
+                                vector, object_names, total_time = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
+
+                                d=len(vector.columns)        
+                                n=len(vector.index)
+
+                                solutionVector = np.empty([n,d])
+                                for ni in range(n):
+                                    for di in range(d):
+                                        solutionVector[ni][di]=vector.iloc[ni,di]
+
+                                allSV.append(solutionVector)
+                                total_time_list.append(total_time)
+
+                            else:
+                                vector, object_names = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
+
+                        
+                                d=len(vector.columns)        
+                                n=len(vector.index)
+
+                                solutionVector = np.empty([n,d])
+                                for ni in range(n):
+                                    for di in range(d):
+                                        solutionVector[ni][di]=vector.iloc[ni,di]
+
+                                allSV.append(solutionVector)
+        if preprocessing:
+            # print(total_time_list)
+            ouliers=[]
+            median_total_time = np.median(total_time_list)
+            MAD = np.median([np.abs(x - median_total_time) for x in total_time_list])
+            # print(f"Median total time: {median_total_time}")
+            # print(f"MAD: {MAD}")
+
+            for i in range(len(total_time_list)):
+                if np.abs(total_time_list[i] - median_total_time) > 5*MAD:
+                    ouliers.append(i)
+
+            # print([i for j, i in enumerate(ids) if j in ouliers])
+            # print([i for j, i in enumerate(total_time_list) if j in ouliers])
+            allSV = [i for j, i in enumerate(allSV) if j not in ouliers]
+            ids = [i for j, i in enumerate(ids) if j not in ouliers]
+            # print(f"Removed {len(ouliers)} outliers")
+
+
+
+        if os.path.isfile(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt'):
+            distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt')
+        elif softdtwscore:
+            if device is not None:
+                distanceMatrix = softdtw_score(allSV, torch_be=torch_be,gamma=gamma, device=device)
+            else:
+                distanceMatrix = softdtw_score(allSV, torch_be=torch_be, gamma=gamma)
+            np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt', distanceMatrix)
+        else:               
+            distanceMatrix = dtwI(allSV)
+            np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt', distanceMatrix)
+
+        if os.path.isfile(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt'):
+            Z = np.loadtxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt')
         else:
-            plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
-    allSV=[]
-    ids=[]
-    total_time_list = []
+            Z = linkage(distanceMatrix, 'ward')
+            np.savetxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt', Z)
 
-    for frame_folder in frame_folders:
-        frame_files = os.listdir(frame_folder)
-        for file in frame_files:
-            if file.endswith(".json"):
-                participant_id, run, puzzle, attempt = use_regex(file)
-                if puzzle == puzzleNumber:
-                    ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
-                    with open(os.path.join(frame_folder,file)) as json_file:
-                        data = json.load(json_file)
-                        if preprocessing:
-                            vector, object_names, total_time = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
+        # np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}_{sequence_type}.txt', ids, fmt="%s")
+        if manual_number_of_clusters:
+            numCluster = int(input("Enter the number of clusters: "))
 
-                            d=len(vector.columns)        
-                            n=len(vector.index)
+        else:
+            distanceMatrixSQ = squareform(distanceMatrix)
 
-                            solutionVector = np.empty([n,d])
-                            for ni in range(n):
-                                for di in range(d):
-                                    solutionVector[ni][di]=vector.iloc[ni,di]
+            fig = clusteringEvaluation(Z,distanceMatrix,puzzleNumber)
 
-                            allSV.append(solutionVector)
-                            total_time_list.append(total_time)
+            fig.savefig(f'{plotPath}/evaluation_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
+            print(f"evaluation_puzzle{puzzleNumber}_{sequence_type}.png saved")
+            plt.close(fig)
 
-                        else:
-                            vector, object_names = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
+            # Silhouette analysis plot and deciding the number of clusters based on the max silhouette score
+            max_silhouette_avg = 0
 
-                    
-                            d=len(vector.columns)        
-                            n=len(vector.index)
+            fig, axs = plt.subplots(2, 4, figsize=(20, 10), sharex=False, sharey=True)
 
-                            solutionVector = np.empty([n,d])
-                            for ni in range(n):
-                                for di in range(d):
-                                    solutionVector[ni][di]=vector.iloc[ni,di]
+            fig.text(0.5, 0.04, 'Silhouette coefficient values', ha='center', fontsize=14)
+            fig.text(0.04, 0.5, 'Cluster label', va='center', rotation='vertical', fontsize=14)
+            
+            for n_clusters in range(2, 10):
 
-                            allSV.append(solutionVector)
+                ax1 = axs[(n_clusters-2)//4][(n_clusters-2)%4]
+                
+                clusters = fcluster(Z, n_clusters, criterion='maxclust')
+                silhouette_avg = silhouette_score(distanceMatrixSQ, clusters, metric='precomputed')
+                silhouette_avg = round(silhouette_avg, 2)
 
+                # print("For n_clusters =", n_clusters, "The average silhouette_score is :", silhouette_avg)
 
+                if silhouette_avg > max_silhouette_avg:
+                    max_silhouette_avg = silhouette_avg
+                    numCluster = n_clusters
 
-    if preprocessing:
-        # print(total_time_list)
-        ouliers=[]
-        median_total_time = np.median(total_time_list)
-        MAD = np.median([np.abs(x - median_total_time) for x in total_time_list])
-        print(f"Median total time: {median_total_time}")
-        print(f"MAD: {MAD}")
+                sample_silhouette_values = silhouette_samples(distanceMatrixSQ, clusters, metric='precomputed')
+                
+                y_lower = 10
+                for i in range(n_clusters):
+                    ith_cluster_silhouette_values = sample_silhouette_values[clusters == i+1]
+                    ith_cluster_silhouette_values.sort()
+                    size_cluster_i = ith_cluster_silhouette_values.shape[0]
+                    y_upper = y_lower + size_cluster_i
+                    color = cm.nipy_spectral(float(i) / n_clusters)
+                    ax1.fill_betweenx(np.arange(y_lower, y_upper), 0, ith_cluster_silhouette_values, facecolor=color, edgecolor=color, alpha=0.7)
+                    ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i+1))
+                    y_lower = y_upper + 10
 
-        for i in range(len(total_time_list)):
-            if np.abs(total_time_list[i] - median_total_time) > 3*MAD:
-                ouliers.append(i)
-
-    
-        print([i for j, i in enumerate(ids) if j in ouliers])
-        print([i for j, i in enumerate(total_time_list) if j in ouliers])
-        allSV = [i for j, i in enumerate(allSV) if j not in ouliers]
-        ids = [i for j, i in enumerate(ids) if j not in ouliers]
-        print(f"Removed {len(ouliers)} outliers")
+                ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
+                ax1.set_yticks([])
+                ax1.set_xticks(np.arange(-0.1, 0.8, 0.1))
+                #set x tick font size 
+                for tick in ax1.xaxis.get_major_ticks():
+                    tick.label1.set_fontsize(8)
+                ax1.set_xlim([-0.1, 0.8])
+                ax1.set_ylim([0, len(distanceMatrixSQ) + (n_clusters+1) * 10])
+                ax1.set_title(f'Number of clusters: {n_clusters}\nSilhouette score: {silhouette_avg}', fontsize=12)
 
 
+            plt.suptitle(f"Silhouette analysis for puzzle {puzzleNumber}", fontsize=14, fontweight='bold')
+            plt.savefig(f'{plotPath}/silhouette_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
+            # print(f"silhouette_puzzle{puzzleNumber}_{sequence_type}.png saved")
+            plt.close(fig)
 
-    if os.path.isfile(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt'):
-        distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt')
-    elif softdtwscore:
-        distanceMatrix = softdtw_score(allSV, torch_be=torch_be, device=device)
-        np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt', distanceMatrix)
-    else:               
-        distanceMatrix = dtwI(allSV)
-        np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt', distanceMatrix)
+        clusters = fcluster(Z, numCluster, criterion='maxclust')
 
-    if os.path.isfile(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt'):
-        Z = np.loadtxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt')
-    else:
-        Z = linkage(distanceMatrix, 'ward')
-        np.savetxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt', Z)
+        cluster_ids = {}
+        # Iterate over the data points and assign them to their respective clusters
+        for i, cluster_id in enumerate(clusters):
+            if cluster_id not in cluster_ids:
+                cluster_ids[cluster_id] = []
+            cluster_ids[cluster_id].append(ids[i])
+        
+        #turn dict keys to int
+        cluster_ids = {int(k): v for k, v in cluster_ids.items()}
 
-    # np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}_{sequence_type}.txt', ids, fmt="%s")
-    if manual_number_of_clusters:
-        numCluster = int(input("Enter the number of clusters: "))
+        #save the cluster ids as json file
+        with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}_{sequence_type}.json', 'w') as fp:
+            json.dump(cluster_ids, fp)
 
-    else:
-        distanceMatrixSQ = squareform(distanceMatrix)
+        for cluster_id, data_ids in cluster_ids.items():
+            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif'):
+                first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True, includeEgo=not ignore_ego_visualization)
+                first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
+            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png'):
+                Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
+            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png'):
+                softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
+            
+        
+        fig = plt.figure()
+        fig.set_figheight(15)
+        fig.set_figwidth(20)
+        
+        ax1 = plt.subplot2grid((3, numCluster), (0, 0), colspan=numCluster)
+        ax1.set_title(f'Dendrogram of puzzle {puzzleNumber} solutions', fontsize=20)
+        ax1.set_xlabel('Solution ID')
+        # ax1.set_ylabel('Distance')
+        dendrogram(Z, labels=ids, ax=ax1, leaf_font_size=10 )
+        #horizontal line where we cut the dendrogram
+        plt.axhline(y=Z[-numCluster+1,2], color='black', linestyle='--')
+        
+        #pad between dendrogram and heatmap
+        plt.subplots_adjust(left=0.05, bottom=0.02, right=0.95, top=0.98, hspace=0.1)
 
-        fig = clusteringEvaluation(Z,distanceMatrix,puzzleNumber)
+        plt.figtext(0.5, 0.60, "Heatmap and Barycenter of solutions within each cluster", ha="center", va="center", fontsize=20)
 
-        fig.savefig(f'{plotPath}/evaluation_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
-        print(f"evaluation_puzzle{puzzleNumber}_{sequence_type}.png saved")
+        for i in np.arange(1,numCluster+1):
+            ax2 = plt.subplot2grid((3, numCluster), (1, i-1))
+            ax2.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png')) 
+            ax2.set_axis_off()
+        
+
+        for i in np.arange(1,numCluster+1):
+            ax3 = plt.subplot2grid((3, numCluster), (2, i-1))
+            try :
+                ax3.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png')) 
+                ax3.set_axis_off()
+            except:
+                
+                ax3.text(0.5, 0.5, 'None', ha='center', va='center', fontsize=20)
+
+                ax3.set_axis_off()
+            
+        plt.savefig(f'{plotPath}/dendrogram_heatmap_barycenter_puzzle{puzzleNumber}.png', dpi=300)
+            
         plt.close(fig)
+        #print for each puzzle how long it took and with which parameters
+        print(f"--- Puzzle {puzzleNumber} ---")
+        print("--- %s seconds ---" % (time.time() - start_time)) 
+        print(f"preprocessing: {preprocessing}")
+        if preprocessing:
+            print(f"median total time: {median_total_time}")
+            print(f"MAD: {MAD}")
+            print(f"Removed {len(ouliers)} outliers time and ids")
+            print([i for j, i in enumerate(ids) if j in ouliers])
+            print([i for j, i in enumerate(total_time_list) if j in ouliers])
+        print(f"Number of clusters: {numCluster}")
+        print(f"Softdtw score: {softdtwscore}")
+        print(f"Ignore unattached ego: {ignore_Unattached_ego}")
+        print(f"Log scale: {log_scale}")
+        print(f"Preprocessing: {preprocessing}")
+        print(f"Manual number of clusters: {manual_number_of_clusters}")
+        print(f"Ignore ego visualization: {ignore_ego_visualization}")
+        # print(f"Sequence type: {sequence_type}")
+        #save the above print in a txt file
+        with open(f'{plotPath}/puzzle{puzzleNumber}_{sequence_type}_info.txt', 'w') as f:
+            print(f"--- Puzzle {puzzleNumber} ---", file=f)
+            print("--- %s seconds ---" % (time.time() - start_time), file=f)
+            print(f"preprocessing: {preprocessing}", file=f)
+            if preprocessing:
+                print(f"median total time: {median_total_time}", file=f)
+                print(f"MAD: {MAD}", file=f)
+                print(f"Removed {len(ouliers)} outliers time and ids", file=f)
+                print([i for j, i in enumerate(ids) if j in ouliers], file=f)
+                print([i for j, i in enumerate(total_time_list) if j in ouliers], file=f)
+            print(f"Number of clusters: {numCluster}", file=f)
+            print(f"Softdtw score: {softdtwscore}", file=f)
+            print(f"Ignore unattached ego: {ignore_Unattached_ego}", file=f)
+            print(f"Log scale: {log_scale}", file=f)
+            print(f"Preprocessing: {preprocessing}", file=f)
+            print(f"Manual number of clusters: {manual_number_of_clusters}", file=f)
+            print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
+            # print(f"Sequence type: {sequence_type}", file=f)
 
-        # Silhouette analysis plot and deciding the number of clusters based on the max silhouette score
-        max_silhouette_avg = 0
+do_cluster(puzzles=[1,2], torch=True,preprocessing=False, softdtwscore=True, ignore_Unattached_ego=False,
+            log_scale=True, sequence_type="POSVEC", ignore_ego_visualization=True, manual_number_of_clusters=False,
+              torch_be=True, gamma=1.)
 
-        fig, axs = plt.subplots(2, 4, figsize=(20, 10), sharex=False, sharey=True)
-
-        fig.text(0.5, 0.04, 'Silhouette coefficient values', ha='center', fontsize=14)
-        fig.text(0.04, 0.5, 'Cluster label', va='center', rotation='vertical', fontsize=14)
-        
-        for n_clusters in range(2, 10):
-
-            ax1 = axs[(n_clusters-2)//4][(n_clusters-2)%4]
-            
-            clusters = fcluster(Z, n_clusters, criterion='maxclust')
-            silhouette_avg = silhouette_score(distanceMatrixSQ, clusters, metric='precomputed')
-            silhouette_avg = round(silhouette_avg, 2)
-
-            # print("For n_clusters =", n_clusters, "The average silhouette_score is :", silhouette_avg)
-
-            if silhouette_avg > max_silhouette_avg:
-                max_silhouette_avg = silhouette_avg
-                numCluster = n_clusters
-
-            sample_silhouette_values = silhouette_samples(distanceMatrixSQ, clusters, metric='precomputed')
-            
-            y_lower = 10
-            for i in range(n_clusters):
-                ith_cluster_silhouette_values = sample_silhouette_values[clusters == i+1]
-                ith_cluster_silhouette_values.sort()
-                size_cluster_i = ith_cluster_silhouette_values.shape[0]
-                y_upper = y_lower + size_cluster_i
-                color = cm.nipy_spectral(float(i) / n_clusters)
-                ax1.fill_betweenx(np.arange(y_lower, y_upper), 0, ith_cluster_silhouette_values, facecolor=color, edgecolor=color, alpha=0.7)
-                ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i+1))
-                y_lower = y_upper + 10
-
-            ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
-            ax1.set_yticks([])
-            ax1.set_xticks(np.arange(-0.1, 0.8, 0.1))
-            #set x tick font size 
-            for tick in ax1.xaxis.get_major_ticks():
-                tick.label1.set_fontsize(8)
-            ax1.set_xlim([-0.1, 0.8])
-            ax1.set_ylim([0, len(distanceMatrixSQ) + (n_clusters+1) * 10])
-            ax1.set_title(f'Number of clusters: {n_clusters}\nSilhouette score: {silhouette_avg}', fontsize=12)
-
-
-        plt.suptitle(f"Silhouette analysis for puzzle {puzzleNumber}", fontsize=14, fontweight='bold')
-        plt.savefig(f'{plotPath}/silhouette_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
-        # print(f"silhouette_puzzle{puzzleNumber}_{sequence_type}.png saved")
-        plt.close(fig)
-
-    clusters = fcluster(Z, numCluster, criterion='maxclust')
-
-    cluster_ids = {}
-    # Iterate over the data points and assign them to their respective clusters
-    for i, cluster_id in enumerate(clusters):
-        if cluster_id not in cluster_ids:
-            cluster_ids[cluster_id] = []
-        cluster_ids[cluster_id].append(ids[i])
-    
-    #turn dict keys to int
-    cluster_ids = {int(k): v for k, v in cluster_ids.items()}
-
-    #save the cluster ids as json file
-    with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}_{sequence_type}.json', 'w') as fp:
-        json.dump(cluster_ids, fp)
-
-    for cluster_id, data_ids in cluster_ids.items():
-        if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif'):
-            first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True, includeEgo=not ignore_ego_visualization)
-            first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
-        if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png'):
-            Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
-        if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png'):
-            softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
-        
-    
-    fig = plt.figure()
-    fig.set_figheight(15)
-    fig.set_figwidth(20)
-    
-    ax1 = plt.subplot2grid((3, numCluster), (0, 0), colspan=numCluster)
-    ax1.set_title(f'Dendrogram of puzzle {puzzleNumber} solutions', fontsize=20)
-    ax1.set_xlabel('Solution ID')
-    # ax1.set_ylabel('Distance')
-    dendrogram(Z, labels=ids, ax=ax1, leaf_font_size=10 )
-    #horizontal line where we cut the dendrogram
-    plt.axhline(y=Z[-numCluster+1,2], color='black', linestyle='--')
-    
-    #pad between dendrogram and heatmap
-    plt.subplots_adjust(left=0.05, bottom=0.02, right=0.95, top=0.98, hspace=0.1)
-
-    plt.figtext(0.5, 0.60, "Heatmap and Barycenter of solutions within each cluster", ha="center", va="center", fontsize=20)
-
-    for i in np.arange(1,numCluster+1):
-        ax2 = plt.subplot2grid((3, numCluster), (1, i-1))
-        ax2.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png')) 
-        ax2.set_axis_off()
-    
-
-    for i in np.arange(1,numCluster+1):
-        ax3 = plt.subplot2grid((3, numCluster), (2, i-1))
-        try :
-            ax3.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png')) 
-            ax3.set_axis_off()
-        except:
-            
-            ax3.text(0.5, 0.5, 'None', ha='center', va='center', fontsize=20)
-
-            ax3.set_axis_off()
-        
-    plt.savefig(f'{plotPath}/dendrogram_heatmap_barycenter_puzzle{puzzleNumber}.png', dpi=300)
-          
-    plt.close(fig)
-    #print for each puzzle how long it took and with which parameters
-    print(f"--- Puzzle {puzzleNumber} ---")
-    print("--- %s seconds ---" % (time.time() - start_time)) 
-    print(f"Number of clusters: {numCluster}")
-    print(f"Softdtw score: {softdtwscore}")
-    print(f"Ignore unattached ego: {ignore_Unattached_ego}")
-    print(f"Log scale: {log_scale}")
-    print(f"Preprocessing: {preprocessing}")
-    print(f"Manual number of clusters: {manual_number_of_clusters}")
-    print(f"Ignore ego visualization: {ignore_ego_visualization}")
-    # print(f"Sequence type: {sequence_type}")
-    #save the above print in a txt file
-    with open(f'{plotPath}/puzzle{puzzleNumber}_{sequence_type}_info.txt', 'w') as f:
-        print(f"--- Puzzle {puzzleNumber} ---", file=f)
-        print("--- %s seconds ---" % (time.time() - start_time), file=f)
-        print(f"Number of clusters: {numCluster}", file=f)
-        print(f"Softdtw score: {softdtwscore}", file=f)
-        print(f"Ignore unattached ego: {ignore_Unattached_ego}", file=f)
-        print(f"Log scale: {log_scale}", file=f)
-        print(f"Preprocessing: {preprocessing}", file=f)
-        print(f"Manual number of clusters: {manual_number_of_clusters}", file=f)
-        print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
-        # print(f"Sequence type: {sequence_type}", file=f)
-
-repo_path = './'
+# repo_path = './'
 
 # os.chdir(repo_path)
 
