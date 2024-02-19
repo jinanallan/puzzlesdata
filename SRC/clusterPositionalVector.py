@@ -335,12 +335,84 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
             plt.savefig(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png',
                         bbox_inches='tight', dpi=720)
 
+def silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber, sequence_type, plotPath):
+    # Silhouette analysis plot and deciding the number of clusters based on the max silhouette score
+            max_silhouette_avg = 0
+
+            fig, axs = plt.subplots(2, 4, figsize=(20, 10), sharex=False, sharey=True)
+
+            fig.text(0.5, 0.04, 'Silhouette coefficient values', ha='center', fontsize=14)
+            fig.text(0.04, 0.5, 'Cluster label', va='center', rotation='vertical', fontsize=14)
+            
+            neg_value_fraction= []
+            below_avg_fraction= []
+            for n_clusters in range(3, 10):
+
+                ax1 = axs[(n_clusters-2)//4][(n_clusters-2)%4]
+                
+                clusters = fcluster(Z, n_clusters, criterion='maxclust')
+                silhouette_avg = silhouette_score(distanceMatrixSQ, clusters, metric='precomputed')
+                silhouette_avg = round(silhouette_avg, 2)
+
+                # print("For n_clusters =", n_clusters, "The average silhouette_score is :", silhouette_avg)
+
+                if silhouette_avg > max_silhouette_avg:
+                    max_silhouette_avg = silhouette_avg
+                    numCluster = n_clusters
+
+                sample_silhouette_values = silhouette_samples(distanceMatrixSQ, clusters, metric='precomputed')
+
+                neg_value_fraction.append(sum(sample_silhouette_values < 0) / len(sample_silhouette_values))
+
+                below_avg_fraction.append(sum(sample_silhouette_values < silhouette_avg) / len(sample_silhouette_values))
+
+                y_lower = 10
+                for i in range(n_clusters):
+                    ith_cluster_silhouette_values = sample_silhouette_values[clusters == i+1]
+                    ith_cluster_silhouette_values.sort()
+                    size_cluster_i = ith_cluster_silhouette_values.shape[0]
+                    y_upper = y_lower + size_cluster_i
+                    color = cm.nipy_spectral(float(i) / n_clusters)
+                    ax1.fill_betweenx(np.arange(y_lower, y_upper), 0, ith_cluster_silhouette_values, facecolor=color, edgecolor=color, alpha=0.4)
+                    ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i+1))
+                    y_lower = y_upper + 10
+
+                ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
+                ax1.set_yticks([])
+                ax1.set_xticks(np.arange(-0.1, 0.8, 0.1))
+                #set x tick font size 
+                for tick in ax1.xaxis.get_major_ticks():
+                    tick.label1.set_fontsize(8)
+                ax1.set_xlim([-0.1, 0.8])
+                ax1.set_ylim([0, len(distanceMatrixSQ) + (n_clusters+1) * 10])
+                ax1.set_title(f'Number of clusters: {n_clusters}\nSilhouette score: {silhouette_avg}', fontsize=12)
+
+
+            plt.suptitle(f"Silhouette analysis for puzzle {puzzleNumber}", fontsize=14, fontweight='bold')
+            plt.savefig(f'{plotPath}/silhouette_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
+            # print(f"silhouette_puzzle{puzzleNumber}_{sequence_type}.png saved")
+            plt.close(fig)
+
+            fig, ax = plt.subplots()
+            ax.plot(range(3, 10), neg_value_fraction, label='Negative value fraction')
+            ax.plot(range(3, 10), below_avg_fraction, label='Below average fraction')
+            ax.set_xlabel('Number of clusters')
+            ax.set_ylabel('Fraction')
+            ax.legend()
+            plt.title(f"Negative and below average fraction for puzzle {puzzleNumber}")
+            plt.savefig(f'{plotPath}/silhouette_fraction_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
+
+            return numCluster,neg_value_fraction,below_avg_fraction
 
 def do_cluster(**kwargs):
     """
     Main function to do the clustering of the positional vectors
     """
     start_time = time.time()
+
+    frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
+
+    sequence_type="POSVEC"
     if "torch" in kwargs and kwargs["torch"]: # Check if the user wants to use PyTorch
 
         # Specify the GPU you want to use
@@ -353,19 +425,7 @@ def do_cluster(**kwargs):
         else:
             device = torch.device("cpu")
             print("CUDA is not available. Using CPU.")
-    
 
-    # Now you can use your PyTorch tensors and models on the specified device
-    if "frame_folders" in kwargs:
-        frame_folders = kwargs["frame_folders"]
-    else:
-        frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
-
-    if "sequence_type" in kwargs:
-        sequence_type = kwargs["sequence_type"]
-    else:
-        sequence_type="POSVEC"
-    
     if "puzzles" in kwargs:
         puzzles = kwargs["puzzles"]
     else:
@@ -527,57 +587,8 @@ def do_cluster(**kwargs):
             print(f"evaluation_puzzle{puzzleNumber}_{sequence_type}.png saved")
             plt.close(fig)
 
-            # Silhouette analysis plot and deciding the number of clusters based on the max silhouette score
-            max_silhouette_avg = 0
-
-            fig, axs = plt.subplots(2, 4, figsize=(20, 10), sharex=False, sharey=True)
-
-            fig.text(0.5, 0.04, 'Silhouette coefficient values', ha='center', fontsize=14)
-            fig.text(0.04, 0.5, 'Cluster label', va='center', rotation='vertical', fontsize=14)
+            numCluster,neg_value_fraction,below_avg_fraction = silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber, sequence_type, plotPath)
             
-            for n_clusters in range(2, 10):
-
-                ax1 = axs[(n_clusters-2)//4][(n_clusters-2)%4]
-                
-                clusters = fcluster(Z, n_clusters, criterion='maxclust')
-                silhouette_avg = silhouette_score(distanceMatrixSQ, clusters, metric='precomputed')
-                silhouette_avg = round(silhouette_avg, 2)
-
-                # print("For n_clusters =", n_clusters, "The average silhouette_score is :", silhouette_avg)
-
-                if silhouette_avg > max_silhouette_avg:
-                    max_silhouette_avg = silhouette_avg
-                    numCluster = n_clusters
-
-                sample_silhouette_values = silhouette_samples(distanceMatrixSQ, clusters, metric='precomputed')
-                
-                y_lower = 10
-                for i in range(n_clusters):
-                    ith_cluster_silhouette_values = sample_silhouette_values[clusters == i+1]
-                    ith_cluster_silhouette_values.sort()
-                    size_cluster_i = ith_cluster_silhouette_values.shape[0]
-                    y_upper = y_lower + size_cluster_i
-                    color = cm.nipy_spectral(float(i) / n_clusters)
-                    ax1.fill_betweenx(np.arange(y_lower, y_upper), 0, ith_cluster_silhouette_values, facecolor=color, edgecolor=color, alpha=0.7)
-                    ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i+1))
-                    y_lower = y_upper + 10
-
-                ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
-                ax1.set_yticks([])
-                ax1.set_xticks(np.arange(-0.1, 0.8, 0.1))
-                #set x tick font size 
-                for tick in ax1.xaxis.get_major_ticks():
-                    tick.label1.set_fontsize(8)
-                ax1.set_xlim([-0.1, 0.8])
-                ax1.set_ylim([0, len(distanceMatrixSQ) + (n_clusters+1) * 10])
-                ax1.set_title(f'Number of clusters: {n_clusters}\nSilhouette score: {silhouette_avg}', fontsize=12)
-
-
-            plt.suptitle(f"Silhouette analysis for puzzle {puzzleNumber}", fontsize=14, fontweight='bold')
-            plt.savefig(f'{plotPath}/silhouette_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
-            # print(f"silhouette_puzzle{puzzleNumber}_{sequence_type}.png saved")
-            plt.close(fig)
-
         clusters = fcluster(Z, numCluster, criterion='maxclust')
 
         cluster_ids = {}
