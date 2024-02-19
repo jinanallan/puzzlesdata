@@ -286,7 +286,7 @@ def Heatmap(cluster_id, data_ids, puzzleNumber, pathplot,ignore_ego=False, log_s
     plt.xlim(-2, 2)
     plt.ylim(-2, 2)
     plt.title(f'cluster {cluster_id}' )
-    plt.savefig(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png',
+    plt.savefig(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_heatmap.png',
                 bbox_inches='tight', dpi=720)
     plt.close(fig)
 
@@ -332,10 +332,10 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
             plt.xlim(-2, 2)
             plt.ylim(-2, 2)
             plt.title(f'cluster {cluster_id} barycenter' )
-            plt.savefig(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png',
+            plt.savefig(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.png',
                         bbox_inches='tight', dpi=720)
 
-def silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber, sequence_type, plotPath):
+def silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber,plotPath):
     # Silhouette analysis plot and deciding the number of clusters based on the max silhouette score
             max_silhouette_avg = 0
 
@@ -389,8 +389,8 @@ def silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber, sequence_type, plotPa
 
 
             plt.suptitle(f"Silhouette analysis for puzzle {puzzleNumber}", fontsize=14, fontweight='bold')
-            plt.savefig(f'{plotPath}/silhouette_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
-            # print(f"silhouette_puzzle{puzzleNumber}_{sequence_type}.png saved")
+            plt.savefig(f'{plotPath}/silhouette_puzzle{puzzleNumber}.png', dpi=300)
+            # print(f"silhouette_puzzle{puzzleNumber}.png saved")
             plt.close(fig)
 
             fig, ax = plt.subplots()
@@ -400,7 +400,7 @@ def silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber, sequence_type, plotPa
             ax.set_ylabel('Fraction')
             ax.legend()
             plt.title(f"Negative and below average fraction for puzzle {puzzleNumber}")
-            plt.savefig(f'{plotPath}/silhouette_fraction_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
+            plt.savefig(f'{plotPath}/silhouette_fraction_puzzle{puzzleNumber}.png', dpi=300)
 
             return numCluster,neg_value_fraction,below_avg_fraction
 
@@ -411,8 +411,7 @@ def do_cluster(**kwargs):
     start_time = time.time()
 
     frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
-
-    sequence_type="POSVEC"
+    
     if "torch" in kwargs and kwargs["torch"]: # Check if the user wants to use PyTorch
 
         # Specify the GPU you want to use
@@ -473,29 +472,29 @@ def do_cluster(**kwargs):
 
     for puzzleNumber in puzzles:
         if softdtwscore and ignore_Unattached_ego:
-            if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'):
-                os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}')
-                plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
+            if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}'):
+                os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}')
+                plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}'
             else:
-                plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
+                plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}'
         elif softdtwscore:
-            if not os.path.exists(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'):
-                os.makedirs(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}')
-                plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
+            if not os.path.exists(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}'):
+                os.makedirs(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}')
+                plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}'
             else:
-                plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}_{sequence_type}'
+                plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}'
         elif ignore_Unattached_ego:
-            if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'):
-                    os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}')
-                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'
+            if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}'):
+                    os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}')
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}'
             else:
-                plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}_{sequence_type}'
+                plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}'
         else:
-            if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'):
-                    os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}')
-                    plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+            if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}'):
+                    os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}')
+                    plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}'
             else:
-                plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}_{sequence_type}'
+                plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}'
         allSV=[]
         ids=[]
         total_time_list = []
@@ -556,25 +555,25 @@ def do_cluster(**kwargs):
 
 
 
-        if os.path.isfile(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt'):
-            distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt')
+        if os.path.isfile(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt'):
+            distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt')
         elif softdtwscore:
             if device is not None:
                 distanceMatrix = softdtw_score(allSV, torch_be=torch_be,gamma=gamma, device=device)
             else:
                 distanceMatrix = softdtw_score(allSV, torch_be=torch_be, gamma=gamma)
-            np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt', distanceMatrix)
+            np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt', distanceMatrix)
         else:               
             distanceMatrix = dtwI(allSV)
-            np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}_{sequence_type}.txt', distanceMatrix)
+            np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt', distanceMatrix)
 
-        if os.path.isfile(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt'):
-            Z = np.loadtxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt')
+        if os.path.isfile(f'{plotPath}/linkage_puzzle{puzzleNumber}.txt'):
+            Z = np.loadtxt(f'{plotPath}/linkage_puzzle{puzzleNumber}.txt')
         else:
             Z = linkage(distanceMatrix, 'ward')
-            np.savetxt(f'{plotPath}/linkage_puzzle{puzzleNumber}_{sequence_type}.txt', Z)
+            np.savetxt(f'{plotPath}/linkage_puzzle{puzzleNumber}.txt', Z)
 
-        # np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}_{sequence_type}.txt', ids, fmt="%s")
+        # np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}.txt', ids, fmt="%s")
         if manual_number_of_clusters:
             numCluster = int(input("Enter the number of clusters: "))
 
@@ -583,11 +582,11 @@ def do_cluster(**kwargs):
 
             fig = clusteringEvaluation(Z,distanceMatrix,puzzleNumber)
 
-            fig.savefig(f'{plotPath}/evaluation_puzzle{puzzleNumber}_{sequence_type}.png', dpi=300)
-            print(f"evaluation_puzzle{puzzleNumber}_{sequence_type}.png saved")
+            fig.savefig(f'{plotPath}/evaluation_puzzle{puzzleNumber}.png', dpi=300)
+            print(f"evaluation_puzzle{puzzleNumber}.png saved")
             plt.close(fig)
 
-            numCluster,neg_value_fraction,below_avg_fraction = silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber, sequence_type, plotPath)
+            numCluster,neg_value_fraction,below_avg_fraction = silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber, plotPath)
             
         clusters = fcluster(Z, numCluster, criterion='maxclust')
 
@@ -602,16 +601,16 @@ def do_cluster(**kwargs):
         cluster_ids = {int(k): v for k, v in cluster_ids.items()}
 
         #save the cluster ids as json file
-        with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}_{sequence_type}.json', 'w') as fp:
+        with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json', 'w') as fp:
             json.dump(cluster_ids, fp)
 
         for cluster_id, data_ids in cluster_ids.items():
-            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif'):
+            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif'):
                 first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True, includeEgo=not ignore_ego_visualization)
-                first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}.gif', save_all=True, append_images=frames, duration=500, loop=0)
-            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png'):
+                first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif', save_all=True, append_images=frames, duration=500, loop=0)
+            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_heatmap.png'):
                 Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
-            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png'):
+            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.png'):
                 softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
             
         
@@ -634,14 +633,14 @@ def do_cluster(**kwargs):
 
         for i in np.arange(1,numCluster+1):
             ax2 = plt.subplot2grid((3, numCluster), (1, i-1))
-            ax2.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_{sequence_type}_heatmap.png')) 
+            ax2.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_heatmap.png')) 
             ax2.set_axis_off()
         
 
         for i in np.arange(1,numCluster+1):
             ax3 = plt.subplot2grid((3, numCluster), (2, i-1))
             try :
-                ax3.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_{sequence_type}_softbarycenter.png')) 
+                ax3.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_softbarycenter.png')) 
                 ax3.set_axis_off()
             except:
                 
@@ -669,9 +668,8 @@ def do_cluster(**kwargs):
         print(f"Preprocessing: {preprocessing}")
         print(f"Manual number of clusters: {manual_number_of_clusters}")
         print(f"Ignore ego visualization: {ignore_ego_visualization}")
-        # print(f"Sequence type: {sequence_type}")
-        #save the above print in a txt file
-        with open(f'{plotPath}/puzzle{puzzleNumber}_{sequence_type}_info.txt', 'w') as f:
+
+        with open(f'{plotPath}/puzzle{puzzleNumber}_info.txt', 'w') as f:
             print(f"--- Puzzle {puzzleNumber} ---", file=f)
             print("--- %s seconds ---" % (time.time() - start_time), file=f)
             print(f"preprocessing: {preprocessing}", file=f)
@@ -688,10 +686,10 @@ def do_cluster(**kwargs):
             print(f"Preprocessing: {preprocessing}", file=f)
             print(f"Manual number of clusters: {manual_number_of_clusters}", file=f)
             print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
-            # print(f"Sequence type: {sequence_type}", file=f)
+            
 
 do_cluster(puzzles=[1,2], torch=True,preprocessing=False, softdtwscore=True, ignore_Unattached_ego=False,
-            log_scale=True, sequence_type="POSVEC", ignore_ego_visualization=True, manual_number_of_clusters=False,
+            log_scale=True, ignore_ego_visualization=True, manual_number_of_clusters=False,
               torch_be=True, gamma=1.)
 
 # repo_path = './'

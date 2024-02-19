@@ -41,7 +41,7 @@ for solutions in df.iterrows():
     id = str(participant_id) + "_"  + str(run) + "_"+ str(puzzle_id) + "_" + str(attempt)
 
     if puzzle_id in pnp_puzzle :
-        cluster_file = f"./Plots_Text/clustering/puzzle{puzzle_id}_POSVEC/cluster_ids_puzzle{puzzle_id}_POSVEC.json"
+        cluster_file = f"./Plots_Text/clustering/puzzle{puzzle_id}/cluster_ids_puzzle{puzzle_id}.json"
 
         with open(cluster_file) as json_file:
             cluster_ids = json.load(json_file)

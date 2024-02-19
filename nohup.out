@@ -1,43 +1,43 @@
 [main 4fcef163] p18 19 20
  40 files changed, 25558 insertions(+), 4 deletions(-)
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/Cluster1_puzzle18_POSVEC.gif
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/Cluster1_puzzle18_POSVEC_heatmap.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/Cluster1_puzzle18_POSVEC_softbarycenter.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/Cluster2_puzzle18_POSVEC.gif
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/Cluster2_puzzle18_POSVEC_heatmap.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/Cluster2_puzzle18_POSVEC_softbarycenter.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/cluster_ids_puzzle18_POSVEC.json
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/dendrogram_heatmap_barycenter_puzzle18.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/distanceMatrix_puzzle18_POSVEC.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/evaluation_puzzle18_POSVEC.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/linkage_puzzle18_POSVEC.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/puzzle18_POSVEC_info.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18_POSVEC/silhouette_puzzle18_POSVEC.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/Cluster1_puzzle19_POSVEC.gif
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/Cluster1_puzzle19_POSVEC_heatmap.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/Cluster1_puzzle19_POSVEC_softbarycenter.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/Cluster2_puzzle19_POSVEC.gif
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/Cluster2_puzzle19_POSVEC_heatmap.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/cluster_ids_puzzle19_POSVEC.json
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/dendrogram_heatmap_barycenter_puzzle19.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/distanceMatrix_puzzle19_POSVEC.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/evaluation_puzzle19_POSVEC.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/linkage_puzzle19_POSVEC.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/puzzle19_POSVEC_info.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19_POSVEC/silhouette_puzzle19_POSVEC.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/Cluster1_puzzle20_POSVEC.gif
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/Cluster1_puzzle20_POSVEC_heatmap.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/Cluster1_puzzle20_POSVEC_softbarycenter.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/Cluster2_puzzle20_POSVEC.gif
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/Cluster2_puzzle20_POSVEC_heatmap.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/Cluster2_puzzle20_POSVEC_softbarycenter.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/cluster_ids_puzzle20_POSVEC.json
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/dendrogram_heatmap_barycenter_puzzle20.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/distanceMatrix_puzzle20_POSVEC.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/evaluation_puzzle20_POSVEC.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/linkage_puzzle20_POSVEC.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/puzzle20_POSVEC_info.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20_POSVEC/silhouette_puzzle20_POSVEC.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/Cluster1_puzzle18.gif
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/Cluster1_puzzle18_heatmap.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/Cluster1_puzzle18_softbarycenter.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/Cluster2_puzzle18.gif
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/Cluster2_puzzle18_heatmap.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/Cluster2_puzzle18_softbarycenter.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/cluster_ids_puzzle18.json
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/dendrogram_heatmap_barycenter_puzzle18.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/distanceMatrix_puzzle18.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/evaluation_puzzle18.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/linkage_puzzle18.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/puzzle18_info.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/silhouette_puzzle18.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/Cluster1_puzzle19.gif
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/Cluster1_puzzle19_heatmap.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/Cluster1_puzzle19_softbarycenter.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/Cluster2_puzzle19.gif
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/Cluster2_puzzle19_heatmap.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/cluster_ids_puzzle19.json
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/dendrogram_heatmap_barycenter_puzzle19.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/distanceMatrix_puzzle19.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/evaluation_puzzle19.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/linkage_puzzle19.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/puzzle19_info.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/silhouette_puzzle19.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/Cluster1_puzzle20.gif
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/Cluster1_puzzle20_heatmap.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/Cluster1_puzzle20_softbarycenter.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/Cluster2_puzzle20.gif
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/Cluster2_puzzle20_heatmap.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/Cluster2_puzzle20_softbarycenter.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/cluster_ids_puzzle20.json
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/dendrogram_heatmap_barycenter_puzzle20.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/distanceMatrix_puzzle20.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/evaluation_puzzle20.png
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/linkage_puzzle20.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/puzzle20_info.txt
+ create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/silhouette_puzzle20.png
 git@github.com: Permission denied (publickey).
 fatal: Could not read from remote repository.
 
@@ -51,7 +51,7 @@ MAD: 3.325000000000001
 Removed 14 outliers
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle18_POSVEC.png saved
+evaluation_puzzle18.png saved
 --- Puzzle 18 ---
 --- 2101.1814827919006 seconds ---
 Number of clusters: 2
@@ -69,7 +69,7 @@ MAD: 6.8199999999999985
 Removed 21 outliers
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle19_POSVEC.png saved
+evaluation_puzzle19.png saved
 --- Puzzle 19 ---
 --- 8102.838165044785 seconds ---
 Number of clusters: 2
@@ -87,7 +87,7 @@ MAD: 2.200000000000001
 Removed 19 outliers
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle20_POSVEC.png saved
+evaluation_puzzle20.png saved
 --- Puzzle 20 ---
 --- 9683.898563146591 seconds ---
 Number of clusters: 2
@@ -101,7 +101,7 @@ Sequence type: POSVEC
 Using GPU: NVIDIA GeForce RTX 3090
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle1_POSVEC.png saved
+evaluation_puzzle1.png saved
 Traceback (most recent call last):
   File "/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py", line 551, in <module>
     Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
@@ -125,7 +125,7 @@ KeyboardInterrupt
 /home/erfan/puzzlesdata/SRC/clusterPositionalVector.py:314: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
   fig, ax = plt.subplots()
 Using GPU: NVIDIA GeForce RTX 3090
-evaluation_puzzle1_POSVEC.png saved
+evaluation_puzzle1.png saved
 --- Puzzle 1 ---
 --- 572.9574348926544 seconds ---
 Number of clusters: 9
@@ -137,7 +137,7 @@ Manual number of clusters: False
 Ignore ego visualization: True
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle2_POSVEC.png saved
+evaluation_puzzle2.png saved
 --- Puzzle 2 ---
 --- 3412.6610159873962 seconds ---
 Number of clusters: 2
@@ -149,7 +149,7 @@ Manual number of clusters: False
 Ignore ego visualization: True
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle3_POSVEC.png saved
+evaluation_puzzle3.png saved
 --- Puzzle 3 ---
 --- 5754.795026063919 seconds ---
 Number of clusters: 2
@@ -161,7 +161,7 @@ Manual number of clusters: False
 Ignore ego visualization: True
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle4_POSVEC.png saved
+evaluation_puzzle4.png saved
 --- Puzzle 4 ---
 --- 18937.984493494034 seconds ---
 Number of clusters: 2
@@ -173,7 +173,7 @@ Manual number of clusters: False
 Ignore ego visualization: True
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle5_POSVEC.png saved
+evaluation_puzzle5.png saved
 --- Puzzle 5 ---
 --- 25220.50160884857 seconds ---
 Number of clusters: 2
@@ -185,7 +185,7 @@ Manual number of clusters: False
 Ignore ego visualization: True
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle6_POSVEC.png saved
+evaluation_puzzle6.png saved
 --- Puzzle 6 ---
 --- 27815.36230826378 seconds ---
 Number of clusters: 6
@@ -197,7 +197,7 @@ Manual number of clusters: False
 Ignore ego visualization: True
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle21_POSVEC.png saved
+evaluation_puzzle21.png saved
 --- Puzzle 21 ---
 --- 74147.56474328041 seconds ---
 Number of clusters: 5
@@ -209,7 +209,7 @@ Manual number of clusters: False
 Ignore ego visualization: True
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle22_POSVEC.png saved
+evaluation_puzzle22.png saved
 --- Puzzle 22 ---
 --- 94986.87941980362 seconds ---
 Number of clusters: 2
@@ -221,7 +221,7 @@ Manual number of clusters: False
 Ignore ego visualization: True
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle23_POSVEC.png saved
+evaluation_puzzle23.png saved
 --- Puzzle 23 ---
 --- 98790.99920010567 seconds ---
 Number of clusters: 7
@@ -233,7 +233,7 @@ Manual number of clusters: False
 Ignore ego visualization: True
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle24_POSVEC.png saved
+evaluation_puzzle24.png saved
 --- Puzzle 24 ---
 --- 165514.30685925484 seconds ---
 Number of clusters: 3
@@ -245,7 +245,7 @@ Manual number of clusters: False
 Ignore ego visualization: True
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle25_POSVEC.png saved
+evaluation_puzzle25.png saved
 --- Puzzle 25 ---
 --- 261325.81205177307 seconds ---
 Number of clusters: 2
@@ -257,7 +257,7 @@ Manual number of clusters: False
 Ignore ego visualization: True
 computing distance matrix based on normalized softdtw score
 end of distance computation
-evaluation_puzzle26_POSVEC.png saved
+evaluation_puzzle26.png saved
 --- Puzzle 26 ---
 --- 289001.5512878895 seconds ---
 Number of clusters: 6
