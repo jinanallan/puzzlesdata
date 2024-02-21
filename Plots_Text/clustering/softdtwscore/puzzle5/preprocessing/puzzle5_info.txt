@@ -1,0 +1,15 @@
+--- Puzzle 5 ---
+--- 1538.2496967315674 seconds ---
+preprocessing: True
+median total time: 15.26
+MAD: 4.26
+Removed 2 outliers time and ids
+['68_1_5_0', '60_2_5_0']
+[44.84, 54.35]
+Number of clusters: 6
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True

@@ -20,8 +20,6 @@ import json
 from clusteringEvaluation import clusteringEvaluation
 import torch
 
-
-
 def coloring(object,dummy = False):
     if dummy:
         if object=='box1':
@@ -316,6 +314,7 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
 
     if len(cluster_vector) > 1:
         avg = softdtw_barycenter(cluster_vector, gamma=1., max_iter=50, tol=1e-3)
+
         fig, ax = plt.subplots()
         imgfolder = './cropped_puzzles_screenshots'
         fname = os.path.join(imgfolder, 'puzzle'+str(puzzleNumber)+'.png')
@@ -325,7 +324,7 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
 
             x = avg[:,i*2]
             y = avg[:,i*2+1]
-        
+            
             plt.scatter(x,y, alpha=0.1, color= coloring(present_objects[object], dummy=True), s=10, edgecolors='face',
                                         marker= ".", label=present_objects[object])
             plt.legend(title=f'Number of solutions: {len(cluster_vector)}',loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=4)
@@ -334,75 +333,74 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
             plt.title(f'cluster {cluster_id} barycenter' )
             plt.savefig(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.png',
                         bbox_inches='tight', dpi=720)
+        
 
 def silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber,plotPath):
     # Silhouette analysis plot and deciding the number of clusters based on the max silhouette score
-            max_silhouette_avg = 0
+    max_silhouette_avg = 0
 
-            fig, axs = plt.subplots(2, 4, figsize=(20, 10), sharex=False, sharey=True)
+    fig, axs = plt.subplots(2, 4, figsize=(20, 10), sharex=False, sharey=True)
 
-            fig.text(0.5, 0.04, 'Silhouette coefficient values', ha='center', fontsize=14)
-            fig.text(0.04, 0.5, 'Cluster label', va='center', rotation='vertical', fontsize=14)
-            
-            neg_value_fraction= []
-            below_avg_fraction= []
-            for n_clusters in range(3, 10):
+    fig.text(0.5, 0.04, 'Silhouette coefficient values', ha='center', fontsize=14)
+    fig.text(0.04, 0.5, 'Cluster label', va='center', rotation='vertical', fontsize=14)
+    
+    neg_value_fraction= []
+    below_avg_fraction= []
+    for n_clusters in range(3, 10):
+        ax1 = axs[(n_clusters-2)//4][(n_clusters-2)%4]
+        
+        clusters = fcluster(Z, n_clusters, criterion='maxclust')
+        silhouette_avg = silhouette_score(distanceMatrixSQ, clusters, metric='precomputed')
+        silhouette_avg = round(silhouette_avg, 2)
 
-                ax1 = axs[(n_clusters-2)//4][(n_clusters-2)%4]
-                
-                clusters = fcluster(Z, n_clusters, criterion='maxclust')
-                silhouette_avg = silhouette_score(distanceMatrixSQ, clusters, metric='precomputed')
-                silhouette_avg = round(silhouette_avg, 2)
+        # print("For n_clusters =", n_clusters, "The average silhouette_score is :", silhouette_avg)
 
-                # print("For n_clusters =", n_clusters, "The average silhouette_score is :", silhouette_avg)
+        if silhouette_avg > max_silhouette_avg:
+            max_silhouette_avg = silhouette_avg
+            numCluster = n_clusters
 
-                if silhouette_avg > max_silhouette_avg:
-                    max_silhouette_avg = silhouette_avg
-                    numCluster = n_clusters
+        sample_silhouette_values = silhouette_samples(distanceMatrixSQ, clusters, metric='precomputed')
 
-                sample_silhouette_values = silhouette_samples(distanceMatrixSQ, clusters, metric='precomputed')
+        neg_value_fraction.append(sum(sample_silhouette_values < 0) / len(sample_silhouette_values))
 
-                neg_value_fraction.append(sum(sample_silhouette_values < 0) / len(sample_silhouette_values))
+        below_avg_fraction.append(sum(sample_silhouette_values < silhouette_avg) / len(sample_silhouette_values))
 
-                below_avg_fraction.append(sum(sample_silhouette_values < silhouette_avg) / len(sample_silhouette_values))
+        y_lower = 10
+        for i in range(n_clusters):
+            ith_cluster_silhouette_values = sample_silhouette_values[clusters == i+1]
+            ith_cluster_silhouette_values.sort()
+            size_cluster_i = ith_cluster_silhouette_values.shape[0]
+            y_upper = y_lower + size_cluster_i
+            color = cm.nipy_spectral(float(i) / n_clusters)
+            ax1.fill_betweenx(np.arange(y_lower, y_upper), 0, ith_cluster_silhouette_values, facecolor=color, edgecolor=color, alpha=0.4)
+            ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i+1))
+            y_lower = y_upper + 10
 
-                y_lower = 10
-                for i in range(n_clusters):
-                    ith_cluster_silhouette_values = sample_silhouette_values[clusters == i+1]
-                    ith_cluster_silhouette_values.sort()
-                    size_cluster_i = ith_cluster_silhouette_values.shape[0]
-                    y_upper = y_lower + size_cluster_i
-                    color = cm.nipy_spectral(float(i) / n_clusters)
-                    ax1.fill_betweenx(np.arange(y_lower, y_upper), 0, ith_cluster_silhouette_values, facecolor=color, edgecolor=color, alpha=0.4)
-                    ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i+1))
-                    y_lower = y_upper + 10
+        ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
+        ax1.set_yticks([])
+        ax1.set_xticks(np.arange(-0.1, 0.8, 0.1))
+        #set x tick font size 
+        for tick in ax1.xaxis.get_major_ticks():
+            tick.label1.set_fontsize(8)
+        ax1.set_xlim([-0.1, 0.8])
+        ax1.set_ylim([0, len(distanceMatrixSQ) + (n_clusters+1) * 10])
+        ax1.set_title(f'Number of clusters: {n_clusters}\nSilhouette score: {silhouette_avg}', fontsize=12)
 
-                ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
-                ax1.set_yticks([])
-                ax1.set_xticks(np.arange(-0.1, 0.8, 0.1))
-                #set x tick font size 
-                for tick in ax1.xaxis.get_major_ticks():
-                    tick.label1.set_fontsize(8)
-                ax1.set_xlim([-0.1, 0.8])
-                ax1.set_ylim([0, len(distanceMatrixSQ) + (n_clusters+1) * 10])
-                ax1.set_title(f'Number of clusters: {n_clusters}\nSilhouette score: {silhouette_avg}', fontsize=12)
+    plt.suptitle(f"Silhouette analysis for puzzle {puzzleNumber}", fontsize=14, fontweight='bold')
+    plt.savefig(f'{plotPath}/silhouette_puzzle{puzzleNumber}.png', dpi=300)
+    # print(f"silhouette_puzzle{puzzleNumber}.png saved")
+    plt.close(fig)
 
+    fig, ax = plt.subplots()
+    ax.plot(range(3, 10), neg_value_fraction, label='Negative value fraction')
+    ax.plot(range(3, 10), below_avg_fraction, label='Below average fraction')
+    ax.set_xlabel('Number of clusters')
+    ax.set_ylabel('Fraction')
+    ax.legend()
+    plt.title(f"Negative and below average fraction for puzzle {puzzleNumber}")
+    plt.savefig(f'{plotPath}/silhouette_fraction_puzzle{puzzleNumber}.png', dpi=300)
 
-            plt.suptitle(f"Silhouette analysis for puzzle {puzzleNumber}", fontsize=14, fontweight='bold')
-            plt.savefig(f'{plotPath}/silhouette_puzzle{puzzleNumber}.png', dpi=300)
-            # print(f"silhouette_puzzle{puzzleNumber}.png saved")
-            plt.close(fig)
-
-            fig, ax = plt.subplots()
-            ax.plot(range(3, 10), neg_value_fraction, label='Negative value fraction')
-            ax.plot(range(3, 10), below_avg_fraction, label='Below average fraction')
-            ax.set_xlabel('Number of clusters')
-            ax.set_ylabel('Fraction')
-            ax.legend()
-            plt.title(f"Negative and below average fraction for puzzle {puzzleNumber}")
-            plt.savefig(f'{plotPath}/silhouette_fraction_puzzle{puzzleNumber}.png', dpi=300)
-
-            return numCluster,neg_value_fraction,below_avg_fraction
+    return numCluster,neg_value_fraction,below_avg_fraction
 
 def do_cluster(**kwargs):
     """
@@ -411,7 +409,7 @@ def do_cluster(**kwargs):
     start_time = time.time()
 
     frame_folders = ["./Data/Pilot3/Frames/", "./Data/Pilot4/Frames/"]
-    
+
     if "torch" in kwargs and kwargs["torch"]: # Check if the user wants to use PyTorch
 
         # Specify the GPU you want to use
@@ -424,6 +422,8 @@ def do_cluster(**kwargs):
         else:
             device = torch.device("cpu")
             print("CUDA is not available. Using CPU.")
+    else:
+        device = None
 
     if "puzzles" in kwargs:
         puzzles = kwargs["puzzles"]
@@ -434,7 +434,7 @@ def do_cluster(**kwargs):
         preprocessing = kwargs["preprocessing"]
     else:
         preprocessing = False
-
+        
     if "softdtwscore" in kwargs:
         softdtwscore = kwargs["softdtwscore"]
     else:
@@ -469,32 +469,60 @@ def do_cluster(**kwargs):
         gamma = kwargs["gamma"]
     else:
         gamma = 1.
-
+    
     for puzzleNumber in puzzles:
         if softdtwscore and ignore_Unattached_ego:
-            if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}'):
-                os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}')
-                plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}'
+            if preprocessing:
+                if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}/preprocessing/'):
+                    os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}/preprocessing/')
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}/preprocessing/'
+                else:
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}/preprocessing/'
             else:
-                plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}'
+                if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}'):
+                    os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}')
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}'
+                else:
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}'
         elif softdtwscore:
-            if not os.path.exists(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}'):
-                os.makedirs(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}')
-                plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}'
+            if preprocessing:
+                if not os.path.exists(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}/preprocessing/'):
+                    os.makedirs(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}/preprocessing/')
+                    plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}/preprocessing/'
+                else:
+                    plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}/preprocessing/'
             else:
-                plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}'
+                if not os.path.exists(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}'):
+                    os.makedirs(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}')
+                    plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}'
+                else:
+                    plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}'
         elif ignore_Unattached_ego:
-            if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}'):
+            if preprocessing:
+                if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}/preprocessing/'):
+                    os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}/preprocessing/')
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}/preprocessing/'
+                else:
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}/preprocessing/'
+            else:
+                if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}'):
                     os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}')
                     plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}'
-            else:
-                plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}'
+                else:
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}'
         else:
-            if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}'):
+            if preprocessing:
+                if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}/preprocessing/'):
+                    os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}/preprocessing/')
+                    plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}/preprocessing/'
+                else:
+                    plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}/preprocessing/'
+            else:
+                if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}'):
                     os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}')
                     plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}'
-            else:
-                plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}'
+                else:
+                    plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}'
         allSV=[]
         ids=[]
         total_time_list = []
@@ -535,6 +563,7 @@ def do_cluster(**kwargs):
                                         solutionVector[ni][di]=vector.iloc[ni,di]
 
                                 allSV.append(solutionVector)
+        
         if preprocessing:
             # print(total_time_list)
             ouliers=[]
@@ -552,8 +581,6 @@ def do_cluster(**kwargs):
             allSV = [i for j, i in enumerate(allSV) if j not in ouliers]
             ids = [i for j, i in enumerate(ids) if j not in ouliers]
             # print(f"Removed {len(ouliers)} outliers")
-
-
 
         if os.path.isfile(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt'):
             distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt')
@@ -686,18 +713,44 @@ def do_cluster(**kwargs):
             print(f"Preprocessing: {preprocessing}", file=f)
             print(f"Manual number of clusters: {manual_number_of_clusters}", file=f)
             print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
+    return neg_value_fraction, below_avg_fraction
             
+for puzzle in [26]:
+    neg_value_fraction, below_avg_fraction = do_cluster(puzzles=[puzzle], 
+                                                    preprocessing=False,
+                                                      softdtwscore=True,
+                                                        ignore_Unattached_ego=False, 
+                                                        log_scale=True, torch=False,
+                                                          torch_be=False, gamma=1.,
+                                                            manual_number_of_clusters=False, 
+                                                            ignore_ego_visualization=True)
 
-do_cluster(puzzles=[1,2], torch=True,preprocessing=False, softdtwscore=True, ignore_Unattached_ego=False,
-            log_scale=True, ignore_ego_visualization=True, manual_number_of_clusters=False,
-              torch_be=True, gamma=1.)
+    neg_value_fractionP, below_avg_fractionP = do_cluster(puzzles=[puzzle], 
+                                                    preprocessing=True,
+                                                      softdtwscore=True,
+                                                        ignore_Unattached_ego=False, 
+                                                        log_scale=True, torch=False,
+                                                          torch_be=False, gamma=1.,
+                                                            manual_number_of_clusters=False, 
+                                                            ignore_ego_visualization=True)
 
-# repo_path = './'
+    plt.figure()
+    plt.plot(range(3, 10), neg_value_fraction, label='Neg' )
+    plt.plot(range(3, 10), below_avg_fraction, label='Below average ')
+    plt.plot(range(3, 10), neg_value_fractionP, label='Neg preprocessed')
+    plt.plot(range(3, 10), below_avg_fractionP, label='Below average preprocessed')
+    plt.xlabel('Number of clusters')
+    plt.ylabel('Fraction')
+    plt.legend()
+    plt.title(f"Negative and below average fraction for puzzle {puzzle}")
+    plt.savefig(f'./Plots_Text/clustering/silhouette_fraction_puzzle{puzzle}.png', dpi=300)
 
-# os.chdir(repo_path)
+repo_path = './'
 
-# subprocess.run(['git', 'add', '.'])
+os.chdir(repo_path)
 
-# subprocess.run(['git', 'commit', '-m', "p18 19 20"])
+subprocess.run(['git', 'add', '.'])
 
-# subprocess.run(['git', 'push'])
+subprocess.run(['git', 'commit', '-m', "effect of preprocessing on clustering results"])
+
+subprocess.run(['git', 'push'])

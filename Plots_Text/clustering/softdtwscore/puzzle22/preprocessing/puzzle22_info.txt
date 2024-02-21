@@ -1,0 +1,15 @@
+--- Puzzle 22 ---
+--- 6420.157035589218 seconds ---
+preprocessing: True
+median total time: 28.23
+MAD: 6.330000000000002
+Removed 6 outliers time and ids
+['47_1_22_0', '66_2_22_0', '59_1_22_0', '68_1_22_0', '51_2_22_0']
+[123.85, 62.6, 60.28, 66.2, 86.05, 68.98]
+Number of clusters: 3
+Softdtw score: True
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
