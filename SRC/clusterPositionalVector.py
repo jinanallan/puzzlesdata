@@ -715,7 +715,7 @@ def do_cluster(**kwargs):
             print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
     return neg_value_fraction, below_avg_fraction
             
-for puzzle in [26]:
+for puzzle in [1]:
     neg_value_fraction, below_avg_fraction = do_cluster(puzzles=[puzzle], 
                                                     preprocessing=False,
                                                       softdtwscore=True,
@@ -730,15 +730,15 @@ for puzzle in [26]:
                                                       softdtwscore=True,
                                                         ignore_Unattached_ego=False, 
                                                         log_scale=True, torch=False,
-                                                          torch_be=False, gamma=1.,
+                                                          torch_be=False, gamma=0.1,
                                                             manual_number_of_clusters=False, 
                                                             ignore_ego_visualization=True)
 
     plt.figure()
     plt.plot(range(3, 10), neg_value_fraction, label='Neg' )
     plt.plot(range(3, 10), below_avg_fraction, label='Below average ')
-    plt.plot(range(3, 10), neg_value_fractionP, label='Neg preprocessed')
-    plt.plot(range(3, 10), below_avg_fractionP, label='Below average preprocessed')
+    plt.plot(range(3, 10), neg_value_fractionP, label='Neg preprocessed with gamma=0.1')
+    plt.plot(range(3, 10), below_avg_fractionP, label='Below average preprocessed with gamma=0.1')
     plt.xlabel('Number of clusters')
     plt.ylabel('Fraction')
     plt.legend()
