@@ -5,6 +5,7 @@ import re
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+from matplotlib.animation import FuncAnimation
 from PIL import Image
 import matplotlib.cm as cm
 from dtaidistance import dtw
@@ -313,7 +314,7 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
         cluster_vector.append(solutionVector)
 
     if len(cluster_vector) > 1:
-        avg = softdtw_barycenter(cluster_vector, gamma=1., max_iter=50, tol=1e-3)
+        avg = softdtw_barycenter(cluster_vector, gamma=1.0, max_iter=50, tol=1e-3)
 
         fig, ax = plt.subplots()
         imgfolder = './cropped_puzzles_screenshots'
@@ -330,10 +331,45 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
             plt.legend(title=f'Number of solutions: {len(cluster_vector)}',loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=4)
             plt.xlim(-2, 2)
             plt.ylim(-2, 2)
-            plt.title(f'cluster {cluster_id} barycenter' )
-            plt.savefig(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.png',
-                        bbox_inches='tight', dpi=720)
+        plt.title(f'cluster {cluster_id} barycenter' )
+        plt.savefig(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.png',
+                    bbox_inches='tight', dpi=720)
+        plt.close(fig)
         
+        fig, ax = plt.subplots()
+        #open image as float
+        img = Image.open(fname).convert('L')
+        img = ax.imshow(img, extent=[-2, 2, -2, 2], cmap='gray')
+
+        ax.set_xlim(-2, 2)
+        ax.set_ylim(-2, 2)
+        num_objects = len(present_objects) -1
+         
+        num_points = len(avg)
+
+        lines =[ax.plot([], [], lw=2)[0] for _ in range(num_objects)]
+
+        # Function to initialize the animation
+        def init():
+            for line in lines:
+                line.set_data([], [])
+            return lines
+    
+        # Function to update the animation
+        def update(frame):
+            for i,object in enumerate(present_objects):
+                if not present_objects[object]=='ego':
+                    x = avg[:,i*2]
+                    y = avg[:,i*2+1]
+                    lines[i-1].set_data(x[:frame], y[:frame])
+            return lines
+        
+        # Create the animation
+        ani = FuncAnimation(fig, update, frames=num_points, init_func=init, blit=True, interval=5)
+
+        ani.save(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.gif', writer='pillow', fps=30)
+        plt.close(fig)
+
 
 def silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber,plotPath):
     # Silhouette analysis plot and deciding the number of clusters based on the max silhouette score
@@ -716,41 +752,41 @@ def do_cluster(**kwargs):
     return neg_value_fraction, below_avg_fraction
             
 for puzzle in [1]:
-    neg_value_fraction, below_avg_fraction = do_cluster(puzzles=[puzzle], 
-                                                    preprocessing=False,
-                                                      softdtwscore=True,
-                                                        ignore_Unattached_ego=False, 
-                                                        log_scale=True, torch=False,
-                                                          torch_be=False, gamma=1.,
-                                                            manual_number_of_clusters=False, 
-                                                            ignore_ego_visualization=True)
+    # neg_value_fraction, below_avg_fraction = do_cluster(puzzles=[puzzle], 
+    #                                                 preprocessing=False,
+    #                                                   softdtwscore=True,
+    #                                                     ignore_Unattached_ego=False, 
+    #                                                     log_scale=True, torch=False,
+    #                                                       torch_be=False, gamma=1.,
+    #                                                         manual_number_of_clusters=False, 
+    #                                                         ignore_ego_visualization=True)
 
     neg_value_fractionP, below_avg_fractionP = do_cluster(puzzles=[puzzle], 
                                                     preprocessing=True,
                                                       softdtwscore=True,
                                                         ignore_Unattached_ego=False, 
                                                         log_scale=True, torch=False,
-                                                          torch_be=False, gamma=0.1,
+                                                          torch_be=False, gamma=1,
                                                             manual_number_of_clusters=False, 
                                                             ignore_ego_visualization=True)
 
-    plt.figure()
-    plt.plot(range(3, 10), neg_value_fraction, label='Neg' )
-    plt.plot(range(3, 10), below_avg_fraction, label='Below average ')
-    plt.plot(range(3, 10), neg_value_fractionP, label='Neg preprocessed with gamma=0.1')
-    plt.plot(range(3, 10), below_avg_fractionP, label='Below average preprocessed with gamma=0.1')
-    plt.xlabel('Number of clusters')
-    plt.ylabel('Fraction')
-    plt.legend()
-    plt.title(f"Negative and below average fraction for puzzle {puzzle}")
-    plt.savefig(f'./Plots_Text/clustering/silhouette_fraction_puzzle{puzzle}.png', dpi=300)
+#     plt.figure()
+#     plt.plot(range(3, 10), neg_value_fraction, label='Neg' )
+#     plt.plot(range(3, 10), below_avg_fraction, label='Below average ')
+#     plt.plot(range(3, 10), neg_value_fractionP, label='Neg preprocessed with gamma=0.1')
+#     plt.plot(range(3, 10), below_avg_fractionP, label='Below average preprocessed with gamma=0.1')
+#     plt.xlabel('Number of clusters')
+#     plt.ylabel('Fraction')
+#     plt.legend()
+#     plt.title(f"Negative and below average fraction for puzzle {puzzle}")
+#     plt.savefig(f'./Plots_Text/clustering/silhouette_fraction_puzzle{puzzle}.png', dpi=300)
 
-repo_path = './'
+# repo_path = './'
 
-os.chdir(repo_path)
+# os.chdir(repo_path)
 
-subprocess.run(['git', 'add', '.'])
+# subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "effect of preprocessing on clustering results"])
+# subprocess.run(['git', 'commit', '-m', "effect of preprocessing on clustering results"])
 
-subprocess.run(['git', 'push'])
+# subprocess.run(['git', 'push'])
