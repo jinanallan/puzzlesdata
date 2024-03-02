@@ -20,6 +20,7 @@ import subprocess
 import json
 from clusteringEvaluation import clusteringEvaluation
 import torch
+import multiprocessing
 
 def coloring(object,dummy = False):
     if dummy:
@@ -158,7 +159,7 @@ def dtwI(sequences : list) -> np.ndarray:
     distanceMatrix = distanceMatrix[np.triu_indices(n, 1)]
     return distanceMatrix
 
-def softdtw_score(sequences : list, torch_be : bool, gamma: float, device=None ) -> np.ndarray:
+def softdtw_score(puzzle: int, sequences : list, torch_be : bool, gamma: float, device=None ) -> np.ndarray:
     n=len(sequences)
     if torch_be:
         if device is None:
@@ -169,11 +170,11 @@ def softdtw_score(sequences : list, torch_be : bool, gamma: float, device=None )
             if torch.cuda.is_available():  # Check if GPU is available
                 sequences[i] = sequences[i].to(device)  # Move tensor to GPU
 
-        print("computing distance matrix based on normalized softdtw score")
+        print(f"computing distance matrix based on normalized softdtw score with pytorch backend for puzzle {puzzle}")
         distanceMatrix = cdist_soft_dtw_normalized(sequences, gamma=gamma, be="pytorch", compute_with_backend=torch_be)
         print("end of distance computation")
     else:
-        print("computing distance matrix based on normalized softdtw score")
+        print(f"computing distance matrix based on normalized softdtw score with numpy backend for puzzle {puzzle}")
         distanceMatrix = cdist_soft_dtw_normalized(sequences, gamma=gamma, be="numpy")
         print("end of distance computation")
     # distanceMatrix in form of scipy pdist  output
@@ -369,7 +370,6 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
 
         ani.save(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.gif', writer='pillow', fps=30)
         plt.close(fig)
-
 
 def silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber,plotPath):
     # Silhouette analysis plot and deciding the number of clusters based on the max silhouette score
@@ -622,9 +622,9 @@ def do_cluster(**kwargs):
             distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt')
         elif softdtwscore:
             if device is not None:
-                distanceMatrix = softdtw_score(allSV, torch_be=torch_be,gamma=gamma, device=device)
+                distanceMatrix = softdtw_score(puzzleNumber,allSV, torch_be=torch_be,gamma=gamma, device=device)
             else:
-                distanceMatrix = softdtw_score(allSV, torch_be=torch_be, gamma=gamma)
+                distanceMatrix = softdtw_score(puzzleNumber,allSV, torch_be=torch_be, gamma=gamma)
             np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt', distanceMatrix)
         else:               
             distanceMatrix = dtwI(allSV)
@@ -673,7 +673,7 @@ def do_cluster(**kwargs):
                 first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif', save_all=True, append_images=frames, duration=500, loop=0)
             if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_heatmap.png'):
                 Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
-            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.png'):
+            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.gif'):
                 softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
             
         
@@ -751,25 +751,36 @@ def do_cluster(**kwargs):
             print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
     return neg_value_fraction, below_avg_fraction
             
-for puzzle in [1]:
-    # neg_value_fraction, below_avg_fraction = do_cluster(puzzles=[puzzle], 
-    #                                                 preprocessing=False,
-    #                                                   softdtwscore=True,
-    #                                                     ignore_Unattached_ego=False, 
-    #                                                     log_scale=True, torch=False,
-    #                                                       torch_be=False, gamma=1.,
-    #                                                         manual_number_of_clusters=False, 
-    #                                                         ignore_ego_visualization=True)
+def process_puzzle(puzzles,preprocessing):
+        _, _ = do_cluster(puzzles=[puzzles],
+                            preprocessing=preprocessing,
+                            softdtwscore=True,
+                            ignore_Unattached_ego=True, 
+                            log_scale=True, torch=False,
+                            torch_be=False, gamma=1,
+                            manual_number_of_clusters=False, 
+                            ignore_ego_visualization=True)
+        
+     
+if __name__ == '__main__':
+    puzzles = [1,2,3,4,5,6,21,22,23,24,25,26]  # List of puzzles
+    preprocessing_options = [True, False]  # Preprocessing options
+    
+    # Create a list of arguments for each combination of puzzle and preprocessing option
+    arguments = [(puzzle, preprocessing) for puzzle in puzzles for preprocessing in preprocessing_options]
+    
+    # Create a multiprocessing pool with the number of processes you want to use
+    pool = multiprocessing.Pool(processes=6)  # Adjust the number of processes as needed
+    
+    # Use the pool to map the process_puzzle function to the list of arguments
+    pool.starmap(process_puzzle, arguments)
+    
+    # Close the pool to free up resources
+    pool.close()
+    pool.join()
+     
 
-    neg_value_fractionP, below_avg_fractionP = do_cluster(puzzles=[puzzle], 
-                                                    preprocessing=True,
-                                                      softdtwscore=True,
-                                                        ignore_Unattached_ego=False, 
-                                                        log_scale=True, torch=False,
-                                                          torch_be=False, gamma=1,
-                                                            manual_number_of_clusters=False, 
-                                                            ignore_ego_visualization=True)
-
+        
 #     plt.figure()
 #     plt.plot(range(3, 10), neg_value_fraction, label='Neg' )
 #     plt.plot(range(3, 10), below_avg_fraction, label='Below average ')
