@@ -1,0 +1,15 @@
+--- Puzzle 24 ---
+--- 24443.906510829926 seconds ---
+preprocessing: True
+median total time: 40.41
+MAD: 12.349999999999998
+Removed 7 outliers time and ids
+['44_1_24_0', '65_1_24_0', '70_2_24_0', '56_2_24_0', '51_2_24_0', '54_1_24_0', '69_2_24_0']
+[159.55, 117.45, 176.23, 105.26, 186.95, 112.75, 111.4]
+Number of clusters: 8
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True

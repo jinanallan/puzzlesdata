@@ -1,0 +1,15 @@
+--- Puzzle 2 ---
+--- 1990.3571903705597 seconds ---
+preprocessing: True
+median total time: 10.97
+MAD: 3.8200000000000003
+Removed 2 outliers time and ids
+['45_1_2_0', '68_2_2_0']
+[64.09, 32.85]
+Number of clusters: 3
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True

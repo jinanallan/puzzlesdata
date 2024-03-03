@@ -1,0 +1,15 @@
+--- Puzzle 26 ---
+--- 25104.284225702286 seconds ---
+preprocessing: True
+median total time: 36.2
+MAD: 8.93
+Removed 6 outliers time and ids
+['38_1_26_0', '33_1_26_0', '65_1_26_0', '67_1_26_0', '58_1_26_0', '65_2_26_0']
+[117.55, 89.23, 119.11, 84.95, 83.19, 94.62]
+Number of clusters: 4
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True

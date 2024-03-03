@@ -770,7 +770,7 @@ if __name__ == '__main__':
     arguments = [(puzzle, preprocessing) for puzzle in puzzles for preprocessing in preprocessing_options]
     
     # Create a multiprocessing pool with the number of processes you want to use
-    pool = multiprocessing.Pool(processes=6)  # Adjust the number of processes as needed
+    pool = multiprocessing.Pool(processes=10)  # Adjust the number of processes as needed
     
     # Use the pool to map the process_puzzle function to the list of arguments
     pool.starmap(process_puzzle, arguments)
@@ -792,12 +792,12 @@ if __name__ == '__main__':
 #     plt.title(f"Negative and below average fraction for puzzle {puzzle}")
 #     plt.savefig(f'./Plots_Text/clustering/silhouette_fraction_puzzle{puzzle}.png', dpi=300)
 
-# repo_path = './'
+repo_path = './'
 
-# os.chdir(repo_path)
+os.chdir(repo_path)
 
-# subprocess.run(['git', 'add', '.'])
+subprocess.run(['git', 'add', '.'])
 
-# subprocess.run(['git', 'commit', '-m', "effect of preprocessing on clustering results"])
+subprocess.run(['git', 'commit', '-m', "ignore ego-soft,pre:T and F, barycenter visulization "])
 
-# subprocess.run(['git', 'push'])
+subprocess.run(['git', 'push'])

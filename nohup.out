@@ -1,269 +1,349 @@
-[main 4fcef163] p18 19 20
- 40 files changed, 25558 insertions(+), 4 deletions(-)
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/Cluster1_puzzle18.gif
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/Cluster1_puzzle18_heatmap.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/Cluster1_puzzle18_softbarycenter.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/Cluster2_puzzle18.gif
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/Cluster2_puzzle18_heatmap.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/Cluster2_puzzle18_softbarycenter.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/cluster_ids_puzzle18.json
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/dendrogram_heatmap_barycenter_puzzle18.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/distanceMatrix_puzzle18.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/evaluation_puzzle18.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/linkage_puzzle18.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/puzzle18_info.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle18/silhouette_puzzle18.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/Cluster1_puzzle19.gif
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/Cluster1_puzzle19_heatmap.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/Cluster1_puzzle19_softbarycenter.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/Cluster2_puzzle19.gif
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/Cluster2_puzzle19_heatmap.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/cluster_ids_puzzle19.json
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/dendrogram_heatmap_barycenter_puzzle19.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/distanceMatrix_puzzle19.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/evaluation_puzzle19.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/linkage_puzzle19.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/puzzle19_info.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle19/silhouette_puzzle19.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/Cluster1_puzzle20.gif
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/Cluster1_puzzle20_heatmap.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/Cluster1_puzzle20_softbarycenter.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/Cluster2_puzzle20.gif
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/Cluster2_puzzle20_heatmap.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/Cluster2_puzzle20_softbarycenter.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/cluster_ids_puzzle20.json
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/dendrogram_heatmap_barycenter_puzzle20.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/distanceMatrix_puzzle20.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/evaluation_puzzle20.png
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/linkage_puzzle20.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/puzzle20_info.txt
- create mode 100644 Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle20/silhouette_puzzle20.png
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-Using GPU: NVIDIA GeForce RTX 3090
-Median total time: 11.825
-MAD: 3.325000000000001
-['39_1_18_2', '44_1_18_2', '33_1_18_0', '44_1_18_0', '60_1_18_2', '61_1_18_0', '67_1_18_0', '59_1_18_0', '60_1_18_0', '66_2_18_1', '60_2_18_0', '66_1_18_0', '64_2_18_0', '53_1_18_0']
-[24.8, 27.16, 23.13, 34.48, 24.42, 22.56, 25.55, 23.22, 32.34, 0.53, 22.49, 26.32, 23.05, 22.59]
-Removed 14 outliers
-computing distance matrix based on normalized softdtw score
-end of distance computation
-evaluation_puzzle18.png saved
---- Puzzle 18 ---
---- 2101.1814827919006 seconds ---
-Number of clusters: 2
-Softdtw score: True
-Ignore unattached ego: True
-Log scale: True
-Preprocessing: True
-Manual number of clusters: False
-Ignore ego visualization: True
-Sequence type: POSVEC
-Median total time: 16.63
-MAD: 6.8199999999999985
-['44_2_19_2', '43_2_19_1', '38_1_19_1', '35_1_19_0', '45_1_19_0', '35_2_19_0', '36_1_19_1', '59_1_19_1', '53_1_19_0', '56_1_19_2', '55_1_19_2', '56_2_19_1', '65_1_19_3', '56_1_19_4', '64_1_19_0', '56_1_19_6', '58_1_19_4', '60_1_19_0', '65_1_19_6', '51_2_19_1', '56_1_19_3']
-[73.45, 48.94, 47.73, 48.04, 41.13, 61.06, 50.27, 564.86, 49.33, 40.1, 84.55, 50.34, 47.11, 59.43, 51.89, 42.35, 39.4, 69.26, 82.6, 56.18, 40.3]
-Removed 21 outliers
-computing distance matrix based on normalized softdtw score
-end of distance computation
-evaluation_puzzle19.png saved
---- Puzzle 19 ---
---- 8102.838165044785 seconds ---
-Number of clusters: 2
-Softdtw score: True
-Ignore unattached ego: True
-Log scale: True
-Preprocessing: True
-Manual number of clusters: False
-Ignore ego visualization: True
-Sequence type: POSVEC
-Median total time: 8.69
-MAD: 2.200000000000001
-['39_1_20_1', '36_1_20_0', '39_1_20_3', '42_2_20_0', '44_1_20_0', '41_1_20_0', '48_1_20_1', '46_1_20_3', '39_1_20_0', '36_1_20_3', '53_1_20_0', '60_1_20_1', '65_1_20_8', '53_2_20_0', '56_1_20_2', '65_1_20_12', '67_2_20_0', '59_1_20_0', '53_1_20_1']
-[29.53, 27.63, 17.37, 16.63, 37.55, 24.85, 15.84, 15.52, 30.0, 1.82, 22.34, 23.44, 16.3, 17.49, 23.41, 15.42, 17.58, 29.73, 54.74]
-Removed 19 outliers
-computing distance matrix based on normalized softdtw score
-end of distance computation
-evaluation_puzzle20.png saved
---- Puzzle 20 ---
---- 9683.898563146591 seconds ---
-Number of clusters: 2
-Softdtw score: True
-Ignore unattached ego: True
-Log scale: True
-Preprocessing: True
-Manual number of clusters: False
-Ignore ego visualization: True
-Sequence type: POSVEC
-Using GPU: NVIDIA GeForce RTX 3090
-computing distance matrix based on normalized softdtw score
-end of distance computation
-evaluation_puzzle1.png saved
+multiprocessing.pool.RemoteTraceback: 
+"""
 Traceback (most recent call last):
-  File "/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py", line 551, in <module>
-    Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
-  File "/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py", line 250, in Heatmap
-    vector, present_objects = positional_vector(data)
-  File "/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py", line 104, in positional_vector
-    positional_vector.at[row,(id,'y')]=y
-  File "/home/erfan/anaconda3/lib/python3.10/site-packages/pandas/core/indexing.py", line 2442, in __setitem__
-    return super().__setitem__(key, value)
-  File "/home/erfan/anaconda3/lib/python3.10/site-packages/pandas/core/indexing.py", line 2386, in __setitem__
-    key = tuple(com.apply_if_callable(x, self.obj) for x in key)
-KeyboardInterrupt
-/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py:556: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
-  fig = plt.figure()
-/home/erfan/puzzlesdata/SRC/clusteringEvaluation.py:31: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
-  fig = plt.figure(figsize=(15, 5))
-/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py:482: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
-  fig, axs = plt.subplots(2, 4, figsize=(20, 10), sharex=False, sharey=True)
-/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py:259: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
-  fig, ax = plt.subplots()
-/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py:314: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
-  fig, ax = plt.subplots()
-Using GPU: NVIDIA GeForce RTX 3090
-evaluation_puzzle1.png saved
---- Puzzle 1 ---
---- 572.9574348926544 seconds ---
-Number of clusters: 9
-Softdtw score: True
-Ignore unattached ego: False
-Log scale: True
-Preprocessing: False
-Manual number of clusters: False
-Ignore ego visualization: True
-computing distance matrix based on normalized softdtw score
-end of distance computation
+  File "/home/erfan/anaconda3/lib/python3.10/multiprocessing/pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+  File "/home/erfan/anaconda3/lib/python3.10/multiprocessing/pool.py", line 51, in starmapstar
+    return list(itertools.starmap(args[0], args[1]))
+  File "/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py", line 755, in process_puzzle
+    _, _ = do_cluster(puzzles=[puzzles],
+  File "/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py", line 688, in do_cluster
+    dendrogram(Z, labels=ids, ax=ax1, leaf_font_size=10 )
+  File "/home/erfan/anaconda3/lib/python3.10/site-packages/scipy/cluster/hierarchy.py", line 3305, in dendrogram
+    raise ValueError("Dimensions of Z and labels must be consistent.")
+ValueError: Dimensions of Z and labels must be consistent.
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/erfan/puzzlesdata/SRC/clusterPositionalVector.py", line 776, in <module>
+    pool.starmap(process_puzzle, arguments)
+  File "/home/erfan/anaconda3/lib/python3.10/multiprocessing/pool.py", line 375, in starmap
+    return self._map_async(func, iterable, starmapstar, chunksize).get()
+  File "/home/erfan/anaconda3/lib/python3.10/multiprocessing/pool.py", line 774, in get
+    raise self._value
+ValueError: Dimensions of Z and labels must be consistent.
 evaluation_puzzle2.png saved
 --- Puzzle 2 ---
---- 3412.6610159873962 seconds ---
-Number of clusters: 2
+--- 4776.398679971695 seconds ---
+preprocessing: False
+Number of clusters: 4
 Softdtw score: True
-Ignore unattached ego: False
+Ignore unattached ego: True
 Log scale: True
 Preprocessing: False
 Manual number of clusters: False
 Ignore ego visualization: True
-computing distance matrix based on normalized softdtw score
-end of distance computation
-evaluation_puzzle3.png saved
---- Puzzle 3 ---
---- 5754.795026063919 seconds ---
-Number of clusters: 2
-Softdtw score: True
-Ignore unattached ego: False
-Log scale: True
-Preprocessing: False
-Manual number of clusters: False
-Ignore ego visualization: True
-computing distance matrix based on normalized softdtw score
-end of distance computation
-evaluation_puzzle4.png saved
---- Puzzle 4 ---
---- 18937.984493494034 seconds ---
-Number of clusters: 2
-Softdtw score: True
-Ignore unattached ego: False
-Log scale: True
-Preprocessing: False
-Manual number of clusters: False
-Ignore ego visualization: True
-computing distance matrix based on normalized softdtw score
-end of distance computation
+evaluation_puzzle23.png saved
 evaluation_puzzle5.png saved
 --- Puzzle 5 ---
---- 25220.50160884857 seconds ---
-Number of clusters: 2
-Softdtw score: True
-Ignore unattached ego: False
-Log scale: True
-Preprocessing: False
-Manual number of clusters: False
-Ignore ego visualization: True
-computing distance matrix based on normalized softdtw score
-end of distance computation
-evaluation_puzzle6.png saved
---- Puzzle 6 ---
---- 27815.36230826378 seconds ---
+--- 7633.327253103256 seconds ---
+preprocessing: False
 Number of clusters: 6
 Softdtw score: True
-Ignore unattached ego: False
+Ignore unattached ego: True
 Log scale: True
 Preprocessing: False
 Manual number of clusters: False
 Ignore ego visualization: True
-computing distance matrix based on normalized softdtw score
-end of distance computation
-evaluation_puzzle21.png saved
---- Puzzle 21 ---
---- 74147.56474328041 seconds ---
-Number of clusters: 5
-Softdtw score: True
-Ignore unattached ego: False
-Log scale: True
-Preprocessing: False
-Manual number of clusters: False
-Ignore ego visualization: True
-computing distance matrix based on normalized softdtw score
-end of distance computation
-evaluation_puzzle22.png saved
---- Puzzle 22 ---
---- 94986.87941980362 seconds ---
-Number of clusters: 2
-Softdtw score: True
-Ignore unattached ego: False
-Log scale: True
-Preprocessing: False
-Manual number of clusters: False
-Ignore ego visualization: True
-computing distance matrix based on normalized softdtw score
-end of distance computation
-evaluation_puzzle23.png saved
---- Puzzle 23 ---
---- 98790.99920010567 seconds ---
-Number of clusters: 7
-Softdtw score: True
-Ignore unattached ego: False
-Log scale: True
-Preprocessing: False
-Manual number of clusters: False
-Ignore ego visualization: True
-computing distance matrix based on normalized softdtw score
+computing distance matrix based on normalized softdtw score with numpy backend for puzzle 24
 end of distance computation
 evaluation_puzzle24.png saved
 --- Puzzle 24 ---
---- 165514.30685925484 seconds ---
-Number of clusters: 3
+--- 24443.90602207184 seconds ---
+preprocessing: True
+median total time: 40.41
+MAD: 12.349999999999998
+Removed 7 outliers time and ids
+['44_1_24_0', '65_1_24_0', '70_2_24_0', '56_2_24_0', '51_2_24_0', '54_1_24_0', '69_2_24_0']
+[159.55, 117.45, 176.23, 105.26, 186.95, 112.75, 111.4]
+Number of clusters: 8
 Softdtw score: True
-Ignore unattached ego: False
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+evaluation_puzzle3.png saved
+--- Puzzle 3 ---
+--- 3223.392174243927 seconds ---
+preprocessing: False
+Number of clusters: 4
+Softdtw score: True
+Ignore unattached ego: True
 Log scale: True
 Preprocessing: False
 Manual number of clusters: False
 Ignore ego visualization: True
-computing distance matrix based on normalized softdtw score
+computing distance matrix based on normalized softdtw score with numpy backend for puzzle 22
 end of distance computation
-evaluation_puzzle25.png saved
---- Puzzle 25 ---
---- 261325.81205177307 seconds ---
-Number of clusters: 2
+evaluation_puzzle22.png saved
+--- Puzzle 22 ---
+--- 9775.98566198349 seconds ---
+preprocessing: True
+median total time: 28.23
+MAD: 6.330000000000002
+Removed 6 outliers time and ids
+['41_1_22_0', '57_2_22_0', '61_2_22_0', '56_2_22_0', '52_1_22_0']
+[123.85, 68.98, 86.05, 60.28, 66.2, 62.6]
+Number of clusters: 9
 Softdtw score: True
-Ignore unattached ego: False
+Ignore unattached ego: True
 Log scale: True
-Preprocessing: False
+Preprocessing: True
 Manual number of clusters: False
 Ignore ego visualization: True
-computing distance matrix based on normalized softdtw score
+computing distance matrix based on normalized softdtw score with numpy backend for puzzle 26
 end of distance computation
 evaluation_puzzle26.png saved
 --- Puzzle 26 ---
---- 289001.5512878895 seconds ---
+--- 25104.28386116028 seconds ---
+preprocessing: True
+median total time: 36.2
+MAD: 8.93
+Removed 6 outliers time and ids
+['38_1_26_0', '33_1_26_0', '65_1_26_0', '67_1_26_0', '58_1_26_0', '65_2_26_0']
+[117.55, 89.23, 119.11, 84.95, 83.19, 94.62]
+Number of clusters: 4
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+evaluation_puzzle2.png saved
+--- Puzzle 2 ---
+--- 1990.3566329479218 seconds ---
+preprocessing: True
+median total time: 10.97
+MAD: 3.8200000000000003
+Removed 2 outliers time and ids
+['45_1_2_0', '68_2_2_0']
+[64.09, 32.85]
+Number of clusters: 3
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+evaluation_puzzle6.png saved
+--- Puzzle 6 ---
+--- 5856.890871524811 seconds ---
+preprocessing: False
 Number of clusters: 6
 Softdtw score: True
-Ignore unattached ego: False
+Ignore unattached ego: True
 Log scale: True
 Preprocessing: False
 Manual number of clusters: False
 Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score with numpy backend for puzzle 25
+end of distance computation
+evaluation_puzzle25.png saved
+--- Puzzle 25 ---
+--- 25966.472831487656 seconds ---
+preprocessing: True
+median total time: 41.685
+MAD: 11.710000000000003
+Removed 3 outliers time and ids
+['55_2_25_0']
+[286.69, 242.96, 133.95]
+Number of clusters: 6
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score with numpy backend for puzzle 5
+end of distance computation
+evaluation_puzzle5.png saved
+--- Puzzle 5 ---
+--- 4046.684103012085 seconds ---
+preprocessing: True
+median total time: 15.26
+MAD: 4.26
+Removed 2 outliers time and ids
+['64_1_5_0', '56_2_5_0']
+[54.35, 44.84]
+Number of clusters: 6
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+evaluation_puzzle22.png saved
+computing distance matrix based on normalized softdtw score with numpy backend for puzzle 26
+end of distance computation
+evaluation_puzzle26.png saved
+--- Puzzle 26 ---
+--- 33264.1516289711 seconds ---
+preprocessing: False
+Number of clusters: 6
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+evaluation_puzzle1.png saved
+--- Puzzle 1 ---
+--- 1203.7192463874817 seconds ---
+preprocessing: True
+median total time: 10.27
+MAD: 2.4499999999999993
+Removed 3 outliers time and ids
+['57_2_1_0', '59_2_1_0']
+[22.95, 28.0, 43.3]
+Number of clusters: 8
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score with numpy backend for puzzle 6
+end of distance computation
+evaluation_puzzle6.png saved
+--- Puzzle 6 ---
+--- 2926.0249004364014 seconds ---
+preprocessing: True
+median total time: 14.815
+MAD: 3.919999999999999
+Removed 4 outliers time and ids
+['62_1_6_0', '62_2_6_0', '67_1_6_0']
+[46.59, 46.79, 45.28, 36.15]
+Number of clusters: 3
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score with numpy backend for puzzle 23
+end of distance computation
+evaluation_puzzle23.png saved
+--- Puzzle 23 ---
+--- 5070.922287464142 seconds ---
+preprocessing: True
+median total time: 22.380000000000003
+MAD: 5.23
+Removed 6 outliers time and ids
+['45_2_23_0', '70_2_23_0', '68_1_23_0', '60_1_23_0', '58_1_23_0', '55_1_23_0']
+[70.81, 53.46, 100.6, 69.04, 54.39, 177.56]
+Number of clusters: 3
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score with numpy backend for puzzle 25
+end of distance computation
+evaluation_puzzle25.png saved
+--- Puzzle 25 ---
+--- 40958.194167137146 seconds ---
+preprocessing: False
+Number of clusters: 3
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score with numpy backend for puzzle 4
+end of distance computation
+evaluation_puzzle4.png saved
+--- Puzzle 4 ---
+--- 7755.555026292801 seconds ---
+preprocessing: True
+median total time: 24.425
+MAD: 7.825000000000001
+Removed 7 outliers time and ids
+['36_1_4_0', '37_1_4_1', '42_2_4_0', '52_1_4_0', '66_2_4_0', '56_1_4_0', '70_2_4_0']
+[69.43, 72.28, 85.71, 72.08, 67.06, 120.96, 65.47]
+Number of clusters: 3
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+computing distance matrix based on normalized softdtw score with numpy backend for puzzle 24
+end of distance computation
+evaluation_puzzle24.png saved
+--- Puzzle 24 ---
+--- 68200.38425183296 seconds ---
+preprocessing: False
+Number of clusters: 3
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+evaluation_puzzle3.png saved
+--- Puzzle 3 ---
+--- 3127.6611585617065 seconds ---
+preprocessing: True
+median total time: 19.67
+MAD: 4.990000000000002
+Removed 1 outliers time and ids
+['66_1_3_0']
+[52.77]
+Number of clusters: 3
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+evaluation_puzzle21.png saved
+--- Puzzle 21 ---
+--- 73676.40982723236 seconds ---
+preprocessing: False
+Number of clusters: 3
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+evaluation_puzzle1.png saved
+computing distance matrix based on normalized softdtw score with numpy backend for puzzle 21
+end of distance computation
+evaluation_puzzle21.png saved
+--- Puzzle 21 ---
+--- 42572.3888669014 seconds ---
+preprocessing: True
+median total time: 41.24
+MAD: 14.170000000000002
+Removed 4 outliers time and ids
+['46_1_21_0', '58_1_21_0', '67_2_21_0', '63_1_21_1']
+[172.3, 115.54, 160.68, 133.85]
+Number of clusters: 3
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
+evaluation_puzzle4.png saved
+--- Puzzle 4 ---
+--- 16793.36137199402 seconds ---
+preprocessing: False
+Number of clusters: 4
+Softdtw score: True
+Ignore unattached ego: True
+Log scale: True
+Preprocessing: False
+Manual number of clusters: False
+Ignore ego visualization: True
+Exception ignored in: <function Pool.__del__ at 0x7faa7962a560>
+Traceback (most recent call last):
+  File "/home/erfan/anaconda3/lib/python3.10/multiprocessing/pool.py", line 271, in __del__
+  File "/home/erfan/anaconda3/lib/python3.10/multiprocessing/queues.py", line 371, in put
+AttributeError: 'NoneType' object has no attribute 'dumps'
