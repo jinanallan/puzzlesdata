@@ -1,11 +1,11 @@
 --- Puzzle 25 ---
---- 18146.372942209244 seconds ---
+--- 23311.36853170395 seconds ---
 preprocessing: True
 median total time: 41.685
 MAD: 11.710000000000003
 Removed 3 outliers time and ids
-['66_1_25_0', '57_2_25_0', '56_2_25_0']
-[242.96, 286.69, 133.95]
+['55_2_25_0']
+[286.69, 242.96, 133.95]
 Number of clusters: 8
 Softdtw score: True
 Ignore unattached ego: False

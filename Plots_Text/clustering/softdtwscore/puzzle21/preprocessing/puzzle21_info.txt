@@ -1,11 +1,11 @@
 --- Puzzle 21 ---
---- 31647.498140096664 seconds ---
+--- 32963.199296951294 seconds ---
 preprocessing: True
 median total time: 41.24
 MAD: 14.170000000000002
 Removed 4 outliers time and ids
-['39_1_21_0', '51_2_21_0', '69_2_21_0', '58_1_21_1']
-[172.3, 160.68, 115.54, 133.85]
+['46_1_21_0', '58_1_21_0', '67_2_21_0', '63_1_21_1']
+[172.3, 115.54, 160.68, 133.85]
 Number of clusters: 3
 Softdtw score: True
 Ignore unattached ego: False

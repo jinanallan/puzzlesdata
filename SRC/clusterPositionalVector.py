@@ -755,7 +755,7 @@ def process_puzzle(puzzles,preprocessing):
         _, _ = do_cluster(puzzles=[puzzles],
                             preprocessing=preprocessing,
                             softdtwscore=True,
-                            ignore_Unattached_ego=True, 
+                            ignore_Unattached_ego=False, 
                             log_scale=True, torch=False,
                             torch_be=False, gamma=1,
                             manual_number_of_clusters=False, 
@@ -798,6 +798,6 @@ os.chdir(repo_path)
 
 subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "ignore ego-soft,pre:T and F, barycenter visulization "])
+subprocess.run(['git', 'commit', '-m', "soft,pre:T and F, barycenter visulization "])
 
 subprocess.run(['git', 'push'])

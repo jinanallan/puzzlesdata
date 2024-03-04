@@ -1,11 +1,11 @@
 --- Puzzle 23 ---
---- 2902.9834218025208 seconds ---
+--- 5651.269329071045 seconds ---
 preprocessing: True
 median total time: 22.380000000000003
 MAD: 5.23
 Removed 6 outliers time and ids
-['35_1_23_0', '51_2_23_0', '52_2_23_0', '60_1_23_0', '53_2_23_0']
-[70.81, 69.04, 100.6, 54.39, 53.46, 177.56]
+['45_2_23_0', '70_2_23_0', '68_1_23_0', '60_1_23_0', '58_1_23_0', '55_1_23_0']
+[70.81, 53.46, 100.6, 69.04, 54.39, 177.56]
 Number of clusters: 3
 Softdtw score: True
 Ignore unattached ego: False
