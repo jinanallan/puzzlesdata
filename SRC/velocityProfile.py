@@ -16,7 +16,7 @@ def use_regex(input_text):
     attempt = match.group(6)
     return int(particpants), int(run), int(puzzle_id), int(attempt)
 
-def velocity_profile(data, acceleration=False, ignore_Unattached_ego=True):
+def velocity_profile(data, acceleration=False, ignore_Unattached_ego=False):
     """
     plot the velocity or accelaration profile of the objects in the puzzle
 
@@ -45,7 +45,7 @@ def velocity_profile(data, acceleration=False, ignore_Unattached_ego=True):
     for definition in last_frame:
         present_objects[definition["ID"]] = definition["name"]
 
-    universal_Objects = ["box1","box2", "obj1","obj2", "obj3","obj4","ego"]
+    universal_Objects = ["box1","box2", "obj1","obj2", "obj3","obj4","ego", "obj1_a"]
     
     for x in list(present_objects):
         if present_objects[x] not in universal_Objects:
@@ -55,7 +55,7 @@ def velocity_profile(data, acceleration=False, ignore_Unattached_ego=True):
     positional_vector=pd.DataFrame(columns=present_objects)
     sub_columns = pd.MultiIndex.from_product([positional_vector.columns, ['x', 'y']], names=['ID', 'position'])
     positional_vector = pd.DataFrame(index=range(len(data.frames)), columns=sub_columns)
-
+    print(present_objects)
     row=0
     for frame in data.frames:
         # print(frame)
@@ -169,7 +169,7 @@ frame_files = os.listdir(frame_folder)
 for file in frame_files:
     if file.endswith(".json"):
         participant_id, run, puzzle, attempt = use_regex(file)
-        if participant_id == 59 and run ==1 and puzzle == 22 and attempt == 0:
+        if participant_id == 59 and run ==1 and puzzle == 26 and attempt == 0:
             with open(os.path.join(frame_folder,file)) as json_file:
                 if True: #not os.path.exists("./Plots_Text/Velocity_Profile/"+str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png"):
                     # print("Saved: ", str(participant_id)+"_"+str(run)+"_"+str(puzzle)+"_"+str(attempt)+".png")

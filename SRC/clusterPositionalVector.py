@@ -58,7 +58,7 @@ def coloring(object,dummy = False):
         elif object=='ego':
             return [(0,0,0,c) for c in np.linspace(0,1,100)]
     
-def positional_vector(data : dict, ignore_Unattached_ego : bool = False, total_time : bool = False) -> pd.DataFrame():
+def positional_vector(data : dict, ignore_Unattached_ego : bool = False, total_time : bool = False) -> pd.DataFrame: 
     """
     Get the positional vector of the objects from frames json file
 
