@@ -754,7 +754,7 @@ def do_cluster(**kwargs):
 def process_puzzle(puzzles,preprocessing):
         _, _ = do_cluster(puzzles=[puzzles],
                             preprocessing=preprocessing,
-                            softdtwscore=True,
+                            softdtwscore=False,
                             ignore_Unattached_ego=False, 
                             log_scale=True, torch=False,
                             torch_be=False, gamma=1,

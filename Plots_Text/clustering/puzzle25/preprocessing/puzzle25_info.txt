@@ -1,0 +1,15 @@
+--- Puzzle 25 ---
+--- 22899.660074472427 seconds ---
+preprocessing: True
+median total time: 41.685
+MAD: 11.710000000000003
+Removed 3 outliers time and ids
+['55_2_25_0']
+[286.69, 242.96, 133.95]
+Number of clusters: 5
+Softdtw score: False
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True

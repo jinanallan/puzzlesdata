@@ -1,0 +1,15 @@
+--- Puzzle 1 ---
+--- 1935.7361743450165 seconds ---
+preprocessing: True
+median total time: 10.27
+MAD: 2.4499999999999993
+Removed 3 outliers time and ids
+['57_2_1_0', '59_2_1_0']
+[22.95, 28.0, 43.3]
+Number of clusters: 7
+Softdtw score: False
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True

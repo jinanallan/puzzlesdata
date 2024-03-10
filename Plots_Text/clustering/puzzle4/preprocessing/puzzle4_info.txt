@@ -1,0 +1,15 @@
+--- Puzzle 4 ---
+--- 4849.681372880936 seconds ---
+preprocessing: True
+median total time: 24.425
+MAD: 7.825000000000001
+Removed 7 outliers time and ids
+['36_1_4_0', '37_1_4_1', '42_2_4_0', '52_1_4_0', '66_2_4_0', '56_1_4_0', '70_2_4_0']
+[69.43, 72.28, 85.71, 72.08, 67.06, 120.96, 65.47]
+Number of clusters: 3
+Softdtw score: False
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True

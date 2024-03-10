@@ -1,0 +1,15 @@
+--- Puzzle 6 ---
+--- 2820.1777012348175 seconds ---
+preprocessing: True
+median total time: 14.815
+MAD: 3.919999999999999
+Removed 4 outliers time and ids
+['62_1_6_0', '62_2_6_0', '67_1_6_0']
+[46.59, 46.79, 45.28, 36.15]
+Number of clusters: 3
+Softdtw score: False
+Ignore unattached ego: False
+Log scale: True
+Preprocessing: True
+Manual number of clusters: False
+Ignore ego visualization: True
