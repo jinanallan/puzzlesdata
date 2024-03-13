@@ -315,8 +315,20 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
         cluster_vector.append(solutionVector)
 
     if len(cluster_vector) > 1:
-        avg = softdtw_barycenter(cluster_vector, gamma=1.0, max_iter=50, tol=1e-3)
+        print(len(cluster_vector))
 
+        #random selection of a solution to initialize the barycenter
+        idx = np.random.choice(len(cluster_vector), 1, replace=False)
+        idx = idx[0]
+
+        if os.path.isfile(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.json'):
+            with open(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.json', 'r') as fp:
+                avg = np.array(json.load(fp))
+        else:
+            avg = softdtw_barycenter(cluster_vector, gamma=1.0, max_iter=50, tol=1e-3, init=cluster_vector[idx])
+            with open(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.json', 'w') as fp:
+                json.dump(avg.tolist(), fp)
+        
         fig, ax = plt.subplots()
         imgfolder = './cropped_puzzles_screenshots'
         fname = os.path.join(imgfolder, 'puzzle'+str(puzzleNumber)+'.png')
@@ -347,6 +359,7 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
         num_objects = len(present_objects) -1
          
         num_points = len(avg)
+        print(num_points)
 
         lines =[ax.plot([], [], lw=2)[0] for _ in range(num_objects)]
 
@@ -355,7 +368,7 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
             for line in lines:
                 line.set_data([], [])
             return lines
-    
+        
         # Function to update the animation
         def update(frame):
             for i,object in enumerate(present_objects):
@@ -363,13 +376,19 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
                     x = avg[:,i*2]
                     y = avg[:,i*2+1]
                     lines[i-1].set_data(x[:frame], y[:frame])
+            # Add time count and label on the frame
+            # ax.text.clear()
+            # ax.text(1.8, -1.8, f"Time: {frame*0.05:.2f}s", fontsize=10, ha='right', va='bottom')
             return lines
         
         # Create the animation
-        ani = FuncAnimation(fig, update, frames=num_points, init_func=init, blit=True, interval=5)
-
-        ani.save(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.gif', writer='pillow', fps=30)
+        print(f"Creating softbarycenter gif for cluster {cluster_id}")
+        ani = FuncAnimation(fig, update, frames=num_points, init_func=init, blit=True, interval=0)
+        print(f"Saving softbarycenter gif for cluster {cluster_id}")
+        ani.save(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.gif', writer='pillow', fps=20)
+        print(f"softbarycenter gif for cluster {cluster_id} saved")
         plt.close(fig)
+
 
 def silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber,plotPath):
     # Silhouette analysis plot and deciding the number of clusters based on the max silhouette score
@@ -650,9 +669,9 @@ def do_cluster(**kwargs):
             plt.close(fig)
 
             numCluster,neg_value_fraction,below_avg_fraction = silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber, plotPath)
+
         if not os.path.isfile(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json'):
             clusters = fcluster(Z, numCluster, criterion='maxclust')
-
             cluster_ids = {}
             # Iterate over the data points and assign them to their respective clusters
             for i, cluster_id in enumerate(clusters):
@@ -669,6 +688,7 @@ def do_cluster(**kwargs):
         else:
             with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json', 'r') as fp:
                 cluster_ids = json.load(fp)
+            numCluster = len(cluster_ids)
 
         for cluster_id, data_ids in cluster_ids.items():
             if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif'):
@@ -756,7 +776,7 @@ def do_cluster(**kwargs):
 def process_puzzle(puzzles,preprocessing):
         _, _ = do_cluster(puzzles=[puzzles],
                             preprocessing=preprocessing,
-                            softdtwscore=False,
+                            softdtwscore=True,
                             ignore_Unattached_ego=False, 
                             log_scale=True, torch=False,
                             torch_be=False, gamma=1,
@@ -765,8 +785,8 @@ def process_puzzle(puzzles,preprocessing):
         
      
 if __name__ == '__main__':
-    puzzles = [1,2,3,4,5,6,21,22,23,24,25,26]  # List of puzzles
-    preprocessing_options = [True, False]  # Preprocessing options
+    puzzles = [1]  # List of puzzles
+    preprocessing_options = [ False]  # Preprocessing options
     
     # Create a list of arguments for each combination of puzzle and preprocessing option
     arguments = [(puzzle, preprocessing) for puzzle in puzzles for preprocessing in preprocessing_options]
