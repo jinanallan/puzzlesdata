@@ -318,8 +318,9 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
         print(len(cluster_vector))
 
         #random selection of a solution to initialize the barycenter
-        idx = np.random.choice(len(cluster_vector), 1, replace=False)
-        idx = idx[0]
+        # idx = np.random.choice(len(cluster_vector), 1, replace=False)
+        # idx = idx[0]
+        idx = np.argmin([len(cluster_vector[i]) for i in range(len(cluster_vector))])
 
         if os.path.isfile(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.json'):
             with open(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.json', 'r') as fp:
@@ -329,6 +330,19 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
             with open(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.json', 'w') as fp:
                 json.dump(avg.tolist(), fp)
         
+        window_size = 5 # Adjust the window size as needed
+        filtered = np.zeros_like(avg)
+
+        for i in range(avg.shape[1]):
+            # print(i)
+            filtered[:, i] = np.convolve(avg[:, i], np.ones(window_size) / window_size, mode='same')
+
+        for i in range(avg.shape[1]):
+            filtered[:, i] = np.convolve(avg[:, i], np.ones(window_size) / window_size, mode='same')
+
+        filtered= filtered[window_size:-window_size]
+        avg= filtered
+
         fig, ax = plt.subplots()
         imgfolder = './cropped_puzzles_screenshots'
         fname = os.path.join(imgfolder, 'puzzle'+str(puzzleNumber)+'.png')
@@ -341,7 +355,8 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
             
             plt.scatter(x,y, alpha=0.1, color= coloring(present_objects[object], dummy=True), s=10, edgecolors='face',
                                         marker= ".", label=present_objects[object])
-            plt.legend(title=f'Number of solutions: {len(cluster_vector)}',loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=4)
+            plt.legend(title=f'Number of solutions: {len(cluster_vector)}, Avg time: {len(avg)*0.05 :.2f} s',loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=4)
+            
             plt.xlim(-2, 2)
             plt.ylim(-2, 2)
         plt.title(f'cluster {cluster_id} barycenter' )
