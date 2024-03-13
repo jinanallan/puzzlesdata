@@ -640,7 +640,7 @@ def do_cluster(**kwargs):
         if manual_number_of_clusters:
             numCluster = int(input("Enter the number of clusters: "))
 
-        else:
+        elif not os.path.isfile(f'{plotPath}/evaluation_puzzle{puzzleNumber}.png'):
             distanceMatrixSQ = squareform(distanceMatrix)
 
             fig = clusteringEvaluation(Z,distanceMatrix,puzzleNumber)
@@ -650,22 +650,25 @@ def do_cluster(**kwargs):
             plt.close(fig)
 
             numCluster,neg_value_fraction,below_avg_fraction = silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber, plotPath)
+        if not os.path.isfile(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json'):
+            clusters = fcluster(Z, numCluster, criterion='maxclust')
+
+            cluster_ids = {}
+            # Iterate over the data points and assign them to their respective clusters
+            for i, cluster_id in enumerate(clusters):
+                if cluster_id not in cluster_ids:
+                    cluster_ids[cluster_id] = []
+                cluster_ids[cluster_id].append(ids[i])
             
-        clusters = fcluster(Z, numCluster, criterion='maxclust')
+            #turn dict keys to int
+            cluster_ids = {int(k): v for k, v in cluster_ids.items()}
 
-        cluster_ids = {}
-        # Iterate over the data points and assign them to their respective clusters
-        for i, cluster_id in enumerate(clusters):
-            if cluster_id not in cluster_ids:
-                cluster_ids[cluster_id] = []
-            cluster_ids[cluster_id].append(ids[i])
-        
-        #turn dict keys to int
-        cluster_ids = {int(k): v for k, v in cluster_ids.items()}
-
-        #save the cluster ids as json file
-        with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json', 'w') as fp:
-            json.dump(cluster_ids, fp)
+            #save the cluster ids as json file
+            with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json', 'w') as fp:
+                json.dump(cluster_ids, fp)
+        else:
+            with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json', 'r') as fp:
+                cluster_ids = json.load(fp)
 
         for cluster_id, data_ids in cluster_ids.items():
             if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif'):
@@ -676,7 +679,6 @@ def do_cluster(**kwargs):
             if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.gif'):
                 softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
             
-        
         fig = plt.figure()
         fig.set_figheight(15)
         fig.set_figwidth(20)
@@ -749,7 +751,7 @@ def do_cluster(**kwargs):
             print(f"Preprocessing: {preprocessing}", file=f)
             print(f"Manual number of clusters: {manual_number_of_clusters}", file=f)
             print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
-    return neg_value_fraction, below_avg_fraction
+
             
 def process_puzzle(puzzles,preprocessing):
         _, _ = do_cluster(puzzles=[puzzles],
