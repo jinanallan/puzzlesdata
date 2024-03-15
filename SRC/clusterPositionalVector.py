@@ -58,13 +58,18 @@ def coloring(object,dummy = False):
         elif object=='ego':
             return [(0,0,0,c) for c in np.linspace(0,1,100)]
     
-def positional_vector(data : dict, weighted : bool = False, w: int = 10, concat_state : bool = False, ignore_Unattached_ego : bool = False, total_time : bool = False) -> pd.DataFrame: 
+def positional_vector(data : dict, weighted : bool = False, w: int = 50, concat_state : bool = False, ignore_Unattached_ego : bool = False, total_time : bool = False) -> pd.DataFrame: 
     """
     Get the positional vector of the objects from frames json file
 
     Accepts:
         data: the json file
-
+        weighted: if True, the state of the objects will be weighted
+        w: the weight of the state
+        concat_state: if True, the state of the objects will be concatenated to the positional vector
+        ignore_Unattached_ego: if True, the positional vector of the ego will be ignored if it is not attached to any object
+        total_time: if True, the total time of the solution will be returned
+        
     Returns: 
         positional_vector: dataframe with the positional vector
         present_objects: dict of object names and their IDs
@@ -143,15 +148,22 @@ def positional_vector(data : dict, weighted : bool = False, w: int = 10, concat_
 
         if weighted:
             weight = positional_vector.std(ddof=0)
-            weight = weight.std(ddof=0)
-            weight = weight*w
+            #exclude the box1 and box2
             # print(weight)
+            for i, object_i in enumerate(present_objects):
+                object_i_name = present_objects[object_i]
+                if object_i_name == 'box1' or object_i_name == 'box2':
+                    weight = weight.drop(object_i)
+            # print(weight)
+            weight = weight.sum()
+            # print(weight)
+            weight = weight*w
             states = states*weight
 
         states = pd.DataFrame(states, columns=[present_objects[object] for object in present_objects if present_objects[object] != 'ego'])
+        # return states, present_objects
         positional_vector = pd.concat([positional_vector, states], axis=1)
         positional_vector = positional_vector.dropna()
-
     t = len(positional_vector)*0.01
     t=round(t,2)
     if total_time:
@@ -551,7 +563,7 @@ def do_cluster(**kwargs):
     if "ignore_ego_visualization" in kwargs:
         ignore_ego_visualization = kwargs["ignore_ego_visualization"]
     else:
-        ignore_ego_visualization = True
+        ignore_ego_visualization = False
 
     if "log_scale" in kwargs:
         log_scale = kwargs["log_scale"]
