@@ -58,7 +58,7 @@ def coloring(object,dummy = False):
         elif object=='ego':
             return [(0,0,0,c) for c in np.linspace(0,1,100)]
     
-def positional_vector(data : dict, ignore_Unattached_ego : bool = False, total_time : bool = False) -> pd.DataFrame: 
+def positional_vector(data : dict, weighted : bool = False,concat_state : bool = False, ignore_Unattached_ego : bool = False, total_time : bool = False) -> pd.DataFrame: 
     """
     Get the positional vector of the objects from frames json file
 
@@ -104,8 +104,6 @@ def positional_vector(data : dict, ignore_Unattached_ego : bool = False, total_t
                 positional_vector.at[row,(id,'y')]=y
         row+=1
     
-    if ignore_Unattached_ego:
-
         velocity_vector = positional_vector.diff()
         velocity_vector = velocity_vector.drop(0)
         velocity_vector = velocity_vector.reset_index(drop=True)
@@ -120,7 +118,8 @@ def positional_vector(data : dict, ignore_Unattached_ego : bool = False, total_t
             vy_i=np.array(vy_i, dtype=np.float64)
             v_temp=np.sqrt(vx_i**2 + vy_i**2)
             v[:,i]=v_temp
-        
+
+    if ignore_Unattached_ego:
         for step in range(1,len(v)):
             if v[step,0] == np.sum(v[step,:]) :
                 positional_vector.at[step,(ego_id,'x')] = np.nan
@@ -128,6 +127,28 @@ def positional_vector(data : dict, ignore_Unattached_ego : bool = False, total_t
                     
         positional_vector[ego_id,'x']=positional_vector[ego_id,'x'].interpolate(method='pad')
         positional_vector[ego_id,'y']=positional_vector[ego_id,'y'].interpolate(method='pad')
+    
+    if concat_state:
+            
+        states = np.zeros((len(velocity_vector),len(present_objects)-1))
+        for i, object_i in enumerate(present_objects):
+            object_i_name = present_objects[object_i]
+            # print(i, object_i)
+
+            if i != 0:
+                same_as_ego = np.where(v[:,i] == v[:,0])
+                vline = v[:,i][same_as_ego]
+                same_as_ego = np.delete(same_as_ego, np.where(vline == 0))
+                states[same_as_ego,i-1] = 1
+
+        if weighted:
+            weight = positional_vector.std(ddof=0)
+            weight = weight.std(ddof=0)
+            # print(weight)
+            states = states*weight
+
+        states = pd.DataFrame(states, columns=[present_objects[object] for object in present_objects if present_objects[object] != 'ego'])
+        positional_vector = pd.concat([positional_vector, states], axis=1)
 
     t = len(positional_vector)*0.01
     t=round(t,2)
@@ -355,7 +376,7 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
             
             plt.scatter(x,y, alpha=0.1, color= coloring(present_objects[object], dummy=True), s=10, edgecolors='face',
                                         marker= ".", label=present_objects[object])
-            plt.legend(title=f'Number of solutions: {len(cluster_vector)}, Avg time: {len(avg)*0.05 :.2f} s',loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=4)
+            plt.legend(title=f'Number of solutions: {len(cluster_vector)}, Avg time: {len(avg)*0.01 :.2f} s',loc='lower center', bbox_to_anchor=(0.5, -0.3), ncol=4)
             
             plt.xlim(-2, 2)
             plt.ylim(-2, 2)
@@ -391,6 +412,7 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
                     x = avg[:,i*2]
                     y = avg[:,i*2+1]
                     lines[i-1].set_data(x[:frame], y[:frame])
+                    lines[i-1].set_color(coloring(present_objects[object], dummy=True))  # Add color to the trajectory
             # Add time count and label on the frame
             # ax.text.clear()
             # ax.text(1.8, -1.8, f"Time: {frame*0.05:.2f}s", fontsize=10, ha='right', va='bottom')
@@ -400,7 +422,7 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
         print(f"Creating softbarycenter gif for cluster {cluster_id}")
         ani = FuncAnimation(fig, update, frames=num_points, init_func=init, blit=True, interval=0)
         print(f"Saving softbarycenter gif for cluster {cluster_id}")
-        ani.save(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.gif', writer='pillow', fps=20)
+        ani.save(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.gif', writer='pillow', fps=100)
         print(f"softbarycenter gif for cluster {cluster_id} saved")
         plt.close(fig)
 
@@ -789,32 +811,41 @@ def do_cluster(**kwargs):
 
             
 def process_puzzle(puzzles,preprocessing):
-        _, _ = do_cluster(puzzles=[puzzles],
-                            preprocessing=preprocessing,
-                            softdtwscore=True,
-                            ignore_Unattached_ego=False, 
-                            log_scale=True, torch=False,
-                            torch_be=False, gamma=1,
-                            manual_number_of_clusters=False, 
-                            ignore_ego_visualization=True)
-        
+        # _, _ = do_cluster(puzzles=[puzzles],
+        #                     preprocessing=preprocessing,
+        #                     softdtwscore=True,
+        #                     ignore_Unattached_ego=False, 
+        #                     log_scale=True, torch=False,
+        #                     torch_be=False, gamma=1,
+        #                     manual_number_of_clusters=False, 
+        #                     ignore_ego_visualization=True)
+        # test the positional vector function
+        with open('./Data/Pilot3/Frames/2022-10-27-080305_31_1_1_0_frames.json') as json_file:
+            data = json.load(json_file)
+
+        vector, object_names = positional_vector(data, concat_state=True, weighted=True)
+        print(vector)  
+    
      
 if __name__ == '__main__':
-    puzzles = [1]  # List of puzzles
-    preprocessing_options = [ False]  # Preprocessing options
     
-    # Create a list of arguments for each combination of puzzle and preprocessing option
-    arguments = [(puzzle, preprocessing) for puzzle in puzzles for preprocessing in preprocessing_options]
+    process_puzzle(1, False)
+
+    # puzzles = [1]  # List of puzzles
+    # preprocessing_options = [ False]  # Preprocessing options
     
-    # Create a multiprocessing pool with the number of processes you want to use
-    pool = multiprocessing.Pool(processes=10)  # Adjust the number of processes as needed
+    # # Create a list of arguments for each combination of puzzle and preprocessing option
+    # arguments = [(puzzle, preprocessing) for puzzle in puzzles for preprocessing in preprocessing_options]
     
-    # Use the pool to map the process_puzzle function to the list of arguments
-    pool.starmap(process_puzzle, arguments)
+    # # Create a multiprocessing pool with the number of processes you want to use
+    # pool = multiprocessing.Pool(processes=10)  # Adjust the number of processes as needed
     
-    # Close the pool to free up resources
-    pool.close()
-    pool.join()
+    # # Use the pool to map the process_puzzle function to the list of arguments
+    # pool.starmap(process_puzzle, arguments)
+    
+    # # Close the pool to free up resources
+    # pool.close()
+    # pool.join()
      
 
         
@@ -829,12 +860,12 @@ if __name__ == '__main__':
 #     plt.title(f"Negative and below average fraction for puzzle {puzzle}")
 #     plt.savefig(f'./Plots_Text/clustering/silhouette_fraction_puzzle{puzzle}.png', dpi=300)
 
-repo_path = './'
+# repo_path = './'
 
-os.chdir(repo_path)
+# os.chdir(repo_path)
 
-subprocess.run(['git', 'add', '.'])
+# subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "soft,pre:T and F, barycenter visulization "])
+# subprocess.run(['git', 'commit', '-m', "soft,pre:T and F, barycenter visulization "])
 
-subprocess.run(['git', 'push'])
+# subprocess.run(['git', 'push'])
