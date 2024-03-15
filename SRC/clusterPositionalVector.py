@@ -58,7 +58,7 @@ def coloring(object,dummy = False):
         elif object=='ego':
             return [(0,0,0,c) for c in np.linspace(0,1,100)]
     
-def positional_vector(data : dict, weighted : bool = False,concat_state : bool = False, ignore_Unattached_ego : bool = False, total_time : bool = False) -> pd.DataFrame: 
+def positional_vector(data : dict, weighted : bool = False, w: int = 10, concat_state : bool = False, ignore_Unattached_ego : bool = False, total_time : bool = False) -> pd.DataFrame: 
     """
     Get the positional vector of the objects from frames json file
 
@@ -144,11 +144,13 @@ def positional_vector(data : dict, weighted : bool = False,concat_state : bool =
         if weighted:
             weight = positional_vector.std(ddof=0)
             weight = weight.std(ddof=0)
+            weight = weight*w
             # print(weight)
             states = states*weight
 
         states = pd.DataFrame(states, columns=[present_objects[object] for object in present_objects if present_objects[object] != 'ego'])
         positional_vector = pd.concat([positional_vector, states], axis=1)
+        positional_vector = positional_vector.dropna()
 
     t = len(positional_vector)*0.01
     t=round(t,2)
@@ -426,7 +428,6 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
         print(f"softbarycenter gif for cluster {cluster_id} saved")
         plt.close(fig)
 
-
 def silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber,plotPath):
     # Silhouette analysis plot and deciding the number of clusters based on the max silhouette score
     max_silhouette_avg = 0
@@ -562,6 +563,11 @@ def do_cluster(**kwargs):
     else:
         gamma = 1.
     
+    if "state" in kwargs:
+        state = kwargs["state"]
+    else:
+        state = False
+    
     for puzzleNumber in puzzles:
         if softdtwscore and ignore_Unattached_ego:
             if preprocessing:
@@ -570,6 +576,12 @@ def do_cluster(**kwargs):
                     plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}/preprocessing/'
                 else:
                     plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}/preprocessing/'
+            if state:
+                if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}/state/'):
+                    os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}/state/')
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}/state/'
+                else:
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}/state/'
             else:
                 if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}'):
                     os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}')
@@ -583,6 +595,12 @@ def do_cluster(**kwargs):
                     plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}/preprocessing/'
                 else:
                     plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}/preprocessing/'
+            if state:
+                if not os.path.exists(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}/state/'):
+                    os.makedirs(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}/state/')
+                    plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}/state/'
+                else:
+                    plotPath=f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}/state/'
             else:
                 if not os.path.exists(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}'):
                     os.makedirs(f'./Plots_Text/clustering/softdtwscore/puzzle{puzzleNumber}')
@@ -596,6 +614,12 @@ def do_cluster(**kwargs):
                     plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}/preprocessing/'
                 else:
                     plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}/preprocessing/'
+            if state:
+                if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}/state/'):
+                    os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}/state/')
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}/state/'
+                else:
+                    plotPath=f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}/state/'
             else:
                 if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}'):
                     os.makedirs(f'./Plots_Text/clustering/Ignore_unattached_ego/puzzle{puzzleNumber}')
@@ -609,6 +633,12 @@ def do_cluster(**kwargs):
                     plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}/preprocessing/'
                 else:
                     plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}/preprocessing/'
+            if state:
+                if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}/state/'):
+                    os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}/state/')
+                    plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}/state/'
+                else:
+                    plotPath=f'./Plots_Text/clustering/puzzle{puzzleNumber}/state/'
             else:
                 if not os.path.exists(f'./Plots_Text/clustering/puzzle{puzzleNumber}'):
                     os.makedirs(f'./Plots_Text/clustering/puzzle{puzzleNumber}')
@@ -641,6 +671,19 @@ def do_cluster(**kwargs):
 
                                 allSV.append(solutionVector)
                                 total_time_list.append(total_time)
+                            
+                            elif state:
+                                vector, object_names = positional_vector(data,weighted=True, concat_state=True)
+
+                                d=len(vector.columns)        
+                                n=len(vector.index)
+
+                                solutionVector = np.empty([n,d])
+                                for ni in range(n):
+                                    for di in range(d):
+                                        solutionVector[ni][di]=vector.iloc[ni,di]
+
+                                allSV.append(solutionVector)
 
                             else:
                                 vector, object_names = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
@@ -810,26 +853,26 @@ def do_cluster(**kwargs):
             print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
 
             
-def process_puzzle(puzzles,preprocessing):
-        # _, _ = do_cluster(puzzles=[puzzles],
-        #                     preprocessing=preprocessing,
-        #                     softdtwscore=True,
-        #                     ignore_Unattached_ego=False, 
-        #                     log_scale=True, torch=False,
-        #                     torch_be=False, gamma=1,
-        #                     manual_number_of_clusters=False, 
-        #                     ignore_ego_visualization=True)
+def process_puzzle(puzzles):
+                 do_cluster(puzzles=[puzzles],
+                            state=True,
+                            softdtwscore=True,
+                            ignore_Unattached_ego=False, 
+                            log_scale=True, torch=False,
+                            torch_be=False, gamma=1,
+                            manual_number_of_clusters=False, 
+                            ignore_ego_visualization=True)
         # test the positional vector function
-        with open('./Data/Pilot3/Frames/2022-10-27-080305_31_1_1_0_frames.json') as json_file:
-            data = json.load(json_file)
+        # with open('./Data/Pilot3/Frames/2022-10-27-080305_31_1_1_0_frames.json') as json_file:
+        #     data = json.load(json_file)
 
-        vector, object_names = positional_vector(data, concat_state=True, weighted=True)
-        print(vector)  
+        # vector, object_names = positional_vector(data, concat_state=True, weighted=True)
+        # print(vector)  
     
      
 if __name__ == '__main__':
     
-    process_puzzle(1, False)
+    process_puzzle(1)
 
     # puzzles = [1]  # List of puzzles
     # preprocessing_options = [ False]  # Preprocessing options
