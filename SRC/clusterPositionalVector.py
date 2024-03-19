@@ -788,7 +788,7 @@ def do_cluster(**kwargs):
                 first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif', save_all=True, append_images=frames, duration=500, loop=0)
             if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_heatmap.png'):
                 Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
-            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.gif'):
+            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.json'):
                 softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
             
         fig = plt.figure()
@@ -865,10 +865,11 @@ def do_cluster(**kwargs):
             print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
 
             
-def process_puzzle(puzzles):
+def process_puzzle(puzzles,preprocessing):
                  do_cluster(puzzles=[puzzles],
-                            state=True,
-                            softdtwscore=True,
+                            preprocessing=preprocessing,
+                            state=False,
+                            softdtwscore=False,
                             ignore_Unattached_ego=False, 
                             log_scale=True, torch=False,
                             torch_be=False, gamma=1,
@@ -884,23 +885,21 @@ def process_puzzle(puzzles):
      
 if __name__ == '__main__':
     
-    process_puzzle(1)
-
-    # puzzles = [1]  # List of puzzles
-    # preprocessing_options = [ False]  # Preprocessing options
+    puzzles = [1,2,3,4,5,6,21,22,23,24,25,26]  # List of puzzles
+    preprocessing_options = [ False, False]  # Preprocessing options
     
-    # # Create a list of arguments for each combination of puzzle and preprocessing option
-    # arguments = [(puzzle, preprocessing) for puzzle in puzzles for preprocessing in preprocessing_options]
+    # Create a list of arguments for each combination of puzzle and preprocessing option
+    arguments = [(puzzle, preprocessing) for puzzle in puzzles for preprocessing in preprocessing_options]
     
-    # # Create a multiprocessing pool with the number of processes you want to use
-    # pool = multiprocessing.Pool(processes=10)  # Adjust the number of processes as needed
+    # Create a multiprocessing pool with the number of processes you want to use
+    pool = multiprocessing.Pool(processes=10)  # Adjust the number of processes as needed
     
-    # # Use the pool to map the process_puzzle function to the list of arguments
-    # pool.starmap(process_puzzle, arguments)
+    # Use the pool to map the process_puzzle function to the list of arguments
+    pool.starmap(process_puzzle, arguments)
     
-    # # Close the pool to free up resources
-    # pool.close()
-    # pool.join()
+    # Close the pool to free up resources
+    pool.close()
+    pool.join()
      
 
         
