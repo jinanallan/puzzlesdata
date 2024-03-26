@@ -362,6 +362,7 @@ def softbarycenter(cluster_id, data_ids, puzzleNumber, pathplot):
                 avg = np.array(json.load(fp))
         else:
             avg = softdtw_barycenter(cluster_vector, gamma=1.0, max_iter=50, tol=1e-3, init=cluster_vector[idx])
+            #save the barycenter
             with open(f'{pathplot}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.json', 'w') as fp:
                 json.dump(avg.tolist(), fp)
         
@@ -660,6 +661,8 @@ def do_cluster(**kwargs):
         allSV=[]
         ids=[]
         total_time_list = []
+        #set of present objects
+        present_objects = {}
 
         for frame_folder in frame_folders:
             frame_files = os.listdir(frame_folder)
@@ -672,6 +675,7 @@ def do_cluster(**kwargs):
                             data = json.load(json_file)
                             if preprocessing:
                                 vector, object_names, total_time = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
+                                present_objects.update(object_names)
 
                                 d=len(vector.columns)        
                                 n=len(vector.index)
@@ -686,7 +690,8 @@ def do_cluster(**kwargs):
                             
                             elif state:
                                 vector, object_names = positional_vector(data,weighted=True, concat_state=True)
-
+                                present_objects.update(object_names)
+                                
                                 d=len(vector.columns)        
                                 n=len(vector.index)
 
@@ -699,7 +704,7 @@ def do_cluster(**kwargs):
 
                             else:
                                 vector, object_names = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
-
+                                present_objects.update(object_names)
                         
                                 d=len(vector.columns)        
                                 n=len(vector.index)
@@ -710,7 +715,10 @@ def do_cluster(**kwargs):
                                         solutionVector[ni][di]=vector.iloc[ni,di]
 
                                 allSV.append(solutionVector)
-        
+        #save present objects as json
+        with open(f'{plotPath}/present_objects_puzzle{puzzleNumber}.json', 'w') as fp:
+            json.dump(present_objects, fp)
+            
         if preprocessing:
             # print(total_time_list)
             ouliers=[]
@@ -885,7 +893,7 @@ def process_puzzle(puzzles,preprocessing):
      
 if __name__ == '__main__':
     
-    puzzles = [1,2,3,4,5,6,21,22,23,24,25,26]  # List of puzzles
+    puzzles = [1]  # List of puzzles
     preprocessing_options = [ False, False]  # Preprocessing options
     
     # Create a list of arguments for each combination of puzzle and preprocessing option
