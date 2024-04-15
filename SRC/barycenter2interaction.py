@@ -43,8 +43,12 @@ def displacement(x1,y1,x2,y2):
     return np.sqrt((x1-x2)**2 + (y1-y2)**2)
 # this is an example of interaction extraction from the barycenter
 
-barycenter_dir= "./Plots_Text/clustering/puzzle1/Cluster1_puzzle1_softbarycenter.json"
+barycenter_dir= "./Plots_Text/clustering/puzzle1/Cluster3_puzzle1_softbarycenter.json"
 present_objects_dir = "./Plots_Text/clustering/puzzle1/present_objects_puzzle1.json"
+box_size= 4
+info_file_path= "./Plots_Text/clustering/puzzle1/Cluster3_puzzle1_barycenter_info.json"
+info= dict()
+info["moved_objects"] = set() # set of objects that moved
 
 #loading the barycenter
 with open(barycenter_dir) as f:
@@ -94,6 +98,11 @@ for i in range(len(present_objects)):
     ax[i].plot(v[:,i], label=present_objects[data.columns[i*2][0]], color=coloring(present_objects[data.columns[i*2][0]], True))
     ax[i].axhline(y=np.mean(v[:,i]), color='r', linestyle='--', label='mean')
     ax[i].set_title(present_objects[data.columns[i*2][0]]+" velocity profile")
+    ax[i].set_xlabel('Time [s]')
+    if T < 1000:
+        ax[i].set_xticks(np.arange(0,T, 100), np.arange(0,T/100, 1))
+    else:
+        ax[i].set_xticks(np.arange(0,T, 1000), np.arange(0,T/100, 10))
     ax[i].legend()
     fig.tight_layout(pad=5.0)
 
@@ -153,12 +162,19 @@ for i, object_i in enumerate(present_objects):
             d_attachment.append(d)
         
         for attach, d in zip(modified_attachment, d_attachment):
-            if d >d_total/20:
-                modified_attachment.remove(attach)
+            if d >d_total/20 and d > box_size/10:
+                #modified_attachment.remove(attach)
                 ax1.barh(y=i/2, width=attach[1]-attach[0], left=attach[0], height=0.5, color=coloring(present_objects[object_i], True))
+                info["moved_objects"].add(present_objects[object_i])
+
+print(info)
 
 ax1.set_xlabel('Time [s]',fontsize=16)
 ax1.set_ylabel('Object name',fontsize=16)
 ax1.set_yticks(np.arange(len(present_objects))/2, present_objects.values(), fontsize=14)
-ax1.set_xticks(np.arange(0,T, 1000), np.arange(0,T/100, 10), fontsize=14)
+#T is in centisecond
+if T < 1000:
+    ax1.set_xticks(np.arange(0,T, 100), np.arange(0,T/100, 1), fontsize=14)
+else:
+    ax1.set_xticks(np.arange(0,T, 1000), np.arange(0,T/100, 10), fontsize=14)
 plt.show()   
