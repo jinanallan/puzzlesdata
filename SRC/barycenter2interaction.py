@@ -43,12 +43,13 @@ def displacement(x1,y1,x2,y2):
     return np.sqrt((x1-x2)**2 + (y1-y2)**2)
 # this is an example of interaction extraction from the barycenter
 
-barycenter_dir= "./Plots_Text/clustering/puzzle1/Cluster3_puzzle1_softbarycenter.json"
+barycenter_dir= "./Plots_Text/clustering/puzzle1/Cluster1_puzzle1_softbarycenter.json"
 present_objects_dir = "./Plots_Text/clustering/puzzle1/present_objects_puzzle1.json"
 box_size= 4
-info_file_path= "./Plots_Text/clustering/puzzle1/Cluster3_puzzle1_barycenter_info.json"
+info_file_path= "./Plots_Text/clustering/puzzle1/Cluster1_puzzle1_barycenter_info.json"
 info= dict()
-info["moved_objects"] = set() # set of objects that moved
+info["moved_objects"] = [] # set of objects that moved
+info["interactions"] = dict() # set of attachment
 
 #loading the barycenter
 with open(barycenter_dir) as f:
@@ -160,15 +161,34 @@ for i, object_i in enumerate(present_objects):
             d=displacement(data[object_i,'x'][attach[0]], data[object_i,'y'][attach[0]], data[object_i,'x'][attach[1]], data[object_i,'y'][attach[1]])
             # print(f"displacement of {present_objects[object_i]} is {d}")
             d_attachment.append(d)
-        
+        if present_objects[object_i] == 'box1':
+            print(d_attachment)
+            print(modified_attachment)
+            
         for attach, d in zip(modified_attachment, d_attachment):
             if d >d_total/20 and d > box_size/10:
+                print(f"displacement of {present_objects[object_i]} is {d}")
                 #modified_attachment.remove(attach)
                 ax1.barh(y=i/2, width=attach[1]-attach[0], left=attach[0], height=0.5, color=coloring(present_objects[object_i], True))
-                info["moved_objects"].add(present_objects[object_i])
+            else:
+                modified_attachment.remove(attach)
+                print(f"displacement of {present_objects[object_i]} is {d} and it is removed " )
+        
+        if len(modified_attachment) > 0 and present_objects[object_i]!= 'ego' :
+            
+            interaction_coardinates = []
+            
+            for attach in modified_attachment:
+                interaction_coardinates.append((data[object_i,'x'][attach[0]], data[object_i,'y'][attach[0]],
+                                               data[object_i,'x'][attach[1]], data[object_i,'y'][attach[1]]))
 
+            info["moved_objects"].append(present_objects[object_i])
+            #rounding the coordinates to 2 decimal places
+            interaction_coardinates = [(round(x1,2), round(y1,2), round(x2,2), round(y2,2)) for x1, y1, x2, y2 in interaction_coardinates]
+            info["interactions"][present_objects[object_i]] = interaction_coardinates
+            
+            
 print(info)
-
 ax1.set_xlabel('Time [s]',fontsize=16)
 ax1.set_ylabel('Object name',fontsize=16)
 ax1.set_yticks(np.arange(len(present_objects))/2, present_objects.values(), fontsize=14)
