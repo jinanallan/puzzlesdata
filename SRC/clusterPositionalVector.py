@@ -893,7 +893,7 @@ def process_puzzle(puzzles,preprocessing):
      
 if __name__ == '__main__':
     
-    puzzles = [1]  # List of puzzles
+    puzzles = [2,3,4,5,6,21,22,23,24,25,26]  # List of puzzles
     preprocessing_options = [ False, False]  # Preprocessing options
     
     # Create a list of arguments for each combination of puzzle and preprocessing option
@@ -922,12 +922,12 @@ if __name__ == '__main__':
 #     plt.title(f"Negative and below average fraction for puzzle {puzzle}")
 #     plt.savefig(f'./Plots_Text/clustering/silhouette_fraction_puzzle{puzzle}.png', dpi=300)
 
-# repo_path = './'
+repo_path = './'
 
-# os.chdir(repo_path)
+os.chdir(repo_path)
 
-# subprocess.run(['git', 'add', '.'])
+subprocess.run(['git', 'add', '.'])
 
-# subprocess.run(['git', 'commit', '-m', "soft,pre:T and F, barycenter visulization "])
+subprocess.run(['git', 'commit', '-m', "add present_objects_puzzle file"])
 
-# subprocess.run(['git', 'push'])
+subprocess.run(['git', 'push'])
