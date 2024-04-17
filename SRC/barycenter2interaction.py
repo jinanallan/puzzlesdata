@@ -118,7 +118,7 @@ for file in os.listdir(clustering_dir):
             ax[i].set_ylabel('Velocity [1/s]')
             # ax[i].set_ylim(0, 1.5*np.max(v[:,i]))
         
-        fig1.suptitle(f"Velocity profiles of cluster {cluster_no} barycenter of puzzle {puzzle_no}", fontsize=16)
+        fig1.suptitle(f"Velocity profiles of  {cluster_no} barycenter of {puzzle_no}", fontsize=16)
         fig1.tight_layout(pad=5.0)
         fig1.savefig(extracted_info_dir+"velocity_profile_"+cluster_no+".png")
         plt.close(fig1)
@@ -194,15 +194,36 @@ for file in os.listdir(clustering_dir):
                 
                     info["interactions"][present_objects[object_i]] = interaction_coordinate
         
-        # IDs=[]
-        # for value in info["interactions"].values():
-        #     IDs.extend(value.keys())
-        # IDs.sort()
+        ego_interaction_time = []
+        print(cluster_no)
+        for value in info["interactions"]["ego"].keys():
+            s,f = value.split(" to ")
+            s = float(s.split(" ")[0])
+            f = float(f.split(" ")[0])
+            ego_interaction_time.append([s,f])
 
-        # for value in info["interactions"].values():
-        #     for key in list(value.keys()):
-        #             #change the key to the index of the key in the IDs
-        #             value[IDs.index(key)] = value.pop(key)
+        info["ego_interaction"] = dict()
+
+        ego_key = [key for key in present_objects.keys() if present_objects[key] == "ego"][0]
+        #check which object interacted with the ego by checking the intersection of the time
+        for key in list(info["interactions"].keys()):
+            if key != "ego":
+                for value in list(info["interactions"][key].keys()):
+                    s,f = value.split(" to ")
+                    s = float(s.split(" ")[0])
+                    f = float(f.split(" ")[0])
+                    for time in ego_interaction_time:
+                        if time[0] < f and time[1] > s:
+                            info["ego_interaction"][str(time[0]) + " s to "+str(s) + " s"] = {"mode":"free", "start-end coordinates":(
+                                data[ego_key,'x'][int(time[0]*100)], data[ego_key,'y'][int(time[0]*100)], data[ego_key,'x'][int(s*100)], data[ego_key,'y'][int(s*100)])}
+                            info["ego_interaction"][str(s) + " s to "+str(f) + " s"] = {"mode":"attached to "+key, "start-end coordinates":(
+                                data[ego_key,'x'][int(s*100)], data[ego_key,'y'][int(s*100)], data[ego_key,'x'][int(f*100)], data[ego_key,'y'][int(f*100)])}
+                            info["ego_interaction"][str(f) + " s to "+str(time[1]) + " s"] = {"mode":"free", "start-end coordinates":(
+                                data[ego_key,'x'][int(f*100)], data[ego_key,'y'][int(f*100)], data[ego_key,'x'][int(time[1]*100)], data[ego_key,'y'][int(time[1]*100)])}
+
+        sorted_ego_interaction_keys = sorted(info["ego_interaction"].keys(), key=lambda x: float(x.split(" ")[0]))
+        info["ego_interaction"] = {key: info["ego_interaction"][key] for key in sorted_ego_interaction_keys}
+        
             
         #saving the information
         with open(info_file_path, 'w') as f:
@@ -217,7 +238,7 @@ for file in os.listdir(clustering_dir):
         else:
             ax1.set_xticks(np.arange(0,T, 1000), np.arange(0,T/100, 10), fontsize=14)
         
-        ax1.set_title(f"Attachment of cluster {cluster_no} barycenter of puzzle {puzzle_no}", fontsize=16)
+        ax1.set_title(f"Attachment of {cluster_no} barycenter of {puzzle_no}", fontsize=16)
         fig2.tight_layout(pad=5.0)
         fig2.savefig( extracted_info_dir+"attachment_"+cluster_no+".png")
         plt.close(fig2)
