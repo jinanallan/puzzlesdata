@@ -45,12 +45,19 @@ def displacement(x1,y1,x2,y2):
 
 clustering_dir= "./Plots_Text/clustering/puzzle1/"
 present_objects_dir = clustering_dir + "/present_objects_puzzle1.json"
+extracted_info_dir = clustering_dir + "extracted_info/"
+if not os.path.exists(extracted_info_dir):
+    os.makedirs(extracted_info_dir)
 box_size= 4
 
 for file in os.listdir(clustering_dir):
     if file.endswith("softbarycenter.json"):
+
+        cluster_no = file.split("_")[0]
+        puzzle_no = file.split("_")[1]
+
         barycenter_dir = clustering_dir + file
-        info_file_path = clustering_dir + file.split("_")[0] + "_interaction.json"
+        info_file_path = extracted_info_dir + file.split("_")[0] + "_interaction.json"
 
         info= dict()
         info["moved_objects"] = [] # objects that moved
@@ -94,7 +101,7 @@ for file in os.listdir(clustering_dir):
         T = len(v)  
 
         #plotting the velocity profile and mean velocity and attachment
-        fig, ax = plt.subplots(len(present_objects),1,figsize=(10,3*len(present_objects)+4))
+        fig1, ax = plt.subplots(len(present_objects),1,figsize=(10,3*len(present_objects)+4))
 
         for i in range(len(present_objects)):
             
@@ -108,11 +115,16 @@ for file in os.listdir(clustering_dir):
             else:
                 ax[i].set_xticks(np.arange(0,T, 1000), np.arange(0,T/100, 10))
             ax[i].legend()
-            fig.tight_layout(pad=5.0)
-
+            ax[i].set_ylabel('Velocity [1/s]')
+            # ax[i].set_ylim(0, 1.5*np.max(v[:,i]))
+        
+        fig1.suptitle(f"Velocity profiles of cluster {cluster_no} barycenter of puzzle {puzzle_no}", fontsize=16)
+        fig1.tight_layout(pad=5.0)
+        fig1.savefig(extracted_info_dir+"velocity_profile_"+cluster_no+".png")
+        plt.close(fig1)
 
         # modifed attachmnet based on displacement
-        fig, ax1 = plt.subplots(figsize=(10,10))
+        fig2, ax1 = plt.subplots(figsize=(10,10))
 
         for i, object_i in enumerate(present_objects):
             v_temp = v[:,i]
@@ -175,21 +187,22 @@ for file in os.listdir(clustering_dir):
                     interaction_coordinate = dict()
                     
                     for attach in spatial_modified_attachment:
-                        interaction_coordinate[int(attach[0])] = (data[object_i,'x'][attach[0]], data[object_i,'y'][attach[0]], data[object_i,'x'][attach[1]], data[object_i,'y'][attach[1]])
+                        interaction_coordinate[str(attach[0]/100)
+                                                   + " s to "+str(attach[1]/100)+" s"] = (data[object_i,'x'][attach[0]], data[object_i,'y'][attach[0]], data[object_i,'x'][attach[1]], data[object_i,'y'][attach[1]])
 
                     info["moved_objects"].append(present_objects[object_i])
                 
                     info["interactions"][present_objects[object_i]] = interaction_coordinate
-                    
-        IDs=[]
-        for value in info["interactions"].values():
-            IDs.extend(value.keys())
-        IDs.sort()
+        
+        # IDs=[]
+        # for value in info["interactions"].values():
+        #     IDs.extend(value.keys())
+        # IDs.sort()
 
-        for value in info["interactions"].values():
-            for key in list(value.keys()):
-                    #change the key to the index of the key in the IDs
-                    value[IDs.index(key)] = value.pop(key)
+        # for value in info["interactions"].values():
+        #     for key in list(value.keys()):
+        #             #change the key to the index of the key in the IDs
+        #             value[IDs.index(key)] = value.pop(key)
             
         #saving the information
         with open(info_file_path, 'w') as f:
@@ -204,6 +217,11 @@ for file in os.listdir(clustering_dir):
         else:
             ax1.set_xticks(np.arange(0,T, 1000), np.arange(0,T/100, 10), fontsize=14)
         
-        plt.close()
+        ax1.set_title(f"Attachment of cluster {cluster_no} barycenter of puzzle {puzzle_no}", fontsize=16)
+        fig2.tight_layout(pad=5.0)
+        fig2.savefig( extracted_info_dir+"attachment_"+cluster_no+".png")
+        plt.close(fig2)
+
+
 
     

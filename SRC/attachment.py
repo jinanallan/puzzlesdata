@@ -150,7 +150,7 @@ def attachment_plot(positional_vector, present_objects):
                     start_time = attachment[attach_index][0]
                     end_time = attachment[attach_index][1]
             modified_attachment.append([start_time, end_time])
-            print(modified_attachment)
+            # print(modified_attachment)
                     
 
             for attach in modified_attachment:
@@ -195,7 +195,7 @@ for frame_folder in frame_folders:
             for file in frame_files:
                 if file.endswith(".json"):
                     participant_id, run, puzzle, attempt = use_regex(file)
-                    if puzzle == 26 and run == 1 and attempt == 0 and participant_id == 59:
+                    if puzzle == 7:
                         # print(file)
                         with open(frame_folder+file) as f:
                             data = json.load(f)
