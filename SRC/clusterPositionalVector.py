@@ -759,7 +759,7 @@ def do_cluster(**kwargs):
         if manual_number_of_clusters:
             # numCluster = int(input("Enter the number of clusters: "))
             numCluster=6
-        
+            
         elif not os.path.isfile(f'{plotPath}/evaluation_puzzle{puzzleNumber}.png'):
             distanceMatrixSQ = squareform(distanceMatrix)
 
