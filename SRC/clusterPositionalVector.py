@@ -757,8 +757,9 @@ def do_cluster(**kwargs):
 
         # np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}.txt', ids, fmt="%s")
         if manual_number_of_clusters:
-            numCluster = int(input("Enter the number of clusters: "))
-
+            # numCluster = int(input("Enter the number of clusters: "))
+            numCluster=6
+            
         elif not os.path.isfile(f'{plotPath}/evaluation_puzzle{puzzleNumber}.png'):
             distanceMatrixSQ = squareform(distanceMatrix)
 
@@ -881,7 +882,7 @@ def process_puzzle(puzzles,preprocessing):
                             ignore_Unattached_ego=False, 
                             log_scale=True, torch=False,
                             torch_be=False, gamma=1,
-                            manual_number_of_clusters=False, 
+                            manual_number_of_clusters=True, 
                             ignore_ego_visualization=True)
         # test the positional vector function
         # with open('./Data/Pilot3/Frames/2022-10-27-080305_31_1_1_0_frames.json') as json_file:
