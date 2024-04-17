@@ -923,12 +923,12 @@ if __name__ == '__main__':
 #     plt.title(f"Negative and below average fraction for puzzle {puzzle}")
 #     plt.savefig(f'./Plots_Text/clustering/silhouette_fraction_puzzle{puzzle}.png', dpi=300)
 
-# repo_path = './'
+repo_path = './'
 
-# os.chdir(repo_path)
+os.chdir(repo_path)
 
-# subprocess.run(['git', 'add', '.'])
+subprocess.run(['git', 'add', '.'])
 
-# subprocess.run(['git', 'commit', '-m', "add present_objects_puzzle file"])
+subprocess.run(['git', 'commit', '-m', "p7 clustering "])
 
-# subprocess.run(['git', 'push'])
+subprocess.run(['git', 'push'])
