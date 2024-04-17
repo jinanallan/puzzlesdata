@@ -758,8 +758,7 @@ def do_cluster(**kwargs):
         # np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}.txt', ids, fmt="%s")
         if manual_number_of_clusters:
             # numCluster = int(input("Enter the number of clusters: "))
-            numCluster=6
-            
+            numCluster=6   
         elif not os.path.isfile(f'{plotPath}/evaluation_puzzle{puzzleNumber}.png'):
             distanceMatrixSQ = squareform(distanceMatrix)
 
