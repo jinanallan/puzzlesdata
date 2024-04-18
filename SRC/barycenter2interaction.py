@@ -43,7 +43,7 @@ def coloring(object,dummy = False):
 def displacement(x1,y1,x2,y2):
     return np.sqrt((x1-x2)**2 + (y1-y2)**2)
 
-for p in range(1,8):
+for p in range(7,8):
 
     clustering_dir= f"./Plots_Text/clustering/puzzle{p}/"
     present_objects_dir = clustering_dir + f"/present_objects_puzzle{p}.json"

@@ -874,11 +874,11 @@ def do_cluster(**kwargs):
             print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
 
             
-def process_puzzle(puzzles,preprocessing):
+def process_puzzle(puzzles,softdtwscore):
                  do_cluster(puzzles=[puzzles],
-                            preprocessing=preprocessing,
+                            preprocessing=False,
                             state=False,
-                            softdtwscore=False,
+                            softdtwscore=softdtwscore,
                             ignore_Unattached_ego=False, 
                             log_scale=True, torch=False,
                             torch_be=False, gamma=1,
@@ -894,11 +894,11 @@ def process_puzzle(puzzles,preprocessing):
      
 if __name__ == '__main__':
     
-    puzzles = [7]  # List of puzzles
-    preprocessing_options = [ False, False]  # Preprocessing options
+    puzzles = [7,8,9,10,11,12,13,14,15,16,17,18,19,20]  # List of puzzles
+    softdtwscore_options = [ True, False]  # Preprocessing options
     
     # Create a list of arguments for each combination of puzzle and preprocessing option
-    arguments = [(puzzle, preprocessing) for puzzle in puzzles for preprocessing in preprocessing_options]
+    arguments = [(puzzle, softdtwscore) for puzzle in puzzles for softdtwscore in softdtwscore_options]
     
     # Create a multiprocessing pool with the number of processes you want to use
     pool = multiprocessing.Pool(processes=10)  # Adjust the number of processes as needed
