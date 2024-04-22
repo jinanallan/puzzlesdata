@@ -21,6 +21,7 @@ import json
 from clusteringEvaluation import clusteringEvaluation
 import torch
 import multiprocessing
+import psutil
 
 def coloring(object,dummy = False):
     if dummy:
@@ -893,24 +894,50 @@ def process_puzzle(puzzles,softdtwscore):
     
      
 if __name__ == '__main__':
-    
-    puzzles = [7,8,9,10,11,12,13,14,15,16,17,18,19,20]  # List of puzzles
-    softdtwscore_options = [ True, False]  # Preprocessing options
-    
-    # Create a list of arguments for each combination of puzzle and preprocessing option
-    arguments = [(puzzle, softdtwscore) for puzzle in puzzles for softdtwscore in softdtwscore_options]
-    
-    # Create a multiprocessing pool with the number of processes you want to use
-    pool = multiprocessing.Pool(processes=10)  # Adjust the number of processes as needed
-    
-    # Use the pool to map the process_puzzle function to the list of arguments
-    pool.starmap(process_puzzle, arguments)
-    
-    # Close the pool to free up resources
-    pool.close()
-    pool.join()
-     
+    def get_available_cores():
+        """
+        Get the list of available CPU cores that are not in high load.
+        Returns:
+            available_cores: List of available CPU cores
+        """
+        available_cores = []
+        cpu_count = psutil.cpu_count(logical=False)
+        cpu_load = psutil.cpu_percent(interval=1, percpu=True)
+        for i in range(cpu_count):
+            if cpu_load[i] < 50:  # Adjust the threshold as needed
+                available_cores.append(i)
+        return available_cores
 
+    def run_process_puzzle(puzzle, softdtwscore):
+        """
+        Run the process_puzzle function for a single combination of puzzle and preprocessing option.
+        Accepts:
+            puzzle: Puzzle number
+            softdtwscore: Preprocessing option
+        """
+        process_puzzle(puzzle, softdtwscore)
+
+    def run_parallel_tasks(puzzles, softdtwscore_options, num_processes):
+        """
+        Run the process_puzzle function in parallel for multiple combinations of puzzles and preprocessing options.
+        Accepts:
+            puzzles: List of puzzles
+            softdtwscore_options: List of preprocessing options
+            num_processes: Number of processes to use
+        """
+        arguments = [(puzzle, softdtwscore) for puzzle in puzzles for softdtwscore in softdtwscore_options]
+        available_cores = get_available_cores()
+        num_cores = min(num_processes, len(available_cores))
+        pool = multiprocessing.Pool(processes=num_cores)
+        pool.starmap(run_process_puzzle, arguments)
+        pool.close()
+        pool.join()
+
+    if __name__ == '__main__':
+        puzzles = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]  # List of puzzles
+        softdtwscore_options = [True, False]  # Preprocessing options
+        num_processes = 4  # Number of processes to use
+        run_parallel_tasks(puzzles, softdtwscore_options, num_processes)
         
 #     plt.figure()
 #     plt.plot(range(3, 10), neg_value_fraction, label='Neg' )
@@ -923,12 +950,12 @@ if __name__ == '__main__':
 #     plt.title(f"Negative and below average fraction for puzzle {puzzle}")
 #     plt.savefig(f'./Plots_Text/clustering/silhouette_fraction_puzzle{puzzle}.png', dpi=300)
 
-repo_path = './'
+# repo_path = './'
 
-os.chdir(repo_path)
+# os.chdir(repo_path)
 
-subprocess.run(['git', 'add', '.'])
+# subprocess.run(['git', 'add', '.'])
 
-subprocess.run(['git', 'commit', '-m', "p7 clustering "])
+# subprocess.run(['git', 'commit', '-m', "p7 clustering "])
 
-subprocess.run(['git', 'push'])
+# subprocess.run(['git', 'push'])
