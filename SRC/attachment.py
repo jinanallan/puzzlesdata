@@ -195,7 +195,7 @@ for frame_folder in frame_folders:
             for file in frame_files:
                 if file.endswith(".json"):
                     participant_id, run, puzzle, attempt = use_regex(file)
-                    if puzzle == 7:
+                    if puzzle in [8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18, 19, 20]:
                         # print(file)
                         with open(frame_folder+file) as f:
                             data = json.load(f)

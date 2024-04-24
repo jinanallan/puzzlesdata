@@ -758,8 +758,7 @@ def do_cluster(**kwargs):
 
         # np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}.txt', ids, fmt="%s")
         if manual_number_of_clusters:
-            # numCluster = int(input("Enter the number of clusters: "))
-            numCluster=6
+            numCluster = int(input("Enter the number of clusters: "))
             
         elif not os.path.isfile(f'{plotPath}/evaluation_puzzle{puzzleNumber}.png'):
             distanceMatrixSQ = squareform(distanceMatrix)
@@ -883,7 +882,7 @@ def process_puzzle(puzzles,softdtwscore):
                             ignore_Unattached_ego=False, 
                             log_scale=True, torch=False,
                             torch_be=False, gamma=1,
-                            manual_number_of_clusters=True, 
+                            manual_number_of_clusters=False, 
                             ignore_ego_visualization=True)
         # test the positional vector function
         # with open('./Data/Pilot3/Frames/2022-10-27-080305_31_1_1_0_frames.json') as json_file:
@@ -936,7 +935,7 @@ if __name__ == '__main__':
     if __name__ == '__main__':
         puzzles = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]  # List of puzzles
         softdtwscore_options = [True, False]  # Preprocessing options
-        num_processes = 4  # Number of processes to use
+        num_processes = 5  # Number of processes to use
         run_parallel_tasks(puzzles, softdtwscore_options, num_processes)
         
 #     plt.figure()
