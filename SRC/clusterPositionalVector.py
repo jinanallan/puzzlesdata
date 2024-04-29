@@ -933,9 +933,9 @@ if __name__ == '__main__':
         pool.join()
 
     if __name__ == '__main__':
-        puzzles = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]  # List of puzzles
+        puzzles = [12]  # List of puzzles
         softdtwscore_options = [True, False]  # Preprocessing options
-        num_processes = 5  # Number of processes to use
+        num_processes = 10  # Number of processes to use
         run_parallel_tasks(puzzles, softdtwscore_options, num_processes)
         
 #     plt.figure()
