@@ -933,8 +933,8 @@ if __name__ == '__main__':
         pool.join()
 
     if __name__ == '__main__':
-        puzzles = [12]  # List of puzzles
-        softdtwscore_options = [True, False]  # Preprocessing options
+        puzzles = [2,3,4,5,6]  # List of puzzles
+        softdtwscore_options = [True]  # Preprocessing options
         num_processes = 10  # Number of processes to use
         run_parallel_tasks(puzzles, softdtwscore_options, num_processes)
         
