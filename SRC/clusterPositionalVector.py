@@ -792,12 +792,12 @@ def do_cluster(**kwargs):
             numCluster = len(cluster_ids)
 
         for cluster_id, data_ids in cluster_ids.items():
-            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif'):
+            # if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif'):
                 first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True, includeEgo=not ignore_ego_visualization)
                 first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif', save_all=True, append_images=frames, duration=500, loop=0)
-            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_heatmap.png'):
+            # if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_heatmap.png'):
                 Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
-            if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.json'):
+            # if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.json'):
                 softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
             
         fig = plt.figure()
