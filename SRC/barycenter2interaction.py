@@ -182,7 +182,7 @@ for p in range(1,27):
                             d_attachment.append(d)
                     
                         for attach, d in zip(temporal_modified_attachment, d_attachment):
-                            if d >d_total/20 and d > box_size/10:
+                            if d >d_total/20 and d > box_size/50:
                                 ax1.barh(y=i/2, width=attach[1]-attach[0], left=attach[0], height=0.5, color=coloring(present_objects[object_i], True))
                                 spatial_modified_attachment.append(attach)
                         
