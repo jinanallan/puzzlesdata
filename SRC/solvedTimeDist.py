@@ -194,6 +194,12 @@ plt.subplot(1, 2, 1)
 vmax = np.max(sol_matrix1_best[sol_matrix1_best != np.inf])
 plt.imshow(sol_matrix1_best, cmap="hot", vmax=vmax, vmin=0)
 
+rawsum1 = np.nanmean(np.where(np.isinf(sol_matrix1_best), -1, sol_matrix1_best), axis=1)/60
+plt.barh(y=np.arange(len(unique_participants)), width=-rawsum1, left=-0.5, color="lightslategray")
+
+columnsum1 = np.nanmean(np.where(np.isinf(sol_matrix1_best), -1, sol_matrix1_best), axis=0)/60
+plt.bar(x=np.arange(len(unique_puzzles)), height=-columnsum1, bottom=-0.5, color="lightslategray")
+
 for i in range(len(unique_participants)):
     for j in range(len(unique_puzzles)):
 
@@ -217,6 +223,13 @@ plt.colorbar( orientation='vertical', pad=0.1, shrink=0.5, label="Time [s]")
 
 plt.subplot(1, 2, 2)
 plt.imshow(sol_matrix2_best, cmap="hot", vmax=vmax, vmin=0)
+
+rawsum2 = np.nanmean(np.where(np.isinf(sol_matrix2_best), -1, sol_matrix2_best), axis=1)/60
+plt.barh(y=np.arange(len(unique_participants)), width=-rawsum2, left=-0.5, color="lightslategray")
+
+columnsum2 = np.nanmean(np.where(np.isinf(sol_matrix2_best), -1, sol_matrix2_best), axis=0)/60
+plt.bar(x=np.arange(len(unique_puzzles)), height=-columnsum2, bottom=-0.5, color="lightslategray")
+
 for i in range(len(unique_participants)):
     for j in range(len(unique_puzzles)):
 
@@ -245,33 +258,33 @@ plt.colorbar( orientation='vertical', pad=0.1, shrink=0.5, label="Time [s]")
 
 plt.savefig("./Data/bestTimeDistribution.png", dpi=300)
 #scale ascore and bScore between 1 and 10
-ascore = ascore*9+1
-bScore = bScore*9+1
-difScore = bScore*ascore
-difScore = difScore/np.max(difScore)
-difScore = difScore*9+1
+# ascore = ascore*9+1
+# bScore = bScore*9+1
+# difScore = bScore*ascore
+# difScore = difScore/np.max(difScore)
+# difScore = difScore*9+1
 
-plt.figure(figsize=(20,11))
-plt.suptitle(' attempt score - time score - diff score', fontsize=20)
-plt.subplot(1, 3, 1)
-plt.bar(unique_puzzles, ascore, color="black")
-plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
-plt.yticks(np.arange(0, 11, 1))
-plt.xlabel("Puzzle ID" , labelpad=20)
-plt.ylabel("Score", labelpad=20)
-plt.yticks(np.arange(0, 11, 1))
-plt.subplot(1, 3, 2)
-plt.bar(unique_puzzles, bScore, color="black")
-plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
-plt.xlabel("Puzzle ID" , labelpad=20)
-plt.ylabel("Score", labelpad=20)
-plt.yticks(np.arange(0, 11, 1))
-plt.subplot(1, 3, 3)
-plt.bar(unique_puzzles, difScore, color="black")
-plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
-plt.xlabel("Puzzle ID" , labelpad=20)
-plt.ylabel("Score", labelpad=20)
-plt.yticks(np.arange(0, 11, 1))
-plt.tight_layout()
-plt.savefig("./Data/difScore.png", dpi=300)
-plt.close()
+# plt.figure(figsize=(20,11))
+# plt.suptitle(' attempt score - time score - diff score', fontsize=20)
+# plt.subplot(1, 3, 1)
+# plt.bar(unique_puzzles, ascore, color="black")
+# plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
+# plt.yticks(np.arange(0, 11, 1))
+# plt.xlabel("Puzzle ID" , labelpad=20)
+# plt.ylabel("Score", labelpad=20)
+# plt.yticks(np.arange(0, 11, 1))
+# plt.subplot(1, 3, 2)
+# plt.bar(unique_puzzles, bScore, color="black")
+# plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
+# plt.xlabel("Puzzle ID" , labelpad=20)
+# plt.ylabel("Score", labelpad=20)
+# plt.yticks(np.arange(0, 11, 1))
+# plt.subplot(1, 3, 3)
+# plt.bar(unique_puzzles, difScore, color="black")
+# plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
+# plt.xlabel("Puzzle ID" , labelpad=20)
+# plt.ylabel("Score", labelpad=20)
+# plt.yticks(np.arange(0, 11, 1))
+# plt.tight_layout()
+# plt.savefig("./Data/difScore.png", dpi=300)
+# plt.close()
