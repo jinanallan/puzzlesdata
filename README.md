@@ -2,7 +2,7 @@
 
 ![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Data/avg_best_time_vs_attempt.png?raw=True)
 ![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Data/bestTimeDistribution.png?raw=True)
-![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Data/Distribution.png?raw=True)
+![alt text](https://github.com/jinanallan/puzzlesdata/blob/main/Data/attemptDistribution.png?raw=True)
 
 # clustering similar solutions
 to run clustering for the desired puzzle:
