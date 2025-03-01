@@ -194,12 +194,6 @@ plt.subplot(1, 2, 1)
 vmax = np.max(sol_matrix1_best[sol_matrix1_best != np.inf])
 plt.imshow(sol_matrix1_best, cmap="hot", vmax=vmax, vmin=0)
 
-rawsum1 = np.nanmean(np.where(np.isinf(sol_matrix1_best), -1, sol_matrix1_best), axis=1)/60
-plt.barh(y=np.arange(len(unique_participants)), width=-rawsum1, left=-0.5, color="lightslategray")
-
-columnsum1 = np.nanmean(np.where(np.isinf(sol_matrix1_best), -1, sol_matrix1_best), axis=0)/60
-plt.bar(x=np.arange(len(unique_puzzles)), height=-columnsum1, bottom=-0.5, color="lightslategray")
-
 for i in range(len(unique_participants)):
     for j in range(len(unique_puzzles)):
 
@@ -210,6 +204,19 @@ for i in range(len(unique_participants)):
             plt.text(j, i,"N", ha="center", va="center", color="black", fontsize=8, fontweight="bold")
         elif np.isnan(sol_matrix1_best[i, j]):
             plt.text(j, i,"*", ha="center", va="center", color="black", fontsize=8, fontweight="bold")
+
+# Replace inf values in each row by the max of each column
+for j in range(sol_matrix1_best.shape[1]):
+    col_max = np.max(sol_matrix1_best[sol_matrix1_best[:, j] != np.inf, j])
+    sol_matrix1_best[sol_matrix1_best[:, j] == np.inf, j] = col_max
+
+rawsum1 = np.nanmean(sol_matrix1_best, axis=1)/60
+plt.barh(y=np.arange(len(unique_participants)), width=-rawsum1, left=-0.5, color="lightslategray")
+
+np.savetxt("./Data/participants_avg_time_1.csv", rawsum1, delimiter=",")
+
+columnsum1 = np.nanmean(sol_matrix1_best, axis=0)/60
+# plt.bar(x=np.arange(len(unique_puzzles)), height=-columnsum1, bottom=-0.5, color="lightslategray")
 
 plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
 plt.tick_params(axis='x', which='both', bottom=True, top=True, labelbottom=True, labeltop=True)
@@ -224,12 +231,6 @@ plt.colorbar( orientation='vertical', pad=0.1, shrink=0.5, label="Time [s]")
 plt.subplot(1, 2, 2)
 plt.imshow(sol_matrix2_best, cmap="hot", vmax=vmax, vmin=0)
 
-rawsum2 = np.nanmean(np.where(np.isinf(sol_matrix2_best), -1, sol_matrix2_best), axis=1)/60
-plt.barh(y=np.arange(len(unique_participants)), width=-rawsum2, left=-0.5, color="lightslategray")
-
-columnsum2 = np.nanmean(np.where(np.isinf(sol_matrix2_best), -1, sol_matrix2_best), axis=0)/60
-plt.bar(x=np.arange(len(unique_puzzles)), height=-columnsum2, bottom=-0.5, color="lightslategray")
-
 for i in range(len(unique_participants)):
     for j in range(len(unique_puzzles)):
 
@@ -240,6 +241,19 @@ for i in range(len(unique_participants)):
             plt.text(j, i,"N", ha="center", va="center", color="black", fontsize=8, fontweight="bold")
         elif np.isnan(sol_matrix2_best[i, j]):
             plt.text(j, i,"*", ha="center", va="center", color="black", fontsize=8, fontweight="bold")
+
+# Replace inf values in each column by the max of each column
+for j in range(sol_matrix2_best.shape[1]):
+    col_max = np.max(sol_matrix2_best[sol_matrix2_best[:, j] != np.inf, j])
+    sol_matrix2_best[sol_matrix2_best[:, j] == np.inf, j] = col_max
+
+rawsum2 = np.nanmean(sol_matrix2_best, axis=1)/60
+plt.barh(y=np.arange(len(unique_participants)), width=-rawsum2, left=-0.5, color="lightslategray")
+
+np.savetxt("./Data/participants_avg_time_2.csv", rawsum1, delimiter=",")
+
+columnsum2 = np.nanmean(sol_matrix2_best, axis=0)/60
+# plt.bar(x=np.arange(len(unique_puzzles)), height=-columnsum2, bottom=-0.5, color="lightslategray")
 
 plt.xticks(np.arange(len(unique_puzzles)), unique_puzzles, rotation=90)
 plt.tick_params(axis='x', which='both', bottom=True, top=True, labelbottom=True, labeltop=True)

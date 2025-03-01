@@ -112,6 +112,7 @@ plt.bar(height=columnsum1, x=np.arange(len(unique_puzzles)), bottom=-0.5, color=
 # plt.axhline(y=min(columnsum1)-0.5, color='k', linestyle=':', linewidth=1, )
 # add the same histogramfor each subject over the puzzle
 plt.barh(y=np.arange(len(unique_participants)), width=rawsum1, left=-0.5, color="lightslategray")
+np.savetxt("./Data/rawsum1.csv", rawsum1, delimiter=",")
 
 for i in range(len(unique_participants)):
     for j in range(len(unique_puzzles)):
@@ -129,7 +130,7 @@ plt.subplot(1, 2, 2)
 plt.imshow(sol_matrix2, cmap="turbo", vmin=0)
 plt.bar(height=columnsum2, x=np.arange(len(unique_puzzles)), bottom=-0.5, color="lightslategray" )
 plt.barh(y=np.arange(len(unique_participants)), width=rawsum2, left=-0.5, color="lightslategray")
-# add the same histogramfor each subject over the puzzle
+np.savetxt("./Data/rawsum2.csv", rawsum2, delimiter=",")
 
 
 for i in range(len(unique_participants)):
