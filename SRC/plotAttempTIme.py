@@ -39,6 +39,9 @@ plt.xlabel('Avg Number of attempts over puzzles')
 plt.ylabel('Avg Best time solved over puzzles[min]')
 plt.title('Run 1')
 plt.grid()
+#make the x and y same scale
+plt.axis('equal')
+
 #add a regression line
 # Compute and add a regression line
 m, b = np.polyfit(-attempts_1.flatten(), data_1.flatten(), 1)
