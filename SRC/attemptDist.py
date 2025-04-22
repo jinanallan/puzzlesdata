@@ -119,14 +119,14 @@ for index, row in df.iterrows():
 sol_matrix1 = sol_matrix1.astype(int)
 columnsum1 = np.sum(sol_matrix1, axis=0).astype(float)*-1
 columnsum1 /= len(unique_participants)
-rawsum1 = np.sum(sol_matrix1, axis=1).astype(float)*-1
-rawsum1 /= len(unique_puzzles)
+participants_avg_attempts_1 = np.sum(sol_matrix1, axis=1).astype(float)*-1
+participants_avg_attempts_1 /= len(unique_puzzles)
 
 sol_matrix2 = sol_matrix2.astype(int) 
 columnsum2 = np.sum(sol_matrix2, axis=0).astype(float)*-1
 columnsum2 /= len(unique_participants)
-rawsum2 = np.sum(sol_matrix2, axis=1).astype(float)*-1
-rawsum2 /= len(unique_puzzles)
+participants_avg_attempts_2 = np.sum(sol_matrix2, axis=1).astype(float)*-1
+participants_avg_attempts_2 /= len(unique_puzzles)
 
 np.savetxt("./Data/sol_matrix1.csv", sol_matrix1, delimiter=",")
 np.savetxt("./Data/sol_matrix2.csv", sol_matrix2, delimiter=",")
@@ -139,8 +139,8 @@ plt.imshow(sol_matrix1, cmap="turbo", vmin=0)
 plt.bar(height=columnsum1, x=np.arange(len(unique_puzzles)), bottom=-0.5, color="lightslategray")
 # plt.axhline(y=min(columnsum1)-0.5, color='k', linestyle=':', linewidth=1, )
 # add the same histogramfor each subject over the puzzle
-plt.barh(y=np.arange(len(unique_participants)), width=rawsum1, left=-0.5, color="lightslategray")
-np.savetxt("./Data/rawsum1.csv", rawsum1, delimiter=",")
+plt.barh(y=np.arange(len(unique_participants)), width=participants_avg_attempts_1, left=-0.5, color="lightslategray")
+np.savetxt("./Data/participants_avg_attempts_1.csv", participants_avg_attempts_1, delimiter=",")
 
 for i in range(len(unique_participants)):
     for j in range(len(unique_puzzles)):
@@ -157,8 +157,8 @@ plt.title("Run 1" , pad=20)
 plt.subplot(1, 2, 2)
 plt.imshow(sol_matrix2, cmap="turbo", vmin=0)
 plt.bar(height=columnsum2, x=np.arange(len(unique_puzzles)), bottom=-0.5, color="lightslategray" )
-plt.barh(y=np.arange(len(unique_participants)), width=rawsum2, left=-0.5, color="lightslategray")
-np.savetxt("./Data/rawsum2.csv", rawsum2, delimiter=",")
+plt.barh(y=np.arange(len(unique_participants)), width=participants_avg_attempts_2, left=-0.5, color="lightslategray")
+np.savetxt("./Data/participants_avg_attempts_2.csv", participants_avg_attempts_2, delimiter=",")
 
 
 for i in range(len(unique_participants)):
@@ -172,4 +172,4 @@ plt.xlabel("Puzzle ID", labelpad=20)
 plt.ylabel("Participant ID - avg. number of attempts", labelpad=20 ) 
 # plt.colorbar()
 plt.title("Run 2", pad=20)
-plt.savefig("./Data/Distribution.png", dpi=300)
+plt.savefig("./Data/attemptDistribution.png", dpi=300)

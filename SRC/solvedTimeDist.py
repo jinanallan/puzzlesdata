@@ -1,3 +1,53 @@
+"""
+This script processes puzzle-solving data for participants and generates visualizations 
+of their performance. It calculates metrics such as the best time to solve puzzles, 
+average solving times, and normalized scores. The script also handles missing data 
+and generates heatmaps and bar charts to visualize the results.
+Modules:
+    - pandas: For data manipulation and analysis.
+    - numpy: For numerical operations and matrix manipulations.
+    - re: For regular expression operations.
+    - os: For interacting with the file system.
+    - json: For reading JSON files.
+    - matplotlib.pyplot: For creating visualizations.
+Functions:
+    - use_regex_frames(input_text):
+        Extracts participant ID, run number, puzzle ID, and attempt number from a 
+        filename using regular expressions.
+        Args:
+            input_text (str): The input filename.
+        Returns:
+            tuple: A tuple containing participant ID, run number, puzzle ID, and attempt number.
+    - df_from_json(file):
+        Reads a JSON file and converts it into a pandas DataFrame.
+        Args:
+            file (str): Path to the JSON file.
+        Returns:
+            pd.DataFrame: A DataFrame containing the JSON data.
+Global Variables:
+    - SMALL_SIZE, MEDIUM_SIZE, LAEGER_SIZE: Font sizes for matplotlib visualizations.
+    - unique_participants: List of unique participant IDs.
+    - unique_puzzles: List of unique puzzle IDs.
+    - sol_matrix1, sol_matrix2: Matrices to store solving times for run 1 and run 2.
+    - sol_matrix1_best, sol_matrix2_best: Matrices to store the best solving times for run 1 and run 2.
+    - sol_att_matrix1, sol_att_matrix2: Matrices to store the number of attempts for run 1 and run 2.
+    - ascore, bScore: Normalized scores for attempts and best times.
+Workflow:
+    1. Load participant and puzzle data from CSV files.
+    2. Initialize matrices to store solving times and attempts.
+    3. Process JSON files for each pilot run to extract solving times and update matrices.
+    4. Handle missing data by assigning NaN values to specific participants and puzzles.
+    5. Calculate average solving times and normalize scores.
+    6. Generate heatmaps and bar charts to visualize solving times and scores.
+    7. Save the visualizations and processed data to files.
+Outputs:
+    - Heatmaps and bar charts for solving times and scores.
+    - CSV files containing average best solving times for participants.
+    - PNG files for visualizations.
+Note:
+    - The script assumes a specific folder structure and file naming convention for input data.
+    - Missing data is handled by assigning NaN values, which are visualized with specific markers.
+"""
 import pandas as pd
 import numpy as np
 import re
@@ -213,7 +263,7 @@ for j in range(sol_matrix1_best.shape[1]):
 rawsum1 = np.nanmean(sol_matrix1_best, axis=1)/60
 plt.barh(y=np.arange(len(unique_participants)), width=-rawsum1, left=-0.5, color="lightslategray")
 
-np.savetxt("./Data/participants_avg_time_1.csv", rawsum1, delimiter=",")
+np.savetxt("./Data/participants_avg_best_time_1.csv", rawsum1, delimiter=",")
 
 columnsum1 = np.nanmean(sol_matrix1_best, axis=0)/60
 # plt.bar(x=np.arange(len(unique_puzzles)), height=-columnsum1, bottom=-0.5, color="lightslategray")
@@ -229,6 +279,7 @@ plt.text(0, 2+len(unique_participants), "max time run 1: {} [s]".format(vmax), h
 plt.colorbar( orientation='vertical', pad=0.1, shrink=0.5, label="Time [s]")
 
 plt.subplot(1, 2, 2)
+# vmax = np.max(sol_matrix2_best[sol_matrix2_best != np.inf])
 plt.imshow(sol_matrix2_best, cmap="hot", vmax=vmax, vmin=0)
 
 for i in range(len(unique_participants)):
@@ -250,7 +301,7 @@ for j in range(sol_matrix2_best.shape[1]):
 rawsum2 = np.nanmean(sol_matrix2_best, axis=1)/60
 plt.barh(y=np.arange(len(unique_participants)), width=-rawsum2, left=-0.5, color="lightslategray")
 
-np.savetxt("./Data/participants_avg_time_2.csv", rawsum1, delimiter=",")
+np.savetxt("./Data/participants_avg_best_time_2.csv", rawsum1, delimiter=",")
 
 columnsum2 = np.nanmean(sol_matrix2_best, axis=0)/60
 # plt.bar(x=np.arange(len(unique_puzzles)), height=-columnsum2, bottom=-0.5, color="lightslategray")
