@@ -241,7 +241,8 @@ bScore = (bScore - np.min(bScore))/(np.max(bScore) - np.min(bScore))
 plt.figure(figsize=(20,11))
 plt.suptitle('Best Time Solved [s]', fontsize=20)
 plt.subplot(1, 2, 1)
-vmax = np.max(sol_matrix1_best[sol_matrix1_best != np.inf])
+vmax_orig = np.max(sol_matrix1_best[sol_matrix1_best != np.inf])
+vmax = np.unique(sol_matrix1_best[sol_matrix1_best != np.inf])[-3]
 plt.imshow(sol_matrix1_best, cmap="hot", vmax=vmax, vmin=0)
 
 for i in range(len(unique_participants)):
@@ -275,7 +276,7 @@ plt.xlabel("Puzzle ID" , labelpad=20)
 plt.ylabel("Participant ID ", labelpad=20) 
 plt.title("Run 1" , pad=20)
 plt.text(0, 1+len(unique_participants), "N = not solved, * = missing data", ha="center", va="center", color="black", fontsize=10, fontweight="bold")
-plt.text(0, 2+len(unique_participants), "max time run 1: {} [s]".format(vmax), ha="center", va="center", color="black", fontsize=10, fontweight="bold")
+plt.text(0, 2+len(unique_participants), "max time run 1: {} [s]".format(vmax_orig), ha="center", va="center", color="black", fontsize=10, fontweight="bold")
 plt.colorbar( orientation='vertical', pad=0.1, shrink=0.5, label="Time [s]")
 
 plt.subplot(1, 2, 2)

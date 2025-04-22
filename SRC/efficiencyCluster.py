@@ -3,6 +3,8 @@ import json
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import re
+
 
 # Load the participant distance file
 participant_distance_file = './Data/participants_distances_1.csv'
@@ -31,19 +33,68 @@ for file_name in os.listdir(clustering_results_dir):
 
                     for cluster in cluster_ids.keys():
                         ids = cluster_ids[cluster]
-                        ids = [int(i.split('_')[0]) for i in ids]
+                        ids_solved = []
+
+                        for id in ids:
+                            try:
+                                filenameTemp = [f for f in os.listdir('./Data/Pilot3/Ego-based/') if f.endswith(f'{id}.json')][0]
+                                dataTemp = json.load(open(f'./Data/Pilot3/Ego-based/{filenameTemp}'))
+
+                                try:
+                                    df = pd.DataFrame(dataTemp)
+                                except:
+                                    df = pd.DataFrame(dataTemp, index=[0])
+                            
+                        
+                                solved = df['solved'].values[0]
+                                if solved == 1:
+                                    ids_solved.append(id)
+                
+                            except:
+                                filenameTemp= [f for f in os.listdir('./Data/Pilot4/Ego-based/') if f.endswith(f'{id}.json')][0]
+                                dataTemp = json.load(open(f'./Data/Pilot4/Ego-based/{filenameTemp}'))
+
+
+                                try:
+                                    df = pd.DataFrame(dataTemp)
+                                except:
+                                    df = pd.DataFrame(dataTemp, index=[0])
+
+                                solved = df['solved'].values[0]
+                                if solved == 1:
+                                    ids_solved.append(id)
+
+                        colors= np.empty(len(ids), dtype=object)
+
+                        for i in range(len(ids)):
+                            if ids[i] in ids_solved:
+                                colors[i] = 'green'
+                            else:
+                                colors[i] = 'red'
+
+                        ids = [int(i.split('_')[0]) for i in ids] #This is the participant id
                         ids = np.array(ids)
+                        #only get the unique ids
+                        # ids = np.unique(ids)
+
+                        colors = colors[~np.isin(ids, [40, 38, 32])]
                         ids = ids[~np.isin(ids, [40, 38, 32])]
-                        if len(ids)!=0:
+                        #remove the ids that are not in the participant_distances
+ 
+                        if len(ids) != 0:
                             participant_scores = participant_distances.loc[ids].values.flatten()
-                            axs[int(cluster)-1].bar(np.arange(len(ids)), participant_scores)
+                            #multiply the the binary ids_solved by a green or red color so that if 1 it is green and if 0 it is red
+                            
+                            axs[int(cluster)-1].bar(np.arange(len(ids)), participant_scores, color=colors)
                             axs[int(cluster)-1].set_ylim(0, 4)
-                            axs[int(cluster)-1].set_xlim(-0.5, max_solutions+0.5)
-                            axs[int(cluster)-1].set_title('Cluster ' + cluster)
-                            axs[int(cluster)-1].set_ylabel('Participant score')
-                            #plot the line at the mean
+                            axs[int(cluster)-1].set_xlim(-0.5, max_solutions + 0.5)
+                            # remove the x ticks
+                            axs[int(cluster)-1].set_xticks([])
+                            axs[int(cluster)-1].set_title('Cluster ' + cluster + ' with mean efficiency score {:.3f}'.format(np.mean(participant_scores)), fontsize=15)
+                            axs[int(cluster)-1].set_ylabel('Participant score', fontsize=15)
+                            # plot the line at the mean
                             axs[int(cluster)-1].axhline(y=np.mean(participant_scores), color='r', linestyle='--')
-                            #place a gap between the subplots
+                            # place a gap between the subplots
                             plt.subplots_adjust(hspace=0.5)
 
 
