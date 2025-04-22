@@ -1,8 +1,36 @@
+"""
+This script processes data related to puzzle-solving attempts by participants and generates visualizations 
+and summary statistics. It performs the following tasks:
+1. Extracts participant, run, puzzle ID, and attempt information from filenames using regular expressions.
+2. Organizes the extracted data into a pandas DataFrame, associating puzzle files with corresponding frame files.
+3. Computes the number of attempts for each participant and puzzle across two runs.
+4. Generates two matrices (`sol_matrix1` and `sol_matrix2`) representing the number of attempts for each 
+    participant-puzzle combination in Run 1 and Run 2, respectively.
+5. Saves the matrices and summary statistics (row and column averages) as CSV files.
+6. Creates a visualization of the attempt distribution for both runs using heatmaps and bar charts.
+7. Saves the visualization as a PNG file.
+Dependencies:
+- re: For regular expression matching.
+- os: For file and directory operations.
+- pandas: For data manipulation and analysis.
+- numpy: For numerical computations.
+- matplotlib: For data visualization.
+Output:
+- A CSV file (`df.csv`) containing the organized data.
+- Two CSV files (`sol_matrix1.csv` and `sol_matrix2.csv`) containing the attempt matrices.
+- Two CSV files (`rawsum1.csv` and `rawsum2.csv`) containing row averages for each run.
+- A PNG file (`Distribution.png`) visualizing the attempt distribution.
+Usage:
+- Ensure the input data is organized in the specified folder structure (`Data/Pilot{}/Frames/` and `Data/Pilot{}/Ego-based/`).
+- Run the script to process the data and generate outputs.
+"""
+
 import re
 import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+
 
 #number of attempts at each run for each participant and puzzle is computed and saved in a csv file and visualized in this script
 

@@ -13,7 +13,7 @@ df= pd.read_csv("./Data/df.csv")
 unique_participants = df["participant_id"].unique().tolist()
 unique_participants= np.array(unique_participants).astype(int)
 
-print("unique_participants", unique_participants)
+# print("unique_participants", unique_participants)
 
 #turn the data into an array
 data_1 = data_1.to_numpy()
@@ -35,13 +35,13 @@ plt.suptitle('Avg Best time solved over puzzles vs Number of attempt (When a puz
 
 plt.subplot(1, 2, 1)
 plt.scatter(-attempts_1, data_1)
-plt.xlabel('Avg Number of attempts over puzzles')
-plt.ylabel('Avg Best time solved over puzzles[min]')
-plt.title('Run 1')
+plt.xlabel('Avg Number of attempts over puzzles', fontsize=14)
+plt.ylabel('Avg Best time solved over puzzles [min]', fontsize=14)
+plt.title('Run 1', fontsize=14)
 plt.grid()
 #make the x and y same scale
-plt.axis('equal')
-
+plt.axis([0, 4, 0, 2])
+# plt.axis('equal')
 #add a regression line
 # Compute and add a regression line
 m, b = np.polyfit(-attempts_1.flatten(), data_1.flatten(), 1)
@@ -49,16 +49,18 @@ plt.plot(-attempts_1, m * -attempts_1 + b, color='red')
 
 plt.subplot(1, 2, 2)
 plt.scatter(-attempts_2, data_2)
-plt.xlabel('Avg Number of attempts over puzzles')
-plt.ylabel('Avg Best time solved over puzzles [min]')
-plt.title('Run 2')
+plt.xlabel('Avg Number of attempts over puzzles', fontsize=14)
+plt.ylabel('Avg Best time solved over puzzles [min]', fontsize=14)
+plt.title('Run 2', fontsize=14)
 plt.grid()
 #make the x and y same scale
-plt.axis('equal')
+# plt.axis('equal')
+plt.axis([0, 4, 0, 2])
 #add a regression line
 # Compute and add a regression line
 m, b = np.polyfit(-attempts_2.flatten(), data_2.flatten(), 1)
 plt.plot(-attempts_2, m * -attempts_2 + b, color='red')
+
 
 # Compute the Euclidean distance from the origin for each point
 distances_1 = np.sqrt(data_1**2 + attempts_1**2)
