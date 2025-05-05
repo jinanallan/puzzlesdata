@@ -302,7 +302,7 @@ for j in range(sol_matrix2_best.shape[1]):
 rawsum2 = np.nanmean(sol_matrix2_best, axis=1)/60
 plt.barh(y=np.arange(len(unique_participants)), width=-rawsum2, left=-0.5, color="lightslategray")
 
-np.savetxt("./Data/participants_avg_best_time_2.csv", rawsum1, delimiter=",")
+np.savetxt("./Data/participants_avg_best_time_2.csv", rawsum2, delimiter=",")
 
 columnsum2 = np.nanmean(sol_matrix2_best, axis=0)/60
 # plt.bar(x=np.arange(len(unique_puzzles)), height=-columnsum2, bottom=-0.5, color="lightslategray")
