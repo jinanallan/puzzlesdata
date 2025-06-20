@@ -22,6 +22,7 @@ from clusteringEvaluation import clusteringEvaluation
 import torch
 import multiprocessing
 import psutil
+import numpy as np
 
 def coloring(object,dummy = False):
     if dummy:
@@ -872,7 +873,6 @@ def do_cluster(**kwargs):
             print(f"Preprocessing: {preprocessing}", file=f)
             print(f"Manual number of clusters: {manual_number_of_clusters}", file=f)
             print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
-
             
 def process_puzzle(puzzles,softdtwscore):
                  do_cluster(puzzles=[puzzles],
@@ -933,10 +933,58 @@ if __name__ == '__main__':
         pool.join()
 
     if __name__ == '__main__':
-        puzzles = [2,3,4,5,6]  # List of puzzles
-        softdtwscore_options = [True]  # Preprocessing options
-        num_processes = 10  # Number of processes to use
-        run_parallel_tasks(puzzles, softdtwscore_options, num_processes)
+        #do for all puzzles from 1 to 26
+        exploration = np.zeros((26, 38))
+        for puzzleNumber in range(1, 27):
+            print(f"Processing puzzle {puzzleNumber}")
+            plotPath = './Plots_Text/clustering/softdtwscore/puzzle' + str(puzzleNumber)
+            distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt')
+           
+            distanceMatrix = squareform(distanceMatrix)
+            # print(distanceMatrix.shape)
+
+            df_path = './Data/df.csv'
+            df = pd.read_csv(df_path)
+            ids = df['participant_id'].tolist()
+            puzzle_id = df['puzzle_id'].tolist()
+
+            filtered_ids = [id_ for id_, p_id in zip(ids, puzzle_id) if p_id == puzzleNumber]
+            ids = filtered_ids
+            
+            ids = np.array(ids)
+            unique_ids = np.unique(ids)
+
+            new_n = len(unique_ids)
+
+
+            for i, id_i in enumerate(unique_ids):
+                idx_i = np.where(ids == id_i)[0]
+                block = distanceMatrix[np.ix_(idx_i, idx_i)]
+                triu_indices = np.triu_indices_from(block, k=1)
+                if block[triu_indices].size == 0:
+                    # print(f"Warning: No data for id {id_i}. Skipping.")
+                    exploration[puzzleNumber-1, i] = float(block)
+                else:
+                    block = block[triu_indices].mean()
+                    # print("Mean distance for id", id_i, ":", block)
+                    exploration[puzzleNumber-1, i] = block
+        
+        plt.figure(figsize=(20,11))
+        plt.suptitle('Mean distance over trials (both runs) normalized by the row mean', fontsize=24)
+        plt.imshow(exploration/np.mean(exploration,axis=0), cmap='hot', aspect='auto')
+        plt.colorbar(label='Mean distance (normalized)')
+        plt.xlabel('Participant ID')
+        plt.ylabel('Puzzle Number')
+        plt.xticks(ticks=np.arange(len(unique_ids)), labels=unique_ids, rotation=45, ha='right')
+        plt.yticks(ticks=np.arange(26), labels=np.arange(1, 27))
+        plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+        plt.savefig(f'./Plots_Text/clustering/exploration_raw.png', dpi=300)
+        # puzzles = [2,3,4,5,6]  # List of puzzles
+        # softdtwscore_options = [True]  # Preprocessing options
+        # num_processes = 10  # Number of processes to use
+        # run_parallel_tasks(puzzles, softdtwscore_options, num_processes)
+
+        
         
 #     plt.figure()
 #     plt.plot(range(3, 10), neg_value_fraction, label='Neg' )
