@@ -933,56 +933,104 @@ if __name__ == '__main__':
         pool.join()
 
     if __name__ == '__main__':
-        #do for all puzzles from 1 to 26
-        exploration = np.zeros((26, 38))
-        for puzzleNumber in range(1, 27):
-            print(f"Processing puzzle {puzzleNumber}")
-            plotPath = './Plots_Text/clustering/softdtwscore/puzzle' + str(puzzleNumber)
-            distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt')
+        # #do for all puzzles from 1 to 26
+        # exploration = np.zeros((26, 38))
+        # puzzle_10_block = []
+        # for puzzleNumber in [10] :# range(1, 27):
+        #     print(f"Processing puzzle {puzzleNumber}")
+        #     plotPath = './Plots_Text/clustering/softdtwscore/puzzle' + str(puzzleNumber)
+        #     distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt')
            
-            distanceMatrix = squareform(distanceMatrix)
-            # print(distanceMatrix.shape)
+        #     distanceMatrix = squareform(distanceMatrix)
+        #     # print(distanceMatrix.shape)
 
-            df_path = './Data/df.csv'
-            df = pd.read_csv(df_path)
-            ids = df['participant_id'].tolist()
-            puzzle_id = df['puzzle_id'].tolist()
+        #     df_path = './Data/df.csv'
+        #     df = pd.read_csv(df_path)
+        #     ids = df['participant_id'].tolist()
+        #     puzzle_id = df['puzzle_id'].tolist()
 
-            filtered_ids = [id_ for id_, p_id in zip(ids, puzzle_id) if p_id == puzzleNumber]
-            ids = filtered_ids
+        #     filtered_ids = [id_ for id_, p_id in zip(ids, puzzle_id) if p_id == puzzleNumber]
+        #     ids = filtered_ids
             
-            ids = np.array(ids)
-            unique_ids = np.unique(ids)
+        #     ids = np.array(ids)
+        #     unique_ids = np.unique(ids)
 
-            new_n = len(unique_ids)
+        #     new_n = len(unique_ids)
 
 
-            for i, id_i in enumerate(unique_ids):
-                idx_i = np.where(ids == id_i)[0]
-                block = distanceMatrix[np.ix_(idx_i, idx_i)]
-                triu_indices = np.triu_indices_from(block, k=1)
-                if block[triu_indices].size == 0:
-                    # print(f"Warning: No data for id {id_i}. Skipping.")
-                    exploration[puzzleNumber-1, i] = float(block)
-                else:
-                    block = block[triu_indices].mean()
-                    # print("Mean distance for id", id_i, ":", block)
-                    exploration[puzzleNumber-1, i] = block
+        #     for i, id_i in enumerate(unique_ids):
+        #         idx_i = np.where(ids == id_i)[0]
+        #         block = distanceMatrix[np.ix_(idx_i, idx_i)]
+        #         triu_indices = np.triu_indices_from(block, k=1)
+        #         if block[triu_indices].size == 0:
+        #             # print(f"Warning: No data for id {id_i}. Skipping.")
+        #             exploration[puzzleNumber-1, i] = float(block)
+        #         else:
+        #             #add the values for each participant id to puzzle_10_block
+                    
+        #             puzzle_10_block.append(block[triu_indices].flatten())
+
+        #             block_mean= block[triu_indices].mean()
+        #             # print("Mean distance for id", id_i, ":", block)
+        #             exploration[puzzleNumber-1, i] = block_mean
+
+        # exploration = exploration/np.mean(exploration,axis=0)
+
+        # plt.figure(figsize=(20,11))
+        # plt.suptitle('Mean distance over trials (both runs) normalized by the row mean', fontsize=24)
+        # plt.imshow(exploration, cmap='hot', aspect='auto', vmax=15)
+        # plt.colorbar(label='Mean distance (normalized)')
+        # plt.xlabel('Participant ID')
+        # plt.ylabel('Puzzle Number')
+        # plt.xticks(ticks=np.arange(len(unique_ids)), labels=unique_ids, rotation=45, ha='right')
+        # plt.yticks(ticks=np.arange(26), labels=np.arange(1, 27))
+        # plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+        # plt.savefig(f'./Plots_Text/exploration_raw.png', dpi=300)
+
+
+      
+        # performance_score = pd.read_csv('./Data/scores2_with_id.csv')
+        # print("Performance score shape:", performance_score.shape)
+  
+        # performance_score_10 = performance_score.iloc[:,11].values
+        # id= performance_score.iloc[:, 0].values
+
+        # # print("Performance score for puzzle 10:", performance_score_10.shape)
+        # # print("puzzle 10 block :", len(puzzle_10_block) )
+
+        # sorted_indices = np.argsort(performance_score_10)
+        # sorted_performance_score = performance_score_10[sorted_indices]
+        # sorted_puzzle_10_block = [puzzle_10_block[i] for i in sorted_indices]   
+        # sorted_ids = [id[i] for i in sorted_indices]
+
+        # plt.figure(figsize=(20,11))
+        # plt.suptitle('Puzzle 10 block values sorted by performance score', fontsize=24)
+        # plt.boxplot(sorted_puzzle_10_block)
+        # plt.xticks(ticks=np.arange(1, len(sorted_ids) + 1), labels=sorted_ids, rotation=45, ha='right')
+        # plt.xlabel('Participant ID')
+        # plt.ylabel('Puzzle 10 block values')            
+        # plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+        # plt.savefig(f'./Plots_Text/puzzle_10_block_values_sorted2.png', dpi=300)
         
-        plt.figure(figsize=(20,11))
-        plt.suptitle('Mean distance over trials (both runs) normalized by the row mean', fontsize=24)
-        plt.imshow(exploration/np.mean(exploration,axis=0), cmap='hot', aspect='auto')
-        plt.colorbar(label='Mean distance (normalized)')
-        plt.xlabel('Participant ID')
-        plt.ylabel('Puzzle Number')
-        plt.xticks(ticks=np.arange(len(unique_ids)), labels=unique_ids, rotation=45, ha='right')
-        plt.yticks(ticks=np.arange(26), labels=np.arange(1, 27))
-        plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-        plt.savefig(f'./Plots_Text/clustering/exploration_raw.png', dpi=300)
-        # puzzles = [2,3,4,5,6]  # List of puzzles
-        # softdtwscore_options = [True]  # Preprocessing options
-        # num_processes = 10  # Number of processes to use
-        # run_parallel_tasks(puzzles, softdtwscore_options, num_processes)
+
+
+        # X = np.matmul(exploration , exploration.T)
+        # X = X / np.mean(X, axis=0)
+
+        # plt.figure(figsize=(20,11))
+        # plt.suptitle('X*X.T', fontsize=24)
+        # plt.imshow(X, cmap='hot', aspect='auto')
+        # plt.colorbar(label='a.u.')
+        # plt.xlabel('puzzle Number')
+        # plt.ylabel('Puzzle Number')
+        # plt.xticks(ticks=np.arange(26), labels=np.arange(1, 27), rotation=45, ha='right')
+        # plt.yticks(ticks=np.arange(26), labels=np.arange(1, 27))
+        # plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+        # plt.savefig(f'./Plots_Text/clustering/exploration_square.png', dpi=300)
+        puzzles = [10]  # List of puzzles
+        softdtwscore_options = [True]  # Preprocessing options
+        num_processes = 10  # Number of processes to use
+        run_parallel_tasks(puzzles, softdtwscore_options, num_processes)
 
         
         
@@ -1005,4 +1053,4 @@ if __name__ == '__main__':
 
 # subprocess.run(['git', 'commit', '-m', "p7 clustering "])
 
-# subprocess.run(['git', 'push'])
+# subprocess.run(['git', 'push']

@@ -73,3 +73,4 @@ np.savetxt('./Data/participants_distances_2.csv', np.column_stack((unique_partic
 
 # plt.show()
 plt.savefig('./Data/avg_best_time_vs_attempt.png', dpi=300, bbox_inches='tight')
+
