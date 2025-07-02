@@ -665,80 +665,89 @@ def do_cluster(**kwargs):
         total_time_list = []
         #set of present objects
         present_objects = {}
+        if not os.path.exists('{plotPath}/present_objects_puzzle{puzzleNumber}.json'.format(plotPath=plotPath, puzzleNumber=puzzleNumber)):
+            for frame_folder in frame_folders:
+                frame_files = os.listdir(frame_folder)
+                for file in frame_files:
+                    if file.endswith(".json"):
+                        participant_id, run, puzzle, attempt = use_regex(file)
+                        if puzzle == puzzleNumber:
+                            ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
+                            with open(os.path.join(frame_folder,file)) as json_file:
+                                data = json.load(json_file)
+                                if preprocessing:
+                                    vector, object_names, total_time = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
+                                    present_objects.update(object_names)
 
-        for frame_folder in frame_folders:
-            frame_files = os.listdir(frame_folder)
-            for file in frame_files:
-                if file.endswith(".json"):
-                    participant_id, run, puzzle, attempt = use_regex(file)
-                    if puzzle == puzzleNumber:
-                        ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
-                        with open(os.path.join(frame_folder,file)) as json_file:
-                            data = json.load(json_file)
-                            if preprocessing:
-                                vector, object_names, total_time = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
-                                present_objects.update(object_names)
+                                    d=len(vector.columns)        
+                                    n=len(vector.index)
 
-                                d=len(vector.columns)        
-                                n=len(vector.index)
+                                    solutionVector = np.empty([n,d])
+                                    for ni in range(n):
+                                        for di in range(d):
+                                            solutionVector[ni][di]=vector.iloc[ni,di]
 
-                                solutionVector = np.empty([n,d])
-                                for ni in range(n):
-                                    for di in range(d):
-                                        solutionVector[ni][di]=vector.iloc[ni,di]
-
-                                allSV.append(solutionVector)
-                                total_time_list.append(total_time)
-                            
-                            elif state:
-                                vector, object_names = positional_vector(data,weighted=True, concat_state=True)
-                                present_objects.update(object_names)
+                                    allSV.append(solutionVector)
+                                    total_time_list.append(total_time)
                                 
-                                d=len(vector.columns)        
-                                n=len(vector.index)
+                                elif state:
+                                    vector, object_names = positional_vector(data,weighted=True, concat_state=True)
+                                    present_objects.update(object_names)
+                                    
+                                    d=len(vector.columns)        
+                                    n=len(vector.index)
 
-                                solutionVector = np.empty([n,d])
-                                for ni in range(n):
-                                    for di in range(d):
-                                        solutionVector[ni][di]=vector.iloc[ni,di]
+                                    solutionVector = np.empty([n,d])
+                                    for ni in range(n):
+                                        for di in range(d):
+                                            solutionVector[ni][di]=vector.iloc[ni,di]
 
-                                allSV.append(solutionVector)
+                                    allSV.append(solutionVector)
 
-                            else:
-                                vector, object_names = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
-                                present_objects.update(object_names)
-                        
-                                d=len(vector.columns)        
-                                n=len(vector.index)
+                                else:
+                                    vector, object_names = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
+                                    present_objects.update(object_names)
+                            
+                                    d=len(vector.columns)        
+                                    n=len(vector.index)
 
-                                solutionVector = np.empty([n,d])
-                                for ni in range(n):
-                                    for di in range(d):
-                                        solutionVector[ni][di]=vector.iloc[ni,di]
+                                    solutionVector = np.empty([n,d])
+                                    for ni in range(n):
+                                        for di in range(d):
+                                            solutionVector[ni][di]=vector.iloc[ni,di]
 
-                                allSV.append(solutionVector)
-        #save present objects as json
-        with open(f'{plotPath}/present_objects_puzzle{puzzleNumber}.json', 'w') as fp:
-            json.dump(present_objects, fp)
-            
-        if preprocessing:
-            # print(total_time_list)
-            ouliers=[]
-            median_total_time = np.median(total_time_list)
-            MAD = np.median([np.abs(x - median_total_time) for x in total_time_list])
-            # print(f"Median total time: {median_total_time}")
-            # print(f"MAD: {MAD}")
+                                    allSV.append(solutionVector)
+            #save present objects as json
+            with open(f'{plotPath}/present_objects_puzzle{puzzleNumber}.json', 'w') as fp:
+                json.dump(present_objects, fp)
+                
+            if preprocessing:
+                # print(total_time_list)
+                ouliers=[]
+                median_total_time = np.median(total_time_list)
+                MAD = np.median([np.abs(x - median_total_time) for x in total_time_list])
+                # print(f"Median total time: {median_total_time}")
+                # print(f"MAD: {MAD}")
 
-            for i in range(len(total_time_list)):
-                if np.abs(total_time_list[i] - median_total_time) > 5*MAD:
-                    ouliers.append(i)
+                for i in range(len(total_time_list)):
+                    if np.abs(total_time_list[i] - median_total_time) > 5*MAD:
+                        ouliers.append(i)
 
-            # print([i for j, i in enumerate(ids) if j in ouliers])
-            # print([i for j, i in enumerate(total_time_list) if j in ouliers])
-            allSV = [i for j, i in enumerate(allSV) if j not in ouliers]
-            ids = [i for j, i in enumerate(ids) if j not in ouliers]
-            # print(f"Removed {len(ouliers)} outliers")
-
+                # print([i for j, i in enumerate(ids) if j in ouliers])
+                # print([i for j, i in enumerate(total_time_list) if j in ouliers])
+                allSV = [i for j, i in enumerate(allSV) if j not in ouliers]
+                ids = [i for j, i in enumerate(ids) if j not in ouliers]
+                # print(f"Removed {len(ouliers)} outliers")
+        else:
+            present_objects = json.load(open(f'{plotPath}/present_objects_puzzle{puzzleNumber}.json'))
+            ids = []
+            #read it drom the values of the file cluster_ids_puzzle{puzzleNumber}.json
+            with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json', 'r') as fp:
+                cluster_ids = json.load(fp)
+            for cluster_id, data_ids in cluster_ids.items():
+                for data_id in data_ids:
+                    ids.append(data_id) 
+                    
         if os.path.isfile(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt'):
             distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt')
         elif softdtwscore:
@@ -760,6 +769,7 @@ def do_cluster(**kwargs):
         # np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}.txt', ids, fmt="%s")
         if manual_number_of_clusters:
             numCluster = int(input("Enter the number of clusters: "))
+            print(f"Using {numCluster} clusters")
             
         elif not os.path.isfile(f'{plotPath}/evaluation_puzzle{puzzleNumber}.png'):
             distanceMatrixSQ = squareform(distanceMatrix)
@@ -772,8 +782,9 @@ def do_cluster(**kwargs):
 
             numCluster,neg_value_fraction,below_avg_fraction = silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber, plotPath)
 
-        if not os.path.isfile(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json'):
+        if True: #not os.path.isfile(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json'):
             clusters = fcluster(Z, numCluster, criterion='maxclust')
+            print(f"clustering with {numCluster} clusters")
             cluster_ids = {}
             # Iterate over the data points and assign them to their respective clusters
             for i, cluster_id in enumerate(clusters):
@@ -882,7 +893,7 @@ def process_puzzle(puzzles,softdtwscore):
                             ignore_Unattached_ego=False, 
                             log_scale=True, torch=False,
                             torch_be=False, gamma=1,
-                            manual_number_of_clusters=False, 
+                            manual_number_of_clusters=True, 
                             ignore_ego_visualization=True)
         # test the positional vector function
         # with open('./Data/Pilot3/Frames/2022-10-27-080305_31_1_1_0_frames.json') as json_file:
@@ -1027,11 +1038,13 @@ if __name__ == '__main__':
         # plt.yticks(ticks=np.arange(26), labels=np.arange(1, 27))
         # plt.tight_layout(rect=[0, 0.03, 1, 0.95])
         # plt.savefig(f'./Plots_Text/clustering/exploration_square.png', dpi=300)
-        puzzles = [10]  # List of puzzles
-        softdtwscore_options = [True]  # Preprocessing options
-        num_processes = 10  # Number of processes to use
-        run_parallel_tasks(puzzles, softdtwscore_options, num_processes)
 
+        # puzzles = [10]  # List of puzzles
+        # softdtwscore_options = [True]  # Preprocessing options
+        # num_processes = 10  # Number of processes to use
+        # run_parallel_tasks(puzzles, softdtwscore_options, num_processes)
+
+        run_process_puzzle(10, True)  # Example of running for puzzle 10 with softdtwscore
         
         
 #     plt.figure()
