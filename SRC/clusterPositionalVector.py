@@ -1044,7 +1044,7 @@ if __name__ == '__main__':
         # num_processes = 10  # Number of processes to use
         # run_parallel_tasks(puzzles, softdtwscore_options, num_processes)
 
-        run_process_puzzle(10, True)  # Example of running for puzzle 10 with softdtwscore
+        run_process_puzzle(20, True)  # Example of running for puzzle 10 with softdtwscore
         
         
 #     plt.figure()
