@@ -583,7 +583,9 @@ def do_cluster(**kwargs):
     else:
         state = False
     
+
     for puzzleNumber in puzzles:
+        print(f"processing puzzle {puzzleNumber}...")
         if softdtwscore and ignore_Unattached_ego:
             if preprocessing:
                 if not os.path.exists(f'./Plots_Text/clustering/Ignore_unattached_ego/softdtwscore/puzzle{puzzleNumber}/preprocessing/'):
@@ -665,58 +667,63 @@ def do_cluster(**kwargs):
         total_time_list = []
         #set of present objects
         present_objects = {}
+        n_files=0
         if not os.path.exists('{plotPath}/present_objects_puzzle{puzzleNumber}.json'.format(plotPath=plotPath, puzzleNumber=puzzleNumber)):
+            print(f"Reading frame files for puzzle {puzzleNumber}...")
             for frame_folder in frame_folders:
                 frame_files = os.listdir(frame_folder)
                 for file in frame_files:
                     if file.endswith(".json"):
                         participant_id, run, puzzle, attempt = use_regex(file)
-                        if puzzle == puzzleNumber:
-                            ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
-                            with open(os.path.join(frame_folder,file)) as json_file:
-                                data = json.load(json_file)
-                                if preprocessing:
-                                    vector, object_names, total_time = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
-                                    present_objects.update(object_names)
+                        while n_files< 2:
+                            if puzzle == puzzleNumber:
+                                ids.append(str(participant_id) + "_" + str(run) + "_" +str(puzzle) + "_" +str(attempt))
+                                with open(os.path.join(frame_folder,file)) as json_file:
+                                    print(f"reading file: {file}")
+                                    n_files+=1
+                                    data = json.load(json_file)
+                                    if preprocessing:
+                                        vector, object_names, total_time = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
+                                        present_objects.update(object_names)
 
-                                    d=len(vector.columns)        
-                                    n=len(vector.index)
+                                        d=len(vector.columns)        
+                                        n=len(vector.index)
 
-                                    solutionVector = np.empty([n,d])
-                                    for ni in range(n):
-                                        for di in range(d):
-                                            solutionVector[ni][di]=vector.iloc[ni,di]
+                                        solutionVector = np.empty([n,d])
+                                        for ni in range(n):
+                                            for di in range(d):
+                                                solutionVector[ni][di]=vector.iloc[ni,di]
 
-                                    allSV.append(solutionVector)
-                                    total_time_list.append(total_time)
-                                
-                                elif state:
-                                    vector, object_names = positional_vector(data,weighted=True, concat_state=True)
-                                    present_objects.update(object_names)
+                                        allSV.append(solutionVector)
+                                        total_time_list.append(total_time)
                                     
-                                    d=len(vector.columns)        
-                                    n=len(vector.index)
+                                    elif state:
+                                        vector, object_names = positional_vector(data,weighted=True, concat_state=True)
+                                        present_objects.update(object_names)
+                                        
+                                        d=len(vector.columns)        
+                                        n=len(vector.index)
 
-                                    solutionVector = np.empty([n,d])
-                                    for ni in range(n):
-                                        for di in range(d):
-                                            solutionVector[ni][di]=vector.iloc[ni,di]
+                                        solutionVector = np.empty([n,d])
+                                        for ni in range(n):
+                                            for di in range(d):
+                                                solutionVector[ni][di]=vector.iloc[ni,di]
 
-                                    allSV.append(solutionVector)
+                                        allSV.append(solutionVector)
 
-                                else:
-                                    vector, object_names = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
-                                    present_objects.update(object_names)
-                            
-                                    d=len(vector.columns)        
-                                    n=len(vector.index)
+                                    else:
+                                        vector, object_names = positional_vector(data, ignore_Unattached_ego, total_time=preprocessing)
+                                        present_objects.update(object_names)
+                                
+                                        d=len(vector.columns)        
+                                        n=len(vector.index)
 
-                                    solutionVector = np.empty([n,d])
-                                    for ni in range(n):
-                                        for di in range(d):
-                                            solutionVector[ni][di]=vector.iloc[ni,di]
+                                        solutionVector = np.empty([n,d])
+                                        for ni in range(n):
+                                            for di in range(d):
+                                                solutionVector[ni][di]=vector.iloc[ni,di]
 
-                                    allSV.append(solutionVector)
+                                        allSV.append(solutionVector)
             #save present objects as json
             with open(f'{plotPath}/present_objects_puzzle{puzzleNumber}.json', 'w') as fp:
                 json.dump(present_objects, fp)
@@ -752,198 +759,223 @@ def do_cluster(**kwargs):
             distanceMatrix = np.loadtxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt')
         elif softdtwscore:
             if device is not None:
+                print(f"computing distance matrix based on normalized softdtw score for puzzle {puzzleNumber} using device {device}")
                 distanceMatrix = softdtw_score(puzzleNumber,allSV, torch_be=torch_be,gamma=gamma, device=device)
+                print(f"Distance matrix computed for puzzle {puzzleNumber}")
             else:
                 distanceMatrix = softdtw_score(puzzleNumber,allSV, torch_be=torch_be, gamma=gamma)
             np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt', distanceMatrix)
-        else:               
+        else:              
+            print(f"computing distance matrix based on independent dtw for puzzle {puzzleNumber}") 
             distanceMatrix = dtwI(allSV)
+            print(f"Distance matrix computed for puzzle {puzzleNumber}")
             np.savetxt(f'{plotPath}/distanceMatrix_puzzle{puzzleNumber}.txt', distanceMatrix)
 
-        if os.path.isfile(f'{plotPath}/linkage_puzzle{puzzleNumber}.txt'):
-            Z = np.loadtxt(f'{plotPath}/linkage_puzzle{puzzleNumber}.txt')
-        else:
-            Z = linkage(distanceMatrix, 'ward')
-            np.savetxt(f'{plotPath}/linkage_puzzle{puzzleNumber}.txt', Z)
+        # if os.path.isfile(f'{plotPath}/linkage_puzzle{puzzleNumber}.txt'):
+        #     Z = np.loadtxt(f'{plotPath}/linkage_puzzle{puzzleNumber}.txt')
+        # else:
+        #     Z = linkage(distanceMatrix, 'ward')
+        #     np.savetxt(f'{plotPath}/linkage_puzzle{puzzleNumber}.txt', Z)
 
-        # np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}.txt', ids, fmt="%s")
-        if manual_number_of_clusters:
-            numCluster = int(input("Enter the number of clusters: "))
-            print(f"Using {numCluster} clusters")
+        # # np.savetxt(f'{plotPath}/ids_puzzle{puzzleNumber}.txt', ids, fmt="%s")
+        # if manual_number_of_clusters:
+        #     numCluster = int(input("Enter the number of clusters: "))
+        #     print(f"Using {numCluster} clusters")
             
-        elif not os.path.isfile(f'{plotPath}/evaluation_puzzle{puzzleNumber}.png'):
-            distanceMatrixSQ = squareform(distanceMatrix)
+        # elif not os.path.isfile(f'{plotPath}/evaluation_puzzle{puzzleNumber}.png'):
+        #     distanceMatrixSQ = squareform(distanceMatrix)
 
-            fig = clusteringEvaluation(Z,distanceMatrix,puzzleNumber)
+        #     fig = clusteringEvaluation(Z,distanceMatrix,puzzleNumber)
 
-            fig.savefig(f'{plotPath}/evaluation_puzzle{puzzleNumber}.png', dpi=300)
-            print(f"evaluation_puzzle{puzzleNumber}.png saved")
-            plt.close(fig)
+        #     fig.savefig(f'{plotPath}/evaluation_puzzle{puzzleNumber}.png', dpi=300)
+        #     print(f"evaluation_puzzle{puzzleNumber}.png saved")
+        #     plt.close(fig)
 
-            numCluster,neg_value_fraction,below_avg_fraction = silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber, plotPath)
+        #     numCluster,neg_value_fraction,below_avg_fraction = silhouette_analysis(Z, distanceMatrixSQ, puzzleNumber, plotPath)
 
-        if True: #not os.path.isfile(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json'):
-            clusters = fcluster(Z, numCluster, criterion='maxclust')
-            print(f"clustering with {numCluster} clusters")
-            cluster_ids = {}
-            # Iterate over the data points and assign them to their respective clusters
-            for i, cluster_id in enumerate(clusters):
-                if cluster_id not in cluster_ids:
-                    cluster_ids[cluster_id] = []
-                cluster_ids[cluster_id].append(ids[i])
+        # if True: #not os.path.isfile(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json'):
+        #     clusters = fcluster(Z, numCluster, criterion='maxclust')
+        #     print(f"clustering with {numCluster} clusters")
+        #     cluster_ids = {}
+        #     # Iterate over the data points and assign them to their respective clusters
+        #     for i, cluster_id in enumerate(clusters):
+        #         if cluster_id not in cluster_ids:
+        #             cluster_ids[cluster_id] = []
+        #         cluster_ids[cluster_id].append(ids[i])
             
-            #turn dict keys to int
-            cluster_ids = {int(k): v for k, v in cluster_ids.items()}
+        #     #turn dict keys to int
+        #     cluster_ids = {int(k): v for k, v in cluster_ids.items()}
 
-            #save the cluster ids as json file
-            with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json', 'w') as fp:
-                json.dump(cluster_ids, fp)
-        else:
-            with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json', 'r') as fp:
-                cluster_ids = json.load(fp)
-            numCluster = len(cluster_ids)
+        #     #save the cluster ids as json file
+        #     with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json', 'w') as fp:
+        #         json.dump(cluster_ids, fp)
+        # else:
+        #     with open(f'{plotPath}/cluster_ids_puzzle{puzzleNumber}.json', 'r') as fp:
+        #         cluster_ids = json.load(fp)
+        #     numCluster = len(cluster_ids)
 
-        for cluster_id, data_ids in cluster_ids.items():
-            # if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif'):
-                first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True, includeEgo=not ignore_ego_visualization)
-                first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif', save_all=True, append_images=frames, duration=500, loop=0)
-            # if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_heatmap.png'):
-                Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
-            # if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.json'):
-                softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
+        # for cluster_id, data_ids in cluster_ids.items():
+        #     # if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif'):
+        #         first_image, frames = gif(desired_puzzle=puzzleNumber,ids=data_ids, attachment=True, includeEgo=not ignore_ego_visualization)
+        #         first_image.save(f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}.gif', save_all=True, append_images=frames, duration=500, loop=0)
+        #     # if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_heatmap.png'):
+        #         Heatmap(cluster_id, data_ids, puzzleNumber,plotPath, ignore_ego=ignore_ego_visualization, log_scale=log_scale)
+        #     # if not os.path.isfile (f'{plotPath}/Cluster{cluster_id}_puzzle{puzzleNumber}_softbarycenter.json'):
+        #         softbarycenter(cluster_id, data_ids, puzzleNumber,plotPath)
             
-        fig = plt.figure()
-        fig.set_figheight(15)
-        fig.set_figwidth(20)
+        # fig = plt.figure()
+        # fig.set_figheight(15)
+        # fig.set_figwidth(20)
         
-        ax1 = plt.subplot2grid((3, numCluster), (0, 0), colspan=numCluster)
-        ax1.set_title(f'Dendrogram of puzzle {puzzleNumber} solutions', fontsize=20)
-        ax1.set_xlabel('Solution ID')
-        # ax1.set_ylabel('Distance')
-        dendrogram(Z, labels=ids, ax=ax1, leaf_font_size=10 )
-        #horizontal line where we cut the dendrogram
-        plt.axhline(y=Z[-numCluster+1,2], color='black', linestyle='--')
+        # ax1 = plt.subplot2grid((3, numCluster), (0, 0), colspan=numCluster)
+        # ax1.set_title(f'Dendrogram of puzzle {puzzleNumber} solutions', fontsize=20)
+        # ax1.set_xlabel('Solution ID')
+        # # ax1.set_ylabel('Distance')
+        # dendrogram(Z, labels=ids, ax=ax1, leaf_font_size=10 )
+        # #horizontal line where we cut the dendrogram
+        # plt.axhline(y=Z[-numCluster+1,2], color='black', linestyle='--')
         
-        #pad between dendrogram and heatmap
-        plt.subplots_adjust(left=0.05, bottom=0.02, right=0.95, top=0.98, hspace=0.1)
+        # #pad between dendrogram and heatmap
+        # plt.subplots_adjust(left=0.05, bottom=0.02, right=0.95, top=0.98, hspace=0.1)
 
-        plt.figtext(0.5, 0.60, "Heatmap and Barycenter of solutions within each cluster", ha="center", va="center", fontsize=20)
+        # plt.figtext(0.5, 0.60, "Heatmap and Barycenter of solutions within each cluster", ha="center", va="center", fontsize=20)
 
-        for i in np.arange(1,numCluster+1):
-            ax2 = plt.subplot2grid((3, numCluster), (1, i-1))
-            ax2.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_heatmap.png')) 
-            ax2.set_axis_off()
+        # for i in np.arange(1,numCluster+1):
+        #     ax2 = plt.subplot2grid((3, numCluster), (1, i-1))
+        #     ax2.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_heatmap.png')) 
+        #     ax2.set_axis_off()
         
 
-        for i in np.arange(1,numCluster+1):
-            ax3 = plt.subplot2grid((3, numCluster), (2, i-1))
-            try :
-                ax3.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_softbarycenter.png')) 
-                ax3.set_axis_off()
-            except:
+        # for i in np.arange(1,numCluster+1):
+        #     ax3 = plt.subplot2grid((3, numCluster), (2, i-1))
+        #     try :
+        #         ax3.imshow(Image.open(f'{plotPath}/Cluster{i}_puzzle{puzzleNumber}_softbarycenter.png')) 
+        #         ax3.set_axis_off()
+        #     except:
                 
-                ax3.text(0.5, 0.5, 'None', ha='center', va='center', fontsize=20)
+        #         ax3.text(0.5, 0.5, 'None', ha='center', va='center', fontsize=20)
 
-                ax3.set_axis_off()
+        #         ax3.set_axis_off()
             
-        plt.savefig(f'{plotPath}/dendrogram_heatmap_barycenter_puzzle{puzzleNumber}.png', dpi=300)
+        # plt.savefig(f'{plotPath}/dendrogram_heatmap_barycenter_puzzle{puzzleNumber}.png', dpi=300)
             
-        plt.close(fig)
-        #print for each puzzle how long it took and with which parameters
-        print(f"--- Puzzle {puzzleNumber} ---")
-        print("--- %s seconds ---" % (time.time() - start_time)) 
-        print(f"preprocessing: {preprocessing}")
-        if preprocessing:
-            print(f"median total time: {median_total_time}")
-            print(f"MAD: {MAD}")
-            print(f"Removed {len(ouliers)} outliers time and ids")
-            print([i for j, i in enumerate(ids) if j in ouliers])
-            print([i for j, i in enumerate(total_time_list) if j in ouliers])
-        print(f"Number of clusters: {numCluster}")
-        print(f"Softdtw score: {softdtwscore}")
-        print(f"Ignore unattached ego: {ignore_Unattached_ego}")
-        print(f"Log scale: {log_scale}")
-        print(f"Preprocessing: {preprocessing}")
-        print(f"Manual number of clusters: {manual_number_of_clusters}")
-        print(f"Ignore ego visualization: {ignore_ego_visualization}")
+        # plt.close(fig)
+        # #print for each puzzle how long it took and with which parameters
+        # print(f"--- Puzzle {puzzleNumber} ---")
+        # print("--- %s seconds ---" % (time.time() - start_time)) 
+        # print(f"preprocessing: {preprocessing}")
+        # if preprocessing:
+        #     print(f"median total time: {median_total_time}")
+        #     print(f"MAD: {MAD}")
+        #     print(f"Removed {len(ouliers)} outliers time and ids")
+        #     print([i for j, i in enumerate(ids) if j in ouliers])
+        #     print([i for j, i in enumerate(total_time_list) if j in ouliers])
+        # print(f"Number of clusters: {numCluster}")
+        # print(f"Softdtw score: {softdtwscore}")
+        # print(f"Ignore unattached ego: {ignore_Unattached_ego}")
+        # print(f"Log scale: {log_scale}")
+        # print(f"Preprocessing: {preprocessing}")
+        # print(f"Manual number of clusters: {manual_number_of_clusters}")
+        # print(f"Ignore ego visualization: {ignore_ego_visualization}")
 
-        with open(f'{plotPath}/puzzle{puzzleNumber}_info.txt', 'w') as f:
-            print(f"--- Puzzle {puzzleNumber} ---", file=f)
-            print("--- %s seconds ---" % (time.time() - start_time), file=f)
-            print(f"preprocessing: {preprocessing}", file=f)
-            if preprocessing:
-                print(f"median total time: {median_total_time}", file=f)
-                print(f"MAD: {MAD}", file=f)
-                print(f"Removed {len(ouliers)} outliers time and ids", file=f)
-                print([i for j, i in enumerate(ids) if j in ouliers], file=f)
-                print([i for j, i in enumerate(total_time_list) if j in ouliers], file=f)
-            print(f"Number of clusters: {numCluster}", file=f)
-            print(f"Softdtw score: {softdtwscore}", file=f)
-            print(f"Ignore unattached ego: {ignore_Unattached_ego}", file=f)
-            print(f"Log scale: {log_scale}", file=f)
-            print(f"Preprocessing: {preprocessing}", file=f)
-            print(f"Manual number of clusters: {manual_number_of_clusters}", file=f)
-            print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
+        # with open(f'{plotPath}/puzzle{puzzleNumber}_info.txt', 'w') as f:
+        #     print(f"--- Puzzle {puzzleNumber} ---", file=f)
+        #     print("--- %s seconds ---" % (time.time() - start_time), file=f)
+        #     print(f"preprocessing: {preprocessing}", file=f)
+        #     if preprocessing:
+        #         print(f"median total time: {median_total_time}", file=f)
+        #         print(f"MAD: {MAD}", file=f)
+        #         print(f"Removed {len(ouliers)} outliers time and ids", file=f)
+        #         print([i for j, i in enumerate(ids) if j in ouliers], file=f)
+        #         print([i for j, i in enumerate(total_time_list) if j in ouliers], file=f)
+        #     print(f"Number of clusters: {numCluster}", file=f)
+        #     print(f"Softdtw score: {softdtwscore}", file=f)
+        #     print(f"Ignore unattached ego: {ignore_Unattached_ego}", file=f)
+        #     print(f"Log scale: {log_scale}", file=f)
+        #     print(f"Preprocessing: {preprocessing}", file=f)
+        #     print(f"Manual number of clusters: {manual_number_of_clusters}", file=f)
+        #     print(f"Ignore ego visualization: {ignore_ego_visualization}", file=f)
             
-def process_puzzle(puzzles,softdtwscore):
-                 do_cluster(puzzles=[puzzles],
-                            preprocessing=False,
-                            state=False,
-                            softdtwscore=softdtwscore,
-                            ignore_Unattached_ego=False, 
-                            log_scale=True, torch=False,
-                            torch_be=False, gamma=1,
-                            manual_number_of_clusters=True, 
-                            ignore_ego_visualization=True)
-        # test the positional vector function
-        # with open('./Data/Pilot3/Frames/2022-10-27-080305_31_1_1_0_frames.json') as json_file:
-        #     data = json.load(json_file)
+# def process_puzzle(puzzles,softdtwscore):
+#                  do_cluster(puzzles=[puzzles],
+#                             preprocessing=False,
+#                             state=False,
+#                             softdtwscore=softdtwscore,
+#                             ignore_Unattached_ego=False, 
+#                             log_scale=True, torch=False,
+#                             torch_be=False, gamma=1,
+#                             manual_number_of_clusters=True, 
+#                             ignore_ego_visualization=True)
+#         # test the positional vector function
+#         # with open('./Data/Pilot3/Frames/2022-10-27-080305_31_1_1_0_frames.json') as json_file:
+#         #     data = json.load(json_file)
 
-        # vector, object_names = positional_vector(data, concat_state=True, weighted=True)
-        # print(vector)  
+#         # vector, object_names = positional_vector(data, concat_state=True, weighted=True)
+#         # print(vector)  
     
      
 if __name__ == '__main__':
-    def get_available_cores():
-        """
-        Get the list of available CPU cores that are not in high load.
-        Returns:
-            available_cores: List of available CPU cores
-        """
-        available_cores = []
-        cpu_count = psutil.cpu_count(logical=False)
-        cpu_load = psutil.cpu_percent(interval=1, percpu=True)
-        for i in range(cpu_count):
-            if cpu_load[i] < 50:  # Adjust the threshold as needed
-                available_cores.append(i)
-        return available_cores
+    do_cluster(puzzles=[27],
+               preprocessing=False,
+               state=False,
+               softdtwscore=True,       
+               ignore_Unattached_ego=False, 
+               log_scale=False, torch=False,
+               torch_be=False, gamma=1,
+               manual_number_of_clusters=False, 
+               ignore_ego_visualization=True)
+    
 
-    def run_process_puzzle(puzzle, softdtwscore):
-        """
-        Run the process_puzzle function for a single combination of puzzle and preprocessing option.
-        Accepts:
-            puzzle: Puzzle number
-            softdtwscore: Preprocessing option
-        """
-        process_puzzle(puzzle, softdtwscore)
 
-    def run_parallel_tasks(puzzles, softdtwscore_options, num_processes):
-        """
-        Run the process_puzzle function in parallel for multiple combinations of puzzles and preprocessing options.
-        Accepts:
-            puzzles: List of puzzles
-            softdtwscore_options: List of preprocessing options
-            num_processes: Number of processes to use
-        """
-        arguments = [(puzzle, softdtwscore) for puzzle in puzzles for softdtwscore in softdtwscore_options]
-        available_cores = get_available_cores()
-        num_cores = min(num_processes, len(available_cores))
-        pool = multiprocessing.Pool(processes=num_cores)
-        pool.starmap(run_process_puzzle, arguments)
-        pool.close()
-        pool.join()
 
-    if __name__ == '__main__':
+
+
+
+
+
+
+
+
+    # def get_available_cores():
+    #     """
+    #     Get the list of available CPU cores that are not in high load.
+    #     Returns:
+    #         available_cores: List of available CPU cores
+    #     """
+    #     available_cores = []
+    #     cpu_count = psutil.cpu_count(logical=False)
+    #     cpu_load = psutil.cpu_percent(interval=1, percpu=True)
+    #     for i in range(cpu_count):
+    #         if cpu_load[i] < 50:  # Adjust the threshold as needed
+    #             available_cores.append(i)
+    #     return available_cores
+
+    # def run_process_puzzle(puzzle, softdtwscore):
+    #     """
+    #     Run the process_puzzle function for a single combination of puzzle and preprocessing option.
+    #     Accepts:
+    #         puzzle: Puzzle number
+    #         softdtwscore: Preprocessing option
+    #     """
+    #     process_puzzle(puzzle, softdtwscore)
+
+    # def run_parallel_tasks(puzzles, softdtwscore_options, num_processes):
+    #     """
+    #     Run the process_puzzle function in parallel for multiple combinations of puzzles and preprocessing options.
+    #     Accepts:
+    #         puzzles: List of puzzles
+    #         softdtwscore_options: List of preprocessing options
+    #         num_processes: Number of processes to use
+    #     """
+    #     arguments = [(puzzle, softdtwscore) for puzzle in puzzles for softdtwscore in softdtwscore_options]
+    #     available_cores = get_available_cores()
+    #     num_cores = min(num_processes, len(available_cores))
+    #     pool = multiprocessing.Pool(processes=num_cores)
+    #     pool.starmap(run_process_puzzle, arguments)
+    #     pool.close()
+    #     pool.join()
+
+    # if __name__ == '__main__':
         # #do for all puzzles from 1 to 26
         # exploration = np.zeros((26, 38))
         # puzzle_10_block = []
@@ -1044,7 +1076,7 @@ if __name__ == '__main__':
         # num_processes = 10  # Number of processes to use
         # run_parallel_tasks(puzzles, softdtwscore_options, num_processes)
 
-        run_process_puzzle(20, True)  # Example of running for puzzle 10 with softdtwscore
+   
         
         
 #     plt.figure()

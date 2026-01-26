@@ -106,7 +106,7 @@ def plot_solved_time_distribution(
 
     ax.set_xticks(positions)
     ax.set_xticklabels(puzzle_ids, rotation=90, fontsize=tick_fontsize)
-    ax.set_ylabel("Time until first solved attempt [s]", fontsize=20)
+    ax.set_ylabel("Time until first solved attempt [s]", fontsize=14)
     ax.set_xlabel(f"{p_type} Puzzles", fontsize=label_fontsize)
 
     ax.tick_params(axis="both", which="major", labelsize=tick_fontsize)
